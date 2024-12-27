@@ -6,7 +6,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* compiled from: qb/89523975 8dcf0dbe0f67a13a743f09df378775af1adb9bb1e787ba2899bc963e7059e86a */
 /* loaded from: classes.dex */
 public interface ISehCodecSolution extends IInterface {
     public static final String DESCRIPTOR = "vendor$samsung$frameworks$codecsolution$ISehCodecSolution".replace('$', '.');
@@ -51,7 +50,6 @@ public interface ISehCodecSolution extends IInterface {
 
     void updateStreamStatus(int i, boolean z, int i2) throws RemoteException;
 
-    /* compiled from: qb/89523975 8dcf0dbe0f67a13a743f09df378775af1adb9bb1e787ba2899bc963e7059e86a */
     public static class Default implements ISehCodecSolution {
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -143,7 +141,6 @@ public interface ISehCodecSolution extends IInterface {
         }
     }
 
-    /* compiled from: qb/89523975 8dcf0dbe0f67a13a743f09df378775af1adb9bb1e787ba2899bc963e7059e86a */
     public static abstract class Stub extends Binder implements ISehCodecSolution {
         static final int TRANSACTION_getDisplaySize = 2;
         static final int TRANSACTION_getH2SCAllowlistStatus = 13;
@@ -165,7 +162,6 @@ public interface ISehCodecSolution extends IInterface {
         static final int TRANSACTION_updateMediaStatisticsData = 14;
         static final int TRANSACTION_updateStreamStatus = 17;
 
-        /* compiled from: qb/89523975 8dcf0dbe0f67a13a743f09df378775af1adb9bb1e787ba2899bc963e7059e86a */
         private static class Proxy implements ISehCodecSolution {
             private IBinder mRemote;
             private int mCachedVersion = -1;

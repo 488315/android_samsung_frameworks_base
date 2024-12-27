@@ -27,7 +27,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import vendor.samsung.frameworks.codecsolution.ISehCodecSolution;
 import vendor.samsung.frameworks.codecsolution.Utils;
 
-/* compiled from: qb/89523975 8dcf0dbe0f67a13a743f09df378775af1adb9bb1e787ba2899bc963e7059e86a */
 /* loaded from: classes.dex */
 public class SehCodecSolutionService extends ISehCodecSolution.Stub {
     private static final String ACTION_SCPM_UPDATE_BROADCAST = "com.samsung.android.scpm.policy.UPDATE.opus-offload-enable-list";
@@ -60,7 +59,6 @@ public class SehCodecSolutionService extends ISehCodecSolution.Stub {
     private ArrayList<PidInfo> mPidDumpList = new ArrayList<>(MAX_PID_DUMP_COUNT);
     private ConcurrentHashMap<Long, SehVideoRecordingParameter> mVideoRecordingParameterMap = new ConcurrentHashMap<>();
 
-    /* compiled from: qb/89523975 8dcf0dbe0f67a13a743f09df378775af1adb9bb1e787ba2899bc963e7059e86a */
     public class OpusRunnable implements Runnable {
         public OpusRunnable() {
         }
@@ -93,14 +91,12 @@ public class SehCodecSolutionService extends ISehCodecSolution.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 8dcf0dbe0f67a13a743f09df378775af1adb9bb1e787ba2899bc963e7059e86a */
     protected static class PidInfo {
         public Date date = null;
         public int pid = 0;
         public String packageName = null;
     }
 
-    /* compiled from: qb/89523975 8dcf0dbe0f67a13a743f09df378775af1adb9bb1e787ba2899bc963e7059e86a */
     public class SCPMReceiver extends BroadcastReceiver {
         public SCPMReceiver() {
             IntentFilter intentFilter = new IntentFilter();

@@ -5,12 +5,10 @@ import android.content.Context;
 import android.util.Log;
 import java.util.List;
 
-/* compiled from: qb/89523975 8dcf0dbe0f67a13a743f09df378775af1adb9bb1e787ba2899bc963e7059e86a */
 /* loaded from: classes.dex */
 public class Utils {
     private static final String TAG = "CodecSolution_Utils";
 
-    /* compiled from: qb/89523975 8dcf0dbe0f67a13a743f09df378775af1adb9bb1e787ba2899bc963e7059e86a */
     public enum QueryResult {
         SERVER_IS_NOT_AVAILABLE,
         NOT_FOUND,

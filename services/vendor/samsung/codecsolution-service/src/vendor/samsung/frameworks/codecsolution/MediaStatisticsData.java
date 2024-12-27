@@ -7,7 +7,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-/* compiled from: qb/89523975 8dcf0dbe0f67a13a743f09df378775af1adb9bb1e787ba2899bc963e7059e86a */
 /* loaded from: classes.dex */
 public class MediaStatisticsData {
     private static final String TAG = "CodecSolution_MediaStatisticsData";
@@ -16,7 +15,6 @@ public class MediaStatisticsData {
     private Label mLabel;
     private HashMap<String, Object> mMap = new HashMap<>();
 
-    /* compiled from: qb/89523975 8dcf0dbe0f67a13a743f09df378775af1adb9bb1e787ba2899bc963e7059e86a */
     enum Action {
         NONE,
         INSTANTIATE;
@@ -32,7 +30,6 @@ public class MediaStatisticsData {
         }
     }
 
-    /* compiled from: qb/89523975 8dcf0dbe0f67a13a743f09df378775af1adb9bb1e787ba2899bc963e7059e86a */
     enum Category {
         NONE,
         VENC,
@@ -51,7 +48,6 @@ public class MediaStatisticsData {
         }
     }
 
-    /* compiled from: qb/89523975 8dcf0dbe0f67a13a743f09df378775af1adb9bb1e787ba2899bc963e7059e86a */
     enum Label {
         NONE("none"),
         SEC_HW_H265("shh5"),
@@ -154,7 +150,6 @@ public class MediaStatisticsData {
         }
     }
 
-    /* compiled from: qb/89523975 8dcf0dbe0f67a13a743f09df378775af1adb9bb1e787ba2899bc963e7059e86a */
     enum Type {
         NONE("none"),
         INT("vint"),

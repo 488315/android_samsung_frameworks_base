@@ -13,7 +13,6 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 import vendor.samsung.frameworks.codecsolution.Utils;
 
-/* compiled from: qb/89523975 8dcf0dbe0f67a13a743f09df378775af1adb9bb1e787ba2899bc963e7059e86a */
 /* loaded from: classes.dex */
 public class SCPMV2Helper {
     private static final String CODEC_SOLUTION_APP_ID = "oqfypdqvry";

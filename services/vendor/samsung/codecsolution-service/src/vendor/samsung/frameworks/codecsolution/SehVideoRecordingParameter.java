@@ -4,7 +4,6 @@ import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* compiled from: qb/89523975 8dcf0dbe0f67a13a743f09df378775af1adb9bb1e787ba2899bc963e7059e86a */
 /* loaded from: classes.dex */
 public class SehVideoRecordingParameter implements Parcelable {
     public static final Parcelable.Creator<SehVideoRecordingParameter> CREATOR = new Parcelable.Creator<SehVideoRecordingParameter>() { // from class: vendor.samsung.frameworks.codecsolution.SehVideoRecordingParameter.1
