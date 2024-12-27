@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="biometric_dialog_credential_too_many_attempts">
+        <item quantity="other">ລອງໃໝ່ອີກໃນ %d ວິນາທີ.</item>
+        <item quantity="one">ລອງໃໝ່ອີກໃນ 1 ວິນາທີ.</item>
+    </plurals>
+    <plurals name="biometric_dialog_credential_too_many_attempts_min">
+        <item quantity="other">ລອງໃໝ່ອີກໃນ %d ນາທີ.</item>
+        <item quantity="one">ລອງໃໝ່ອີກໃນ 1 ນາທີ.</item>
+    </plurals>
+    <plurals name="sec_incorrect_password_attempts_left">
+        <item quantity="other">ລະຫັດຜ່ານບໍ່ຖືກຕ້ອງ. ຍັງເຫຼືອ %d ຄັ້ງ.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_incorrect_pattern_attempts_left">
+        <item quantity="other">ຮູບແບບບໍ່ຖືກຕ້ອງ. ຍັງເຫຼືອ %d ຄັ້ງ.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_incorrect_pin_attempts_left">
+        <item quantity="other">PIN ບໍ່ຖືກຕ້ອງ. ຍັງເຫຼືອ %d ຄັ້ງ.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_lockpattern_too_many_failed_confirmation_attempts_footer_min">
+        <item quantity="other">ລອງໃໝ່ອີກໃນ %d ນາທີ.</item>
+        <item quantity="one">ລອງໃໝ່ອີກໃນ 1 ນາທີ.</item>
+    </plurals>
+    <plurals name="sec_lockpattern_too_many_failed_confirmation_attempts_footer_sec">
+        <item quantity="other">ລອງໃໝ່ອີກໃນ %d ວິນາທີ.</item>
+        <item quantity="one">ລອງໃໝ່ອີກໃນ 1 ວິນາທີ.</item>
+    </plurals>
+    <plurals name="wpc_phone_incorrect_dialog_2">
+        <item quantity="other">ມີການພະຍາຍາມປົດລັອກໂປຣໄຟລ໌ວຽກຂອງທ່ານແລ້ວ 1 ຄັ້ງ. ທ່ານຍັງເຫຼືອຄວາມພະຍາຍາມອີກ %d ຄັ້ງກ່ອນທີ່ໂທລະສັບນີ້ຈະຖືກຕັ້ງຄືນໃໝ່ເປັນການຕັ້ງຄ່າຈາກໂຮງງານ ແລະ ຂໍ້ມູນທັງໝົດຈະຖືກລຶບ.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wpc_phone_incorrect_dialog_4">
+        <item quantity="other">ມີການພະຍາຍາມປົດລັອກໂປຣໄຟລ໌ວຽກຂອງທ່ານແລ້ວ %d ຄັ້ງ. ທ່ານຍັງເຫຼືອຄວາມພະຍາຍາມອີກ 1 ຄັ້ງກ່ອນທີ່ໂທລະສັບນີ້ຈະຖືກຕັ້ງຄືນໃໝ່ເປັນການຕັ້ງຄ່າຈາກໂຮງງານ ແລະ ຂໍ້ມູນທັງໝົດຈະຖືກລຶບ.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wpc_tablet_incorrect_dialog_2">
+        <item quantity="other">ມີການພະຍາຍາມປົດລັອກໂປຣໄຟລ໌ວຽກຂອງທ່ານແລ້ວ 1 ຄັ້ງ. ທ່ານຍັງເຫຼືອຄວາມພະຍາຍາມອີກ %d ຄັ້ງກ່ອນທີ່ແທັບເລັດນີ້ຈະຖືກຕັ້ງຄືນໃໝ່ເປັນການຕັ້ງຄ່າຈາກໂຮງງານ ແລະ ຂໍ້ມູນທັງໝົດຈະຖືກລຶບ.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wpc_tablet_incorrect_dialog_4">
+        <item quantity="other">ມີການພະຍາຍາມປົດລັອກໂປຣໄຟລ໌ວຽກຂອງທ່ານແລ້ວ %d ຄັ້ງ. ທ່ານຍັງເຫຼືອຄວາມພະຍາຍາມອີກ 1 ຄັ້ງກ່ອນທີ່ແທັບເລັດນີ້ຈະຖືກຕັ້ງຄືນໃໝ່ເປັນການຕັ້ງຄ່າຈາກໂຮງງານ ແລະ ຂໍ້ມູນທັງໝົດຈະຖືກລຶບ.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

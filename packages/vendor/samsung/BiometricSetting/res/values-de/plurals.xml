@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="biometric_dialog_credential_too_many_attempts">
+        <item quantity="other">Versuche es in %d Sekunden erneut</item>
+        <item quantity="one">Versuche es in 1 Sekunde erneut</item>
+    </plurals>
+    <plurals name="biometric_dialog_credential_too_many_attempts_min">
+        <item quantity="other">Versuche es in %d Minuten erneut.</item>
+        <item quantity="one">Versuche es in 1 Minute erneut.</item>
+    </plurals>
+    <plurals name="sec_incorrect_password_attempts_left">
+        <item quantity="other">Falsches Passwort. Noch %d Versuche.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Falsches Passwort. Noch %d Versuch.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_incorrect_pattern_attempts_left">
+        <item quantity="other">Falsches Muster. Noch %d Versuche.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Falsches Muster. Noch %d Versuch.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_incorrect_pin_attempts_left">
+        <item quantity="other">Falsche PIN. Noch %d Versuche.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Falsche PIN. Noch %d Versuch.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_lockpattern_too_many_failed_confirmation_attempts_footer_min">
+        <item quantity="other">Versuche es in %d Minuten erneut.</item>
+        <item quantity="one">Versuche es in 1 Minute erneut.</item>
+    </plurals>
+    <plurals name="sec_lockpattern_too_many_failed_confirmation_attempts_footer_sec">
+        <item quantity="other">Versuche es in %d Sekunden erneut</item>
+        <item quantity="one">Versuche es in 1 Sekunde erneut</item>
+    </plurals>
+    <plurals name="wpc_phone_incorrect_dialog_2">
+        <item quantity="other">Es wurde 1-mal versucht, dein Arbeitsprofil zu entsperren. Du hast noch %d Versuche, bevor dieses Telefon auf Werkseinstellungen zurückgesetzt wird und alle Daten gelöscht werden.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Es wurde 1-mal versucht, dein Arbeitsprofil zu entsperren. Du hast noch %d Versuch, bevor dieses Telefon auf Werkseinstellungen zurückgesetzt wird und alle Daten gelöscht werden.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wpc_phone_incorrect_dialog_4">
+        <item quantity="other">Es wurde %d-mal versucht, dein Arbeitsprofil zu entsperren. Du hast noch 1 Versuch, bevor dieses Telefon auf Werkseinstellungen zurückgesetzt wird und alle Daten gelöscht werden.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Es wurde %d-mal versucht, dein Arbeitsprofil zu entsperren. Du hast noch 1 Versuch, bevor dieses Telefon auf Werkseinstellungen zurückgesetzt wird und alle Daten gelöscht werden.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wpc_tablet_incorrect_dialog_2">
+        <item quantity="other">Es wurde 1-mal versucht, dein Arbeitsprofil zu entsperren. Du hast noch %d Versuche, bevor dieses Tablet auf Werkseinstellungen zurückgesetzt wird und alle Daten gelöscht werden.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Es wurde 1-mal versucht, dein Arbeitsprofil zu entsperren. Du hast noch %d Versuch, bevor dieses Tablet auf Werkseinstellungen zurückgesetzt wird und alle Daten gelöscht werden.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wpc_tablet_incorrect_dialog_4">
+        <item quantity="other">Es wurde %d-mal versucht, dein Arbeitsprofil zu entsperren. Du hast noch 1 Versuch, bevor dieses Tablet auf Werkseinstellungen zurückgesetzt wird und alle Daten gelöscht werden.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Es wurde %d-mal versucht, dein Arbeitsprofil zu entsperren. Du hast noch 1 Versuch, bevor dieses Tablet auf Werkseinstellungen zurückgesetzt wird und alle Daten gelöscht werden.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

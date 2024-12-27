@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:id="@id/sem_fingerprint_layout" android:clipChildren="false" android:clipToPadding="false" android:layout_width="fill_parent" android:layout_height="fill_parent" android:translationZ="1.0dip"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout android:gravity="center" android:id="@id/sem_fingerprint_icon_container" android:layout_width="wrap_content" android:layout_height="wrap_content">
+        <com.airbnb.lottie.LottieAnimationView android:id="@id/sem_fingerprint_sensor_imageview" android:layout_width="226.0px" android:layout_height="226.0px" />
+    </RelativeLayout>
+    <com.samsung.android.biometrics.app.setting.fingerprint.vi.VisualEffectContainer android:id="@id/sem_fingerprint_vi_effect" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+    <TextView android:textSize="14.0dip" android:textColor="#fffafaff" android:gravity="center" android:id="@id/sem_fingerprint_fail_textview" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="40.0dip" android:fontFamily="sec" android:paddingStart="16.0dip" android:paddingEnd="16.0dip" android:textFontWeight="400" />
+</FrameLayout>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <fraction name="auth_credential_foldable_main_height_percent">56.000008%</fraction>
+    <fraction name="auth_credential_foldable_main_width_percent">63.0%</fraction>
+    <fraction name="face_verification_feedback_text_left_margin_percent">12.5%</fraction>
+    <fraction name="face_verification_feedback_text_right_margin_percent">12.5%</fraction>
+    <fraction name="face_verification_feedback_text_top_margin_percent">6.5999985%</fraction>
+    <fraction name="face_verification_width_percent_flip_cover">94.50001%</fraction>
+    <fraction name="face_verification_width_percent_land">50.559998%</fraction>
+    <fraction name="face_verification_width_percent_portrait">94.50001%</fraction>
+    <fraction name="fingerprint_verification_width_percent_flip_cover">94.50001%</fraction>
+    <fraction name="fingerprint_verification_width_percent_land">60.000004%</fraction>
+    <fraction name="fingerprint_verification_width_percent_land_tablet">37.5%</fraction>
+    <fraction name="fingerprint_verification_width_percent_land_winner">60.000004%</fraction>
+    <fraction name="fingerprint_verification_width_percent_portrait">94.50001%</fraction>
+    <fraction name="fingerprint_verification_width_percent_portrait_tablet">60.000004%</fraction>
+    <fraction name="fingerprint_verification_width_percent_portrait_winner">68.36001%</fraction>
+    <fraction name="intelligent_verification_land_height_percent">70.50001%</fraction>
+    <fraction name="intelligent_verification_preview_iris_height_percent">29.190004%</fraction>
+</resources>

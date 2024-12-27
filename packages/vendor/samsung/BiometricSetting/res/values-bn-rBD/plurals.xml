@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="biometric_dialog_credential_too_many_attempts">
+        <item quantity="other">%d সেকেন্ড এর মধ্যে আবার চেষ্টা করুন।</item>
+        <item quantity="one">1 সেকেন্ডের মধ্যে আবার চেষ্টা করুন।</item>
+    </plurals>
+    <plurals name="biometric_dialog_credential_too_many_attempts_min">
+        <item quantity="other">Try again in %d minutes.</item>
+        <item quantity="one">1 মিনিট পর আবার চেষ্টা করুন৷</item>
+    </plurals>
+    <plurals name="sec_incorrect_password_attempts_left">
+        <item quantity="other">ভুল পাসওয়ার্ড৷ %dটি প্রচেষ্টা বাকি আছে৷</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">ভুল পাসওয়ার্ড৷ %dটি প্রচেষ্টা বাকি আছে৷</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_incorrect_pattern_attempts_left">
+        <item quantity="other">ভুল প্যাটার্ন৷ %dটি প্রচেষ্টা বাকি আছে৷</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">ভুল প্যাটার্ন৷ %dটি প্রচেষ্টা বাকি আছে৷</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_incorrect_pin_attempts_left">
+        <item quantity="other">ভুল PIN৷ %dটি প্রচেষ্টা বাকি আছে৷</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">ভুল PIN৷ %dটি প্রচেষ্টা বাকি আছে৷</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_lockpattern_too_many_failed_confirmation_attempts_footer_min">
+        <item quantity="other">Try again in %d minutes.</item>
+        <item quantity="one">1 মিনিট পর আবার চেষ্টা করুন৷</item>
+    </plurals>
+    <plurals name="sec_lockpattern_too_many_failed_confirmation_attempts_footer_sec">
+        <item quantity="other">%d সেকেন্ড এর মধ্যে আবার চেষ্টা করুন।</item>
+        <item quantity="one">1 সেকেন্ডের মধ্যে আবার চেষ্টা করুন।</item>
+    </plurals>
+    <plurals name="wpc_phone_incorrect_dialog_2">
+        <item quantity="other">আপনার অফিসের প্রোফাইল আনলক করার জন্য 1 বার চেষ্টা করা হয়েছে৷ এই ফোন ফ্যাক্টরি সেটিংসে রিসেট হওয়ার আগে আপনি আর %d বার চেষ্টা করতে পারবেন এবং সব ডাটা মুছে যাবে৷</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">আপনার অফিসের প্রোফাইল আনলক করার জন্য 1 বার চেষ্টা করা হয়েছে৷ এই ফোন ফ্যাক্টরি সেটিংসে রিসেট হওয়ার আগে আপনি আর %d বার চেষ্টা করতে পারবেন এবং সব ডাটা মুছে যাবে৷</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wpc_phone_incorrect_dialog_4">
+        <item quantity="other">আপনার অফিসের প্রোফাইল আনলক করার জন্য %d বার চেষ্টা করা হয়েছে৷ এই ফোন ফ্যাক্টরি সেটিংসে রিসেট হওয়ার এবং সব ডাটা মুছে যাওয়ার আগে আপনি আর 1 বার চেষ্টা করতে পারবেন৷</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">আপনার অফিসের প্রোফাইল আনলক করার জন্য %d বার চেষ্টা করা হয়েছে৷ এই ফোন ফ্যাক্টরি সেটিংসে রিসেট হওয়ার এবং সব ডাটা মুছে যাওয়ার আগে আপনি আর 1 বার চেষ্টা করতে পারবেন৷</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wpc_tablet_incorrect_dialog_2">
+        <item quantity="other">আপনার অফিসের প্রোফাইল আনলক করার জন্য 1 বার চেষ্টা করা হয়েছে৷ এই ট্যাবলেট ফ্যাক্টরি সেটিংসে রিসেট হওয়ার আগে আপনি আর %d বার চেষ্টা করতে পারবেন এবং সব ডাটা মুছে যাবে৷</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">আপনার অফিসের প্রোফাইল আনলক করার জন্য 1 বার চেষ্টা করা হয়েছে৷ এই ট্যাবলেট ফ্যাক্টরি সেটিংসে রিসেট হওয়ার আগে আপনি আর %d বার চেষ্টা করতে পারবেন এবং সব ডাটা মুছে যাবে৷</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wpc_tablet_incorrect_dialog_4">
+        <item quantity="other">আপনার অফিসের প্রোফাইল আনলক করার জন্য %d বার চেষ্টা করা হয়েছে৷ এই ট্যাবলেট ফ্যাক্টরি সেটিংসে রিসেট হওয়ার এবং সব ডাটা মুছে যাওয়ার আগে আপনি আর 1 বার চেষ্টা করতে পারবেন৷</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">আপনার অফিসের প্রোফাইল আনলক করার জন্য %d বার চেষ্টা করা হয়েছে৷ এই ট্যাবলেট ফ্যাক্টরি সেটিংসে রিসেট হওয়ার এবং সব ডাটা মুছে যাওয়ার আগে আপনি আর 1 বার চেষ্টা করতে পারবেন৷</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="biometric_dialog_credential_too_many_attempts">
+        <item quantity="other">Skúste to znova v priebehu %d sekúnd.</item>
+        <item quantity="one">Skúste to znova za 1 sekundu.</item>
+    </plurals>
+    <plurals name="biometric_dialog_credential_too_many_attempts_min">
+        <item quantity="other">Skúste to znova v priebehu %d minút.</item>
+        <item quantity="one">Skúste to znova po uplynutí 1 minúty.</item>
+    </plurals>
+    <plurals name="sec_incorrect_password_attempts_left">
+        <item quantity="other">Nesprávne heslo. Zostáva %d pokusov.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Nesprávne heslo. Zostáva %d pokus.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Nesprávne heslo. Zostávajú %d pokusy.</item>
+        <item quantity="many">Nesprávne heslo. Zostáva %d pokusu.</item>
+    </plurals>
+    <plurals name="sec_incorrect_pattern_attempts_left">
+        <item quantity="other">Nesprávny vzor. Zostáva %d pokusov.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Nesprávny vzor. Zostáva %d pokus.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Nesprávny vzor. Zostávajú %d pokusy.</item>
+        <item quantity="many">Nesprávny vzor. Zostáva %d pokusu.</item>
+    </plurals>
+    <plurals name="sec_incorrect_pin_attempts_left">
+        <item quantity="other">Nesprávny kód PIN. Zostáva %d pokusov.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Nesprávny kód PIN. Zostáva %d pokus.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Nesprávny kód PIN. Zostávajú %d pokusy.</item>
+        <item quantity="many">Nesprávny kód PIN. Zostáva %d pokusu.</item>
+    </plurals>
+    <plurals name="sec_lockpattern_too_many_failed_confirmation_attempts_footer_min">
+        <item quantity="other">Skúste to znova v priebehu %d minút.</item>
+        <item quantity="one">Skúste to znova po uplynutí 1 minúty.</item>
+    </plurals>
+    <plurals name="sec_lockpattern_too_many_failed_confirmation_attempts_footer_sec">
+        <item quantity="other">Skúste to znova v priebehu %d sekúnd.</item>
+        <item quantity="one">Skúste to znova za 1 sekundu.</item>
+    </plurals>
+    <plurals name="wpc_phone_incorrect_dialog_2">
+        <item quantity="other">Došlo k 1 pokusu o odomknutie vášho pracovného priestoru. Zostáva vám ešte %d pokusov a potom sa tento telefón resetuje s obnovením výrobných nastavení a vymažú sa všetky údaje.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Došlo k 1 pokusu o odomknutie vášho pracovného priestoru. Zostáva vám ešte %d pokus a potom sa tento telefón resetuje s obnovením výrobných nastavení a všetky údaje sa vymažú.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Došlo k 1 pokusu o odomknutie vášho pracovného priestoru. Zostávajú vám ešte %d pokusy a potom sa tento telefón resetuje s obnovením výrobných nastavení a vymažú sa všetky údaje.</item>
+        <item quantity="many">Došlo k 1 pokusu o odomknutie vášho pracovného priestoru. Zostáva vám ešte %d pokusu a potom sa tento telefón resetuje s obnovením výrobných nastavení a vymažú sa všetky údaje.</item>
+    </plurals>
+    <plurals name="wpc_phone_incorrect_dialog_4">
+        <item quantity="other">Došlo k %d pokusom o odomknutie vášho pracovného priestoru. Zostáva vám ešte 1 pokus a potom sa tento telefón resetuje s obnovením výrobných nastavení a všetky údaje sa vymažú.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Došlo k %d pokusu o odomknutie vášho pracovného priestoru. Zostáva vám ešte 1 pokus a potom sa tento telefón resetuje s obnovením výrobných nastavení a všetky údaje sa vymažú.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Došlo k %d pokusom o odomknutie vášho pracovného priestoru. Zostáva vám ešte 1 pokus a potom sa tento telefón resetuje s obnovením výrobných nastavení a všetky údaje sa vymažú.</item>
+        <item quantity="many">Došlo k %d pokusu o odomknutie vášho pracovného priestoru. Zostáva vám ešte 1 pokus a potom sa tento telefón resetuje s obnovením výrobných nastavení a všetky údaje sa vymažú.</item>
+    </plurals>
+    <plurals name="wpc_tablet_incorrect_dialog_2">
+        <item quantity="other">Došlo k 1 pokusu o odomknutie vášho pracovného priestoru. Zostáva vám ešte %d pokusov a potom sa tento tablet resetuje s obnovením výrobných nastavení a vymažú sa všetky údaje.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Došlo k 1 pokusu o odomknutie vášho pracovného priestoru. Zostáva vám ešte %d pokus a potom sa tento tablet resetuje s obnovením výrobných nastavení a vymažú sa všetky údaje.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Došlo k 1 pokusu o odomknutie vášho pracovného priestoru. Zostávajú vám ešte %d pokusy a potom sa tento tablet resetuje s obnovením výrobných nastavení a vymažú sa všetky údaje.</item>
+        <item quantity="many">Došlo k 1 pokusu o odomknutie vášho pracovného priestoru. Zostáva vám ešte %d pokusu a potom sa tento tablet resetuje s obnovením výrobných nastavení a vymažú sa všetky údaje.</item>
+    </plurals>
+    <plurals name="wpc_tablet_incorrect_dialog_4">
+        <item quantity="other">Došlo k %d pokusom o odomknutie vášho pracovného priestoru. Zostáva vám ešte 1 pokus a potom sa tento tablet resetuje s obnovením výrobných nastavení a všetky údaje sa vymažú.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Došlo k %d pokusu o odomknutie vášho pracovného priestoru. Zostáva vám ešte 1 pokus a potom sa tento tablet resetuje s obnovením výrobných nastavení a všetky údaje sa vymažú.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Došlo k %d pokusom o odomknutie vášho pracovného priestoru. Zostáva vám ešte 1 pokus a potom sa tento tablet resetuje s obnovením výrobných nastavení a všetky údaje sa vymažú.</item>
+        <item quantity="many">Došlo k %d pokusu o odomknutie vášho pracovného priestoru. Zostáva vám ešte 1 pokus a potom sa tento tablet resetuje s obnovením výrobných nastavení a všetky údaje sa vymažú.</item>
+    </plurals>
+</resources>

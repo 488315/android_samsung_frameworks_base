@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout android:paddingTop="@dimen/face_enroll_guide_padding_top" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout android:orientation="vertical" android:id="@id/guide_layout" android:layout_width="0.0dip" android:layout_height="0.0dip" android:layout_marginBottom="@dimen/face_enroll_guide_button_margin_bottom" app:layout_constraintBottom_toTopOf="@id/bottom_margin_layout" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent" app:layout_constraintWidth_percent="@dimen/face_enroll_guide_layout_width_percent">
+        <TextView android:textSize="@dimen/biometrics_common_guide_title_text_size" android:textColor="#fffafaff" android:gravity="center" android:id="@id/help_guide_title" android:layout_width="wrap_content" android:layout_height="64.0dip" android:layout_marginBottom="@dimen/face_enroll_guide_title_margin_bottom" android:text="@string/face_registration_help" android:singleLine="true" android:fontFamily="sec" android:paddingHorizontal="@dimen/face_enroll_guide_title_horizontal_margin" android:textFontWeight="600" />
+        <RelativeLayout android:id="@id/help_guide_layout" android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <TextureView android:id="@id/help_guide_video" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_centerInParent="true" />
+        </RelativeLayout>
+        <ScrollView android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_marginTop="@dimen/face_enroll_guide_margin_top" android:layout_marginBottom="@dimen/face_enroll_guide_margin_bottom" android:layout_weight="1.0" android:layout_marginHorizontal="@dimen/face_enroll_guide_horizontal_margin">
+            <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <TextView android:textSize="17.0sp" android:textColor="#fffafaff" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/face_registration_guide" android:fontFamily="sec" android:textFontWeight="600" />
+                <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="6.0dip" android:layout_marginStart="8.0dip" android:layout_marginEnd="4.0dip">
+                    <TextView android:layout_width="wrap_content" android:text="@string/common_bullet" style="@style/SecFingerprintFirstGuideStyle" />
+                    <TextView android:id="@id/guide_text" android:text="@string/face_guide_enroll_description" style="@style/SecFingerprintFirstGuideStyle" />
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+        <LinearLayout android:gravity="center_horizontal" android:orientation="horizontal" android:id="@id/register_button_layout" android:layout_width="fill_parent" android:layout_height="wrap_content" android:weightSum="1.0">
+            <Button android:id="@id/register_button" android:text="@string/fingerprint_setup_register_btn" android:layout_marginHorizontal="@dimen/face_enroll_guide_button_margin_side" style="@style/SecFingerprintRaisedButtonStyle" />
+        </LinearLayout>
+    </LinearLayout>
+    <View android:id="@id/bottom_margin_layout" android:layout_width="fill_parent" android:layout_height="@dimen/face_enroll_guide_bottom_margin_height" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintTop_toTopOf="@id/knox_logo_view" app:layout_constraintVertical_bias="1.0" />
+    <include android:id="@id/knox_logo_view" android:visibility="invisible" android:layout_width="0.0dip" android:layout_height="wrap_content" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintWidth_percent="@dimen/face_enroll_guide_layout_width_percent_knox_bi" layout="@layout/face_secured_knox_logo_view" />
+</androidx.constraintlayout.widget.ConstraintLayout>

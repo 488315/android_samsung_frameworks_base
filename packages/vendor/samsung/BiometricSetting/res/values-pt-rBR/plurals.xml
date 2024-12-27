@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="biometric_dialog_credential_too_many_attempts">
+        <item quantity="other">Tente novamente dentro de %d segundos.</item>
+        <item quantity="one">Tente nov. em 1 segundo.</item>
+    </plurals>
+    <plurals name="biometric_dialog_credential_too_many_attempts_min">
+        <item quantity="other">Tente novamente em %d minutos.</item>
+        <item quantity="one">Tente novamente em 1 minuto.</item>
+    </plurals>
+    <plurals name="sec_incorrect_password_attempts_left">
+        <item quantity="other">A senha está incorreta. Restam %d tentativas.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">A senha está incorreta. Resta %d tentativa.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_incorrect_pattern_attempts_left">
+        <item quantity="other">O padrão está incorreto. Restam %d tentativas.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">O padrão está incorreto. Resta %d tentativa.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_incorrect_pin_attempts_left">
+        <item quantity="other">O PIN está incorreto. Restam %d tentativas.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">O PIN está incorreto. Resta %d tentativa.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_lockpattern_too_many_failed_confirmation_attempts_footer_min">
+        <item quantity="other">Tente novamente em %d minutos.</item>
+        <item quantity="one">Tente novamente em 1 minuto.</item>
+    </plurals>
+    <plurals name="sec_lockpattern_too_many_failed_confirmation_attempts_footer_sec">
+        <item quantity="other">Tente novamente dentro de %d segundos.</item>
+        <item quantity="one">Tente nov. em 1 segundo.</item>
+    </plurals>
+    <plurals name="wpc_phone_incorrect_dialog_2">
+        <item quantity="other">Houve 1 tentativa de desbloquear seu perfil de trabalho. Você tem %d tentativas restantes antes que este telefone seja restaurado para as configurações de fábrica e todos os dados sejam apagados.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Houve 1 tentativa de desbloquear seu perfil de trabalho. Você tem %d tentativa restante antes que este telefone seja restaurado para as configurações de fábrica e todos os dados sejam apagados.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wpc_phone_incorrect_dialog_4">
+        <item quantity="other">Houve %d tentativas de desbloquear seu perfil de trabalho. Você tem 1 tentativa restante antes que este telefone seja restaurado para as configurações de fábrica e todos os dados sejam apagados.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Houve %d tentativa de desbloquear seu perfil de trabalho. Você tem 1 tentativa restante antes que este telefone seja restaurado para as configurações de fábrica e todos os dados sejam apagados.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wpc_tablet_incorrect_dialog_2">
+        <item quantity="other">Houve 1 tentativa de desbloquear seu perfil de trabalho. Você tem %d tentativas restantes antes que este tablet seja restaurado para as configurações de fábrica e todos os dados sejam apagados.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Houve 1 tentativa de desbloquear seu perfil de trabalho. Você tem %d tentativa restante antes que este tablet seja restaurado para as configurações de fábrica e todos os dados sejam apagados.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wpc_tablet_incorrect_dialog_4">
+        <item quantity="other">Houve %d tentativas de desbloquear seu perfil de trabalho. Você tem 1 tentativa restante antes que este tablet seja restaurado para as configurações de fábrica e todos os dados sejam apagados.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Houve %d tentativa de desbloquear seu perfil de trabalho. Você tem 1 tentativa restante antes que este tablet seja restaurado para as configurações de fábrica e todos os dados sejam apagados.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

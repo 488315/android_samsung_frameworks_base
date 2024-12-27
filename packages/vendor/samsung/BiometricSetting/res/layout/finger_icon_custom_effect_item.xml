@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:gravity="center" android:layout_gravity="center" android:id="@id/effect_container" android:visibility="visible" android:layout_width="wrap_content" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.airbnb.lottie.LottieAnimationView android:id="@id/effect_lottie" android:background="@drawable/sem_finger_custom_effect_shape" android:layout_width="54.0dip" android:layout_height="54.0dip" />
+    <TextView android:textSize="10.0dip" android:typeface="sans" android:textStyle="normal" android:textColor="#ff0f0f0f" android:gravity="center" android:id="@id/effect_text" android:padding="2.0dip" android:visibility="gone" android:layout_width="54.0dip" android:layout_height="54.0dip" android:text="@string/fingerprint_no_effect" android:layout_alignLeft="@id/effect_lottie" android:layout_alignTop="@id/effect_lottie" android:layout_alignRight="@id/effect_lottie" android:layout_alignBottom="@id/effect_lottie" android:layout_centerInParent="true" android:fontFamily="sec-roboto-regular" android:letterSpacing="0.04" android:autoSizeTextType="uniform" android:autoSizeStepGranularity="1.0dip" android:autoSizeMinTextSize="6.0dip" android:autoSizeMaxTextSize="10.0dip" />
+</RelativeLayout>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="biometric_dialog_credential_too_many_attempts">
+        <item quantity="other">Bandykite dar kartą po %d sek.</item>
+        <item quantity="one">Pabandykite dar kartą po 1 sekundės.</item>
+    </plurals>
+    <plurals name="biometric_dialog_credential_too_many_attempts_min">
+        <item quantity="other">Bandykite dar kartą po %d min.</item>
+        <item quantity="one">Bandykite po 1 min.</item>
+    </plurals>
+    <plurals name="sec_incorrect_password_attempts_left">
+        <item quantity="other">Slaptažodžio klaida. Liko %d bandymų.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Slaptažodžio klaida. Liko %d bandymas.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Slaptažodžio klaida. Liko %d bandymai.</item>
+        <item quantity="many">Slaptažodžio klaida. Liko %d bandymų.</item>
+    </plurals>
+    <plurals name="sec_incorrect_pattern_attempts_left">
+        <item quantity="other">Netinkamas šablonas. Liko %d bandymų.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Netinkamas šablonas. Liko %d bandymas.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Netinkamas šablonas. Liko %d bandymai.</item>
+        <item quantity="many">Netinkamas šablonas. Liko %d bandymų.</item>
+    </plurals>
+    <plurals name="sec_incorrect_pin_attempts_left">
+        <item quantity="other">Neteisingas PIN. Liko %d bandymų.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Neteisingas PIN. Liko %d bandymas.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Neteisingas PIN. Liko %d bandymai.</item>
+        <item quantity="many">Neteisingas PIN. Liko %d bandymų.</item>
+    </plurals>
+    <plurals name="sec_lockpattern_too_many_failed_confirmation_attempts_footer_min">
+        <item quantity="other">Bandykite dar kartą po %d min.</item>
+        <item quantity="one">Bandykite po 1 min.</item>
+    </plurals>
+    <plurals name="sec_lockpattern_too_many_failed_confirmation_attempts_footer_sec">
+        <item quantity="other">Bandykite dar kartą po %d sek.</item>
+        <item quantity="one">Pabandykite dar kartą po 1 sekundės.</item>
+    </plurals>
+    <plurals name="wpc_phone_incorrect_dialog_2">
+        <item quantity="other">Jūsų darbo profilį buvo bandoma atrakinti 1 kartą. Jums liko %d bandymų, tada šis telefonas bus nustatytas iš naujo atkuriant gamyklinius nustatymus, o visi duomenys bus ištrinti.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Jūsų darbo profilį buvo bandoma atrakinti 1 kartą. Jums liko %d bandymas, tada šis telefonas bus nustatytas iš naujo atkuriant gamyklinius nustatymus, o visi duomenys bus ištrinti.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Jūsų darbo profilį buvo bandoma atrakinti 1 kartą. Jums liko %d bandymai, tada šis telefonas bus nustatytas iš naujo atkuriant gamyklinius nustatymus, o visi duomenys bus ištrinti.</item>
+        <item quantity="many">Jūsų darbo profilį buvo bandoma atrakinti 1 kartą. Jums liko %d bandymų, tada šis telefonas bus nustatytas iš naujo atkuriant gamyklinius nustatymus, o visi duomenys bus ištrinti.</item>
+    </plurals>
+    <plurals name="wpc_phone_incorrect_dialog_4">
+        <item quantity="other">Jūsų darbo profilį buvo bandoma atrakinti %d kartų. Jums liko 1 bandymas, tada šis telefonas bus nustatytas iš naujo atkuriant gamyklinius nustatymus, o visi duomenys bus ištrinti.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Jūsų darbo profilį buvo bandoma atrakinti %d kartą. Jums liko 1 bandymas, tada šis telefonas bus nustatytas iš naujo atkuriant gamyklinius nustatymus, o visi duomenys bus ištrinti.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Jūsų darbo profilį buvo bandoma atrakinti %d kartus. Jums liko 1 bandymas, tada šis telefonas bus nustatytas iš naujo atkuriant gamyklinius nustatymus, o visi duomenys bus ištrinti.</item>
+        <item quantity="many">Jūsų darbo profilį buvo bandoma atrakinti %d kartų. Jums liko 1 bandymas, tada šis telefonas bus nustatytas iš naujo atkuriant gamyklinius nustatymus, o visi duomenys bus ištrinti.</item>
+    </plurals>
+    <plurals name="wpc_tablet_incorrect_dialog_2">
+        <item quantity="other">Jūsų darbo profilį buvo bandoma atrakinti 1 kartą. Jums liko %d bandymai, tada šis planšetinis kompiuteris bus nustatytas iš naujo atkuriant gamyklinius nustatymus, o visi duomenys bus ištrinti.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Jūsų darbo profilį buvo bandoma atrakinti 1 kartą. Jums liko %d bandymas, tada šis planšetinis kompiuteris bus nustatytas iš naujo atkuriant gamyklinius nustatymus, o visi duomenys bus ištrinti.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Jūsų darbo profilį buvo bandoma atrakinti 1 kartą. Jums liko %d bandymai, tada šis planšetinis kompiuteris bus nustatytas iš naujo atkuriant gamyklinius nustatymus, o visi duomenys bus ištrinti.</item>
+        <item quantity="many">Jūsų darbo profilį buvo bandoma atrakinti 1 kartą. Jums liko %d bandymų, tada šis planšetinis kompiuteris bus nustatytas iš naujo atkuriant gamyklinius nustatymus, o visi duomenys bus ištrinti.</item>
+    </plurals>
+    <plurals name="wpc_tablet_incorrect_dialog_4">
+        <item quantity="other">Jūsų darbo profilį buvo bandoma atrakinti %d kartų. Jums liko 1 bandymas, tada šis planšetinis kompiuteris bus nustatytas iš naujo atkuriant gamyklinius nustatymus, o visi duomenys bus ištrinti.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Jūsų darbo profilį buvo bandoma atrakinti %d kartą. Jums liko 1 bandymas, tada šis planšetinis kompiuteris bus nustatytas iš naujo atkuriant gamyklinius nustatymus, o visi duomenys bus ištrinti.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Jūsų darbo profilį buvo bandoma atrakinti %d kartus. Jums liko 1 bandymas, tada šis planšetinis kompiuteris bus nustatytas iš naujo atkuriant gamyklinius nustatymus, o visi duomenys bus ištrinti.</item>
+        <item quantity="many">Jūsų darbo profilį buvo bandoma atrakinti %d kartų. Jums liko 1 bandymas, tada šis planšetinis kompiuteris bus nustatytas iš naujo atkuriant gamyklinius nustatymus, o visi duomenys bus ištrinti.</item>
+    </plurals>
+</resources>

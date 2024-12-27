@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="biometric_dialog_credential_too_many_attempts">
+        <item quantity="other">Cuba lagi dalam %d saat.</item>
+        <item quantity="one">Cuba semula dalam masa 1 saat.</item>
+    </plurals>
+    <plurals name="biometric_dialog_credential_too_many_attempts_min">
+        <item quantity="other">Cuba lagi dlm %d minit.</item>
+        <item quantity="one">Cuba lagi selepas 1 minit.</item>
+    </plurals>
+    <plurals name="sec_incorrect_password_attempts_left">
+        <item quantity="other">Kata laluan salah. %d percubaan lagi.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_incorrect_pattern_attempts_left">
+        <item quantity="other">Corak salah. %d percubaan lagi.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_incorrect_pin_attempts_left">
+        <item quantity="other">PIN salah. %d percubaan lagi.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_lockpattern_too_many_failed_confirmation_attempts_footer_min">
+        <item quantity="other">Cuba lagi dlm %d minit.</item>
+        <item quantity="one">Cuba lagi selepas 1 minit.</item>
+    </plurals>
+    <plurals name="sec_lockpattern_too_many_failed_confirmation_attempts_footer_sec">
+        <item quantity="other">Cuba lagi dalam %d saat.</item>
+        <item quantity="one">Cuba semula dalam masa 1 saat.</item>
+    </plurals>
+    <plurals name="wpc_phone_incorrect_dialog_2">
+        <item quantity="other">Terdapat 1 percubaan untuk membuka kunci profil kerja anda. Anda mempunyai %d percubaan lagi sebelum telefon ini ditetapkan semula kepada aturan kilang dan semua data akan dipadamkan.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wpc_phone_incorrect_dialog_4">
+        <item quantity="other">Terdapat %d percubaan untuk membuka kunci profil kerja anda. Anda mempunyai 1 percubaan lagi sebelum telefon ini ditetapkan semula kepada aturan kilang dan semua data akan dipadamkan.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wpc_tablet_incorrect_dialog_2">
+        <item quantity="other">Terdapat 1 percubaan untuk membuka kunci profil kerja anda. Anda mempunyai %d percubaan lagi sebelum tablet ini ditetapkan semula kepada aturan kilang dan semua data akan dipadamkan.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wpc_tablet_incorrect_dialog_4">
+        <item quantity="other">Terdapat %d percubaan untuk membuka kunci profil kerja anda. Anda mempunyai 1 percubaan lagi sebelum tablet ini ditetapkan semula kepada aturan kilang dan semua data akan dipadamkan.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

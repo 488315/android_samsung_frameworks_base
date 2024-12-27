@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="biometric_dialog_credential_too_many_attempts">
+        <item quantity="other">Әрекетті %d секундтан кейін қайталаңыз.</item>
+        <item quantity="one">Әрекетті 1 секундтан кейін қайталап көріңіз.</item>
+    </plurals>
+    <plurals name="biometric_dialog_credential_too_many_attempts_min">
+        <item quantity="other">%d мин кейін қайталаңыз.</item>
+        <item quantity="one">Әрекетті 1 минуттан кейін қайталаңыз.</item>
+    </plurals>
+    <plurals name="sec_incorrect_password_attempts_left">
+        <item quantity="other">Құпиясөз дұрыс емес. %d әрекет қалды.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Құпиясөз дұрыс емес. %d әрекет қалды.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_incorrect_pattern_attempts_left">
+        <item quantity="other">Үлгі дұрыс емес. %d әрекет қалды.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Үлгі дұрыс емес. %d әрекет қалды.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_incorrect_pin_attempts_left">
+        <item quantity="other">PIN коды дұрыс емес. %d әрекет қалды.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">PIN коды дұрыс емес. %d әрекет қалды.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_lockpattern_too_many_failed_confirmation_attempts_footer_min">
+        <item quantity="other">%d мин кейін қайталаңыз.</item>
+        <item quantity="one">Әрекетті 1 минуттан кейін қайталаңыз.</item>
+    </plurals>
+    <plurals name="sec_lockpattern_too_many_failed_confirmation_attempts_footer_sec">
+        <item quantity="other">Әрекетті %d секундтан кейін қайталаңыз.</item>
+        <item quantity="one">Әрекетті 1 секундтан кейін қайталап көріңіз.</item>
+    </plurals>
+    <plurals name="wpc_phone_incorrect_dialog_2">
+        <item quantity="other">Жұмыс профиліңіздің құлпын ашу үшін 1 әрекет жасалды. Осы телефон зауыттық параметрлерге қалпына келтіріліп, барлық деректер өшірілгенге дейін сізде %d әрекет қалды.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Жұмыс профиліңіздің құлпын ашу үшін 1 әрекет жасалды. Осы телефон зауыттық параметрлерге қалпына келтіріліп, барлық деректер өшірілгенге дейін сізде %d әрекет қалды.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wpc_phone_incorrect_dialog_4">
+        <item quantity="other">Жұмыс профиліңіздің құлпын ашу үшін %d әрекет жасалды. Осы телефон зауыттық параметрлерге қалпына келтіріліп, барлық деректер өшірілгенге дейін сізде 1 әрекет қалды.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Жұмыс профиліңіздің құлпын ашу үшін %d әрекет жасалды. Осы телефон зауыттық параметрлерге қалпына келтіріліп, барлық деректер өшірілгенге дейін сізде 1 әрекет қалды.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wpc_tablet_incorrect_dialog_2">
+        <item quantity="other">Жұмыс профиліңіздің құлпын ашу үшін 1 әрекет жасалды. Осы планшет зауыттық параметрлерге қалпына келтіріліп, барлық деректер өшірілгенге дейін сізде %d әрекет қалды.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Жұмыс профиліңіздің құлпын ашу үшін 1 әрекет жасалды. Осы планшет зауыттық параметрлерге қалпына келтіріліп, барлық деректер өшірілгенге дейін сізде %d әрекет қалды.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wpc_tablet_incorrect_dialog_4">
+        <item quantity="other">Жұмыс профиліңіздің құлпын ашу үшін %d әрекет жасалды. Осы планшет зауыттық параметрлерге қалпына келтіріліп, барлық деректер өшірілгенге дейін сізде 1 әрекет қалды.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Жұмыс профиліңіздің құлпын ашу үшін %d әрекет жасалды. Осы планшет зауыттық параметрлерге қалпына келтіріліп, барлық деректер өшірілгенге дейін сізде 1 әрекет қалды.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="biometric_dialog_credential_too_many_attempts">
+        <item quantity="other">%d секундын дараа дахин оролдоно уу</item>
+        <item quantity="one">1 секундын дараа дахин оролд.</item>
+    </plurals>
+    <plurals name="biometric_dialog_credential_too_many_attempts_min">
+        <item quantity="other">Try again in %d minutes.</item>
+        <item quantity="one">1 минутын дараа дахин оролд.</item>
+    </plurals>
+    <plurals name="sec_incorrect_password_attempts_left">
+        <item quantity="other">Буруу нууц үг. %d оролдлого үлдсэн.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Буруу нууц үг. %d оролдлого үлдсэн.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_incorrect_pattern_attempts_left">
+        <item quantity="other">Буруу хээ. %d оролдлого үлдсэн.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Буруу хээ. %d оролдлого үлдсэн.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_incorrect_pin_attempts_left">
+        <item quantity="other">Буруу PIN. %d оролдлого үлдсэн.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Буруу PIN. %d оролдлого үлдсэн.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_lockpattern_too_many_failed_confirmation_attempts_footer_min">
+        <item quantity="other">Try again in %d minutes.</item>
+        <item quantity="one">1 минутын дараа дахин оролд.</item>
+    </plurals>
+    <plurals name="sec_lockpattern_too_many_failed_confirmation_attempts_footer_sec">
+        <item quantity="other">%d секундын дараа дахин оролдоно уу</item>
+        <item quantity="one">1 секундын дараа дахин оролд.</item>
+    </plurals>
+    <plurals name="wpc_phone_incorrect_dialog_2">
+        <item quantity="other">Та ажлын профайлынхаа түгжээг тайлах гэж 1 удаа оролдсон байна. Энэ утсыг үйлдвэрийн тохиргоо руу шилжүүлэхийн өмнө танд %d оролдлого үлдсэн бөгөөд бүх өгөгдөл устах болно.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Та ажлын профайлынхаа түгжээг тайлах гэж 1 удаа оролдсон байна. Энэ утсыг үйлдвэрийн тохиргоо руу шилжүүлэхийн өмнө танд %d оролдлого үлдсэн бөгөөд бүх өгөгдөл устах болно.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wpc_phone_incorrect_dialog_4">
+        <item quantity="other">Та ажлын профайлынхаа түгжээг тайлах гэж %d удаа оролдсон байна. Энэ утсыг үйлдвэрийн тохиргоо руу шилжүүлэхийн өмнө танд 1 оролдлого үлдсэн бөгөөд бүх өгөгдөл устах болно.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Та ажлын профайлынхаа түгжээг тайлах гэж %d удаа оролдсон байна. Энэ утсыг үйлдвэрийн тохиргоо руу шилжүүлэхийн өмнө танд 1 оролдлого үлдсэн бөгөөд бүх өгөгдөл устах болно.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wpc_tablet_incorrect_dialog_2">
+        <item quantity="other">Та ажлын профайлынхаа түгжээг тайлах гэж 1 удаа оролдсон байна. Энэ таблетыг үйлдвэрийн тохиргоо руу шилжүүлэхийн өмнө танд %d оролдлого үлдсэн бөгөөд бүх өгөгдөл устах болно.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Та ажлын профайлынхаа түгжээг тайлах гэж 1 удаа оролдсон байна. Энэ таблетыг үйлдвэрийн тохиргоо руу шилжүүлэхийн өмнө танд %d оролдлого үлдсэн бөгөөд бүх өгөгдөл устах болно.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wpc_tablet_incorrect_dialog_4">
+        <item quantity="other">Та ажлын профайлынхаа түгжээг тайлах гэж %d удаа оролдсон байна. Энэ таблетыг үйлдвэрийн тохиргоо руу шилжүүлэхийн өмнө танд 1 оролдлого үлдсэн бөгөөд бүх өгөгдөл устах болно.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Та ажлын профайлынхаа түгжээг тайлах гэж %d удаа оролдсон байна. Энэ таблетыг үйлдвэрийн тохиргоо руу шилжүүлэхийн өмнө танд 1 оролдлого үлдсэн бөгөөд бүх өгөгдөл устах болно.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

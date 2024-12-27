@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="biometric_dialog_credential_too_many_attempts">
+        <item quantity="other">Încercați din nou peste %d secunde.</item>
+        <item quantity="one">Încercați din nou peste 1 secundă.</item>
+    </plurals>
+    <plurals name="biometric_dialog_credential_too_many_attempts_min">
+        <item quantity="other">Reîncercați peste %d minute.</item>
+        <item quantity="one">Încercați din nou peste 1 minut.</item>
+    </plurals>
+    <plurals name="sec_incorrect_password_attempts_left">
+        <item quantity="other">Parolă greșită. %d încercări rămase.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Parolă greșită. %d încercare rămasă.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Parolă greșită. %d încercări rămase.</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_incorrect_pattern_attempts_left">
+        <item quantity="other">Model greșit. %d încercări rămase.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Model greșit. %d încercare rămasă.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Model greșit. %d încercări rămase.</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_incorrect_pin_attempts_left">
+        <item quantity="other">PIN greșit. %d încercări rămase.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Cod PIN greșit. %d încercare rămasă.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">PIN greșit. %d încercări rămase.</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_lockpattern_too_many_failed_confirmation_attempts_footer_min">
+        <item quantity="other">Reîncercați peste %d minute.</item>
+        <item quantity="one">Încercați din nou peste 1 minut.</item>
+    </plurals>
+    <plurals name="sec_lockpattern_too_many_failed_confirmation_attempts_footer_sec">
+        <item quantity="other">Încercați din nou peste %d secunde.</item>
+        <item quantity="one">Încercați din nou peste 1 secundă.</item>
+    </plurals>
+    <plurals name="wpc_phone_incorrect_dialog_2">
+        <item quantity="other">A existat 1 încercare de a debloca profilul dumneavoastră de lucru. Mai aveți %d încercări înainte ca acest telefon să fie resetat la valorile din fabrică și ca toate datele să fie șterse.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">A existat 1 încercare de a debloca profilul dumneavoastră de lucru. Mai aveți %d încercare înainte ca acest telefon să fie resetat la valorile din fabrică și ca toate datele să fie șterse.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">A existat 1 încercare de a debloca profilul dumneavoastră de lucru. Mai aveți %d încercări înainte ca acest telefon să fie resetat la valorile din fabrică și ca toate datele să fie șterse.</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wpc_phone_incorrect_dialog_4">
+        <item quantity="other">Au existat %d încercări de a debloca profilul dumneavoastră de lucru. Mai aveți 1 încercare înainte ca acest telefon să fie resetat la valorile din fabrică și ca toate datele să fie șterse.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">A existat %d încercare de a debloca profilul dumneavoastră de lucru. Mai aveți 1 încercare înainte ca acest telefon să fie resetat la valorile din fabrică și ca toate datele să fie șterse.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Au existat %d încercări de a debloca profilul dumneavoastră de lucru. Mai aveți 1 încercare înainte ca acest telefon să fie resetat la valorile din fabrică și ca toate datele să fie șterse.</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wpc_tablet_incorrect_dialog_2">
+        <item quantity="other">A existat 1 încercare de a debloca profilul dumneavoastră de lucru. Mai aveți %d încercări înainte ca această tabletă să fie resetată la valorile din fabrică și ca toate datele să fie șterse.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">A existat 1 încercare de a debloca profilul dumneavoastră de lucru. Mai aveți %d încercare înainte ca această tabletă să fie resetată la valorile din fabrică și ca toate datele să fie șterse.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">A existat 1 încercare de a debloca profilul dumneavoastră de lucru. Mai aveți %d încercări înainte ca această tabletă să fie resetată la valorile din fabrică și ca toate datele să fie șterse.</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wpc_tablet_incorrect_dialog_4">
+        <item quantity="other">Au existat %d încercări de a debloca profilul dumneavoastră de lucru. Mai aveți 1 încercare înainte ca această tabletă să fie resetată la valorile din fabrică și ca toate datele să fie șterse.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">A existat %d încercare de a debloca profilul dumneavoastră de lucru. Mai aveți 1 încercare înainte ca această tabletă să fie resetată la valorile din fabrică și ca toate datele să fie șterse.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Au existat %d încercări de a debloca profilul dumneavoastră de lucru. Mai aveți 1 încercare înainte ca această tabletă să fie resetată la valorile din fabrică și ca toate datele să fie șterse.</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

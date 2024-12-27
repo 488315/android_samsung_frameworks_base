@@ -1,0 +1,396 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="abc_action_bar_content_inset_material">16.0dip</dimen>
+    <dimen name="abc_action_bar_content_inset_with_nav">72.0dip</dimen>
+    <dimen name="abc_action_bar_default_height_material">56.0dip</dimen>
+    <dimen name="abc_action_bar_default_padding_end_material">0.0dip</dimen>
+    <dimen name="abc_action_bar_default_padding_start_material">0.0dip</dimen>
+    <dimen name="abc_action_bar_elevation_material">4.0dip</dimen>
+    <dimen name="abc_action_bar_icon_vertical_padding_material">16.0dip</dimen>
+    <dimen name="abc_action_bar_overflow_padding_end_material">10.0dip</dimen>
+    <dimen name="abc_action_bar_overflow_padding_start_material">6.0dip</dimen>
+    <dimen name="abc_action_bar_stacked_max_height">48.0dip</dimen>
+    <dimen name="abc_action_bar_stacked_tab_max_width">180.0dip</dimen>
+    <dimen name="abc_action_bar_subtitle_bottom_margin_material">5.0dip</dimen>
+    <dimen name="abc_action_bar_subtitle_top_margin_material">-3.0dip</dimen>
+    <dimen name="abc_action_button_min_height_material">48.0dip</dimen>
+    <dimen name="abc_action_button_min_width_material">48.0dip</dimen>
+    <dimen name="abc_action_button_min_width_overflow_material">36.0dip</dimen>
+    <dimen name="abc_alert_dialog_button_bar_height">48.0dip</dimen>
+    <dimen name="abc_alert_dialog_button_dimen">48.0dip</dimen>
+    <item type="dimen" name="abc_button_inset_horizontal_material">@dimen/abc_control_inset_material</item>
+    <dimen name="abc_button_inset_vertical_material">6.0dip</dimen>
+    <dimen name="abc_button_padding_horizontal_material">8.0dip</dimen>
+    <item type="dimen" name="abc_button_padding_vertical_material">@dimen/abc_control_padding_material</item>
+    <dimen name="abc_cascading_menus_min_smallest_width">720.0dip</dimen>
+    <dimen name="abc_config_prefDialogWidth">320.0dip</dimen>
+    <dimen name="abc_control_corner_material">2.0dip</dimen>
+    <dimen name="abc_control_inset_material">4.0dip</dimen>
+    <dimen name="abc_control_padding_material">4.0dip</dimen>
+    <dimen name="abc_dialog_corner_radius_material">2.0dip</dimen>
+    <item type="dimen" name="abc_dialog_fixed_height_major">79.99999%</item>
+    <item type="dimen" name="abc_dialog_fixed_height_minor">100.0%</item>
+    <dimen name="abc_dialog_fixed_width_major">320.0dip</dimen>
+    <dimen name="abc_dialog_fixed_width_minor">320.0dip</dimen>
+    <dimen name="abc_dialog_list_padding_bottom_no_buttons">8.0dip</dimen>
+    <dimen name="abc_dialog_list_padding_top_no_title">8.0dip</dimen>
+    <item type="dimen" name="abc_dialog_min_width_major">65.0%</item>
+    <item type="dimen" name="abc_dialog_min_width_minor">95.00001%</item>
+    <dimen name="abc_dialog_padding_material">24.0dip</dimen>
+    <dimen name="abc_dialog_padding_top_material">18.0dip</dimen>
+    <dimen name="abc_dialog_title_divider_material">8.0dip</dimen>
+    <item type="dimen" name="abc_disabled_alpha_material_dark">0.3</item>
+    <item type="dimen" name="abc_disabled_alpha_material_light">0.26</item>
+    <dimen name="abc_dropdownitem_icon_width">32.0dip</dimen>
+    <dimen name="abc_dropdownitem_text_padding_left">8.0dip</dimen>
+    <dimen name="abc_dropdownitem_text_padding_right">8.0dip</dimen>
+    <dimen name="abc_edit_text_inset_bottom_material">7.0dip</dimen>
+    <dimen name="abc_edit_text_inset_horizontal_material">4.0dip</dimen>
+    <dimen name="abc_edit_text_inset_top_material">10.0dip</dimen>
+    <dimen name="abc_floating_window_z">16.0dip</dimen>
+    <dimen name="abc_list_item_height_large_material">80.0dip</dimen>
+    <dimen name="abc_list_item_height_material">64.0dip</dimen>
+    <dimen name="abc_list_item_height_small_material">48.0dip</dimen>
+    <item type="dimen" name="abc_list_item_padding_horizontal_material">@dimen/abc_action_bar_content_inset_material</item>
+    <dimen name="abc_panel_menu_list_width">296.0dip</dimen>
+    <dimen name="abc_progress_bar_height_material">4.0dip</dimen>
+    <dimen name="abc_search_view_preferred_height">48.0dip</dimen>
+    <dimen name="abc_search_view_preferred_width">320.0dip</dimen>
+    <dimen name="abc_seekbar_track_background_height_material">2.0dip</dimen>
+    <dimen name="abc_seekbar_track_progress_height_material">2.0dip</dimen>
+    <dimen name="abc_select_dialog_padding_start_material">20.0dip</dimen>
+    <dimen name="abc_star_big">48.0dip</dimen>
+    <dimen name="abc_star_medium">36.0dip</dimen>
+    <dimen name="abc_star_small">16.0dip</dimen>
+    <dimen name="abc_switch_padding">0.0px</dimen>
+    <dimen name="abc_text_size_body_1_material">14.0sp</dimen>
+    <dimen name="abc_text_size_body_2_material">14.0sp</dimen>
+    <dimen name="abc_text_size_button_material">14.0sp</dimen>
+    <dimen name="abc_text_size_caption_material">12.0sp</dimen>
+    <dimen name="abc_text_size_display_1_material">34.0sp</dimen>
+    <dimen name="abc_text_size_display_2_material">45.0sp</dimen>
+    <dimen name="abc_text_size_display_3_material">56.0sp</dimen>
+    <dimen name="abc_text_size_display_4_material">112.0sp</dimen>
+    <dimen name="abc_text_size_headline_material">24.0sp</dimen>
+    <dimen name="abc_text_size_large_material">22.0sp</dimen>
+    <dimen name="abc_text_size_medium_material">18.0sp</dimen>
+    <dimen name="abc_text_size_menu_header_material">14.0sp</dimen>
+    <dimen name="abc_text_size_menu_material">16.0sp</dimen>
+    <dimen name="abc_text_size_small_material">14.0sp</dimen>
+    <dimen name="abc_text_size_subhead_material">16.0sp</dimen>
+    <dimen name="abc_text_size_subtitle_material_toolbar">16.0dip</dimen>
+    <dimen name="abc_text_size_title_material">20.0sp</dimen>
+    <dimen name="abc_text_size_title_material_toolbar">20.0dip</dimen>
+    <dimen name="auth_credential_btn_password_show_height">48.0dip</dimen>
+    <dimen name="auth_credential_btn_password_show_width">48.0dip</dimen>
+    <dimen name="auth_credential_description_tablet_margin_top">16.0dip</dimen>
+    <dimen name="auth_credential_description_tablet_padding_horizontal">24.0dip</dimen>
+    <dimen name="auth_credential_error_tablet_margin_bottom">24.0dip</dimen>
+    <dimen name="auth_credential_icon_cover_margin_top">8.0dip</dimen>
+    <dimen name="auth_credential_icon_margin_top">24.0dip</dimen>
+    <dimen name="auth_credential_lockPassword_margin_horizontal">24.0dip</dimen>
+    <dimen name="auth_credential_main_view_margin_top">40.0dip</dimen>
+    <dimen name="auth_credential_main_view_tablet_margin_bottom">16.0dip</dimen>
+    <dimen name="auth_credential_title_tablet_margin_top">8.0dip</dimen>
+    <dimen name="biometric_prompt_background_feedback_text_size">16.0sp</dimen>
+    <dimen name="biometric_prompt_between_icon_margin">12.0dip</dimen>
+    <dimen name="biometric_prompt_bottom_cover_margin">4.0dip</dimen>
+    <dimen name="biometric_prompt_icon_height">40.0dip</dimen>
+    <dimen name="biometric_prompt_icon_right_margin">7.0dip</dimen>
+    <dimen name="biometric_prompt_icon_width">40.0dip</dimen>
+    <dimen name="biometric_prompt_knox_logo_bottom_margin">16.0dip</dimen>
+    <dimen name="biometric_prompt_knox_logo_end_margin">24.0dip</dimen>
+    <dimen name="biometric_prompt_knox_logo_height">21.0dip</dimen>
+    <item type="dimen" name="biometric_prompt_knox_logo_view_alpha">0.3</item>
+    <dimen name="biometric_prompt_knox_logo_width">61.0dip</dimen>
+    <dimen name="biometric_prompt_negative_bottom_cover_margin">44.0dip</dimen>
+    <dimen name="biometric_prompt_negative_bottom_margin">20.0dip</dimen>
+    <dimen name="biometric_prompt_negative_button_height">36.0dip</dimen>
+    <dimen name="biometric_prompt_negative_button_top_margin">16.0dip</dimen>
+    <dimen name="biometric_prompt_negative_button_width">271.0dip</dimen>
+    <dimen name="biometric_prompt_negative_padding_size">24.0dip</dimen>
+    <dimen name="biometric_prompt_positive_button_bottom_margin">12.0dip</dimen>
+    <dimen name="biometric_prompt_positive_button_height">36.0dip</dimen>
+    <dimen name="biometric_prompt_positive_button_min_width">216.0dip</dimen>
+    <dimen name="biometric_prompt_positive_button_padding_size">16.0dip</dimen>
+    <dimen name="biometric_prompt_positive_button_text_size">18.0sp</dimen>
+    <dimen name="biometric_prompt_positive_button_top_margin">26.0dip</dimen>
+    <item type="dimen" name="biometric_prompt_scroll_view_landscape_height">0.55</item>
+    <item type="dimen" name="biometric_prompt_scroll_view_portrait_height">0.42</item>
+    <dimen name="biometric_prompt_switch_text">15.0dip</dimen>
+    <dimen name="biometric_prompt_switch_view_height">60.0dip</dimen>
+    <dimen name="biometric_prompt_switch_width">36.0dip</dimen>
+    <dimen name="biometric_prompt_top_margin_avalible_biometrics_icon">12.0dip</dimen>
+    <dimen name="biometric_prompt_verification_description_text_size">14.0sp</dimen>
+    <dimen name="biometric_prompt_verification_description_top_margin">12.0dip</dimen>
+    <dimen name="biometric_prompt_verification_description_top_margin_in_multi">10.0dip</dimen>
+    <dimen name="biometric_prompt_verification_description_top_margin_not_exist_other_bio">18.0dip</dimen>
+    <dimen name="biometric_prompt_verification_dialog_bottom_margin_land">16.0dip</dimen>
+    <dimen name="biometric_prompt_verification_dialog_bottom_margin_portrait_winner_tablet">16.0dip</dimen>
+    <dimen name="biometric_prompt_verification_feedback_top_margin">5.0dip</dimen>
+    <dimen name="biometric_prompt_verification_horizontal_margin">24.0dip</dimen>
+    <dimen name="biometric_prompt_verification_left_margin">24.0dip</dimen>
+    <dimen name="biometric_prompt_verification_logo_text_size">14.0sp</dimen>
+    <dimen name="biometric_prompt_verification_min_height">189.0dip</dimen>
+    <dimen name="biometric_prompt_verification_negative_text_size">18.0sp</dimen>
+    <dimen name="biometric_prompt_verification_padding">20.0dip</dimen>
+    <dimen name="biometric_prompt_verification_right_margin">24.0dip</dimen>
+    <dimen name="biometric_prompt_verification_subtitle_text_size">14.0sp</dimen>
+    <dimen name="biometric_prompt_verification_title_text_size">16.0sp</dimen>
+    <dimen name="biometric_prompt_verification_top_margin">24.0dip</dimen>
+    <dimen name="biometrics_common_guide_title_text_size">21.0sp</dimen>
+    <dimen name="biometrics_common_raised_button_height">44.0dip</dimen>
+    <dimen name="biometrics_common_suw_bottom_bar_padding_bottom">12.0dip</dimen>
+    <dimen name="biometrics_common_suw_bottom_bar_padding_end">28.0dip</dimen>
+    <dimen name="biometrics_common_suw_bottom_bar_padding_start">5.0dip</dimen>
+    <dimen name="biometrics_common_suw_bottom_button_layout_height">76.0dip</dimen>
+    <dimen name="biometrics_common_suw_bottom_button_min_width">80.0dip</dimen>
+    <dimen name="biometrics_common_suw_bottom_next_button_height">40.0dip</dimen>
+    <dimen name="biometrics_common_suw_bottom_next_button_padding">16.0dip</dimen>
+    <dimen name="biometrics_common_suw_bottom_next_button_text_size">15.0sp</dimen>
+    <dimen name="biometrics_common_suw_bottom_next_button_vertical_padding">8.0dip</dimen>
+    <dimen name="borderless_button_radius">2.0dip</dimen>
+    <dimen name="cardview_compat_inset_shadow">1.0dip</dimen>
+    <dimen name="cardview_default_elevation">2.0dip</dimen>
+    <dimen name="cardview_default_radius">2.0dip</dimen>
+    <dimen name="compat_button_inset_horizontal_material">4.0dip</dimen>
+    <dimen name="compat_button_inset_vertical_material">6.0dip</dimen>
+    <dimen name="compat_button_padding_horizontal_material">8.0dip</dimen>
+    <dimen name="compat_button_padding_vertical_material">4.0dip</dimen>
+    <dimen name="compat_control_corner_material">2.0dip</dimen>
+    <dimen name="compat_notification_large_icon_max_height">320.0dip</dimen>
+    <dimen name="compat_notification_large_icon_max_width">320.0dip</dimen>
+    <dimen name="def_drawer_elevation">10.0dip</dimen>
+    <item type="dimen" name="disabled_alpha_material_dark">0.3</item>
+    <item type="dimen" name="disabled_alpha_material_light">0.26</item>
+    <dimen name="face_enroll_disclaimer_text_linespace">4.0dip</dimen>
+    <dimen name="face_enroll_guide_bottom_margin_height">0.0dip</dimen>
+    <dimen name="face_enroll_guide_button_margin_bottom">8.0dip</dimen>
+    <dimen name="face_enroll_guide_button_margin_side">32.0dip</dimen>
+    <item type="dimen" name="face_enroll_guide_clip_height_ratio">0.285</item>
+    <dimen name="face_enroll_guide_glass_button_margin_bottom">24.0dip</dimen>
+    <dimen name="face_enroll_guide_glass_button_margin_side">24.0dip</dimen>
+    <dimen name="face_enroll_guide_horizontal_margin">24.0dip</dimen>
+    <item type="dimen" name="face_enroll_guide_layout_width_percent">1.0</item>
+    <item type="dimen" name="face_enroll_guide_layout_width_percent_knox_bi">@dimen/face_enroll_guide_layout_width_percent</item>
+    <dimen name="face_enroll_guide_margin_bottom">24.0dip</dimen>
+    <dimen name="face_enroll_guide_margin_top">24.0dip</dimen>
+    <dimen name="face_enroll_guide_padding_top">9.0dip</dimen>
+    <dimen name="face_enroll_guide_text_margin_top">20.0dip</dimen>
+    <dimen name="face_enroll_guide_title_horizontal_margin">24.0dip</dimen>
+    <dimen name="face_enroll_guide_title_margin_bottom">0.0dip</dimen>
+    <item type="dimen" name="face_enroll_preview_bottom_margin_view">0.073</item>
+    <item type="dimen" name="face_enroll_preview_error_size">1.0</item>
+    <item type="dimen" name="face_enroll_preview_guide_line_size">0.81</item>
+    <item type="dimen" name="face_enroll_preview_layout_width_percent">0.84</item>
+    <item type="dimen" name="face_enroll_preview_top_margin_view">0.08</item>
+    <dimen name="face_enroll_progress_margin_top">20.0dip</dimen>
+    <dimen name="face_enroll_progress_width">8.0dip</dimen>
+    <dimen name="face_enroll_register_guide_text_size">14.0dip</dimen>
+    <dimen name="face_enroll_sub_text_linespace">3.0dip</dimen>
+    <dimen name="face_enroll_title_margin_top">20.0dip</dimen>
+    <dimen name="face_knox_logo_bottom_margin">16.0dip</dimen>
+    <dimen name="face_knox_logo_end_margin">24.0dip</dimen>
+    <dimen name="face_verification_between_buttons_margin">20.0dip</dimen>
+    <dimen name="face_verification_bottom_margin">20.0dip</dimen>
+    <dimen name="face_verification_bottom_margin_land">16.0dip</dimen>
+    <dimen name="face_verification_button_height">36.0dip</dimen>
+    <dimen name="face_verification_button_min_width">220.0dip</dimen>
+    <dimen name="face_verification_description_margin">18.0dip</dimen>
+    <dimen name="face_verification_description_text_size">16.0sp</dimen>
+    <dimen name="face_verification_feedback_text_size">16.0sp</dimen>
+    <dimen name="face_verification_icon_height">40.0dip</dimen>
+    <dimen name="face_verification_icon_right_margin">7.0dip</dimen>
+    <dimen name="face_verification_icon_width">40.0dip</dimen>
+    <dimen name="face_verification_line_spacing_extra">4.0dip</dimen>
+    <dimen name="face_verification_middle_margin">24.0dip</dimen>
+    <dimen name="face_verification_negative_button_radius">26.0dip</dimen>
+    <dimen name="face_verification_negative_padding_size">4.0dip</dimen>
+    <dimen name="face_verification_negative_text_size">16.0sp</dimen>
+    <dimen name="face_verification_positive_padding_size">16.0dip</dimen>
+    <dimen name="face_verification_positive_text_size">15.0sp</dimen>
+    <dimen name="face_verification_subtitle_text_size">13.0sp</dimen>
+    <dimen name="face_verification_title_text_size">20.0sp</dimen>
+    <dimen name="fastscroll_default_thickness">8.0dip</dimen>
+    <dimen name="fastscroll_margin">0.0dip</dimen>
+    <dimen name="fastscroll_minimum_range">50.0dip</dimen>
+    <dimen name="fingerprint_dialog_animation_translation_offset">350.0dip</dimen>
+    <dimen name="fingerprint_dialog_corner_size">4.0dip</dimen>
+    <dimen name="fingerprint_dialog_fp_icon_size">64.0dip</dimen>
+    <dimen name="fingerprint_verification_between_buttons_margin">20.0dip</dimen>
+    <dimen name="fingerprint_verification_between_icon_prompt_size">24.0dip</dimen>
+    <dimen name="fingerprint_verification_between_icon_prompt_size_land">12.0dip</dimen>
+    <dimen name="fingerprint_verification_bottom_margin">20.0dip</dimen>
+    <dimen name="fingerprint_verification_button_height">36.0dip</dimen>
+    <dimen name="fingerprint_verification_button_min_width">220.0dip</dimen>
+    <dimen name="fingerprint_verification_check_added_fingerprint_icon_height">34.0dip</dimen>
+    <dimen name="fingerprint_verification_check_added_fingerprint_icon_right_margin">3.0dip</dimen>
+    <dimen name="fingerprint_verification_check_added_fingerprint_icon_width">34.0dip</dimen>
+    <dimen name="fingerprint_verification_check_added_fingerprint_min_height">40.0dip</dimen>
+    <dimen name="fingerprint_verification_description_margin">18.0dip</dimen>
+    <dimen name="fingerprint_verification_description_text_size">16.0sp</dimen>
+    <dimen name="fingerprint_verification_dialog_bottom_margin_land">16.0dip</dimen>
+    <dimen name="fingerprint_verification_enrolled_fingerprint_text_size">18.0sp</dimen>
+    <dimen name="fingerprint_verification_icon_height">40.0dip</dimen>
+    <dimen name="fingerprint_verification_icon_right_margin">7.0dip</dimen>
+    <dimen name="fingerprint_verification_icon_width">40.0dip</dimen>
+    <dimen name="fingerprint_verification_middle_margin">24.0dip</dimen>
+    <dimen name="fingerprint_verification_negative_button_radius">26.0dip</dimen>
+    <dimen name="fingerprint_verification_negative_padding_size">4.0dip</dimen>
+    <dimen name="fingerprint_verification_positive_padding_size">16.0dip</dimen>
+    <dimen name="fingerprint_verification_positive_text_size">15.0sp</dimen>
+    <item type="dimen" name="highlight_alpha_material_colored">0.26</item>
+    <item type="dimen" name="highlight_alpha_material_dark">0.2</item>
+    <item type="dimen" name="highlight_alpha_material_light">0.12</item>
+    <item type="dimen" name="hint_alpha_material_dark">0.5</item>
+    <item type="dimen" name="hint_alpha_material_light">0.38</item>
+    <item type="dimen" name="hint_pressed_alpha_material_dark">0.7</item>
+    <item type="dimen" name="hint_pressed_alpha_material_light">0.54</item>
+    <dimen name="intelligent_biometric_prompt_dialog_left_space_270">74.0dip</dimen>
+    <dimen name="intelligent_biometric_prompt_dialog_left_space_90">392.0dip</dimen>
+    <dimen name="intelligent_biometric_prompt_dialog_min_height">268.0dip</dimen>
+    <dimen name="intelligent_biometric_prompt_dialog_right_space_270">392.0dip</dimen>
+    <dimen name="intelligent_biometric_prompt_dialog_width">287.0dip</dimen>
+    <dimen name="intelligent_biometric_prompt_width">679.0dip</dimen>
+    <dimen name="intelligent_enroll_masking_radius">20.0dip</dimen>
+    <dimen name="intelligent_enroll_masking_size">249.5dip</dimen>
+    <dimen name="intelligent_enroll_masking_stroke">1.5dip</dimen>
+    <dimen name="intelligent_enroll_register_header_guide_text_size">24.0dip</dimen>
+    <dimen name="intelligent_verification_bottom_margin">20.0dip</dimen>
+    <dimen name="intelligent_verification_bottom_margin_land">20.0dip</dimen>
+    <dimen name="intelligent_verification_button_height">36.0dip</dimen>
+    <dimen name="intelligent_verification_button_min_width">180.0dip</dimen>
+    <dimen name="intelligent_verification_description_margin">18.0dip</dimen>
+    <dimen name="intelligent_verification_description_text_size">16.0sp</dimen>
+    <dimen name="intelligent_verification_left_margin">24.0dip</dimen>
+    <dimen name="intelligent_verification_middle_margin">24.0dip</dimen>
+    <dimen name="intelligent_verification_negative_button_radius">26.0dip</dimen>
+    <dimen name="intelligent_verification_negative_padding_size">4.0dip</dimen>
+    <dimen name="intelligent_verification_negative_text_size">16.0sp</dimen>
+    <dimen name="intelligent_verification_positive_padding_size">16.0dip</dimen>
+    <dimen name="intelligent_verification_positive_text_size">15.0sp</dimen>
+    <dimen name="intelligent_verification_right_margin">24.0dip</dimen>
+    <dimen name="intelligent_verification_subtitle_text_size">13.0sp</dimen>
+    <dimen name="intelligent_verification_title_text_size">20.0sp</dimen>
+    <dimen name="intelligent_verification_top_margin">24.0dip</dimen>
+    <dimen name="intelligent_verification_top_margin_land">34.25dip</dimen>
+    <dimen name="item_touch_helper_max_drag_scroll_per_frame">20.0dip</dimen>
+    <dimen name="item_touch_helper_swipe_escape_max_velocity">800.0dip</dimen>
+    <dimen name="item_touch_helper_swipe_escape_velocity">120.0dip</dimen>
+    <dimen name="keyguard_two_step_image_height">20.0dip</dimen>
+    <dimen name="keyguard_two_step_image_margin_bottom">8.0dip</dimen>
+    <dimen name="keyguard_two_step_image_width">60.0dip</dimen>
+    <dimen name="kg_pwd_layout_default_margin_bottom">60.0dip</dimen>
+    <dimen name="kg_pwd_layout_height_landscape">200.0dip</dimen>
+    <dimen name="knox_detail_text_margin_left">24.0dip</dimen>
+    <dimen name="knox_detail_text_margin_right">24.0dip</dimen>
+    <dimen name="knox_detail_text_size">18.0sp</dimen>
+    <dimen name="knox_error_margin_horizontal">24.0dip</dimen>
+    <dimen name="knox_error_text_size">16.0sp</dimen>
+    <dimen name="knox_lock_password_show_button_size">26.0dip</dimen>
+    <dimen name="knox_lock_pattern_header_text_size">15.0dip</dimen>
+    <dimen name="knox_logo_confirm_credential_dimen">48.0dip</dimen>
+    <dimen name="knox_logo_confirm_credential_top_margin">72.0dip</dimen>
+    <dimen name="knox_logo_end_margin">24.0dip</dimen>
+    <item type="dimen" name="knox_logo_view_alpha">1.0</item>
+    <dimen name="knox_logo_view_height">37.0dip</dimen>
+    <dimen name="knox_logo_view_prompt_top_margin">8.0dip</dimen>
+    <dimen name="knox_password_edittext_width">231.0dip</dimen>
+    <dimen name="knox_password_view_height">44.0dip</dimen>
+    <dimen name="knox_password_view_margin_bottom">11.0dip</dimen>
+    <dimen name="knox_password_view_margin_end">46.0dip</dimen>
+    <dimen name="knox_password_view_margin_start">47.0dip</dimen>
+    <dimen name="knox_password_view_margin_top">24.0dip</dimen>
+    <dimen name="knox_password_view_width">267.0dip</dimen>
+    <dimen name="knox_title_sub_text_height">21.0dip</dimen>
+    <dimen name="knox_title_sub_text_size">15.0dip</dimen>
+    <dimen name="knox_title_text_height">19.0dip</dimen>
+    <dimen name="knox_ucm_title_text_top_margin">8.0dip</dimen>
+    <dimen name="noti_setting_and_clear_show_button_bg_inset">3.0dip</dimen>
+    <dimen name="notification_action_icon_size">32.0dip</dimen>
+    <dimen name="notification_action_text_size">13.0sp</dimen>
+    <dimen name="notification_big_circle_margin">12.0dip</dimen>
+    <dimen name="notification_content_margin_start">0.0dip</dimen>
+    <dimen name="notification_large_icon_height">64.0dip</dimen>
+    <dimen name="notification_large_icon_width">64.0dip</dimen>
+    <dimen name="notification_main_column_padding_top">0.0dip</dimen>
+    <dimen name="notification_media_narrow_margin">12.0dip</dimen>
+    <dimen name="notification_right_icon_size">16.0dip</dimen>
+    <dimen name="notification_right_side_padding_top">4.0dip</dimen>
+    <dimen name="notification_small_icon_background_padding">3.0dip</dimen>
+    <dimen name="notification_small_icon_size_as_large">24.0dip</dimen>
+    <dimen name="notification_subtext_size">13.0sp</dimen>
+    <dimen name="notification_top_pad">10.0dip</dimen>
+    <dimen name="notification_top_pad_large_text">5.0dip</dimen>
+    <item type="dimen" name="sec_fingerprint_enroll_1st_layout_ratio">3.0</item>
+    <item type="dimen" name="sec_fingerprint_enroll_2nd_layout_ratio">2.7</item>
+    <item type="dimen" name="sec_fingerprint_enroll_3rd_layout_ratio">0.3</item>
+    <item type="dimen" name="sec_fingerprint_enroll_4th_layout_ratio">4.0</item>
+    <dimen name="sec_fingerprint_enroll_add_button_margin_top">36.0dip</dimen>
+    <dimen name="sec_fingerprint_enroll_bg_stroke_width">1.0px</dimen>
+    <dimen name="sec_fingerprint_enroll_guide_button_margin_bottom">8.0dip</dimen>
+    <dimen name="sec_fingerprint_enroll_guide_layout_margin_horizontal">24.0dip</dimen>
+    <dimen name="sec_fingerprint_enroll_guide_padding_top">9.0dip</dimen>
+    <dimen name="sec_fingerprint_enroll_guide_vi_margin_top">0.0dip</dimen>
+    <dimen name="sec_fingerprint_enroll_knox_bi_marginBottom">16.0dip</dimen>
+    <dimen name="sec_fingerprint_enroll_knox_bi_marginEnd">24.0dip</dimen>
+    <dimen name="sec_fingerprint_enroll_progress_textSize">36.0sp</dimen>
+    <dimen name="sec_fingerprint_enroll_try_out_description_textSize">16.0sp</dimen>
+    <dimen name="sec_fingerprint_enroll_try_out_marginTop">16.0dip</dimen>
+    <dimen name="sec_fingerprint_enroll_try_out_title_textSize">18.0sp</dimen>
+    <dimen name="sec_fingerprint_register_bottom_bar_height">52.0dip</dimen>
+    <dimen name="sec_fingerprint_register_bottom_bar_textSize">18.0sp</dimen>
+    <dimen name="sec_fingerprint_register_button_height">52.0dip</dimen>
+    <dimen name="sec_fingerprint_register_button_marginBottom">25.0dip</dimen>
+    <dimen name="sec_fingerprint_register_button_marginSide">24.0dip</dimen>
+    <dimen name="sec_fingerprint_register_button_padding">16.0dip</dimen>
+    <dimen name="sec_fingerprint_register_button_textSize">17.0sp</dimen>
+    <dimen name="sec_fingerprint_register_button_width">296.0dip</dimen>
+    <dimen name="sec_fingerprint_register_frame_marginTop">0.0dip</dimen>
+    <dimen name="sec_fingerprint_register_guideClip_bg_marginSide">10.0dip</dimen>
+    <dimen name="sec_fingerprint_register_guideSecondText_size">16.0dip</dimen>
+    <dimen name="sec_fingerprint_register_guideSubTitle_text_size">17.0sp</dimen>
+    <dimen name="sec_fingerprint_register_guideText_marginTop">19.0dip</dimen>
+    <dimen name="sec_fingerprint_register_guideText_size">18.0sp</dimen>
+    <dimen name="sec_fingerprint_register_guideTitle_text_size">18.0dip</dimen>
+    <item type="dimen" name="sec_fingerprint_register_guide_height_ratio">0.285</item>
+    <dimen name="sec_fingerprint_register_guide_textLineSpace">3.0dip</dimen>
+    <item type="dimen" name="sec_fingerprint_register_marginTop_ratio">0.079</item>
+    <item type="dimen" name="sec_fingerprint_register_progress_first_text_height_ratio">0.44</item>
+    <item type="dimen" name="sec_fingerprint_register_progress_first_vi_height_ratio">0.81</item>
+    <item type="dimen" name="sec_fingerprint_register_progress_first_vi_height_ratio_swipe">0.78</item>
+    <item type="dimen" name="sec_fingerprint_register_progress_first_vi_height_ratio_tablet_land">0.95</item>
+    <item type="dimen" name="sec_fingerprint_register_progress_first_vi_layout_height_ratio">0.48</item>
+    <item type="dimen" name="sec_fingerprint_register_progress_first_vi_layout_height_ratio_swipe">0.31</item>
+    <item type="dimen" name="sec_fingerprint_register_progress_percent_height_ratio">0.195</item>
+    <item type="dimen" name="sec_fingerprint_register_progress_swipe_guide_vi_height_ratio">0.6</item>
+    <item type="dimen" name="sec_fingerprint_register_progress_swipe_guide_vi_layout_height_ratio">0.6</item>
+    <item type="dimen" name="sec_fingerprint_register_progress_swipe_image_vi_height_ratio">0.3</item>
+    <item type="dimen" name="sec_fingerprint_register_progress_swipe_image_vi_layout_height_ratio">0.6</item>
+    <item type="dimen" name="sec_fingerprint_register_progress_text_height_ratio">0.31</item>
+    <item type="dimen" name="sec_fingerprint_register_progress_vi_height_ratio">0.55</item>
+    <item type="dimen" name="sec_fingerprint_register_progress_vi_height_ratio_tablet_land">0.65</item>
+    <item type="dimen" name="sec_fingerprint_register_progress_vi_layout_height_ratio">0.4</item>
+    <dimen name="sec_fingerprint_register_textLineSpace">4.0sp</dimen>
+    <item type="dimen" name="sec_fingerprint_register_width_ratio">0.867</item>
+    <item type="dimen" name="sec_fingerprint_register_width_ratio_knox_bi">@dimen/sec_fingerprint_register_width_ratio</item>
+    <dimen name="sec_fingerprint_swipe_enroll_description_marginStart">8.0dip</dimen>
+    <dimen name="sec_fingerprint_swipe_enroll_description_marginTop">6.0dip</dimen>
+    <dimen name="sec_fingerprint_swipe_enroll_subTitle_marginTop">24.0dip</dimen>
+    <dimen name="sec_lock_password_edit_text_size">18.0dip</dimen>
+    <dimen name="sec_lock_pattern_view_size">255.0dip</dimen>
+    <dimen name="title_margin_top">12.0dip</dimen>
+    <dimen name="tooltip_corner_radius">2.0dip</dimen>
+    <dimen name="tooltip_horizontal_padding">16.0dip</dimen>
+    <dimen name="tooltip_margin">8.0dip</dimen>
+    <dimen name="tooltip_precise_anchor_extra_offset">8.0dip</dimen>
+    <dimen name="tooltip_precise_anchor_threshold">96.0dip</dimen>
+    <dimen name="tooltip_vertical_padding">6.5dip</dimen>
+    <dimen name="tooltip_y_offset_non_touch">0.0dip</dimen>
+    <dimen name="tooltip_y_offset_touch">16.0dip</dimen>
+    <dimen name="uninstall_btn_height">34.0dip</dimen>
+    <dimen name="uninstall_btn_margin_top_land">16.0dip</dimen>
+    <dimen name="uninstall_btn_margin_top_port">8.0dip</dimen>
+    <dimen name="uninstall_btn_padding_left_right">20.0dip</dimen>
+    <dimen name="uninstall_btn_width">120.0dip</dimen>
+</resources>

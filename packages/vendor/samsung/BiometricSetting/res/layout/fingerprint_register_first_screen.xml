@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent" android:weightSum="1.0">
+        <LinearLayout android:gravity="bottom|center" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="0.0dip" android:weightSum="1.0" android:layout_weight="@dimen/sec_fingerprint_register_progress_first_vi_layout_height_ratio">
+            <LinearLayout android:id="@id/register_first_guide_vi_layout" android:background="@drawable/sec_fingerprint_enroll_bg" android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_weight="@dimen/sec_fingerprint_register_progress_first_vi_height_ratio">
+                <TextureView android:id="@id/register_popup_img_first" android:visibility="invisible" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout android:orientation="vertical" android:id="@id/first_guide_description" android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_weight="@dimen/sec_fingerprint_register_progress_first_text_height_ratio">
+            <ScrollView android:layout_width="fill_parent" android:layout_height="fill_parent" android:fillViewport="true">
+                <RelativeLayout android:layout_width="fill_parent" android:layout_height="fill_parent">
+                    <TextView android:gravity="center_horizontal" android:id="@id/first_guide_title" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/fingerscanner_register_text" android:layout_centerInParent="true" android:lineSpacingExtra="@dimen/sec_fingerprint_register_textLineSpace" style="@style/FingerprintEnrollGuideDescriptionStyle" />
+                    <TextView android:textSize="@dimen/sec_fingerprint_register_guideSecondText_size" android:gravity="center_horizontal" android:id="@id/register_text_first" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/sec_fingerprint_register_guideText_marginTop" android:text="@string/fingerscanner_register_text" android:layout_below="@id/first_guide_title" android:lineSpacingExtra="@dimen/sec_fingerprint_register_guide_textLineSpace" style="@style/FingerprintEnrollGuideDescriptionStyle" />
+                </RelativeLayout>
+            </ScrollView>
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

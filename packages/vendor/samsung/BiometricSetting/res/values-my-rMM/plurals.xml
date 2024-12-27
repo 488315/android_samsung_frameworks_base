@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="biometric_dialog_credential_too_many_attempts">
+        <item quantity="other">%d စက္ကန့်အတွင်း ထပ်မံကြိုးစားပါ။</item>
+        <item quantity="one">၁ စက္ကန့်အကြာမှာ ထပ်ကြိုးစားပါ။</item>
+    </plurals>
+    <plurals name="biometric_dialog_credential_too_many_attempts_min">
+        <item quantity="other">%d မိနစ်အတွင်း ပြန်ကြိုးစားပါ။</item>
+        <item quantity="one">၁ မိနစ်အတွင်း ထပ်မံကြိုးစားပါ။</item>
+    </plurals>
+    <plurals name="sec_incorrect_password_attempts_left">
+        <item quantity="other">မမှန်သော စကားဝှက်။ ကြိုးစားမှု %d ကြိမ် ကျန်သေးသည်။</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_incorrect_pattern_attempts_left">
+        <item quantity="other">မမှန်သော ပုံစံနမူနာ။ ကြိုးစားမှု %d ကြိမ် ကျန်သေးသည်။</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_incorrect_pin_attempts_left">
+        <item quantity="other">မမှန်သော PIN။ ကြိုးစားမှု %d ကြိမ် ကျန်သေးသည်။</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_lockpattern_too_many_failed_confirmation_attempts_footer_min">
+        <item quantity="other">%d မိနစ်အတွင်း ပြန်ကြိုးစားပါ။</item>
+        <item quantity="one">၁ မိနစ်အတွင်း ထပ်မံကြိုးစားပါ။</item>
+    </plurals>
+    <plurals name="sec_lockpattern_too_many_failed_confirmation_attempts_footer_sec">
+        <item quantity="other">%d စက္ကန့်အတွင်း ထပ်မံကြိုးစားပါ။</item>
+        <item quantity="one">၁ စက္ကန့်အကြာမှာ ထပ်ကြိုးစားပါ။</item>
+    </plurals>
+    <plurals name="wpc_phone_incorrect_dialog_2">
+        <item quantity="other">သင်၏ အလုပ်ပရိုဖိုင်ကို သော့ဖွင့်ရန် ကြိုးပမ်းမှု ၁ ကြိမ် ရှိခဲ့သည်။ ဤဖုန်းကို စက်ရုံထုတ် သတ်မှတ်ချက်များအတိုင်း ပြန်လည်သတ်မှတ်ပြီး ဒေတာအားလုံးကို ဖျက်ပစ်ခြင်း မပြုမီ သင့်တွင် ကြိုးပမ်းခွင့် %d ကြိမ် ကျန်သည်။</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wpc_phone_incorrect_dialog_4">
+        <item quantity="other">သင်၏ အလုပ်ပရိုဖိုင်ကို သော့ဖွင့်ရန် ကြိုးပမ်းမှု %d ကြိမ် ရှိခဲ့သည်။ ဤဖုန်းကို စက်ရုံထုတ် သတ်မှတ်ချက်များအတိုင်း ပြန်လည်သတ်မှတ်ပြီး ဒေတာအားလုံးကို ဖျက်ပစ်ခြင်း မပြုမီ သင့်တွင် ကြိုးပမ်းခွင့် ၁ ကြိမ် ကျန်သည်။</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wpc_tablet_incorrect_dialog_2">
+        <item quantity="other">သင်၏ အလုပ်ပရိုဖိုင်ကို သော့ဖွင့်ရန် ကြိုးပမ်းမှု ၁ ကြိမ် ရှိခဲ့သည်။ ဤတက်ဘလက်ကို စက်ရုံထုတ် သတ်မှတ်ချက်များအတိုင်း ပြန်လည်သတ်မှတ်ပြီး ဒေတာအားလုံးကို ဖျက်ပစ်ခြင်း မပြုမီ သင့်တွင် ကြိုးပမ်းခွင့် %d ကြိမ် ကျန်သည်။</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wpc_tablet_incorrect_dialog_4">
+        <item quantity="other">သင်၏ အလုပ်ပရိုဖိုင်ကို သော့ဖွင့်ရန် ကြိုးပမ်းမှု %d ကြိမ် ရှိခဲ့သည်။ ဤတက်ဘလက်ကို စက်ရုံထုတ် သတ်မှတ်ချက်များအတိုင်း ပြန်လည်သတ်မှတ်ပြီး ဒေတာအားလုံးကို ဖျက်ပစ်ခြင်း မပြုမီ သင့်တွင် ကြိုးပမ်းခွင့် ၁ ကြိမ် ကျန်သည်။</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

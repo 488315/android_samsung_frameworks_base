@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="biometric_dialog_credential_too_many_attempts">
+        <item quantity="other">Spróbuj ponownie za %d sek.</item>
+        <item quantity="one">Ponów próbę za 1 s.</item>
+    </plurals>
+    <plurals name="biometric_dialog_credential_too_many_attempts_min">
+        <item quantity="other">Spróbuj ponownie za %d min.</item>
+        <item quantity="one">Spróbuj ponownie za 1 minutę.</item>
+    </plurals>
+    <plurals name="sec_incorrect_password_attempts_left">
+        <item quantity="other">Nieprawidłowe hasło. Pozostało %d prób.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Nieprawidłowe hasło. Pozostała %d próba.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Nieprawidłowe hasło. Pozostały %d próby.</item>
+        <item quantity="many">Nieprawidłowe hasło. Pozostało %d prób.</item>
+    </plurals>
+    <plurals name="sec_incorrect_pattern_attempts_left">
+        <item quantity="other">Nieprawidłowy symbol. Pozostało %d prób.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Nieprawidłowy symbol. Pozostała %d próba.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Nieprawidłowy symbol. Pozostały %d próby.</item>
+        <item quantity="many">Nieprawidłowy symbol. Pozostało %d prób.</item>
+    </plurals>
+    <plurals name="sec_incorrect_pin_attempts_left">
+        <item quantity="other">Nieprawidłowy kod PIN. Pozostało %d prób.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Nieprawidłowy kod PIN. Pozostała %d próba.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Nieprawidłowy kod PIN. Pozostały %d próby.</item>
+        <item quantity="many">Nieprawidłowy kod PIN. Pozostało %d prób.</item>
+    </plurals>
+    <plurals name="sec_lockpattern_too_many_failed_confirmation_attempts_footer_min">
+        <item quantity="other">Spróbuj ponownie za %d min.</item>
+        <item quantity="one">Spróbuj ponownie za 1 minutę.</item>
+    </plurals>
+    <plurals name="sec_lockpattern_too_many_failed_confirmation_attempts_footer_sec">
+        <item quantity="other">Spróbuj ponownie za %d sek.</item>
+        <item quantity="one">Ponów próbę za 1 s.</item>
+    </plurals>
+    <plurals name="wpc_phone_incorrect_dialog_2">
+        <item quantity="other">Podjęto 1 próbę odblokowania profilu służbowego. Pozostało %d próby, zanim telefon zostanie przywrócony do ustawień fabrycznych, a wszystkie dane zostaną usunięte.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Podjęto 1 próbę odblokowania profilu służbowego. Pozostała %d próba, zanim telefon zostanie przywrócony do ustawień fabrycznych, a wszystkie dane zostaną usunięte.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Podjęto 1 próbę odblokowania profilu służbowego. Pozostały %d próby, zanim telefon zostanie przywrócony do ustawień fabrycznych, a wszystkie dane zostaną usunięte.</item>
+        <item quantity="many">Podjęto 1 próbę odblokowania profilu służbowego. Pozostało %d prób, zanim telefon zostanie przywrócony do ustawień fabrycznych, a wszystkie dane zostaną usunięte.</item>
+    </plurals>
+    <plurals name="wpc_phone_incorrect_dialog_4">
+        <item quantity="other">Podjęto %d próby odblokowania profilu służbowego. Pozostała 1 próba zanim telefon zostanie zresetowany do ustawień fabrycznych, a wszystkie dane zostaną usunięte.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Podjęto %d próbę odblokowania profilu służbowego. Pozostała 1 próba, zanim telefon zostanie przywrócony do ustawień fabrycznych, a wszystkie dane zostaną usunięte.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Podjęto %d próby odblokowania profilu służbowego. Pozostała 1 próba zanim telefon zostanie zresetowany do ustawień fabrycznych, a wszystkie dane zostaną usunięte.</item>
+        <item quantity="many">Podjęto %d prób odblokowania profilu służbowego. Pozostała 1 próba zanim telefon zostanie zresetowany do ustawień fabrycznych, a wszystkie dane zostaną usunięte.</item>
+    </plurals>
+    <plurals name="wpc_tablet_incorrect_dialog_2">
+        <item quantity="other">Podjęto 1 próbę odblokowania profilu służbowego. Pozostało %d próby, zanim tablet zostanie zresetowany do ustawień fabrycznych, a wszystkie dane zostaną usunięte.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Podjęto 1 próbę odblokowania profilu służbowego. Pozostała %d próba, zanim tablet zostanie przywrócony do ustawień fabrycznych, a wszystkie dane zostaną usunięte.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Podjęto 1 próbę odblokowania profilu służbowego. Pozostały %d próby, zanim tablet zostanie zresetowany do ustawień fabrycznych, a wszystkie dane zostaną usunięte.</item>
+        <item quantity="many">Podjęto 1 próbę odblokowania profilu służbowego. Pozostało %d prób, zanim tablet zostanie zresetowany do ustawień fabrycznych, a wszystkie dane zostaną usunięte.</item>
+    </plurals>
+    <plurals name="wpc_tablet_incorrect_dialog_4">
+        <item quantity="other">Podjęto %d próby odblokowania profilu służbowego. Pozostała 1 próba zanim tablet zostanie zresetowany do ustawień fabrycznych, a wszystkie dane zostaną usunięte.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Podjęto %d próbę odblokowania profilu służbowego. Pozostała 1 próba, zanim telefon zostanie przywrócony do ustawień fabrycznych, a wszystkie dane zostaną usunięte.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Podjęto %d próby odblokowania profilu służbowego. Pozostała 1 próba zanim tablet zostanie zresetowany do ustawień fabrycznych, a wszystkie dane zostaną usunięte.</item>
+        <item quantity="many">Podjęto %d prób odblokowania profilu służbowego. Pozostała 1 próba zanim tablet zostanie zresetowany do ustawień fabrycznych, a wszystkie dane zostaną usunięte.</item>
+    </plurals>
+</resources>

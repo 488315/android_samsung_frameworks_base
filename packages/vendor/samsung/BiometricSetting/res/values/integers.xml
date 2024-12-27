@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="abc_config_activityDefaultDur">220</integer>
+    <integer name="abc_config_activityShortDur">150</integer>
+    <integer name="cancel_button_image_alpha">127</integer>
+    <integer name="config_faceMaxTemplatesPerUser">2</integer>
+    <integer name="config_tooltipAnimTime">150</integer>
+    <integer name="face_verification_bg_alpha">18</integer>
+    <integer name="finger_enroll_progress_vi_max_frame">270</integer>
+    <integer name="fingerprint_verification_bg_alpha">18</integer>
+    <integer name="intelligent_verification_bg_alpha">65</integer>
+    <integer name="sec_face_enroll_activity_orientation">1</integer>
+    <integer name="sec_face_enroll_distance_cm_from">20</integer>
+    <integer name="sec_face_enroll_distance_cm_to">50</integer>
+    <integer name="sec_face_enroll_distance_inch_from">8</integer>
+    <integer name="sec_face_enroll_distance_inch_to">20</integer>
+    <integer name="sec_fingerprint_enroll_activity_orientation">1</integer>
+    <integer name="sec_fingerprint_enroll_activity_suw_orientation">1</integer>
+    <integer name="status_bar_notification_info_maxnum">999</integer>
+</resources>

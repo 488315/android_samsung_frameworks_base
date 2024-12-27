@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="finger_effect_json">
+        <item>None</item>
+        <item>indisplay_fingerprint_touch_effect_ripple.json</item>
+    </string-array>
+    <string-array name="fingerprint_black_tone_color">
+        <item>\#00000000</item>
+        <item>\#FFE7E7E7</item>
+        <item>\#FFFFB8B8</item>
+        <item>\#FFFFC6A7</item>
+        <item>\#FFFFDBE6</item>
+        <item>\#FFFFECC9</item>
+        <item>\#FFE7FFC7</item>
+        <item>\#FFCEFFF8</item>
+        <item>\#FFDBF2FF</item>
+        <item>\#FFD4DEFF</item>
+        <item>\#FFECE2FF</item>
+        <item>\#00000000</item>
+    </string-array>
+    <string-array name="fingerprint_white_tone_color">
+        <item>\#00000000</item>
+        <item>\#FFFAFAFA</item>
+        <item>\#FFFB5050</item>
+        <item>\#FFF48A52</item>
+        <item>\#FFF17199</item>
+        <item>\#FFE4AA3E</item>
+        <item>\#FF8AB94C</item>
+        <item>\#FF18C1A9</item>
+        <item>\#FF58B3E7</item>
+        <item>\#FF6686E7</item>
+        <item>\#FF906DCF</item>
+        <item>\#00000000</item>
+    </string-array>
+</resources>

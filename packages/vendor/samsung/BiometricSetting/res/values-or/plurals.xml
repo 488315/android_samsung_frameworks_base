@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="biometric_dialog_credential_too_many_attempts">
+        <item quantity="other">%d ସେକେଣ୍ଡରେ ପୁନଃଚେଷ୍ଟା କରନ୍ତୁ।</item>
+        <item quantity="one">1 ସେକେଣ୍ଡରେ ପୁନଃଚେଷ୍ଟା କରନ୍ତୁ।</item>
+    </plurals>
+    <plurals name="biometric_dialog_credential_too_many_attempts_min">
+        <item quantity="other">%d ମିନିଟରେ ପୁନଃଚେଷ୍ଟା କରନ୍ତୁ।</item>
+        <item quantity="one">1 ମିନିଟରେ ପୁନଃଚେଷ୍ଟା କରନ୍ତୁ।</item>
+    </plurals>
+    <plurals name="sec_incorrect_password_attempts_left">
+        <item quantity="other">ଭୁଲ୍ ପାସୱାର୍ଡ୍। %d ଥର ଉଦ୍ୟମ ବାକି ରହିଛି।</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">ଭୁଲ୍ ପାସୱାର୍ଡ୍। %d ଥର ଉଦ୍ୟମ ବାକି ରହିଛି।</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_incorrect_pattern_attempts_left">
+        <item quantity="other">ଭୁଲ୍ ପେଟର୍ନ। %d ଥର ଉଦ୍ୟମ ବାକି ରହିଛି।</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">ଭୁଲ୍ ପେଟର୍ନ। %d ଥର ଉଦ୍ୟମ ବାକି ରହିଛି।</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_incorrect_pin_attempts_left">
+        <item quantity="other">ଭୁଲ୍ PIN। %d ଥର ଉଦ୍ୟମ ବାକି ରହିଛି।</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">ଭୁଲ୍ PIN। %d ଥର ଉଦ୍ୟମ ବାକି ରହିଛି।</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_lockpattern_too_many_failed_confirmation_attempts_footer_min">
+        <item quantity="other">%d ମିନିଟରେ ପୁନଃଚେଷ୍ଟା କରନ୍ତୁ।</item>
+        <item quantity="one">1 ମିନିଟରେ ପୁନଃଚେଷ୍ଟା କରନ୍ତୁ।</item>
+    </plurals>
+    <plurals name="sec_lockpattern_too_many_failed_confirmation_attempts_footer_sec">
+        <item quantity="other">%d ସେକେଣ୍ଡରେ ପୁନଃଚେଷ୍ଟା କରନ୍ତୁ।</item>
+        <item quantity="one">1 ସେକେଣ୍ଡରେ ପୁନଃଚେଷ୍ଟା କରନ୍ତୁ।</item>
+    </plurals>
+    <plurals name="wpc_phone_incorrect_dialog_2">
+        <item quantity="other">ଆପଣଙ୍କ କାର୍ଯ୍ୟ ପ୍ରୋଫାଇଲ୍ ଅନଲକ୍ କରିବାକୁ 1 ଥର ଉଦ୍ୟମ ହୋଇଛି। ଏହି ଫୋନ୍ ଫ୍ୟାକ୍ଟୋରୀ ସେଟିଂସକୁ ରିସେଟ୍ ହେବା ପୂର୍ବରୁ ଆପଣଙ୍କ %d ଥର ଉଦ୍ୟମ ବାକି ଅଛି ଏବଂ ସମସ୍ତ ଡାଟା ବିଲୋପ ହେବ।</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">ଆପଣଙ୍କ କାର୍ଯ୍ୟ ପ୍ରୋଫାଇଲ୍ ଅନଲକ୍ କରିବାକୁ 1 ଥର ଉଦ୍ୟମ ହୋଇଛି। ଏହି ଫୋନ୍ ଫ୍ୟାକ୍ଟୋରୀ ସେଟିଂସକୁ ରିସେଟ୍ ହେବା ପୂର୍ବରୁ ଆପଣଙ୍କ %d ଥର ଉଦ୍ୟମ ବାକି ଅଛି ଏବଂ ସମସ୍ତ ଡାଟା ବିଲୋପ ହେବ।</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wpc_phone_incorrect_dialog_4">
+        <item quantity="other">ଆପଣଙ୍କ କାର୍ଯ୍ୟ ପ୍ରୋଫାଇଲ୍ ଅନଲକ୍ କରିବାକୁ %d ଥର ଉଦ୍ୟମ ହୋଇଛି। ଏହି ଫୋନ୍ ଫ୍ୟାକ୍ଟୋରୀ ସେଟିଂସକୁ ରିସେଟ୍ ହେବା ପୂର୍ବରୁ ଆପଣଙ୍କ 1 ଥର ଉଦ୍ୟମ ବାକି ଅଛି ଏବଂ ସମସ୍ତ ଡାଟା ବିଲୋପ ହେବ।</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">ଆପଣଙ୍କ କାର୍ଯ୍ୟ ପ୍ରୋଫାଇଲ୍ ଅନଲକ୍ କରିବାକୁ %d ଥର ଉଦ୍ୟମ ହୋଇଛି। ଏହି ଫୋନ୍ ଫ୍ୟାକ୍ଟୋରୀ ସେଟିଂସକୁ ରିସେଟ୍ ହେବା ପୂର୍ବରୁ ଆପଣଙ୍କ 1 ଥର ଉଦ୍ୟମ ବାକି ଅଛି ଏବଂ ସମସ୍ତ ଡାଟା ବିଲୋପ ହେବ।</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wpc_tablet_incorrect_dialog_2">
+        <item quantity="other">ଆପଣଙ୍କ କାର୍ଯ୍ୟ ପ୍ରୋଫାଇଲ୍ ଅନଲକ୍ କରିବାକୁ 1 ଥର ଉଦ୍ୟମ ହୋଇଛି। ଏହି ଟ୍ୟାବଲେଟ୍ ଫ୍ୟାକ୍ଟୋରୀ ସେଟିଂସକୁ ରିସେଟ୍ ହେବା ପୂର୍ବରୁ ଆପଣଙ୍କ %d ଥର ଉଦ୍ୟମ ବାକି ଅଛି ଏବଂ ସମସ୍ତ ଡାଟା ବିଲୋପ ହେବ।</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">ଆପଣଙ୍କ କାର୍ଯ୍ୟ ପ୍ରୋଫାଇଲ୍ ଅନଲକ୍ କରିବାକୁ 1 ଥର ଉଦ୍ୟମ ହୋଇଛି। ଏହି ଟ୍ୟାବଲେଟ୍ ଫ୍ୟାକ୍ଟୋରୀ ସେଟିଂସକୁ ରିସେଟ୍ ହେବା ପୂର୍ବରୁ ଆପଣଙ୍କ %d ଥର ଉଦ୍ୟମ ବାକି ଅଛି ଏବଂ ସମସ୍ତ ଡାଟା ବିଲୋପ ହେବ।</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wpc_tablet_incorrect_dialog_4">
+        <item quantity="other">ଆପଣଙ୍କ କାର୍ଯ୍ୟ ପ୍ରୋଫାଇଲ୍ ଅନଲକ୍ କରିବାକୁ %d ଥର ଉଦ୍ୟମ ହୋଇଛି। ଏହି ଟ୍ୟାବଲେଟ୍ ଫ୍ୟାକ୍ଟୋରୀ ସେଟିଂସକୁ ରିସେଟ୍ ହେବା ପୂର୍ବରୁ ଆପଣଙ୍କ 1 ଥର ଉଦ୍ୟମ ବାକି ଅଛି ଏବଂ ସମସ୍ତ ଡାଟା ବିଲୋପ ହେବ।</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">ଆପଣଙ୍କ କାର୍ଯ୍ୟ ପ୍ରୋଫାଇଲ୍ ଅନଲକ୍ କରିବାକୁ %d ଥର ଉଦ୍ୟମ ହୋଇଛି। ଏହି ଟ୍ୟାବଲେଟ୍ ଫ୍ୟାକ୍ଟୋରୀ ସେଟିଂସକୁ ରିସେଟ୍ ହେବା ପୂର୍ବରୁ ଆପଣଙ୍କ 1 ଥର ଉଦ୍ୟମ ବାକି ଅଛି ଏବଂ ସମସ୍ତ ଡାଟା ବିଲୋପ ହେବ।</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="biometric_dialog_credential_too_many_attempts">
+        <item quantity="other">Vuelve a intentarlo en %d segundos.</item>
+        <item quantity="one">Inténtalo de nuevo en 1 segundo.</item>
+    </plurals>
+    <plurals name="biometric_dialog_credential_too_many_attempts_min">
+        <item quantity="other">Intentar de nuevo en %d minutos.</item>
+        <item quantity="one">Inténtalo de nuevo en 1 minuto.</item>
+    </plurals>
+    <plurals name="sec_incorrect_password_attempts_left">
+        <item quantity="other">Contraseña incorrecta. Te quedan %d intentos.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Contraseña incorrecta. Te queda %d intento.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_incorrect_pattern_attempts_left">
+        <item quantity="other">Patrón incorrecto. Te quedan %d intentos.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Patrón incorrecto. Te queda %d intento.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_incorrect_pin_attempts_left">
+        <item quantity="other">PIN incorrecto. Te quedan %d intentos.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">PIN incorrecto. Te queda %d intento.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_lockpattern_too_many_failed_confirmation_attempts_footer_min">
+        <item quantity="other">Intentar de nuevo en %d minutos.</item>
+        <item quantity="one">Inténtalo de nuevo en 1 minuto.</item>
+    </plurals>
+    <plurals name="sec_lockpattern_too_many_failed_confirmation_attempts_footer_sec">
+        <item quantity="other">Vuelve a intentarlo en %d segundos.</item>
+        <item quantity="one">Inténtalo de nuevo en 1 segundo.</item>
+    </plurals>
+    <plurals name="wpc_phone_incorrect_dialog_2">
+        <item quantity="other">Se ha intentado desbloquear tu perfil de trabajo 1 vez. Te quedan %d intentos antes de que este teléfono se restablezca a los ajustes de fábrica y se eliminen todos los datos.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Se ha intentado desbloquear tu perfil de trabajo 1 vez. Te queda %d intento antes de que este teléfono se restablezca a los ajustes de fábrica y se eliminen todos los datos.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wpc_phone_incorrect_dialog_4">
+        <item quantity="other">Se ha intentado desbloquear tu perfil de trabajo %d veces. Te queda 1 intento antes de que este teléfono se restablezca a los ajustes de fábrica y se eliminen todos los datos.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Se ha intentado desbloquear tu perfil de trabajo %d vez. Te queda 1 intento antes de que este teléfono se restablezca a los ajustes de fábrica y se eliminen todos los datos.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wpc_tablet_incorrect_dialog_2">
+        <item quantity="other">Se ha intentado desbloquear tu perfil de trabajo 1 vez. Te quedan %d intentos antes de que esta tableta se restablezca a los ajustes de fábrica y se eliminen todos los datos.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Se ha intentado desbloquear tu perfil de trabajo 1 vez. Te queda %d intento antes de que esta tableta se restablezca a los ajustes de fábrica y se eliminen todos los datos.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wpc_tablet_incorrect_dialog_4">
+        <item quantity="other">Se ha intentado desbloquear tu perfil de trabajo %d veces. Te queda 1 intento antes de que esta tableta se restablezca a los ajustes de fábrica y se eliminen todos los datos.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Se ha intentado desbloquear tu perfil de trabajo %d vez. Te queda 1 intento antes de que esta tableta se restablezca a los ajustes de fábrica y se eliminen todos los datos.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

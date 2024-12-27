@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="biometric_dialog_credential_too_many_attempts">
+        <item quantity="other">Subukang muli sa loob ng %d (na) segundo.</item>
+        <item quantity="one">Subukang muli sa loob ng 1 segundo.</item>
+    </plurals>
+    <plurals name="biometric_dialog_credential_too_many_attempts_min">
+        <item quantity="other">Subukang muli pagkalipas ng %d minuto.</item>
+        <item quantity="one">Subukang muli sa loob ng 1 minuto.</item>
+    </plurals>
+    <plurals name="sec_incorrect_password_attempts_left">
+        <item quantity="other">Maling password. %d tangka ang natitira.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Maling password. %d tangka ang natitira.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_incorrect_pattern_attempts_left">
+        <item quantity="other">Mali ang pattern. %d tangka ang natitira.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Mali ang pattern. %d tangka ang natitira.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_incorrect_pin_attempts_left">
+        <item quantity="other">Mali ang PIN. %d tangka ang nalalabi.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Mali ang PIN. %d tangka ang natitira.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_lockpattern_too_many_failed_confirmation_attempts_footer_min">
+        <item quantity="other">Subukang muli pagkalipas ng %d minuto.</item>
+        <item quantity="one">Subukang muli sa loob ng 1 minuto.</item>
+    </plurals>
+    <plurals name="sec_lockpattern_too_many_failed_confirmation_attempts_footer_sec">
+        <item quantity="other">Subukang muli sa loob ng %d (na) segundo.</item>
+        <item quantity="one">Subukang muli sa loob ng 1 segundo.</item>
+    </plurals>
+    <plurals name="wpc_phone_incorrect_dialog_2">
+        <item quantity="other">Nagkaroon ng 1 tangka na i-unlock ang profile mong pangtrabaho. Mayroon kang %d tangkang nalalabi bago mag-reset ang telepono na ito sa mga factory default na setting at mabubura ang lahat ng data.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Nagkaroon ng 1 tangka na i-unlock ang profile mong pangtrabaho. Mayroon kang %d tangkang nalalabi bago mag-reset ang telepono na ito sa mga factory default na setting at mabubura ang lahat ng data.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wpc_phone_incorrect_dialog_4">
+        <item quantity="other">Nagkaroon ng %d tangka na i-unlock ang profile mong pangtrabaho. Mayroon kang 1 tangkang nalalabi bago mag-reset ang telepono na ito sa mga factory default na setting at mabubura ang lahat ng data.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Nagkaroon ng %d tangka na i-unlock ang profile mong pangtrabaho. Mayroon kang 1 tangkang nalalabi bago mag-reset ang telepono na ito sa mga factory default na setting at mabubura ang lahat ng data.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wpc_tablet_incorrect_dialog_2">
+        <item quantity="other">Nagkaroon ng 1 tangka na i-unlock ang profile mong pangtrabaho. Mayroon kang %d tangkang nalalabi bago mag-reset ang tablet na ito sa mga factory default na setting at mabubura ang lahat ng data.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Nagkaroon ng 1 tangka na i-unlock ang profile mong pangtrabaho. Mayroon kang %d tangkang nalalabi bago mag-reset ang tablet na ito sa mga factory default na setting at mabubura ang lahat ng data.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wpc_tablet_incorrect_dialog_4">
+        <item quantity="other">Nagkaroon ng %d tangka na i-unlock ang profile mong pangtrabaho. Mayroon kang 1 tangkang nalalabi bago mag-reset ang tablet na ito sa mga factory default na setting at mabubura ang lahat ng data.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Nagkaroon ng %d tangka na i-unlock ang profile mong pangtrabaho. Mayroon kang 1 tangkang nalalabi bago mag-reset ang tablet na ito sa mga factory default na setting at mabubura ang lahat ng data.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="face_verification_bg_alpha">65</integer>
+    <integer name="fingerprint_verification_bg_alpha">65</integer>
+</resources>

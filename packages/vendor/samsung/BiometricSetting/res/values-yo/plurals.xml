@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="biometric_dialog_credential_too_many_attempts">
+        <item quantity="other">Gbìyànjú síi ní ìsẹjú àáyá %d</item>
+        <item quantity="one">Tún gbìyànjú síi ní ìṣẹ́jú àáyá 1</item>
+    </plurals>
+    <plurals name="biometric_dialog_credential_too_many_attempts_min">
+        <item quantity="other">Gbìyànjú síi ní ìṣẹ́jú %d</item>
+        <item quantity="one">Try again in 1 minute.</item>
+    </plurals>
+    <plurals name="sec_incorrect_password_attempts_left">
+        <item quantity="other">Incorrect password. %d attempts left.</item>
+        <item quantity="zero">Incorrect password. %d attempts left.</item>
+        <item quantity="one">Incorrect password. %d attempt left.</item>
+        <item quantity="two">Incorrect password. %d attempts left.</item>
+        <item quantity="few">Incorrect password. %d attempts left.</item>
+        <item quantity="many">Incorrect password. %d attempts left.</item>
+    </plurals>
+    <plurals name="sec_incorrect_pattern_attempts_left">
+        <item quantity="other">Incorrect pattern. %d attempts left.</item>
+        <item quantity="zero">Incorrect pattern. %d attempts left.</item>
+        <item quantity="one">Incorrect pattern. %d attempt left.</item>
+        <item quantity="two">Incorrect pattern. %d attempts left.</item>
+        <item quantity="few">Incorrect pattern. %d attempts left.</item>
+        <item quantity="many">Incorrect pattern. %d attempts left.</item>
+    </plurals>
+    <plurals name="sec_incorrect_pin_attempts_left">
+        <item quantity="other">Incorrect PIN. %d attempts left.</item>
+        <item quantity="zero">Incorrect PIN. %d attempts left.</item>
+        <item quantity="one">Incorrect PIN. %d attempt left.</item>
+        <item quantity="two">Incorrect PIN. %d attempts left.</item>
+        <item quantity="few">Incorrect PIN. %d attempts left.</item>
+        <item quantity="many">Incorrect PIN. %d attempts left.</item>
+    </plurals>
+    <plurals name="sec_lockpattern_too_many_failed_confirmation_attempts_footer_min">
+        <item quantity="other">Gbìyànjú síi ní ìṣẹ́jú %d</item>
+        <item quantity="one">Try again in 1 minute.</item>
+    </plurals>
+    <plurals name="sec_lockpattern_too_many_failed_confirmation_attempts_footer_sec">
+        <item quantity="other">Gbìyànjú síi ní ìsẹjú àáyá %d</item>
+        <item quantity="one">Tún gbìyànjú síi ní ìṣẹ́jú àáyá 1</item>
+    </plurals>
+    <plurals name="wpc_phone_incorrect_dialog_2">
+        <item quantity="other">There has been 1 attempt to unlock your work profile. You have %d attempts left before this phone is reset to factory settings and all data will be erased.</item>
+        <item quantity="zero">There has been 1 attempt to unlock your work profile. You have %d attempts left before this phone is reset to factory settings and all data will be erased.</item>
+        <item quantity="one">There has been 1 attempt to unlock your work profile. You have %d attempt left before this phone is reset to factory settings and all data will be erased.</item>
+        <item quantity="two">There has been 1 attempt to unlock your work profile. You have %d attempts left before this phone is reset to factory settings and all data will be erased.</item>
+        <item quantity="few">There has been 1 attempt to unlock your work profile. You have %d attempts left before this phone is reset to factory settings and all data will be erased.</item>
+        <item quantity="many">There has been 1 attempt to unlock your work profile. You have %d attempts left before this phone is reset to factory settings and all data will be erased.</item>
+    </plurals>
+    <plurals name="wpc_phone_incorrect_dialog_4">
+        <item quantity="other">There have been %d attempts to unlock your work profile. You have 1 attempt left before this phone is reset to factory settings and all data will be erased.</item>
+        <item quantity="zero">There have been %d attempts to unlock your work profile. You have 1 attempt left before this phone is reset to factory settings and all data will be erased.</item>
+        <item quantity="one">There has been %d attempt to unlock your work profile. You have 1 attempt left before this phone is reset to factory settings and all data will be erased.</item>
+        <item quantity="two">There have been %d attempts to unlock your work profile. You have 1 attempt left before this phone is reset to factory settings and all data will be erased.</item>
+        <item quantity="few">There have been %d attempts to unlock your work profile. You have 1 attempt left before this phone is reset to factory settings and all data will be erased.</item>
+        <item quantity="many">There have been %d attempts to unlock your work profile. You have 1 attempt left before this phone is reset to factory settings and all data will be erased.</item>
+    </plurals>
+    <plurals name="wpc_tablet_incorrect_dialog_2">
+        <item quantity="other">There has been 1 attempt to unlock your work profile. You have %d attempts left before this tablet is reset to factory settings and all data will be erased.</item>
+        <item quantity="zero">There has been 1 attempt to unlock your work profile. You have %d attempts left before this tablet is reset to factory settings and all data will be erased.</item>
+        <item quantity="one">There has been 1 attempt to unlock your work profile. You have %d attempt left before this tablet is reset to factory settings and all data will be erased.</item>
+        <item quantity="two">There has been 1 attempt to unlock your work profile. You have %d attempts left before this tablet is reset to factory settings and all data will be erased.</item>
+        <item quantity="few">There has been 1 attempt to unlock your work profile. You have %d attempts left before this tablet is reset to factory settings and all data will be erased.</item>
+        <item quantity="many">There has been 1 attempt to unlock your work profile. You have %d attempts left before this tablet is reset to factory settings and all data will be erased.</item>
+    </plurals>
+    <plurals name="wpc_tablet_incorrect_dialog_4">
+        <item quantity="other">There have been %d attempts to unlock your work profile. You have 1 attempt left before this tablet is reset to factory settings and all data will be erased.</item>
+        <item quantity="zero">There have been %d attempts to unlock your work profile. You have 1 attempt left before this tablet is reset to factory settings and all data will be erased.</item>
+        <item quantity="one">There has been %d attempt to unlock your work profile. You have 1 attempt left before this tablet is reset to factory settings and all data will be erased.</item>
+        <item quantity="two">There have been %d attempts to unlock your work profile. You have 1 attempt left before this tablet is reset to factory settings and all data will be erased.</item>
+        <item quantity="few">There have been %d attempts to unlock your work profile. You have 1 attempt left before this tablet is reset to factory settings and all data will be erased.</item>
+        <item quantity="many">There have been %d attempts to unlock your work profile. You have 1 attempt left before this tablet is reset to factory settings and all data will be erased.</item>
+    </plurals>
+</resources>

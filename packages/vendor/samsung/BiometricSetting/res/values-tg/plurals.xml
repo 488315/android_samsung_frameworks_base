@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="biometric_dialog_credential_too_many_attempts">
+        <item quantity="other">Баъди %d сония такрор кунед.</item>
+        <item quantity="one">Пас аз 1 сония аз нав кӯшиш кунед.</item>
+    </plurals>
+    <plurals name="biometric_dialog_credential_too_many_attempts_min">
+        <item quantity="other">Try again in %d minutes.</item>
+        <item quantity="one">Пас аз 1 дақиқа аз нав кӯшиш кунед.</item>
+    </plurals>
+    <plurals name="sec_incorrect_password_attempts_left">
+        <item quantity="other">Парол нодуруст аст. %d кӯшиш монд.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Парол нодуруст аст. %d кӯшиш монд.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_incorrect_pattern_attempts_left">
+        <item quantity="other">Расми нодуруст. %d кӯшиш монд.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Расми нодуруст. %d кӯшиш монд.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_incorrect_pin_attempts_left">
+        <item quantity="other">PIN нодуруст аст. %d кӯшиш монд.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">PIN нодуруст аст. %d кӯшиш монд.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_lockpattern_too_many_failed_confirmation_attempts_footer_min">
+        <item quantity="other">Try again in %d minutes.</item>
+        <item quantity="one">Пас аз 1 дақиқа аз нав кӯшиш кунед.</item>
+    </plurals>
+    <plurals name="sec_lockpattern_too_many_failed_confirmation_attempts_footer_sec">
+        <item quantity="other">Баъди %d сония такрор кунед.</item>
+        <item quantity="one">Пас аз 1 сония аз нав кӯшиш кунед.</item>
+    </plurals>
+    <plurals name="wpc_phone_incorrect_dialog_2">
+        <item quantity="other">1 кӯшиши озод кардани профили кории шумо иҷро шудааст. Шумо %d кӯшиши дигар доред, ки баъди сарф шудани онҳо телефон ба танзимоти коргоҳӣ барқарор карда шуда, ҳамаи иттилоот нест карда мешавад.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">1 кӯшиши озод кардани профили кории шумо иҷро шудааст. Шумо %d кӯшиши дигар доред, ки баъди сарф шудани он телефон ба танзимоти коргоҳӣ барқарор карда шуда, ҳамаи иттилоот нест карда мешавад.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wpc_phone_incorrect_dialog_4">
+        <item quantity="other">%d кӯшиши озод кардани профили кории шумо иҷро шудааст. Шумо 1 кӯшиши дигар доред, ки баъди сарф шудани он телефон ба танзимоти коргоҳӣ барқарор карда шуда, ҳамаи иттилоот нест карда мешавад.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d кӯшиши озод кардани профили кории шумо иҷро шуда буд. Шумо 1 кӯшиши дигар доред, ки баъди сарф шудани он телефон ба танзимоти коргоҳӣ барқарор карда шуда, ҳамаи иттилоот нест карда мешавад.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wpc_tablet_incorrect_dialog_2">
+        <item quantity="other">1 кӯшиши озод кардани профили кории шумо иҷро шудааст. Шумо %d кӯшиши дигар доред, ки баъди сарф шудани онҳо планшет ба танзимоти коргоҳӣ барқарор карда шуда, ҳамаи иттилоот нест карда мешавад.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">1 кӯшиши озод кардани профили кории шумо иҷро шудааст. Шумо %d кӯшиши дигар доред, ки баъди сарф шудани он планшет ба танзимоти коргоҳӣ барқарор карда шуда, ҳамаи иттилоот нест карда мешавад.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wpc_tablet_incorrect_dialog_4">
+        <item quantity="other">%d кӯшиши озод кардани профили кории шумо иҷро шудааст. Шумо 1 кӯшиши дигар доред, ки баъди сарф шудани он планшет ба танзимоти коргоҳӣ барқарор карда шуда, ҳамаи иттилоот нест карда мешавад.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d кӯшиши озод кардани профили кории шумо иҷро шуда буд. Шумо 1 кӯшиши дигар доред, ки баъди сарф шудани он планшет ба танзимоти коргоҳӣ барқарор карда шуда, ҳамаи иттилоот нест карда мешавад.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

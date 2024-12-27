@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="biometric_dialog_credential_too_many_attempts">
+        <item quantity="other">ลองอีกครั้งใน %d วินาที</item>
+        <item quantity="one">ลองอีกครั้งใน 1 วินาที</item>
+    </plurals>
+    <plurals name="biometric_dialog_credential_too_many_attempts_min">
+        <item quantity="other">ลอง​อีก​ครั้ง​ใน %d ​นาที</item>
+        <item quantity="one">ลองอีกครั้งใน 1 นาที</item>
+    </plurals>
+    <plurals name="sec_incorrect_password_attempts_left">
+        <item quantity="other">รหัสผ่านไม่ถูกต้อง ใส่ได้อีก %d ครั้ง</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_incorrect_pattern_attempts_left">
+        <item quantity="other">รูปแบบไม่ถูกต้อง ใส่ได้อีก %d ครั้ง</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_incorrect_pin_attempts_left">
+        <item quantity="other">PIN ไม่ถูกต้อง ใส่ได้อีก %d ครั้ง</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_lockpattern_too_many_failed_confirmation_attempts_footer_min">
+        <item quantity="other">ลอง​อีก​ครั้ง​ใน %d ​นาที</item>
+        <item quantity="one">ลองอีกครั้งใน 1 นาที</item>
+    </plurals>
+    <plurals name="sec_lockpattern_too_many_failed_confirmation_attempts_footer_sec">
+        <item quantity="other">ลองอีกครั้งใน %d วินาที</item>
+        <item quantity="one">ลองอีกครั้งใน 1 วินาที</item>
+    </plurals>
+    <plurals name="wpc_phone_incorrect_dialog_2">
+        <item quantity="other">มีความพยายามปลดล็อกโปรไฟล์งานของคุณ 1 ครั้ง คุณเหลือความพยายามอีก %d ครั้งก่อนที่โทรศัพท์เครื่องนี้จะรีเซ็ตเป็นค่าพื้นฐานจากโรงงาน และข้อมูลทั้งหมดจะถูกลบ</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wpc_phone_incorrect_dialog_4">
+        <item quantity="other">มีความพยายามปลดล็อกโปรไฟล์งานของคุณ %d ครั้ง คุณเหลือความพยายามอีก 1 ครั้งก่อนที่โทรศัพท์เครื่องนี้จะรีเซ็ตเป็นค่าพื้นฐานจากโรงงาน และข้อมูลทั้งหมดจะถูกลบ</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wpc_tablet_incorrect_dialog_2">
+        <item quantity="other">มีความพยายามปลดล็อกโปรไฟล์งานของคุณ 1 ครั้ง คุณเหลือความพยายามอีก %d ครั้งก่อนที่แท็บเล็ตเครื่องนี้จะรีเซ็ตเป็นค่าพื้นฐานจากโรงงาน และข้อมูลทั้งหมดจะถูกลบ</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wpc_tablet_incorrect_dialog_4">
+        <item quantity="other">มีความพยายามปลดล็อกโปรไฟล์งานของคุณ %d ครั้ง คุณเหลือความพยายามอีก 1 ครั้งก่อนที่แท็บเล็ตเครื่องนี้จะรีเซ็ตเป็นค่าพื้นฐานจากโรงงาน และข้อมูลทั้งหมดจะถูกลบ</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

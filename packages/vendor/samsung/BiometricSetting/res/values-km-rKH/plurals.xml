@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="biometric_dialog_credential_too_many_attempts">
+        <item quantity="other">សាកល្បង​ម្ដងទៀត​ក្នុង​ពេល %d វិនាទី។</item>
+        <item quantity="one">សាកល្បង​ម្ដងទៀត​ក្នុង​ពេល 1 វិនាទី។</item>
+    </plurals>
+    <plurals name="biometric_dialog_credential_too_many_attempts_min">
+        <item quantity="other">សាកល្បង​ម្ដងទៀត​ក្នុង​ពេល %d នាទី។</item>
+        <item quantity="one">សាកល្បង​ម្តងទៀត​ក្នុង​ពេល 1 នាទី។</item>
+    </plurals>
+    <plurals name="sec_incorrect_password_attempts_left">
+        <item quantity="other">ពាក្យសម្ងាត់​មិន​ត្រឹមត្រូវ។ សល់​ការប៉ុនប៉ង %d ដង។</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_incorrect_pattern_attempts_left">
+        <item quantity="other">លំនាំ​មិន​ត្រឹមត្រូវ។ សល់​ការប៉ុនប៉ង %d ដង។</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_incorrect_pin_attempts_left">
+        <item quantity="other">PIN មិន​ត្រឹមត្រូវ។ សល់​ការប៉ុនប៉ង %d ដង។</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_lockpattern_too_many_failed_confirmation_attempts_footer_min">
+        <item quantity="other">សាកល្បង​ម្ដងទៀត​ក្នុង​ពេល %d នាទី។</item>
+        <item quantity="one">សាកល្បង​ម្តងទៀត​ក្នុង​ពេល 1 នាទី។</item>
+    </plurals>
+    <plurals name="sec_lockpattern_too_many_failed_confirmation_attempts_footer_sec">
+        <item quantity="other">សាកល្បង​ម្ដងទៀត​ក្នុង​ពេល %d វិនាទី។</item>
+        <item quantity="one">សាកល្បង​ម្ដងទៀត​ក្នុង​ពេល 1 វិនាទី។</item>
+    </plurals>
+    <plurals name="wpc_phone_incorrect_dialog_2">
+        <item quantity="other">មាន​ការប៉ុនប៉ង 1ដង ដើម្បី​ដោះសោ​ទម្រង់​ការងារ​របស់​អ្នក។ អ្នក​នៅសល់​ការប៉ុនប៉ង %dដង ទៀត ទើប​ទូរសព្ទ​នេះ​ត្រូវ​បាន​កំណត់​ឡើងវិញ​ទៅ​ការកំណត់​ពី​រោងចក្រ និង​លុប​ទិន្នន័យ​ទាំងអស់។</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wpc_phone_incorrect_dialog_4">
+        <item quantity="other">មាន​ការប៉ុនប៉ង %dដង ដើម្បី​ដោះសោ​ទម្រង់​ការងារ​របស់​អ្នក។ អ្នក​នៅសល់​ការប៉ុនប៉ង 1ដង ទៀត ទើប​ទូរសព្ទ​នេះ​ត្រូវ​បាន​កំណត់​ឡើងវិញ​ទៅ​ការកំណត់​ពី​រោងចក្រ និង​លុប​ទិន្នន័យ​ទាំងអស់។</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wpc_tablet_incorrect_dialog_2">
+        <item quantity="other">មាន​ការប៉ុនប៉ង 1ដង ដើម្បី​ដោះសោ​ទម្រង់​ការងារ​របស់​អ្នក។ អ្នក​នៅសល់​ការប៉ុនប៉ង %dដង ទៀត ទើប​ថេប្លិត​នេះ​ត្រូវ​បាន​កំណត់​ឡើងវិញ​ទៅ​ការកំណត់​ពី​រោងចក្រ និង​លុប​ទិន្នន័យ​ទាំងអស់។</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wpc_tablet_incorrect_dialog_4">
+        <item quantity="other">មាន​ការប៉ុនប៉ង %dដង ដើម្បី​ដោះសោ​ទម្រង់​ការងារ​របស់​អ្នក។ អ្នក​នៅសល់​ការប៉ុនប៉ង 1ដង ទៀត ទើប​ថេប្លិត​នេះ​ត្រូវ​បាន​កំណត់​ឡើងវិញ​ទៅ​ការកំណត់​ពី​រោងចក្រ និង​លុប​ទិន្នន័យ​ទាំងអស់។</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

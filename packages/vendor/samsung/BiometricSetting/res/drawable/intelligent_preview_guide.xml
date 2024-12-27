@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape android:shape="rectangle"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <stroke android:width="@dimen/intelligent_enroll_masking_stroke" android:color="@color/intelligent_preview_rect_color" />
+    <corners android:radius="@dimen/intelligent_enroll_masking_radius" />
+</shape>

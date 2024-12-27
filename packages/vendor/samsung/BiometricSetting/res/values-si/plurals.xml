@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="biometric_dialog_credential_too_many_attempts">
+        <item quantity="other">තත්පර %d කින් නැවත උත්සාහ කරන්න.</item>
+        <item quantity="one">තත්පර 1 කින් නැවත උත්සාහ කරන්න.</item>
+    </plurals>
+    <plurals name="biometric_dialog_credential_too_many_attempts_min">
+        <item quantity="other">විනාඩි %d කින් නැවත උත්සාහ කරන්න.</item>
+        <item quantity="one">විනාඩි 1 කින් නැවත උත්සාහ කරන්න.</item>
+    </plurals>
+    <plurals name="sec_incorrect_password_attempts_left">
+        <item quantity="other">වැරදි මුරපදයක්. ප්‍රයත්න %dක් ඉතිරියි.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">වැරදි මුරපදයක්. ප්‍රයත්න %dක් ඉතිරියි.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_incorrect_pattern_attempts_left">
+        <item quantity="other">වැරදි රටාවක්. ප්‍රයත්න %dක් ඉතිරියි.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">වැරදි රටාවක්. ප්‍රයත්න %dක් ඉතිරියි.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_incorrect_pin_attempts_left">
+        <item quantity="other">වැරදි PIN අංකයක්. ප්‍රයත්න %dක් ඉතිරියි.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">වැරදි PIN අංකයක්. ප්‍රයත්න %dක් ඉතිරියි.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_lockpattern_too_many_failed_confirmation_attempts_footer_min">
+        <item quantity="other">විනාඩි %d කින් නැවත උත්සාහ කරන්න.</item>
+        <item quantity="one">විනාඩි 1 කින් නැවත උත්සාහ කරන්න.</item>
+    </plurals>
+    <plurals name="sec_lockpattern_too_many_failed_confirmation_attempts_footer_sec">
+        <item quantity="other">තත්පර %d කින් නැවත උත්සාහ කරන්න.</item>
+        <item quantity="one">තත්පර 1 කින් නැවත උත්සාහ කරන්න.</item>
+    </plurals>
+    <plurals name="wpc_phone_incorrect_dialog_2">
+        <item quantity="other">ඔබේ කාර්යාල පැතිකඩ අගුළු හැරීමට 1 උත්සාහයක් ගෙන ඇත. මෙම දුරකථනය කර්මාන්තශාලා සැකසුම් වෙත යළි සැකසීමට පෙර ඔබට උත්සාහයන් %dක් ඉතිරිව ඇති අතර සියලු දත්ත මැකෙනු ඇත.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">ඔබේ කාර්යාල පැතිකඩ අගුළු හැරීමට 1 උත්සාහයක් ගෙන ඇත. මෙම දුරකථනය කර්මාන්තශාලා සැකසුම් වෙත යළි සැකසීමට පෙර ඔබට %d උත්සාහයක් ඉතිරිව ඇති අතර සියලු දත්ත මැකෙනු ඇත.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wpc_phone_incorrect_dialog_4">
+        <item quantity="other">ඔබේ කාර්යාල පැතිකඩ අගුළු හැරීමට උත්සාහයන් %dක් ගෙන ඇත. මෙම දුරකථනය කර්මාන්තශාලා සැකසුම් වෙත යළි සැකසීමට පෙර ඔබට 1 උත්සාහයක් ඉතිරිව ඇති අතර සියලු දත්ත මැකෙනු ඇත.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">ඔබේ කාර්යාල පැතිකඩ අගුළු හැරීමට %d උත්සාහයක් ගෙන ඇත. මෙම දුරකථනය කර්මාන්තශාලා සැකසුම් වෙත යළි සැකසීමට පෙර ඔබට 1 උත්සාහයක් ඉතිරිව ඇති අතර සියලු දත්ත මැකෙනු ඇත.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wpc_tablet_incorrect_dialog_2">
+        <item quantity="other">ඔබේ කාර්යාල පැතිකඩ අගුළු හැරීමට 1 උත්සාහයක් ගෙන ඇත. මෙම ටැබ්ලටය කර්මාන්තශාලා සැකසුම් වෙත යළි සැකසීමට පෙර ඔබට උත්සාහයන් %dක් ඉතිරිව ඇති අතර සියලු දත්ත මැකෙනු ඇත.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">ඔබේ කාර්යාල පැතිකඩ අගුළු හැරීමට 1 උත්සාහයක් ගෙන ඇත. මෙම ටැබ්ලටය කර්මාන්තශාලා සැකසුම් වෙත යළි සැකසීමට පෙර ඔබට %d උත්සාහයක් ඉතිරිව ඇති අතර සියලු දත්ත මැකෙනු ඇත.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wpc_tablet_incorrect_dialog_4">
+        <item quantity="other">ඔබේ කාර්යාල පැතිකඩ අගුළු හැරීමට උත්සාහයන් %dක් ගෙන ඇත. මෙම ටැබ්ලටය කර්මාන්තශාලා සැකසුම් වෙත යළි සැකසීමට පෙර ඔබට 1 උත්සාහයක් ඉතිරිව ඇති අතර සියලු දත්ත මැකෙනු ඇත.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">ඔබේ කාර්යාල පැතිකඩ අගුළු හැරීමට %d උත්සාහයක් ගෙන ඇත. මෙම ටැබ්ලටය කර්මාන්තශාලා සැකසුම් වෙත යළි සැකසීමට පෙර ඔබට 1 උත්සාහයක් ඉතිරිව ඇති අතර සියලු දත්ත මැකෙනු ඇත.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

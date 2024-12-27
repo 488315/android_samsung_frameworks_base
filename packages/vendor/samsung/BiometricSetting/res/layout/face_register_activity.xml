@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:id="@id/activity_main" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout android:id="@id/face_fragment_view" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+    <RelativeLayout android:gravity="bottom" android:id="@id/face_suw_bottom_container" android:background="@color/intelligent_enroll_background_color" android:paddingBottom="@dimen/biometrics_common_suw_bottom_bar_padding_bottom" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="@dimen/biometrics_common_suw_bottom_button_layout_height" android:layout_alignParentBottom="true" android:paddingStart="@dimen/biometrics_common_suw_bottom_bar_padding_start" android:paddingEnd="@dimen/biometrics_common_suw_bottom_bar_padding_end">
+        <Button android:gravity="center" android:orientation="horizontal" android:id="@id/next_button_area" android:background="@drawable/sec_biometrics_common_setupwizard_bottom_next_button_ripple" android:focusable="true" android:layout_width="wrap_content" android:layout_height="wrap_content" android:minWidth="@dimen/biometrics_common_suw_bottom_button_min_width" android:minHeight="@dimen/biometrics_common_suw_bottom_next_button_height" android:text="@string/face_enroll_guide_bottom_continue" android:layout_alignParentEnd="true" style="@style/SecBiometricsSuwButtonTextStyle" />
+    </RelativeLayout>
+</RelativeLayout>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:id="@id/id_prompt_knox_auth_container_layout" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView android:id="@id/background" android:layout_width="fill_parent" android:layout_height="fill_parent" android:accessibilityLiveRegion="polite" />
+    <View android:id="@id/panel" android:layout_width="fill_parent" android:layout_height="fill_parent" android:elevation="1.0dip" />
+    <ScrollView android:layout_gravity="bottom|center" android:id="@id/biometric_scrollview" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_margin="4.0dip" android:elevation="1.0dip" />
+</FrameLayout>

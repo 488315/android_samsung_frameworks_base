@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:background="?android:windowBackground" android:paddingTop="@dimen/sec_fingerprint_register_frame_marginTop" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:gravity="center_horizontal" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:weightSum="1.0" android:layout_alignParentBottom="true" android:elevation="1.0dip">
+        <FrameLayout android:id="@id/knox_bi_layout" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="@dimen/sec_fingerprint_register_width_ratio_knox_bi">
+            <ImageView android:layout_gravity="end" android:id="@id/image_knox_bi" android:visibility="invisible" android:layout_width="@dimen/biometric_prompt_knox_logo_width" android:layout_height="@dimen/biometric_prompt_knox_logo_height" android:layout_marginBottom="@dimen/biometric_prompt_knox_logo_bottom_margin" android:src="@drawable/bi_knox_secured" />
+        </FrameLayout>
+    </LinearLayout>
+    <RelativeLayout android:id="@id/register_screen" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <LinearLayout android:orientation="vertical" android:id="@id/register_layout" android:layout_width="fill_parent" android:layout_height="fill_parent" android:weightSum="1.0">
+            <LinearLayout android:gravity="bottom|center" android:orientation="vertical" android:id="@id/register_enroll_vi_frame" android:layout_width="fill_parent" android:layout_height="0.0dip" android:weightSum="1.0" android:layout_weight="@dimen/sec_fingerprint_register_progress_vi_layout_height_ratio">
+                <com.samsung.android.biometrics.app.setting.fingerprint.enroll.FingerprintProgressEffectView android:id="@id/finger_view" android:layout_width="wrap_content" android:layout_height="0.0dip" android:layout_weight="@dimen/sec_fingerprint_register_progress_vi_height_ratio" />
+            </LinearLayout>
+            <TextView android:layout_gravity="center" android:id="@id/progress_text" android:layout_width="wrap_content" android:layout_height="0.0dip" android:layout_weight="@dimen/sec_fingerprint_register_progress_percent_height_ratio" style="@style/ProgressTextStyle" />
+            <LinearLayout android:orientation="vertical" android:id="@id/register_guide_layout" android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_weight="@dimen/sec_fingerprint_register_progress_text_height_ratio">
+                <ScrollView android:layout_width="fill_parent" android:layout_height="fill_parent">
+                    <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                        <TextView android:textSize="@dimen/sec_fingerprint_register_guideText_size" android:textColor="?android:textColorPrimary" android:ellipsize="end" android:gravity="center_horizontal" android:id="@id/register_guide_title" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/fingerprint_register_place_your_finger" android:lineSpacingExtra="@dimen/sec_fingerprint_register_textLineSpace" android:fontFamily="sec" android:textFontWeight="300" />
+                    </LinearLayout>
+                </ScrollView>
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout android:orientation="horizontal" android:id="@id/add_done_button_layout" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:weightSum="2.0" android:layout_alignParentBottom="true" android:layout_marginStart="@dimen/sec_fingerprint_register_button_marginSide" android:layout_marginEnd="@dimen/sec_fingerprint_register_button_marginSide">
+            <RelativeLayout android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0">
+                <Button android:id="@id/add_button" android:layout_width="fill_parent" android:text="@string/fingerprint_register_add" android:layout_centerInParent="true" style="@style/SecFingerprintBottomBarStyle" />
+            </RelativeLayout>
+            <RelativeLayout android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0">
+                <Button android:id="@id/done_button" android:layout_width="fill_parent" android:text="@string/fingerprint_register_done" android:layout_centerInParent="true" style="@style/SecFingerprintBottomBarStyle" />
+            </RelativeLayout>
+        </LinearLayout>
+        <LinearLayout android:orientation="horizontal" android:id="@id/done_button_layout" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="@dimen/sec_fingerprint_register_bottom_bar_height" android:weightSum="1.0" android:layout_alignParentBottom="true" android:layout_marginStart="@dimen/sec_fingerprint_register_button_marginSide" android:layout_marginEnd="@dimen/sec_fingerprint_register_button_marginSide">
+            <Button android:id="@id/done2_button" android:text="@string/fingerprint_register_done" style="@style/SecFingerprintBottomBarStyle" />
+        </LinearLayout>
+    </RelativeLayout>
+    <RelativeLayout android:id="@id/first_guide_screen" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_centerHorizontal="true">
+        <include layout="@layout/fingerprint_register_first_screen" />
+    </RelativeLayout>
+    <RelativeLayout android:id="@id/second_guide_screen" android:background="?android:windowBackground" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_centerHorizontal="true">
+        <LinearLayout android:orientation="vertical" android:id="@id/second_guide_screen_layout" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginBottom="10.0dip" android:weightSum="1.0" android:layout_above="@id/continue_raised_button_layout">
+            <LinearLayout android:gravity="center" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="0.0dip" android:weightSum="1.0" android:layout_weight="@dimen/sec_fingerprint_register_progress_first_vi_layout_height_ratio">
+                <LinearLayout android:gravity="center_horizontal" android:orientation="vertical" android:id="@id/register_second_guide_vi_layout" android:background="@drawable/sec_fingerprint_enroll_bg" android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_weight="@dimen/sec_fingerprint_register_progress_first_vi_height_ratio">
+                    <TextureView android:id="@id/register_popup_img_second" android:visibility="invisible" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+                </LinearLayout>
+            </LinearLayout>
+            <ScrollView android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_weight="@dimen/sec_fingerprint_register_progress_first_text_height_ratio">
+                <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                    <TextView android:textSize="@dimen/sec_fingerprint_register_guideTitle_text_size" android:textColor="?android:textColorPrimary" android:ellipsize="end" android:gravity="center_horizontal" android:id="@id/second_guide_title" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/sec_fingerprint_second_guide_title" android:lineSpacingExtra="@dimen/sec_fingerprint_register_textLineSpace" android:fontFamily="sec" android:textFontWeight="300" />
+                    <TextView android:textSize="@dimen/sec_fingerprint_register_guideText_size" android:textColor="?android:textColorSecondary" android:gravity="center_horizontal" android:id="@id/second_guide_text" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/sec_fingerprint_register_guideText_marginTop" android:text="@string/fingerprint_rotate_guide_msg" android:lineSpacingExtra="@dimen/sec_fingerprint_register_textLineSpace" android:fontFamily="sec" android:textFontWeight="300" />
+                </LinearLayout>
+            </ScrollView>
+        </LinearLayout>
+        <LinearLayout android:gravity="center" android:orientation="horizontal" android:id="@id/continue_raised_button_layout" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="@dimen/sec_fingerprint_register_button_marginBottom" android:layout_alignParentBottom="true">
+            <Button android:id="@id/continue_raised_button" android:text="@string/fingerprint_continue_button_text" android:onClick="onClickContinue" style="@style/SecFingerprintRaisedButtonStyle" />
+        </LinearLayout>
+    </RelativeLayout>
+    <RelativeLayout android:id="@id/swipe_enroll_guide_screen" android:background="?android:windowBackground" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_centerHorizontal="true">
+        <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent" android:weightSum="1.0">
+            <LinearLayout android:gravity="center" android:orientation="vertical" android:id="@id/swipe_enroll_guide_clip_layout" android:layout_width="fill_parent" android:layout_height="0.0dip" android:weightSum="1.0" android:layout_weight="@dimen/sec_fingerprint_register_progress_swipe_guide_vi_layout_height_ratio">
+                <LinearLayout android:id="@id/swipe_enroll_guide_clip_vi_layout" android:background="@drawable/sec_fingerprint_enroll_bg" android:padding="@dimen/sec_fingerprint_register_guideClip_bg_marginSide" android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_weight="@dimen/sec_fingerprint_register_progress_swipe_guide_vi_height_ratio">
+                    <TextureView android:id="@id/swipe_enroll_guide_vi" android:visibility="invisible" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_centerInParent="true" />
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout android:gravity="center" android:orientation="vertical" android:id="@id/swipe_enroll_guide_vi_layout" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="0.0dip" android:weightSum="1.0" android:layout_weight="@dimen/sec_fingerprint_register_progress_swipe_image_vi_layout_height_ratio">
+                <RelativeLayout android:id="@id/swipe_enroll_guide_vi_image_layout" android:layout_width="wrap_content" android:layout_height="0.0dip" android:layout_weight="@dimen/sec_fingerprint_register_progress_swipe_image_vi_height_ratio">
+                    <ImageView android:id="@id/swipe_enroll_guide_error" android:layout_width="fill_parent" android:layout_height="fill_parent" android:alpha="0.4" />
+                </RelativeLayout>
+            </LinearLayout>
+            <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_weight="@dimen/sec_fingerprint_register_progress_first_text_height_ratio">
+                <TextView android:textSize="@dimen/sec_fingerprint_enroll_try_out_title_textSize" android:textColor="?android:textColorPrimary" android:ellipsize="end" android:gravity="center_horizontal" android:id="@id/swipe_enroll_guide_title" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/fingerprint_enroll_test_fingerprint_title" android:fontFamily="sec" android:textFontWeight="600" />
+                <TextView android:textSize="@dimen/sec_fingerprint_enroll_try_out_description_textSize" android:textColor="?android:textColorSecondary" android:gravity="center_horizontal" android:id="@id/swipe_enroll_guide_text" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/sec_fingerprint_enroll_try_out_marginTop" android:text="@string/fingerprint_enroll_test_fingerprint_description" android:fontFamily="sec" android:textFontWeight="400" />
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout android:orientation="horizontal" android:id="@id/done2_button_layout" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="@dimen/sec_fingerprint_register_bottom_bar_height" android:weightSum="1.0" android:layout_alignParentBottom="true" android:layout_marginStart="@dimen/sec_fingerprint_register_button_marginSide" android:layout_marginEnd="@dimen/sec_fingerprint_register_button_marginSide">
+            <Button android:id="@id/done3_button" android:text="@string/fingerprint_register_done" style="@style/SecFingerprintBottomBarStyle" />
+        </LinearLayout>
+    </RelativeLayout>
+    <LinearLayout android:orientation="vertical" android:id="@id/unfold_guide_screen" android:background="?android:windowBackground" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="fill_parent" android:weightSum="1.0" android:paddingHorizontal="24.0dip">
+        <LinearLayout android:gravity="bottom|center" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="0.0dip" android:weightSum="1.0" android:layout_weight="@dimen/sec_fingerprint_register_progress_first_vi_layout_height_ratio">
+            <LinearLayout android:orientation="vertical" android:id="@id/register_unfold_guide_vi_layout" android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_weight="@dimen/sec_fingerprint_register_progress_first_vi_height_ratio">
+                <TextureView android:id="@id/unfold_guide_clip" android:visibility="invisible" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+            </LinearLayout>
+        </LinearLayout>
+        <TextView android:textSize="@dimen/sec_fingerprint_register_guideTitle_text_size" android:textColor="?android:textColorPrimary" android:ellipsize="end" android:gravity="center" android:id="@id/folding_guide_text" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/sec_fingerprint_register_open_phone" android:layout_weight="@dimen/sec_fingerprint_register_progress_first_text_height_ratio" android:lineSpacingExtra="@dimen/sec_fingerprint_register_textLineSpace" android:fontFamily="sec" android:textFontWeight="300" />
+    </LinearLayout>
+    <LinearLayout android:orientation="vertical" android:id="@id/swipe_enroll_touch_guide_screen" android:background="?android:windowBackground" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="fill_parent" android:weightSum="1.0" android:layout_centerHorizontal="true" android:paddingHorizontal="24.0dip">
+        <View android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_weight="0.11" />
+        <LinearLayout android:gravity="center" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="0.0dip" android:weightSum="1.0" android:layout_weight="0.31">
+            <LinearLayout android:orientation="vertical" android:id="@id/swipe_enroll_touch_guide_vi_layout" android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_weight="0.76">
+                <TextureView android:id="@id/swipe_touch_guide_clip" android:visibility="invisible" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+            </LinearLayout>
+        </LinearLayout>
+        <View android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_weight="0.15" />
+        <ScrollView android:id="@id/swipe_enroll_touch_guide_text" android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_weight="0.28">
+            <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <TextView android:textSize="18.0sp" android:textColor="?android:textColorPrimary" android:ellipsize="end" android:gravity="center_horizontal" android:id="@id/swipe_touch_guide_title" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/fingerprint_enroll_first_guide_subtitle" android:lineSpacingExtra="@dimen/sec_fingerprint_register_textLineSpace" android:fontFamily="sec" android:textFontWeight="600" />
+                <TextView android:textSize="16.0sp" android:textColor="?android:textColorSecondary" android:gravity="center_horizontal" android:id="@id/swipe_touch_guide_description" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="16.0dip" android:text="@string/fingerprint_enroll_swipe_first_guide1" android:lineSpacingExtra="@dimen/sec_fingerprint_register_textLineSpace" android:fontFamily="sec" android:textFontWeight="400" />
+            </LinearLayout>
+        </ScrollView>
+        <LinearLayout android:gravity="center_horizontal" android:id="@id/ok_button_layout" android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_weight="0.15">
+            <Button android:id="@id/ok_button" android:layout_marginTop="24.0dip" android:text="@string/fingerprint_enroll_swipe_touch_popup_ok" style="@style/SecFingerprintRaisedButtonStyle" />
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout android:gravity="center_horizontal" android:layout_gravity="bottom" android:orientation="horizontal" android:id="@id/add_button_layout" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_above="@id/next_button_area">
+        <Button android:id="@id/add2_button" android:background="@drawable/sec_fingerprint_contained_button_background" android:layout_width="wrap_content" android:minWidth="@dimen/intelligent_verification_button_min_width" android:text="@string/fingerprint_register_add" style="@style/SecFingerprintRaisedButtonStyle" />
+    </LinearLayout>
+    <RelativeLayout android:gravity="center_vertical" android:id="@id/next_button_area" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_alignParentBottom="true" android:layout_marginEnd="@dimen/biometrics_common_suw_bottom_bar_padding_end">
+        <Button android:id="@id/next_text_btn" android:text="@string/next_button_label" android:layout_alignParentEnd="true" android:layout_marginVertical="12.0dip" style="@style/SecFingerprintSuwNextButtonStyle" />
+    </RelativeLayout>
+</RelativeLayout>

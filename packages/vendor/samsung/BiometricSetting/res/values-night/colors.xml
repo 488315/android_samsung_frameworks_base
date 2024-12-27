@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="auth_credential_background_color">#ff252525</color>
+    <color name="auth_credential_body_text_color">#ffe0e0e0</color>
+    <color name="auth_credential_input_text_color">#fffafafa</color>
+    <color name="auth_credential_password_line_color">#fffafafa</color>
+    <color name="auth_credential_pattern_draw_regular_color">#fffafafa</color>
+    <color name="auth_credential_subtitle_text_color">#fff0f0f0</color>
+    <color name="auth_credential_title_text_color">#fffafafa</color>
+    <color name="biometric_prompt_credential_pattern_color">#b3fafafa</color>
+    <color name="biometric_prompt_description_text_color">#ffeaeaeb</color>
+    <color name="biometric_prompt_dialog_color">#ff252525</color>
+    <color name="biometric_prompt_logo_text_color">#ffeaeaeb</color>
+    <color name="biometric_prompt_negative_text_color">#fffafaff</color>
+    <color name="biometric_prompt_password_color">#fffafafa</color>
+    <color name="biometric_prompt_positive_button_color">#ff2d2d30</color>
+    <color name="biometric_prompt_positive_button_ripple_color">#33ffffff</color>
+    <color name="biometric_prompt_positive_text_color">#fffafaff</color>
+    <color name="biometric_prompt_subtitle_text_color">#ff999999</color>
+    <color name="biometric_prompt_switch_ripple">#33ffffff</color>
+    <color name="biometric_prompt_switch_track">#ff565656</color>
+    <color name="biometric_prompt_switch_track_text">#fffafafa</color>
+    <color name="biometric_prompt_title_text_color">#fffafaff</color>
+    <color name="face_verification_button_ripple_color">#33ffffff</color>
+    <color name="face_verification_dialog_color">#ff252525</color>
+    <color name="face_verification_positive_button_color">#ff1f1f1f</color>
+    <color name="fingerprint_prompt_icon_color">#fffafafa</color>
+    <color name="fingerprint_verification_button_ripple_color">#33ffffff</color>
+    <color name="fingerprint_verification_negative_text_color">#ff3e91ff</color>
+</resources>

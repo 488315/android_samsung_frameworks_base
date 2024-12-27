@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="biometric_dialog_credential_too_many_attempts">
+        <item quantity="other">%d saniye içinde yeniden dene.</item>
+        <item quantity="one">1 saniye icinde tekrar deneyin.</item>
+    </plurals>
+    <plurals name="biometric_dialog_credential_too_many_attempts_min">
+        <item quantity="other">%d dakika sonra tekrar dene.</item>
+        <item quantity="one">1 dakika sonra tekrar deneyin.</item>
+    </plurals>
+    <plurals name="sec_incorrect_password_attempts_left">
+        <item quantity="other">Hatalı şifre. %d deneme hakkı kaldı.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Hatalı şifre. %d deneme hakkı kaldı.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_incorrect_pattern_attempts_left">
+        <item quantity="other">Hatalı desen. %d deneme hakkı kaldı.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Hatalı desen. %d deneme hakkı kaldı.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_incorrect_pin_attempts_left">
+        <item quantity="other">Hatalı PIN. %d deneme hakkı kaldı.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Hatalı PIN. %d deneme hakkı kaldı.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_lockpattern_too_many_failed_confirmation_attempts_footer_min">
+        <item quantity="other">%d dakika sonra tekrar dene.</item>
+        <item quantity="one">1 dakika sonra tekrar deneyin.</item>
+    </plurals>
+    <plurals name="sec_lockpattern_too_many_failed_confirmation_attempts_footer_sec">
+        <item quantity="other">%d saniye içinde yeniden dene.</item>
+        <item quantity="one">1 saniye icinde tekrar deneyin.</item>
+    </plurals>
+    <plurals name="wpc_phone_incorrect_dialog_2">
+        <item quantity="other">İş profilinizin kilidini açmak için 1 deneme yapıldı. Bu telefon fabrika ayarlarına sıfırlanmadan ve tüm veriler silinmeden önce %d deneme hakkınız kaldı.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">İş profilinizin kilidini açmak için 1 deneme yapıldı. Bu telefon fabrika ayarlarına sıfırlanmadan ve tüm veriler silinmeden önce %d deneme hakkınız kaldı.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wpc_phone_incorrect_dialog_4">
+        <item quantity="other">İş profilinizin kilidini açmak için %d deneme yapıldı. Bu telefon fabrika ayarlarına sıfırlanmadan ve tüm veriler silinmeden önce 1 deneme hakkınız kaldı.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">İş profilinizin kilidini açmak için %d deneme yapıldı. Bu telefon fabrika ayarlarına sıfırlanmadan ve tüm veriler silinmeden önce 1 deneme hakkınız kaldı.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wpc_tablet_incorrect_dialog_2">
+        <item quantity="other">İş profilinizin kilidini açmak için 1 deneme yapıldı. Bu tablet fabrika ayarlarına sıfırlanmadan ve tüm veriler silinmeden önce %d deneme hakkınız kaldı.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">İş profilinizin kilidini açmak için 1 deneme yapıldı. Bu tablet fabrika ayarlarına sıfırlanmadan ve tüm veriler silinmeden önce %d deneme hakkınız kaldı.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wpc_tablet_incorrect_dialog_4">
+        <item quantity="other">İş profilinizin kilidini açmak için %d deneme yapıldı. Bu tablet fabrika ayarlarına sıfırlanmadan ve tüm veriler silinmeden önce 1 deneme hakkınız kaldı.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">İş profilinizin kilidini açmak için %d deneme yapıldı. Bu tablet fabrika ayarlarına sıfırlanmadan ve tüm veriler silinmeden önce 1 deneme hakkınız kaldı.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

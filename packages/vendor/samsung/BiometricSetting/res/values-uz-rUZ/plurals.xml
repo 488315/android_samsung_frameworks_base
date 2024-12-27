@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="biometric_dialog_credential_too_many_attempts">
+        <item quantity="other">%d soniyada qayta urinib ko‘ring.</item>
+        <item quantity="one">1 soniyadan keyin qayta urinib ko‘ring.</item>
+    </plurals>
+    <plurals name="biometric_dialog_credential_too_many_attempts_min">
+        <item quantity="other">%d daqiqada qayta urinib ko‘ring.</item>
+        <item quantity="one">1 daqiqada qayta urining.</item>
+    </plurals>
+    <plurals name="sec_incorrect_password_attempts_left">
+        <item quantity="other">Noto‘g‘ri parol. %d urinish qoldi.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Noto‘g‘ri parol. %d urinish qoldi.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_incorrect_pattern_attempts_left">
+        <item quantity="other">Noto‘g‘ri chizma. %d urinish qoldi.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Noto‘g‘ri chizma. %d urinish qoldi.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_incorrect_pin_attempts_left">
+        <item quantity="other">Noto‘g‘ri PIN-kod. %d urinish qoldi.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Noto‘g‘ri PIN-kod. %d urinish qoldi.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_lockpattern_too_many_failed_confirmation_attempts_footer_min">
+        <item quantity="other">%d daqiqada qayta urinib ko‘ring.</item>
+        <item quantity="one">1 daqiqada qayta urining.</item>
+    </plurals>
+    <plurals name="sec_lockpattern_too_many_failed_confirmation_attempts_footer_sec">
+        <item quantity="other">%d soniyada qayta urinib ko‘ring.</item>
+        <item quantity="one">1 soniyadan keyin qayta urinib ko‘ring.</item>
+    </plurals>
+    <plurals name="wpc_phone_incorrect_dialog_2">
+        <item quantity="other">Ish profilingizni blokdan chiqarish uchun 1 ta urinish amalga oshirildi. Yana %d ta urinishdan so‘ng, bu telefon ishlab chiqaruvchi sozlamalariga tashlanadi va barcha ma’lumotlar o‘chiriladi.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Ish profilingizni blokdan chiqarish uchun 1 ta urinish amalga oshirildi. Yana %d ta urinishdan so‘ng, bu telefon ishlab chiqaruvchi sozlamalariga tashlanadi va barcha ma’lumotlar o‘chiriladi.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wpc_phone_incorrect_dialog_4">
+        <item quantity="other">Ish profilingizni blokdan chiqarish uchun %d ta urinish amalga oshirildi. Yana 1 ta urinishdan so‘ng, bu telefon ishlab chiqaruvchi sozlamalariga tashlanadi va barcha ma’lumotlar o‘chiriladi.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Ish profilingizni blokdan chiqarish uchun %d ta urinish amalga oshirildi. Yana 1 ta urinishdan so‘ng, bu telefon ishlab chiqaruvchi sozlamalariga tashlanadi va barcha ma’lumotlar o‘chiriladi.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wpc_tablet_incorrect_dialog_2">
+        <item quantity="other">Ish profilingizni blokdan chiqarish uchun 1 ta urinish amalga oshirildi. Yana %d ta urinishdan so‘ng, bu planshet ishlab chiqaruvchi sozlamalariga tashlanadi va barcha ma’lumotlar o‘chiriladi.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Ish profilingizni blokdan chiqarish uchun 1 ta urinish amalga oshirildi. Yana %d ta urinishdan so‘ng, bu planshet ishlab chiqaruvchi sozlamalariga tashlanadi va barcha ma’lumotlar o‘chiriladi.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wpc_tablet_incorrect_dialog_4">
+        <item quantity="other">Ish profilingizni blokdan chiqarish uchun %d ta urinish amalga oshirildi. Yana 1 ta urinishdan so‘ng, bu planshet ishlab chiqaruvchi sozlamalariga tashlanadi va barcha ma’lumotlar o‘chiriladi.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Ish profilingizni blokdan chiqarish uchun %d ta urinish amalga oshirildi. Yana 1 ta urinishdan so‘ng, bu planshet ishlab chiqaruvchi sozlamalariga tashlanadi va barcha ma’lumotlar o‘chiriladi.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

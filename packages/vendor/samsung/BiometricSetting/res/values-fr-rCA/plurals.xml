@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="biometric_dialog_credential_too_many_attempts">
+        <item quantity="other">Réessayez dans %d secondes.</item>
+        <item quantity="one">Réessayer dans 1 seconde.</item>
+    </plurals>
+    <plurals name="biometric_dialog_credential_too_many_attempts_min">
+        <item quantity="other">Essayez dans %d minutes.</item>
+        <item quantity="one">Réessayez dans 1 minute.</item>
+    </plurals>
+    <plurals name="sec_incorrect_password_attempts_left">
+        <item quantity="other">Mot de passe incorrect. %d tentatives restantes.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Mot de passe incorrect. %d tentative restante.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_incorrect_pattern_attempts_left">
+        <item quantity="other">Modèle incorrect. %d tentatives restantes.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Modèle incorrect. %d tentative restante.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_incorrect_pin_attempts_left">
+        <item quantity="other">NIP incorrect. %d tentatives restantes.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">NIP incorrect. %d tentative restante.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_lockpattern_too_many_failed_confirmation_attempts_footer_min">
+        <item quantity="other">Essayez dans %d minutes.</item>
+        <item quantity="one">Réessayez dans 1 minute.</item>
+    </plurals>
+    <plurals name="sec_lockpattern_too_many_failed_confirmation_attempts_footer_sec">
+        <item quantity="other">Réessayez dans %d secondes.</item>
+        <item quantity="one">Réessayer dans 1 seconde.</item>
+    </plurals>
+    <plurals name="wpc_phone_incorrect_dialog_2">
+        <item quantity="other">"Il y a eu 1 tentative de déverrouillage de votre profil professionnel. Il vous reste %d tentatives avant le rétablissement des paramètres par défaut de ce téléphone et l'effacement de toutes les données."</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">"Il y a eu 1 tentative de déverrouillage de votre profil professionnel. Il vous reste %d tentative avant le rétablissement des paramètres par défaut de ce téléphone et l'effacement de toutes les données."</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wpc_phone_incorrect_dialog_4">
+        <item quantity="other">"Il y a eu %d tentatives de déverrouillage de votre profil professionnel. Il vous reste 1 tentative avant le rétablissement des paramètres par défaut de ce téléphone et l'effacement de toutes les données."</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">"Il y a eu %d tentative de déverrouillage de votre profil professionnel. Il vous reste 1 tentative avant le rétablissement des paramètres par défaut de ce téléphone et l'effacement de toutes les données."</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wpc_tablet_incorrect_dialog_2">
+        <item quantity="other">"Il y a eu 1 tentative de déverrouillage de votre profil professionnel. Il vous reste %d tentatives avant le rétablissement des paramètres par défaut de cette tablette et l'effacement de toutes les données."</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">"Il y a eu 1 tentative de déverrouillage de votre profil professionnel. Il vous reste %d tentative avant le rétablissement des paramètres par défaut de cette tablette et l'effacement de toutes les données."</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wpc_tablet_incorrect_dialog_4">
+        <item quantity="other">"Il y a eu %d tentatives de déverrouillage de votre profil professionnel. Il vous reste 1 tentative avant le rétablissement des paramètres par défaut de cette tablette et l'effacement de toutes les données."</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">"Il y a eu %d tentative de déverrouillage de votre profil professionnel. Il vous reste 1 tentative avant le rétablissement des paramètres par défaut de cette tablette et l'effacement de toutes les données."</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set android:fillAfter="true" android:fillEnabled="true"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <alpha android:fromAlpha="0.0" android:toAlpha="1.0" />
+    <translate android:interpolator="@interpolator/sine_out_60" android:duration="200" android:fillAfter="true" android:fromYDelta="0.0%" android:toYDelta="3.0" />
+    <translate android:interpolator="@interpolator/sine_out_60" android:duration="200" android:fillAfter="true" android:startOffset="200" android:fromYDelta="0.0%" android:toYDelta="-2.9999971%" />
+</set>

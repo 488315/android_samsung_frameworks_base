@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="biometric_dialog_credential_too_many_attempts">
+        <item quantity="other">%d సెకన్ల తర్వాత మళ్ళీ ప్రయత్నించండి.</item>
+        <item quantity="one">1 సెకనులో మళ్లీ ప్రయత్నించండి.</item>
+    </plurals>
+    <plurals name="biometric_dialog_credential_too_many_attempts_min">
+        <item quantity="other">%d నిమిషాలలో మళ్ళీ ప్రయత్నించండి.</item>
+        <item quantity="one">1 నిమిషం తర్వాత మళ్లీ ప్రయత్నించండి.</item>
+    </plurals>
+    <plurals name="sec_incorrect_password_attempts_left">
+        <item quantity="other">పాస్‌వర్డ్ చెల్లదు. %d ప్రయత్నాలు మిగిలి ఉన్నాయి.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">పాస్‌వర్డ్ చెల్లదు. %d ప్రయత్నం మిగిలి ఉంది.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_incorrect_pattern_attempts_left">
+        <item quantity="other">నమూనా చెల్లదు. %d ప్రయత్నాలు మిగిలి ఉన్నాయి.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">నమూనా చెల్లదు. %d ప్రయత్నం మిగిలి ఉంది.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_incorrect_pin_attempts_left">
+        <item quantity="other">PIN చెల్లదు. %d ప్రయత్నాలు మిగిలి ఉన్నాయి.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">PIN చెల్లదు. %d ప్రయత్నం మిగిలి ఉంది.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_lockpattern_too_many_failed_confirmation_attempts_footer_min">
+        <item quantity="other">%d నిమిషాలలో మళ్ళీ ప్రయత్నించండి.</item>
+        <item quantity="one">1 నిమిషం తర్వాత మళ్లీ ప్రయత్నించండి.</item>
+    </plurals>
+    <plurals name="sec_lockpattern_too_many_failed_confirmation_attempts_footer_sec">
+        <item quantity="other">%d సెకన్ల తర్వాత మళ్ళీ ప్రయత్నించండి.</item>
+        <item quantity="one">1 సెకనులో మళ్లీ ప్రయత్నించండి.</item>
+    </plurals>
+    <plurals name="wpc_phone_incorrect_dialog_2">
+        <item quantity="other">మీ కార్యాలయ ప్రొఫైల్‌ని అన్‌లాక్ చేయడానికి 1 ప్రయత్నం మిగిలి ఉంది. ఈ ఫోన్ ఫ్యాక్టరీ సెట్టింగ్‌లకు రీసెట్ చేయబడటానికి ముందు మీకు %d ప్రయత్నాలు మిగిలి ఉన్నాయి మరియు మొత్తం డేటా తుడిచివేయబడుతుంది.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">మీ కార్యాలయ ప్రొఫైల్‌ని అన్‌లాక్ చేయడానికి 1 ప్రయత్నం మిగిలి ఉంది. ఈ ఫోన్ ఫ్యాక్టరీ సెట్టింగ్‌లకు రీసెట్ చేయబడటానికి ముందు మీకు %d ప్రయత్నం మిగిలి ఉంది మరియు మొత్తం డేటా తుడిచివేయబడుతుంది.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wpc_phone_incorrect_dialog_4">
+        <item quantity="other">మీ కార్యాలయ ప్రొఫైల్‌ని అన్‌లాక్ చేయడానికి %d ప్రయత్నాలు మిగిలి ఉన్నాయి. ఈ ఫోన్ ఫ్యాక్టరీ సెట్టింగ్‌లకు రీసెట్ చేయబడటానికి ముందు మీకు 1 ప్రయత్నం మిగిలి ఉంది మరియు మొత్తం డేటా తుడిచివేయబడుతుంది.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">మీ కార్యాలయ ప్రొఫైల్‌ని అన్‌లాక్ చేయడానికి %d ప్రయత్నం మిగిలి ఉంది. ఈ ఫోన్ ఫ్యాక్టరీ సెట్టింగ్‌లకు రీసెట్ చేయబడటానికి ముందు మీకు 1 ప్రయత్నం మిగిలి ఉంది మరియు మొత్తం డేటా తుడిచివేయబడుతుంది.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wpc_tablet_incorrect_dialog_2">
+        <item quantity="other">మీ కార్యాలయ ప్రొఫైల్‌ని అన్‌లాక్ చేయడానికి 1 ప్రయత్నం మిగిలి ఉంది. ఈ టాబ్లెట్ ఫ్యాక్టరీ సెట్టింగ్‌లకు రీసెట్ చేయబడటానికి ముందు మీకు %d ప్రయత్నాలు మిగిలి ఉన్నాయి మరియు మొత్తం డేటా తుడిచివేయబడుతుంది.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">మీ కార్యాలయ ప్రొఫైల్‌ని అన్‌లాక్ చేయడానికి 1 ప్రయత్నం మిగిలి ఉంది. ఈ టాబ్లెట్ ఫ్యాక్టరీ సెట్టింగ్‌లకు రీసెట్ చేయబడటానికి ముందు మీకు %d ప్రయత్నం మిగిలి ఉంది మరియు మొత్తం డేటా తుడిచివేయబడుతుంది.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wpc_tablet_incorrect_dialog_4">
+        <item quantity="other">మీ కార్యాలయ ప్రొఫైల్‌ని అన్‌లాక్ చేయడానికి %d ప్రయత్నాలు మిగిలి ఉన్నాయి. ఈ టాబ్లెట్ ఫ్యాక్టరీ సెట్టింగ్‌లకు రీసెట్ చేయబడటానికి ముందు మీకు 1 ప్రయత్నం మిగిలి ఉంది మరియు మొత్తం డేటా తుడిచివేయబడుతుంది.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">మీ కార్యాలయ ప్రొఫైల్‌ని అన్‌లాక్ చేయడానికి %d ప్రయత్నం మిగిలి ఉంది. ఈ టాబ్లెట్ ఫ్యాక్టరీ సెట్టింగ్‌లకు రీసెట్ చేయబడటానికి ముందు మీకు 1 ప్రయత్నం మిగిలి ఉంది మరియు మొత్తం డేటా తుడిచివేయబడుతుంది.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

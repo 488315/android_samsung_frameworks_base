@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="biometric_dialog_credential_too_many_attempts">
+        <item quantity="other">Provo përsëri për %d sekonda.</item>
+        <item quantity="one">Provo sërish për 1 sekondë.</item>
+    </plurals>
+    <plurals name="biometric_dialog_credential_too_many_attempts_min">
+        <item quantity="other">Provo sërish pas %d minutash.</item>
+        <item quantity="one">Riprovo pas 1 minute.</item>
+    </plurals>
+    <plurals name="sec_incorrect_password_attempts_left">
+        <item quantity="other">Fjalëkalim jokorrekt. %d orvatje mbeten.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Fjalëkalim jokorrekt. %d orvatje mbetet.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_incorrect_pattern_attempts_left">
+        <item quantity="other">Motiv jokorrekt. %d orvatje mbeten.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Motiv jokorrekt. %d orvatje mbetet.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_incorrect_pin_attempts_left">
+        <item quantity="other">PIN jokorrekt. %d orvatje mbeten.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">PIN jokorrekt. %d orvatje mbetet.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_lockpattern_too_many_failed_confirmation_attempts_footer_min">
+        <item quantity="other">Provo sërish pas %d minutash.</item>
+        <item quantity="one">Riprovo pas 1 minute.</item>
+    </plurals>
+    <plurals name="sec_lockpattern_too_many_failed_confirmation_attempts_footer_sec">
+        <item quantity="other">Provo përsëri për %d sekonda.</item>
+        <item quantity="one">Provo sërish për 1 sekondë.</item>
+    </plurals>
+    <plurals name="wpc_phone_incorrect_dialog_2">
+        <item quantity="other">Është bërë 1 orvatje për ta zhbllokuar profilin tënd të punës. Të kanë mbetur edhe %d orvatje para se ky telefon të resetohet në parazgjedhjet e fabrikës dhe të gjitha të dhënat të fshihen.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Është bërë 1 orvatje për ta zhbllokuar profilin tënd të punës. Të ka mbetur edhe %d orvatje para se ky telefon të resetohet në parazgjedhjet e fabrikës dhe të gjitha të dhënat të fshihen.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wpc_phone_incorrect_dialog_4">
+        <item quantity="other">Janë bërë %d orvatje për ta zhbllokuar profilin tënd të punës. Të ka mbetur edhe 1 orvatje para se ky telefon të resetohet në parazgjedhjet e fabrikës dhe të gjitha të dhënat të fshihen.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Është bërë %d orvatje për ta zhbllokuar profilin tënd të punës. Të ka mbetur edhe 1 orvatje para se ky telefon të resetohet në parazgjedhjet e fabrikës dhe të gjitha të dhënat të fshihen.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wpc_tablet_incorrect_dialog_2">
+        <item quantity="other">Është bërë 1 orvatje për ta zhbllokuar profilin tënd të punës. Të kanë mbetur edhe %d orvatje para se kjo tabletë të resetohet në parazgjedhjet e fabrikës dhe të gjitha të dhënat të fshihen.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Është bërë 1 orvatje për ta zhbllokuar profilin tënd të punës. Të ka mbetur edhe %d orvatje para se kjo tabletë të resetohet në parazgjedhjet e fabrikës dhe të gjitha të dhënat të fshihen.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wpc_tablet_incorrect_dialog_4">
+        <item quantity="other">Janë bërë %d orvatje për ta zhbllokuar profilin tënd të punës. Të ka mbetur edhe 1 orvatje para se kjo tabletë të resetohet në parazgjedhjet e fabrikës dhe të gjitha të dhënat të fshihen.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Është bërë %d orvatje për ta zhbllokuar profilin tënd të punës. Të ka mbetur edhe 1 orvatje para se kjo tabletë të resetohet në parazgjedhjet e fabrikës dhe të gjitha të dhënat të fshihen.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="biometric_dialog_credential_too_many_attempts">
+        <item quantity="other">Forsøg igen om %d sekunder.</item>
+        <item quantity="one">Prøv igen om 1 sekund.</item>
+    </plurals>
+    <plurals name="biometric_dialog_credential_too_many_attempts_min">
+        <item quantity="other">Prøv igen om %d minutter.</item>
+        <item quantity="one">Prøv igen om 1 minut.</item>
+    </plurals>
+    <plurals name="sec_incorrect_password_attempts_left">
+        <item quantity="other">Forkert adgangskode. %d forsøg tilbage.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Forkert adgangskode. %d forsøg tilbage.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_incorrect_pattern_attempts_left">
+        <item quantity="other">Forkert mønster. %d forsøg tilbage.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Forkert mønster. %d forsøg tilbage.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_incorrect_pin_attempts_left">
+        <item quantity="other">Forkert PIN-kode. %d forsøg tilbage.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Forkert PIN-kode. %d forsøg tilbage.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_lockpattern_too_many_failed_confirmation_attempts_footer_min">
+        <item quantity="other">Prøv igen om %d minutter.</item>
+        <item quantity="one">Prøv igen om 1 minut.</item>
+    </plurals>
+    <plurals name="sec_lockpattern_too_many_failed_confirmation_attempts_footer_sec">
+        <item quantity="other">Forsøg igen om %d sekunder.</item>
+        <item quantity="one">Prøv igen om 1 sekund.</item>
+    </plurals>
+    <plurals name="wpc_phone_incorrect_dialog_2">
+        <item quantity="other">Der har været 1 forsøg på at låse din arbejdsprofil op. Du har %d forsøg tilbage, før denne telefon nulstilles til fabriksindstillingerne, og alle data vil blive slettet.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Der har været 1 forsøg på at låse din arbejdsprofil op. Du har %d forsøg tilbage, før denne telefon nulstilles til fabriksindstillingerne, og alle data vil blive slettet.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wpc_phone_incorrect_dialog_4">
+        <item quantity="other">Der har været %d forsøg på at låse din arbejdsprofil op. Du har 1 forsøg tilbage, før denne telefon nulstilles til fabriksindstillingerne, og alle data vil blive slettet.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Der har været %d forsøg på at låse din arbejdsprofil op. Du har 1 forsøg tilbage, før denne telefon nulstilles til fabriksindstillingerne, og alle data vil blive slettet.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wpc_tablet_incorrect_dialog_2">
+        <item quantity="other">Der har været 1 forsøg på at låse din arbejdsprofil op. Du har %d forsøg tilbage, før denne tablet nulstilles til fabriksindstillingerne, og alle data vil blive slettet.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Der har været 1 forsøg på at låse din arbejdsprofil op. Du har %d forsøg tilbage, før denne tablet nulstilles til fabriksindstillingerne, og alle data vil blive slettet.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wpc_tablet_incorrect_dialog_4">
+        <item quantity="other">Der har været %d forsøg på at låse din arbejdsprofil op. Du har 1 forsøg tilbage, før denne tablet nulstilles til fabriksindstillingerne, og alle data vil blive slettet.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Der har været %d forsøg på at låse din arbejdsprofil op. Du har 1 forsøg tilbage, før denne tablet nulstilles til fabriksindstillingerne, og alle data vil blive slettet.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

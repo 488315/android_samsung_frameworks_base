@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="biometric_dialog_credential_too_many_attempts">
+        <item quantity="other">Try again in %d seconds.</item>
+        <item quantity="one">Try again in 1 second.</item>
+    </plurals>
+    <plurals name="biometric_dialog_credential_too_many_attempts_min">
+        <item quantity="other">Try again in %d minutes.</item>
+        <item quantity="one">Try again in 1 minute.</item>
+    </plurals>
+    <plurals name="sec_incorrect_password_attempts_left">
+        <item quantity="other">Incorrect password. %d attempts left.</item>
+        <item quantity="zero">Incorrect password. %d attempts left.</item>
+        <item quantity="one">Incorrect password. %d attempt left.</item>
+        <item quantity="two">Incorrect password. %d attempts left.</item>
+        <item quantity="few">Incorrect password. %d attempts left.</item>
+        <item quantity="many">Incorrect password. %d attempts left.</item>
+    </plurals>
+    <plurals name="sec_incorrect_pattern_attempts_left">
+        <item quantity="other">Incorrect pattern. %d attempts left.</item>
+        <item quantity="zero">Incorrect pattern. %d attempts left.</item>
+        <item quantity="one">Incorrect pattern. %d attempt left.</item>
+        <item quantity="two">Incorrect pattern. %d attempts left.</item>
+        <item quantity="few">Incorrect pattern. %d attempts left.</item>
+        <item quantity="many">Incorrect pattern. %d attempts left.</item>
+    </plurals>
+    <plurals name="sec_incorrect_pin_attempts_left">
+        <item quantity="other">Incorrect PIN. %d attempts left.</item>
+        <item quantity="zero">Incorrect PIN. %d attempts left.</item>
+        <item quantity="one">Incorrect PIN. %d attempt left.</item>
+        <item quantity="two">Incorrect PIN. %d attempts left.</item>
+        <item quantity="few">Incorrect PIN. %d attempts left.</item>
+        <item quantity="many">Incorrect PIN. %d attempts left.</item>
+    </plurals>
+    <plurals name="sec_lockpattern_too_many_failed_confirmation_attempts_footer_min">
+        <item quantity="other">Try again in %d minutes.</item>
+        <item quantity="one">Try again in 1 minute.</item>
+    </plurals>
+    <plurals name="sec_lockpattern_too_many_failed_confirmation_attempts_footer_sec">
+        <item quantity="other">Try again in %d seconds.</item>
+        <item quantity="one">Try again in 1 second.</item>
+    </plurals>
+</resources>

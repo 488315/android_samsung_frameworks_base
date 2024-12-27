@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="biometric_dialog_credential_too_many_attempts">
+        <item quantity="other">Thử lại sau %d giây.</item>
+        <item quantity="one">Thử lại sau 1 giây.</item>
+    </plurals>
+    <plurals name="biometric_dialog_credential_too_many_attempts_min">
+        <item quantity="other">Thử lại sau %d phút.</item>
+        <item quantity="one">Hãy thử lại sau 1 phút.</item>
+    </plurals>
+    <plurals name="sec_incorrect_password_attempts_left">
+        <item quantity="other">Mật mã không đúng. Còn %d lần thử.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_incorrect_pattern_attempts_left">
+        <item quantity="other">Mẫu hình không đúng. Còn %d lần thử.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_incorrect_pin_attempts_left">
+        <item quantity="other">Mã PIN không đúng. Còn %d lần thử.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_lockpattern_too_many_failed_confirmation_attempts_footer_min">
+        <item quantity="other">Thử lại sau %d phút.</item>
+        <item quantity="one">Hãy thử lại sau 1 phút.</item>
+    </plurals>
+    <plurals name="sec_lockpattern_too_many_failed_confirmation_attempts_footer_sec">
+        <item quantity="other">Thử lại sau %d giây.</item>
+        <item quantity="one">Thử lại sau 1 giây.</item>
+    </plurals>
+    <plurals name="wpc_phone_incorrect_dialog_2">
+        <item quantity="other">Bạn đã thử mở khóa cấu hình cơ quan 1 lần. Bạn còn %d lần nữa trước khi điện thoại này khôi phục cài đặt gốc và mọi dữ liệu sẽ bị xóa.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wpc_phone_incorrect_dialog_4">
+        <item quantity="other">Bạn đã thử mở khóa cấu hình cơ quan %d lần. Bạn còn 1 lần nữa trước khi điện thoại này khôi phục cài đặt gốc và mọi dữ liệu sẽ bị xóa.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wpc_tablet_incorrect_dialog_2">
+        <item quantity="other">Bạn đã thử mở khóa cấu hình cơ quan 1 lần. Bạn còn %d lần nữa trước khi máy tính bảng này khôi phục cài đặt gốc và mọi dữ liệu sẽ bị xóa.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wpc_tablet_incorrect_dialog_4">
+        <item quantity="other">Bạn đã thử mở khóa cấu hình cơ quan %d lần. Bạn còn 1 lần nữa trước khi máy tính bảng này khôi phục cài đặt gốc và mọi dữ liệu sẽ bị xóa.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

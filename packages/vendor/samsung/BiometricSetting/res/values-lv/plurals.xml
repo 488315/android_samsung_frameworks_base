@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="biometric_dialog_credential_too_many_attempts">
+        <item quantity="other">Mēģiniet vēlreiz pēc %d sekundēm.</item>
+        <item quantity="one">Pēc 1 sekundes mēģiniet vēlreiz.</item>
+    </plurals>
+    <plurals name="biometric_dialog_credential_too_many_attempts_min">
+        <item quantity="other">Mēģiniet vēlreiz pēc %d minūtēm.</item>
+        <item quantity="one">Mēģiniet vēlreiz pēc 1 minūtes.</item>
+    </plurals>
+    <plurals name="sec_incorrect_password_attempts_left">
+        <item quantity="other">Nepareiza parole. Atlikuši %d mēģinājumi.</item>
+        <item quantity="zero">Nepareiza parole. Atlikuši %d mēģinājumi.</item>
+        <item quantity="one">Nepareiza parole. Atlicis %d mēģinājums.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_incorrect_pattern_attempts_left">
+        <item quantity="other">Nepareiza figūra. Atlikuši %d mēģinājumi.</item>
+        <item quantity="zero">Nepareiza figūra. Atlikuši %d mēģinājumi.</item>
+        <item quantity="one">Nepareiza figūra. Atlicis %d mēģinājums.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_incorrect_pin_attempts_left">
+        <item quantity="other">Nepareizs PIN kods. Atlikuši %d mēģinājumi.</item>
+        <item quantity="zero">Nepareizs PIN kods. Atlikuši %d mēģinājumi.</item>
+        <item quantity="one">Nepareizs PIN kods. Atlicis %d mēģinājums.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_lockpattern_too_many_failed_confirmation_attempts_footer_min">
+        <item quantity="other">Mēģiniet vēlreiz pēc %d minūtēm.</item>
+        <item quantity="one">Mēģiniet vēlreiz pēc 1 minūtes.</item>
+    </plurals>
+    <plurals name="sec_lockpattern_too_many_failed_confirmation_attempts_footer_sec">
+        <item quantity="other">Mēģiniet vēlreiz pēc %d sekundēm.</item>
+        <item quantity="one">Pēc 1 sekundes mēģiniet vēlreiz.</item>
+    </plurals>
+    <plurals name="wpc_phone_incorrect_dialog_2">
+        <item quantity="other">Tika veikts 1 mēģinājums atbloķēt jūsu darba profilu. Jums ir atlikuši %d mēģinājumi, pirms šajā tālrunī tiks atjaunoti rūpnīcas noklusējuma iestatījumi un visi dati tiks izdzēsti.</item>
+        <item quantity="zero">Tika veikts 1 mēģinājums atbloķēt jūsu darba profilu. Jums ir atlikuši %d mēģinājumi, pirms šajā tālrunī tiks atjaunoti rūpnīcas noklusējuma iestatījumi un visi dati tiks izdzēsti.</item>
+        <item quantity="one">Tika veikts 1 mēģinājums atbloķēt jūsu darba profilu. Jums ir atlicis %d mēģinājums, pirms šajā tālrunī tiks atjaunoti rūpnīcas noklusējuma iestatījumi un visi dati tiks izdzēsti.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wpc_phone_incorrect_dialog_4">
+        <item quantity="other">Tika veikti %d mēģinājumi atbloķēt jūsu darba profilu. Jums ir atlicis 1 mēģinājums, pirms šajā tālrunī tiks atjaunoti rūpnīcas noklusējuma iestatījumi un visi dati tiks izdzēsti.</item>
+        <item quantity="zero">Tika veikti %d mēģinājumi atbloķēt jūsu darba profilu. Jums ir atlicis 1 mēģinājums, pirms šajā tālrunī tiks atjaunoti rūpnīcas noklusējuma iestatījumi un visi dati tiks izdzēsti.</item>
+        <item quantity="one">Tika veikts %d mēģinājums atbloķēt jūsu darba profilu. Jums ir atlicis 1 mēģinājums, pirms šajā tālrunī tiks atjaunoti rūpnīcas noklusējuma iestatījumi un visi dati tiks izdzēsti.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wpc_tablet_incorrect_dialog_2">
+        <item quantity="other">Tika veikts 1 mēģinājums atbloķēt jūsu darba profilu. Jums ir atlikuši %d mēģinājumi, pirms šajā planšetdatorā tiks atjaunoti rūpnīcas noklusējuma iestatījumi un visi dati tiks izdzēsti.</item>
+        <item quantity="zero">Tika veikts 1 mēģinājums atbloķēt jūsu darba profilu. Jums ir atlikuši %d mēģinājumi, pirms šajā planšetdatorā tiks atjaunoti rūpnīcas noklusējuma iestatījumi un visi dati tiks izdzēsti.</item>
+        <item quantity="one">Tika veikts 1 mēģinājums atbloķēt jūsu darba profilu. Jums ir atlicis %d mēģinājums, pirms šajā planšetdatorā tiks atjaunoti rūpnīcas noklusējuma iestatījumi un visi dati tiks izdzēsti.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wpc_tablet_incorrect_dialog_4">
+        <item quantity="other">Tika veikti %d mēģinājumi atbloķēt jūsu darba profilu. Jums ir atlicis 1 mēģinājums, pirms šajā planšetdatorā tiks atjaunoti rūpnīcas noklusējuma iestatījumi un visi dati tiks izdzēsti.</item>
+        <item quantity="zero">Tika veikti %d mēģinājumi atbloķēt jūsu darba profilu. Jums ir atlicis 1 mēģinājums, pirms šajā planšetdatorā tiks atjaunoti rūpnīcas noklusējuma iestatījumi un visi dati tiks izdzēsti.</item>
+        <item quantity="one">Tika veikts %d mēģinājums atbloķēt jūsu darba profilu. Jums ir atlicis 1 mēģinājums, pirms šajā planšetdatorā tiks atjaunoti rūpnīcas noklusējuma iestatījumi un visi dati tiks izdzēsti.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

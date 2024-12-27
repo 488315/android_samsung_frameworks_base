@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="biometric_dialog_credential_too_many_attempts">
+        <item quantity="other">طی %d ثانیه دوباره امتحان کنید.</item>
+        <item quantity="one">طی 1 ثانیه دوباره امتحان کنید.</item>
+    </plurals>
+    <plurals name="biometric_dialog_credential_too_many_attempts_min">
+        <item quantity="other">پس از %d دقیقه دوباره امتحان کنید.</item>
+        <item quantity="one">۱ دقیقه دیگر دوباره امتحان کنید.</item>
+    </plurals>
+    <plurals name="sec_incorrect_password_attempts_left">
+        <item quantity="other">رمز عبور نادرست. %d تلاش باقی مانده است.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">رمز عبور نادرست. %d تلاش باقی مانده است.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_incorrect_pattern_attempts_left">
+        <item quantity="other">الگو نادرست. %d تلاش باقی مانده است.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">الگو نادرست. %d تلاش باقی مانده است.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_incorrect_pin_attempts_left">
+        <item quantity="other">پین نادرست. %d تلاش باقی مانده است.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">پین نادرست. %d تلاش باقی مانده است.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_lockpattern_too_many_failed_confirmation_attempts_footer_min">
+        <item quantity="other">پس از %d دقیقه دوباره امتحان کنید.</item>
+        <item quantity="one">۱ دقیقه دیگر دوباره امتحان کنید.</item>
+    </plurals>
+    <plurals name="sec_lockpattern_too_many_failed_confirmation_attempts_footer_sec">
+        <item quantity="other">طی %d ثانیه دوباره امتحان کنید.</item>
+        <item quantity="one">طی 1 ثانیه دوباره امتحان کنید.</item>
+    </plurals>
+    <plurals name="wpc_phone_incorrect_dialog_2">
+        <item quantity="other">۱ تلاش برای بازگشایی قفل نمایه کاری‌تان صورت گرفته است. %d تلاش دیگر باقی مانده است، پس از آن این گوشی به تنظیمات کارخانه بازنشانی می‌شود و همه اطلاعات پاک خواهد شد.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">۱ تلاش برای بازگشایی قفل نمایه کاری‌تان صورت گرفته است. %d تلاش دیگر باقی مانده است، پس از آن این گوشی به تنظیمات کارخانه بازنشانی می‌شود و همه اطلاعات پاک خواهد شد.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wpc_phone_incorrect_dialog_4">
+        <item quantity="other">%d تلاش برای بازگشایی قفل نمایه کاری‌تان صورت گرفته است. ۱ تلاش دیگر باقی مانده است، پس از آن این گوشی به تنظیمات کارخانه بازنشانی می‌شود و همه اطلاعات پاک خواهد شد.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d تلاش برای بازگشایی قفل نمایه کاری‌تان صورت گرفته است. ۱ تلاش دیگر باقی مانده است، پس از آن این گوشی به تنظیمات کارخانه بازنشانی می‌شود و همه اطلاعات پاک خواهد شد.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wpc_tablet_incorrect_dialog_2">
+        <item quantity="other">۱ تلاش برای بازگشایی قفل نمایه کاری‌تان صورت گرفته است. %d تلاش دیگر باقی مانده است، پس از آن این تبلت به تنظیمات کارخانه بازنشانی می‌شود و همه اطلاعات پاک خواهد شد.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">۱ تلاش برای بازگشایی قفل نمایه کاری‌تان صورت گرفته است. %d تلاش دیگر باقی مانده است، پس از آن این تبلت به تنظیمات کارخانه بازنشانی می‌شود و همه اطلاعات پاک خواهد شد.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wpc_tablet_incorrect_dialog_4">
+        <item quantity="other">%d تلاش برای بازگشایی قفل نمایه کاری‌تان صورت گرفته است. ۱ تلاش دیگر باقی مانده است، پس از آن این تبلت به تنظیمات کارخانه بازنشانی می‌شود و همه اطلاعات پاک خواهد شد.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d تلاش برای بازگشایی قفل نمایه کاری‌تان صورت گرفته است. ۱ تلاش دیگر باقی مانده است، پس از آن این تبلت به تنظیمات کارخانه بازنشانی می‌شود و همه اطلاعات پاک خواهد شد.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

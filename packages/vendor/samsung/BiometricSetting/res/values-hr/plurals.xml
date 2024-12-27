@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="biometric_dialog_credential_too_many_attempts">
+        <item quantity="other">Ponovite nakon %d sekundi.</item>
+        <item quantity="one">Ponovite nakon 1 sek.</item>
+    </plurals>
+    <plurals name="biometric_dialog_credential_too_many_attempts_min">
+        <item quantity="other">Ponovite nakon %d min.</item>
+        <item quantity="one">Pokušajte ponovno za 1 min.</item>
+    </plurals>
+    <plurals name="sec_incorrect_password_attempts_left">
+        <item quantity="other">Neispravna lozinka. Preostalo je %d pokušaja.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Neispravna lozinka. Preostao je %d pokušaj.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Neispravna lozinka. Preostala su %d pokušaja.</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_incorrect_pattern_attempts_left">
+        <item quantity="other">Neispravan uzorak. Preostalo je %d pokušaja.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Neispravan uzorak. Preostao je %d pokušaj.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Neispravan uzorak. Preostala su %d pokušaja.</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_incorrect_pin_attempts_left">
+        <item quantity="other">Neispravan PIN. Preostalo je %d pokušaja.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Neispravan PIN. Preostao je %d pokušaj.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Neispravan PIN. Preostala su %d pokušaja.</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_lockpattern_too_many_failed_confirmation_attempts_footer_min">
+        <item quantity="other">Ponovite nakon %d min.</item>
+        <item quantity="one">Pokušajte ponovno za 1 min.</item>
+    </plurals>
+    <plurals name="sec_lockpattern_too_many_failed_confirmation_attempts_footer_sec">
+        <item quantity="other">Ponovite nakon %d sekundi.</item>
+        <item quantity="one">Ponovite nakon 1 sek.</item>
+    </plurals>
+    <plurals name="wpc_phone_incorrect_dialog_2">
+        <item quantity="other">Zabilježen je 1 pokušaj otključavanja vašeg radnog profila. Imate još %d pokušaja, nakon čega će se ovaj telefon vratiti na tvorničke postavke, a svi se podaci izbrisati.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Zabilježen je 1 pokušaj otključavanja vašeg radnog profila. Imate još %d pokušaj, nakon čega će se ovaj telefon vratiti na tvorničke postavke, a svi se podaci izbrisati.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Zabilježen je 1 pokušaj otključavanja vašeg radnog profila. Imate još %d pokušaja, nakon čega će se ovaj telefon vratiti na tvorničke postavke, a svi se podaci izbrisati.</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wpc_phone_incorrect_dialog_4">
+        <item quantity="other">Zabilježeno je %d pokušaja otključavanja vašeg radnog profila. Imate još 1 pokušaj, nakon čega će se ovaj telefon vratiti na tvorničke postavke, a svi se podaci izbrisati.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Zabilježen je %d pokušaj otključavanja vašeg radnog profila. Imate još 1 pokušaj, nakon čega će se ovaj telefon vratiti na tvorničke postavke, a svi se podaci izbrisati.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Zabilježena su %d pokušaja otključavanja vašeg radnog profila. Imate još 1 pokušaj, nakon čega će se ovaj telefon vratiti na tvorničke postavke, a svi se podaci izbrisati.</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wpc_tablet_incorrect_dialog_2">
+        <item quantity="other">Zabilježen je 1 pokušaj otključavanja vašeg radnog profila. Imate još %d pokušaja, nakon čega će se ovaj tablet vratiti na tvorničke postavke, a svi se podaci izbrisati.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Zabilježen je 1 pokušaj otključavanja vašeg radnog profila. Imate još %d pokušaj, nakon čega će se ovaj tablet vratiti na tvorničke postavke, a svi se podaci izbrisati.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Zabilježen je 1 pokušaj otključavanja vašeg radnog profila. Imate još %d pokušaja, nakon čega će se ovaj tablet vratiti na tvorničke postavke, a svi se podaci izbrisati.</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wpc_tablet_incorrect_dialog_4">
+        <item quantity="other">Zabilježeno je %d pokušaja otključavanja vašeg radnog profila. Imate još 1 pokušaj, nakon čega će se ovaj tablet vratiti na tvorničke postavke, a svi se podaci izbrisati.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Zabilježen je %d pokušaj otključavanja vašeg radnog profila. Imate još 1 pokušaj, nakon čega će se ovaj tablet vratiti na tvorničke postavke, a svi se podaci izbrisati.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Zabilježena su %d pokušaja otključavanja vašeg radnog profila. Imate još 1 pokušaj, nakon čega će se ovaj tablet vratiti na tvorničke postavke, a svi se podaci izbrisati.</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

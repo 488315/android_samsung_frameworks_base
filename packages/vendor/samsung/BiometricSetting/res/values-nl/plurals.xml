@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="biometric_dialog_credential_too_many_attempts">
+        <item quantity="other">Probeer opnieuw over %d seconden.</item>
+        <item quantity="one">Probeer opnieuw over 1 seconde.</item>
+    </plurals>
+    <plurals name="biometric_dialog_credential_too_many_attempts_min">
+        <item quantity="other">Probeer opnieuw over %d min.</item>
+        <item quantity="one">Probeer het opnieuw over 1 minuut.</item>
+    </plurals>
+    <plurals name="sec_incorrect_password_attempts_left">
+        <item quantity="other">Onjuist wachtwoord. %d pogingen over.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Onjuist wachtwoord. %d poging over.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_incorrect_pattern_attempts_left">
+        <item quantity="other">Onjuist patroon. %d pogingen over.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Onjuist patroon. %d poging over.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_incorrect_pin_attempts_left">
+        <item quantity="other">Onjuiste PIN. %d pogingen over.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Onjuiste PIN. %d poging over.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_lockpattern_too_many_failed_confirmation_attempts_footer_min">
+        <item quantity="other">Probeer opnieuw over %d min.</item>
+        <item quantity="one">Probeer het opnieuw over 1 minuut.</item>
+    </plurals>
+    <plurals name="sec_lockpattern_too_many_failed_confirmation_attempts_footer_sec">
+        <item quantity="other">Probeer opnieuw over %d seconden.</item>
+        <item quantity="one">Probeer opnieuw over 1 seconde.</item>
+    </plurals>
+    <plurals name="wpc_phone_incorrect_dialog_2">
+        <item quantity="other">Er is 1 poging gedaan om je werkprofiel te ontgrendelen. Je hebt nog %d pogingen over voordat deze telefoon wordt gereset naar de fabrieksinstellingen en alle gegevens worden gewist.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Er is 1 poging gedaan om je werkprofiel te ontgrendelen. Je hebt nog %d poging over voordat deze telefoon wordt gereset naar de fabrieksinstellingen en alle gegevens worden gewist.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wpc_phone_incorrect_dialog_4">
+        <item quantity="other">Er zijn %d pogingen gedaan om je werkprofiel te ontgrendelen. Je hebt nog 1 poging over voordat deze telefoon wordt gereset naar de fabrieksinstellingen en alle gegevens worden gewist.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Er is %d poging gedaan om je werkprofiel te ontgrendelen. Je hebt nog 1 poging over voordat deze telefoon wordt gereset naar de fabrieksinstellingen en alle gegevens worden gewist.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wpc_tablet_incorrect_dialog_2">
+        <item quantity="other">Er is 1 poging gedaan om je werkprofiel te ontgrendelen. Je hebt nog %d pogingen over voordat deze tablet wordt gereset naar de fabrieksinstellingen en alle gegevens worden gewist.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Er is 1 poging gedaan om je werkprofiel te ontgrendelen. Je hebt nog %d poging over voordat deze tablet wordt gereset naar de fabrieksinstellingen en alle gegevens worden gewist.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wpc_tablet_incorrect_dialog_4">
+        <item quantity="other">Er zijn %d pogingen gedaan om je werkprofiel te ontgrendelen. Je hebt nog 1 poging over voordat deze tablet wordt gereset naar de fabrieksinstellingen en alle gegevens worden gewist.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Er is %d poging gedaan om je werkprofiel te ontgrendelen. Je hebt nog 1 poging over voordat deze tablet wordt gereset naar de fabrieksinstellingen en alle gegevens worden gewist.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

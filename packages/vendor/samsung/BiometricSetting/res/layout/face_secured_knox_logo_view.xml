@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout android:paddingBottom="@dimen/face_knox_logo_bottom_margin" android:layout_width="fill_parent" android:layout_height="wrap_content" android:paddingEnd="@dimen/face_knox_logo_end_margin" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ImageView android:id="@id/securedKnoxLogoImage" android:layout_width="@dimen/biometric_prompt_knox_logo_width" android:layout_height="@dimen/biometric_prompt_knox_logo_height" android:src="@drawable/bi_knox_secured" android:layout_alignParentEnd="true" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape android:visible="true" android:shape="rectangle"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@color/biometric_prompt_switch_track" />
+    <corners android:radius="26.0dip" />
+    <size android:height="36.0dip" />
+</shape>

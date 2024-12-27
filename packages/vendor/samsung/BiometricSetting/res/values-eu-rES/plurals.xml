@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="biometric_dialog_credential_too_many_attempts">
+        <item quantity="other">Saiatu berriro hemendik %d segundotara</item>
+        <item quantity="one">Saiatu berriz segundo 1 barru</item>
+    </plurals>
+    <plurals name="biometric_dialog_credential_too_many_attempts_min">
+        <item quantity="other">Saiatu berriz %d minutu ondoren</item>
+        <item quantity="one">Saiatu berriz 1 minutu barru.</item>
+    </plurals>
+    <plurals name="sec_incorrect_password_attempts_left">
+        <item quantity="other">Pasahitza okerra da. Beste %d saiakera geratzen dira.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Pasahitza okerra da. Beste %d saiakera geratzen da.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_incorrect_pattern_attempts_left">
+        <item quantity="other">Patroia okerra da. %d saiakera geratzen dira.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Patroia okerra da. %d saiakera geratzen da.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_incorrect_pin_attempts_left">
+        <item quantity="other">PINa okerra da. %d saiakera geratzen dira.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">PINa okerra da. %d saiakera geratzen da.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_lockpattern_too_many_failed_confirmation_attempts_footer_min">
+        <item quantity="other">Saiatu berriz %d minutu ondoren</item>
+        <item quantity="one">Saiatu berriz 1 minutu barru.</item>
+    </plurals>
+    <plurals name="sec_lockpattern_too_many_failed_confirmation_attempts_footer_sec">
+        <item quantity="other">Saiatu berriro hemendik %d segundotara</item>
+        <item quantity="one">Saiatu berriz segundo 1 barru</item>
+    </plurals>
+    <plurals name="wpc_phone_incorrect_dialog_2">
+        <item quantity="other">Laneko profila desblokeatzeko 1 saiakera egin da. %d saiakera geratzen zaizkizu telefonoan fabrikako ezarpenak berrezarri eta datu guztiak ezabatu aurretik.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Laneko profila desblokeatzeko 1 saiakera egin da. %d saiakera geratzen zaizu telefonoan fabrikako ezarpenak berrezarri eta datu guztiak ezabatu aurretik.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wpc_phone_incorrect_dialog_4">
+        <item quantity="other">Laneko profila desblokeatzeko %d saiakera egin dira. 1 saiakera geratzen zaizu telefonoan fabrikako ezarpenak berrezarri eta datu guztiak ezabatu aurretik.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Laneko profila desblokeatzeko %d saiakera egin da. 1 saiakera geratzen zaizu telefonoan fabrikako ezarpenak berrezarri eta datu guztiak ezabatu aurretik.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wpc_tablet_incorrect_dialog_2">
+        <item quantity="other">Laneko profila desblokeatzeko 1 saiakera egin da. %d saiakera geratzen zaizkizu tabletan fabrikako ezarpenak berrezarri eta datu guztiak ezabatu aurretik.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Laneko profila desblokeatzeko 1 saiakera egin da. %d saiakera geratzen zaizu tabletan fabrikako ezarpenak berrezarri eta datu guztiak ezabatu aurretik.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wpc_tablet_incorrect_dialog_4">
+        <item quantity="other">Laneko profila desblokeatzeko %d saiakera egin dira. 1 saiakera geratzen zaizu tabletan fabrikako ezarpenak berrezarri eta datu guztiak ezabatu aurretik.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Laneko profila desblokeatzeko %d saiakera egin da. 1 saiakera geratzen zaizu tabletan fabrikako ezarpenak berrezarri eta datu guztiak ezabatu aurretik.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

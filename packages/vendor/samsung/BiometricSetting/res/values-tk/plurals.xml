@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="biometric_dialog_credential_too_many_attempts">
+        <item quantity="other">%d sekuntdan synanyşyp görüň.</item>
+        <item quantity="one">Ýene 1 sekuntdan synanyş.</item>
+    </plurals>
+    <plurals name="biometric_dialog_credential_too_many_attempts_min">
+        <item quantity="other">Try again in %d minutes.</item>
+        <item quantity="one">Ýene 1 minutdan synanyşyň.</item>
+    </plurals>
+    <plurals name="sec_incorrect_password_attempts_left">
+        <item quantity="other">Nädogry parol. %d synanyşyk galdy.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Nädogry parol. %d synanyşyk galdy.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_incorrect_pattern_attempts_left">
+        <item quantity="other">Nädogry şablon. %d synanyşyk galdy.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Nädogry şablon. %d synanyşyk galdy.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_incorrect_pin_attempts_left">
+        <item quantity="other">Nädogry PIN. %d synanyşyk galdy.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Nädogry PIN. %d synanyşyk galdy.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_lockpattern_too_many_failed_confirmation_attempts_footer_min">
+        <item quantity="other">Try again in %d minutes.</item>
+        <item quantity="one">Ýene 1 minutdan synanyşyň.</item>
+    </plurals>
+    <plurals name="sec_lockpattern_too_many_failed_confirmation_attempts_footer_sec">
+        <item quantity="other">%d sekuntdan synanyşyp görüň.</item>
+        <item quantity="one">Ýene 1 sekuntdan synanyş.</item>
+    </plurals>
+    <plurals name="wpc_phone_incorrect_dialog_2">
+        <item quantity="other">Iş profiliňiziň gulpuny açmaga 1 synanyşyk edildi. Ýene %d gezek ýalňyş synanyşsaňyz, bu telefon asyl sazlamalaryna nol ediler we ähli maglumat pozular.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Iş profiliňiziň gulpuny açmaga 1 synanyşyk edildi. Ýene %d gezek ýalňyş synanyşsaňyz, bu telefon asyl sazlamalaryna nol ediler we ähli maglumat pozular.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wpc_phone_incorrect_dialog_4">
+        <item quantity="other">Iş profiliňiziň gulpuny açmaga %d synanyşyk edildi. Ýene 1 gezek ýalňyş synanyşsaňyz, bu telefon asyl sazlamalaryna nol ediler we ähli maglumat pozular.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Iş profiliňiziň gulpuny açmaga %d synanyşyk edildi. Ýene 1 gezek ýalňyş synanyşsaňyz, bu telefon asyl sazlamalaryna nol ediler we ähli maglumat pozular.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wpc_tablet_incorrect_dialog_2">
+        <item quantity="other">Iş profiliňiziň gulpuny açmaga 1 synanyşyk edildi. Ýene %d gezek ýalňyş synanyşsaňyz, bu planşet asyl sazlamalaryna nol ediler we ähli maglumat pozular.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Iş profiliňiziň gulpuny açmaga 1 synanyşyk edildi. Ýene %d gezek ýalňyş synanyşsaňyz, bu planşet asyl sazlamalaryna nol ediler we ähli maglumat pozular.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wpc_tablet_incorrect_dialog_4">
+        <item quantity="other">Iş profiliňiziň gulpuny açmaga %d synanyşyk edildi. Ýene 1 gezek ýalňyş synanyşsaňyz, bu planşet asyl sazlamalaryna nol ediler we ähli maglumat pozular.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Iş profiliňiziň gulpuny açmaga %d synanyşyk edildi. Ýene 1 gezek ýalňyş synanyşsaňyz, bu planşet asyl sazlamalaryna nol ediler we ähli maglumat pozular.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

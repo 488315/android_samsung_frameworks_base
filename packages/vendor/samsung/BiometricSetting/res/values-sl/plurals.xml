@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="biometric_dialog_credential_too_many_attempts">
+        <item quantity="other">Poskusite znova čez %d sekund.</item>
+        <item quantity="one">Poskusite znova čez 1 s.</item>
+    </plurals>
+    <plurals name="biometric_dialog_credential_too_many_attempts_min">
+        <item quantity="other">Poskusite znova čez %d m.</item>
+        <item quantity="one">Poskusite znova čez 1 minuto.</item>
+    </plurals>
+    <plurals name="sec_incorrect_password_attempts_left">
+        <item quantity="other">Napačno geslo. Imate še %d poskusov.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Napačno geslo. Imate še %d poskus.</item>
+        <item quantity="two">Napačno geslo. Imate še %d poskusa.</item>
+        <item quantity="few">Napačno geslo. Imate še %d poskuse.</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_incorrect_pattern_attempts_left">
+        <item quantity="other">Napačen vzorec. Imate še %d poskusov.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Napačen vzorec. Imate še %d poskus.</item>
+        <item quantity="two">Napačen vzorec. Imate še %d poskusa.</item>
+        <item quantity="few">Napačen vzorec. Imate še %d poskuse.</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_incorrect_pin_attempts_left">
+        <item quantity="other">Napačna koda PIN. Imate še %d poskusov.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Napačna koda PIN. Imate še %d poskus.</item>
+        <item quantity="two">Napačna koda PIN. Imate še %d poskusa.</item>
+        <item quantity="few">Napačna koda PIN. Imate še %d poskuse.</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_lockpattern_too_many_failed_confirmation_attempts_footer_min">
+        <item quantity="other">Poskusite znova čez %d m.</item>
+        <item quantity="one">Poskusite znova čez 1 minuto.</item>
+    </plurals>
+    <plurals name="sec_lockpattern_too_many_failed_confirmation_attempts_footer_sec">
+        <item quantity="other">Poskusite znova čez %d sekund.</item>
+        <item quantity="one">Poskusite znova čez 1 s.</item>
+    </plurals>
+    <plurals name="wpc_phone_incorrect_dialog_2">
+        <item quantity="other">1-krat ste poskusili odkleniti delovni profil. Imate še %d poskusov, nato bo ta telefon ponastavljen na tovarniške nastavitve, vsi podatki pa bodo izbrisani.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">1-krat ste poskusili odkleniti delovni profil. Imate še %d poskus, nato bo ta telefon ponastavljen na tovarniške nastavitve, vsi podatki pa bodo izbrisani.</item>
+        <item quantity="two">1-krat ste poskusili odkleniti delovni profil. Imate še %d poskusa, nato bo ta telefon ponastavljen na tovarniške nastavitve, vsi podatki pa bodo izbrisani.</item>
+        <item quantity="few">1-krat ste poskusili odkleniti delovni profil. Imate še %d poskuse, nato bo ta telefon ponastavljen na tovarniške nastavitve, vsi podatki pa bodo izbrisani.</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wpc_phone_incorrect_dialog_4">
+        <item quantity="other">%d-krat ste poskusili odkleniti delovni profil. Imate še 1 poskus, nato bo ta telefon ponastavljen na tovarniške nastavitve, vsi podatki pa bodo izbrisani.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d-krat ste poskusili odkleniti delovni profil. Imate še 1 poskus, nato bo ta telefon ponastavljen na tovarniške nastavitve, vsi podatki pa bodo izbrisani.</item>
+        <item quantity="two">%d-krat ste poskusili odkleniti delovni profil. Imate še 1 poskus, nato bo ta telefon ponastavljen na tovarniške nastavitve, vsi podatki pa bodo izbrisani.</item>
+        <item quantity="few">%d-krat ste poskusili odkleniti delovni profil. Imate še 1 poskus, nato bo ta telefon ponastavljen na tovarniške nastavitve, vsi podatki pa bodo izbrisani.</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wpc_tablet_incorrect_dialog_2">
+        <item quantity="other">1-krat ste poskusili odkleniti delovni profil. Imate še %d poskusov, nato bo ta tablični računalnik ponastavljen na tovarniške nastavitve, vsi podatki pa bodo izbrisani.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">1-krat ste poskusili odkleniti delovni profil. Imate še %d poskus, nato bo ta tablični računalnik ponastavljen na tovarniške nastavitve, vsi podatki pa bodo izbrisani.</item>
+        <item quantity="two">1-krat ste poskusili odkleniti delovni profil. Imate še %d poskusa, nato bo ta tablični računalnik ponastavljen na tovarniške nastavitve, vsi podatki pa bodo izbrisani.</item>
+        <item quantity="few">1-krat ste poskusili odkleniti delovni profil. Imate še %d poskuse, nato bo ta tablični računalnik ponastavljen na tovarniške nastavitve, vsi podatki pa bodo izbrisani.</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wpc_tablet_incorrect_dialog_4">
+        <item quantity="other">%d-krat ste poskusili odkleniti delovni profil. Imate še 1 poskus, nato bo ta tablični računalnik ponastavljen na tovarniške nastavitve, vsi podatki pa bodo izbrisani.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d-krat ste poskusili odkleniti delovni profil. Imate še 1 poskus, nato bo ta tablični računalnik ponastavljen na tovarniške nastavitve, vsi podatki pa bodo izbrisani.</item>
+        <item quantity="two">%d-krat ste poskusili odkleniti delovni profil. Imate še 1 poskus, nato bo ta tablični računalnik ponastavljen na tovarniške nastavitve, vsi podatki pa bodo izbrisani.</item>
+        <item quantity="few">%d-krat ste poskusili odkleniti delovni profil. Imate še 1 poskus, nato bo ta tablični računalnik ponastavljen na tovarniške nastavitve, vsi podatki pa bodo izbrisani.</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

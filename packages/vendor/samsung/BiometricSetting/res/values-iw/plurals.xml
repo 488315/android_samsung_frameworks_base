@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="biometric_dialog_credential_too_many_attempts">
+        <item quantity="other">נסה שוב בעוד %d שניות.</item>
+        <item quantity="one">נסה שוב בעוד שניה אחת.</item>
+    </plurals>
+    <plurals name="biometric_dialog_credential_too_many_attempts_min">
+        <item quantity="other">נסה שוב בעוד ‎%d‏ דקות.</item>
+        <item quantity="one">נסה שוב בעוד דקה.</item>
+    </plurals>
+    <plurals name="sec_incorrect_password_attempts_left">
+        <item quantity="other">סיסמה שגויה. לרשותך עוד %d ניסיונות.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">סיסמה שגויה. לרשותך עוד %d ניסיון.</item>
+        <item quantity="two">סיסמה שגויה. לרשותך עוד %d ניסיונות.</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">סיסמה שגויה. לרשותך עוד %d ניסיונות.</item>
+    </plurals>
+    <plurals name="sec_incorrect_pattern_attempts_left">
+        <item quantity="other">דפוס שגוי. לרשותך עוד %d ניסיונות.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">דפוס שגוי. לרשותך עוד %d ניסיון.</item>
+        <item quantity="two">דפוס שגוי. לרשותך עוד %d ניסיונות.</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">דפוס שגוי. לרשותך עוד %d ניסיונות.</item>
+    </plurals>
+    <plurals name="sec_incorrect_pin_attempts_left">
+        <item quantity="other">קוד PIN שגוי. לרשותך עוד %d ניסיונות.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">קוד PIN שגוי. לרשותך עוד %d ניסיון.</item>
+        <item quantity="two">קוד PIN שגוי. לרשותך עוד %d ניסיונות.</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">קוד PIN שגוי. לרשותך עוד %d ניסיונות.</item>
+    </plurals>
+    <plurals name="sec_lockpattern_too_many_failed_confirmation_attempts_footer_min">
+        <item quantity="other">נסה שוב בעוד ‎%d‏ דקות.</item>
+        <item quantity="one">נסה שוב בעוד דקה.</item>
+    </plurals>
+    <plurals name="sec_lockpattern_too_many_failed_confirmation_attempts_footer_sec">
+        <item quantity="other">נסה שוב בעוד %d שניות.</item>
+        <item quantity="one">נסה שוב בעוד שניה אחת.</item>
+    </plurals>
+    <plurals name="wpc_phone_incorrect_dialog_2">
+        <item quantity="other">לרשותך עוד ניסיון אחד לבטל את נעילת פרופיל העבודה. נותרו לך %d ניסיונות לפני שהטלפון הזה יאופס לערכי ברירת המחדל של היצרן וכל הנתונים יימחקו.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">לרשותך עוד ניסיון אחד לבטל את נעילת פרופיל העבודה. נותר לך ניסיון %d לפני שהטלפון הזה יאופס לערכי ברירת המחדל של היצרן וכל הנתונים יימחקו.</item>
+        <item quantity="two">לרשותך עוד ניסיון אחד לבטל את נעילת פרופיל העבודה. נותרו לך %d ניסיונות לפני שהטלפון הזה יאופס לערכי ברירת המחדל של היצרן וכל הנתונים יימחקו.</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">לרשותך עוד ניסיון אחד לבטל את נעילת פרופיל העבודה. נותרו לך %d ניסיונות לפני שהטלפון הזה יאופס לערכי ברירת המחדל של היצרן וכל הנתונים יימחקו.</item>
+    </plurals>
+    <plurals name="wpc_phone_incorrect_dialog_4">
+        <item quantity="other">לרשותך עוד %d ניסיונות לבטל את נעילת פרופיל העבודה. נותר לך ניסיון אחד לפני שהטלפון הזה יאופס לערכי ברירת המחדל של היצרן וכל הנתונים יימחקו.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">לרשותך עוד ניסיון %d לבטל את נעילת פרופיל העבודה. נותר לך ניסיון אחד לפני שהטלפון הזה יאופס לערכי ברירת המחדל של היצרן וכל הנתונים יימחקו.</item>
+        <item quantity="two">לרשותך עוד %d ניסיונות לבטל את נעילת פרופיל העבודה. נותר לך ניסיון אחד לפני שהטלפון הזה יאופס לערכי ברירת המחדל של היצרן וכל הנתונים יימחקו.</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">לרשותך עוד %d ניסיונות לבטל את נעילת פרופיל העבודה. נותר לך ניסיון אחד לפני שהטלפון הזה יאופס לערכי ברירת המחדל של היצרן וכל הנתונים יימחקו.</item>
+    </plurals>
+    <plurals name="wpc_tablet_incorrect_dialog_2">
+        <item quantity="other">לרשותך עוד ניסיון אחד לבטל את נעילת פרופיל העבודה. נותרו לך %d ניסיונות לפני שהטאבלט הזה יאופס לערכי ברירת המחדל של היצרן וכל הנתונים יימחקו.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">לרשותך עוד ניסיון אחד לבטל את נעילת פרופיל העבודה. נותר לך ניסיון %d לפני שהטאבלט הזה יאופס לערכי ברירת המחדל של היצרן וכל הנתונים יימחקו.</item>
+        <item quantity="two">לרשותך עוד ניסיון אחד לבטל את נעילת פרופיל העבודה. נותרו לך %d ניסיונות לפני שהטאבלט הזה יאופס לערכי ברירת המחדל של היצרן וכל הנתונים יימחקו.</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">לרשותך עוד ניסיון אחד לבטל את נעילת פרופיל העבודה. נותרו לך %d ניסיונות לפני שהטאבלט הזה יאופס לערכי ברירת המחדל של היצרן וכל הנתונים יימחקו.</item>
+    </plurals>
+    <plurals name="wpc_tablet_incorrect_dialog_4">
+        <item quantity="other">לרשותך עוד %d ניסיונות לבטל את נעילת פרופיל העבודה. נותר לך ניסיון אחד לפני שהטאבלט הזה יאופס לערכי ברירת המחדל של היצרן וכל הנתונים יימחקו.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">לרשותך עוד ניסיון %d לבטל את נעילת פרופיל העבודה. נותר לך ניסיון אחד לפני שהטאבלט הזה יאופס לערכי ברירת המחדל של היצרן וכל הנתונים יימחקו.</item>
+        <item quantity="two">לרשותך עוד %d ניסיונות לבטל את נעילת פרופיל העבודה. נותר לך ניסיון אחד לפני שהטאבלט הזה יאופס לערכי ברירת המחדל של היצרן וכל הנתונים יימחקו.</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">לרשותך עוד %d ניסיונות לבטל את נעילת פרופיל העבודה. נותר לך ניסיון אחד לפני שהטאבלט הזה יאופס לערכי ברירת המחדל של היצרן וכל הנתונים יימחקו.</item>
+    </plurals>
+</resources>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="biometric_dialog_credential_too_many_attempts">
+        <item quantity="other">Паўтарыце спробу праз %d сек.</item>
+        <item quantity="one">Паспрабуйце яшчэ раз праз 1 секунду.</item>
+    </plurals>
+    <plurals name="biometric_dialog_credential_too_many_attempts_min">
+        <item quantity="other">Try again in %d minutes.</item>
+        <item quantity="one">Паўтарыце спробу праз 1 хвіліну.</item>
+    </plurals>
+    <plurals name="sec_incorrect_password_attempts_left">
+        <item quantity="other">Няправільны пароль. Засталося %d спроб.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Няправільны пароль. Засталася %d спроба.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Няправільны пароль. Засталося %d спробы.</item>
+        <item quantity="many">Няправільны пароль. Засталося %d спроб.</item>
+    </plurals>
+    <plurals name="sec_incorrect_pattern_attempts_left">
+        <item quantity="other">Няправільны ўзор. Засталося %d спроб.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Няправільны ўзор. Засталася %d спроба.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Няправільны ўзор. Засталося %d спробы.</item>
+        <item quantity="many">Няправільны ўзор. Засталося %d спроб.</item>
+    </plurals>
+    <plurals name="sec_incorrect_pin_attempts_left">
+        <item quantity="other">Няправільны PIN-код. Засталося %d спроб.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Няправільны PIN-код. Засталася %d спроба.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Няправільны PIN-код. Засталося %d спробы.</item>
+        <item quantity="many">Няправільны PIN-код. Засталося %d спроб.</item>
+    </plurals>
+    <plurals name="sec_lockpattern_too_many_failed_confirmation_attempts_footer_min">
+        <item quantity="other">Try again in %d minutes.</item>
+        <item quantity="one">Паўтарыце спробу праз 1 хвіліну.</item>
+    </plurals>
+    <plurals name="sec_lockpattern_too_many_failed_confirmation_attempts_footer_sec">
+        <item quantity="other">Паўтарыце спробу праз %d сек.</item>
+        <item quantity="one">Паспрабуйце яшчэ раз праз 1 секунду.</item>
+    </plurals>
+    <plurals name="wpc_phone_incorrect_dialog_2">
+        <item quantity="other">Зроблена 1 спроба разблакіроўкі рабочага профілю. У вас засталося %d спроб, перш чым налады гэтага тэлефона будуць скінуты да заводскіх значэнняў, а ўсе даныя сцёрты.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Зроблена 1 спроба разблакіроўкі рабочага профілю. У вас засталася %d спроба, перш чым налады гэтага тэлефона будуць скінуты да заводскіх значэнняў, а ўсе даныя сцёрты.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Зроблена 1 спроба разблакіроўкі рабочага профілю. У вас засталіся %d спробы, перш чым налады гэтага тэлефона будуць скінуты да заводскіх значэнняў, а ўсе даныя сцёрты.</item>
+        <item quantity="many">Зроблена 1 спроба разблакіроўкі рабочага профілю. У вас засталося %d спроб, перш чым налады гэтага тэлефона будуць скінуты да заводскіх значэнняў, а ўсе даныя сцёрты.</item>
+    </plurals>
+    <plurals name="wpc_phone_incorrect_dialog_4">
+        <item quantity="other">Зроблена %d спроб разблакіроўкі рабочага профілю. У вас засталася 1 спроба, перш чым налады гэтага тэлефона будуць скінуты да заводскіх значэнняў, а ўсе даныя сцёрты.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Зроблена %d спроба разблакіроўкі рабочага профілю. У вас засталася 1 спроба, перш чым налады гэтага тэлефона будуць скінуты да заводскіх значэнняў, а ўсе даныя сцёрты.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Зроблены %d спробы разблакіроўкі рабочага профілю. У вас засталася 1 спроба, перш чым налады гэтага тэлефона будуць скінуты да заводскіх значэнняў, а ўсе даныя сцёрты.</item>
+        <item quantity="many">Зроблена %d спроб разблакіроўкі рабочага профілю. У вас засталася 1 спроба, перш чым налады гэтага тэлефона будуць скінуты да заводскіх значэнняў, а ўсе даныя сцёрты.</item>
+    </plurals>
+    <plurals name="wpc_tablet_incorrect_dialog_2">
+        <item quantity="other">Зроблена 1 спроба разблакіроўкі рабочага профілю. У вас засталося %d спроб, перш чым налады гэтага планшэта будуць скінуты да заводскіх значэнняў, а ўсе даныя сцёрты.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Зроблена 1 спроба разблакіроўкі рабочага профілю. У вас засталася %d спроба, перш чым налады гэтага планшэта будуць скінуты да заводскіх значэнняў, а ўсе даныя сцёрты.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Зроблена 1 спроба разблакіроўкі рабочага профілю. У вас засталіся %d спробы, перш чым налады гэтага планшэта будуць скінуты да заводскіх значэнняў, а ўсе даныя сцёрты.</item>
+        <item quantity="many">Зроблена 1 спроба разблакіроўкі рабочага профілю. У вас засталося %d спроб, перш чым налады гэтага планшэта будуць скінуты да заводскіх значэнняў, а ўсе даныя сцёрты.</item>
+    </plurals>
+    <plurals name="wpc_tablet_incorrect_dialog_4">
+        <item quantity="other">Зроблена %d спроб разблакіроўкі рабочага профілю. У вас засталася 1 спроба, перш чым налады гэтага планшэта будуць скінуты да заводскіх значэнняў, а ўсе даныя сцёрты.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Зроблена %d спроба разблакіроўкі рабочага профілю. У вас засталася 1 спроба, перш чым налады гэтага планшэта будуць скінуты да заводскіх значэнняў, а ўсе даныя сцёрты.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Зроблены %d спробы разблакіроўкі рабочага профілю. У вас засталася 1 спроба, перш чым налады гэтага планшэта будуць скінуты да заводскіх значэнняў, а ўсе даныя сцёрты.</item>
+        <item quantity="many">Зроблена %d спроб разблакіроўкі рабочага профілю. У вас засталася 1 спроба, перш чым налады гэтага планшэта будуць скінуты да заводскіх значэнняў, а ўсе даныя сцёрты.</item>
+    </plurals>
+</resources>

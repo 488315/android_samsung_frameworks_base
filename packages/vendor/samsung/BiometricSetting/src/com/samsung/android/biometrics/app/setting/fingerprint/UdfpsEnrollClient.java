@@ -1,0 +1,17 @@
+package com.samsung.android.biometrics.app.setting.fingerprint;
+
+/* compiled from: qb/89523975 3d932b551ea0d034372835fb60fef8bf79c4dff86d0cff0c41e74d050161944e */
+/* loaded from: classes.dex */
+public final class UdfpsEnrollClient extends UdfpsClient {
+    public UdfpsEnrollSensorWindow mEnrollWindow;
+
+    @Override // com.samsung.android.biometrics.app.setting.SysUiClient
+    public final void prepareWindows() {
+        this.mEnrollWindow.initFromBaseWindow(this.mBaseSensorWindow);
+        UdfpsEnrollSensorWindow udfpsEnrollSensorWindow = this.mEnrollWindow;
+        udfpsEnrollSensorWindow.getClass();
+        udfpsEnrollSensorWindow.mH.post(
+                new UdfpsSensorWindow$$ExternalSyntheticLambda0(udfpsEnrollSensorWindow, 0));
+        this.mWindows.add(this.mEnrollWindow);
+    }
+}
