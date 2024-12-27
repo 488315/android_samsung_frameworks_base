@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<conditions>
+    <condition category="soundcraft" description="Playing Audio" icon="@drawable/routine_ic_ringtone" label="@string/routine_playing_audio" tag="playing_audio">
+        <configuration targetUi="com.android.systemui.audio.soundcraft.interfaces.routine.condition.PlayingAudioConditionConfigActivity" />
+    </condition>
+</conditions>

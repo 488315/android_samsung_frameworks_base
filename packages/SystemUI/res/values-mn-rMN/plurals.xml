@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="controls_item_number_of_favorites">
+        <item quantity="other">%d зүйл сонгосон</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d зүйл сонгосон</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="globalactions_force_restart_message">
+        <item quantity="other">Хажуу товчлуур ба Дууг багасгах товчлуурыг нэгэн зэрэг %d секундээс дээш дарж утсаа дахин эхлүүлнэ үү.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Хажуу товчлуур ба Дууг багасгах товчлуурыг нэгэн зэрэг %d секундээс дээш дарж утсаа дахин эхлүүлнэ үү.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_attempt_left">
+        <item quantity="other">%d оролдлого үлдсэн</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d оролдлого үлдсэн</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_attempt_left_before_permanent_locking">
+        <item quantity="other">Бүр мөсөн түгжихээс өмнө %d оролдлого үлдсэн байна</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Бүр мөсөн түгжихээс өмнө %d оролдлого үлдсэн байна</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_secure_attempts_to_unlock_with_fingerprints">
+        <item quantity="other">Хурууны хээгээр түгжээ тайлах %d оролдлого.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Хурууны хээгээр түгжээ тайлах %d оролдлого.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_by_biometrics">
+        <item quantity="other">Биометр баталгаажуулах %d удаагийн буруу оролдлого.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Биометр баталгаажуулах %d удаагийн буруу оролдлого.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_by_face">
+        <item quantity="other">Таны нүүрийг баталгаажуулах %d удаагийн буруу оролдлого.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Таны нүүрийг баталгаажуулах %d удаагийн буруу оролдлого.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_by_fingerprint">
+        <item quantity="other">Хурууны хээг баталгаажуулах %d удаагийн буруу оролдлого.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Хурууны хээг баталгаажуулах %d удаагийн буруу оролдлого.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_1_hour_and_min">
+        <item quantity="other">1 цаг %d минутын дараа дахин оролдоно уу</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">1 цаг %d минутын дараа дахин оролдоно уу</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_biometric">
+        <item quantity="other">%d секундийн дотор биометрикээрээ оролд</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d секундийн дотор биометрикээрээ оролд</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_face">
+        <item quantity="other">Нүүр танилтыг %d секундийн дараа дахин оролдоно уу</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Нүүр танилтыг %d секундийн дараа дахин оролдоно уу</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_fingerprint">
+        <item quantity="other">%d секундийн дотор хурууны хээгээрээ оролд</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d секундийн дотор хурууны хээгээрээ оролд</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_hour">
+        <item quantity="other">%d цагийн дараа дахин оролдоно уу</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d цагийн дараа дахин оролдоно уу</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_hour_and_1_min">
+        <item quantity="other">%d цаг 1 минутын дараа дахин оролдоно уу</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d цаг 1 минутын дараа дахин оролдоно уу</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_min">
+        <item quantity="other">%d минутын дараа дахин оролдоно уу</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d минутын дараа дахин оролдоно уу</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_sec">
+        <item quantity="other">%d секундийн дараа дахин оролдоно уу</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d секундийн дараа дахин оролдоно уу</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_countdown">
+        <item quantity="other">%d секундийн дараа дахин оролд.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d секундийн дараа дахин оролд.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_ucm_attempt_left">
+        <item quantity="other">%d оролдлого үлдсэн</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d оролдлого үлдсэн</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="n_speakers">
+        <item quantity="other">%d чанга яригч</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d чанга яригч</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="notification_insignificant_title">
+        <item quantity="other">%d гаруй мэдэгдэл</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d гаруй мэдэгдэл</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ongoing_activity_chip_count">
+        <item quantity="other">Өөр %d Шууд мэдэгдэл</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Өөр %d Шууд мэдэгдэл</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="plural_notification_count">
+        <item quantity="other">%d мэдэгдэл</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d мэдэгдэл</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_qs_add_minimum">
+        <item quantity="other">%d товчлуур шаардлагатай.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d товчлуур шаардлагатай.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_qs_dnd_detail_fhl_hours_option">
+        <item quantity="other">%d цагийн турш</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d цагийн турш</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_qs_unable_add_maximum">
+        <item quantity="other">%d-с олон товчлуур нэмэх боломжгүй.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d-с олон товчлуур нэмэх боломжгүй.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_qs_unable_remove_minimum">
+        <item quantity="other">Товчлуурыг арилгах боломжгүй. Түргэн самбарт хамгийн багадаа %d товчлуур байх хэрэгтэй.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Товчлуурыг арилгах боломжгүй. Түргэн самбарт хамгийн багадаа %d товчлуур байх хэрэгтэй.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_qs_video_call_effects_num">
+        <item quantity="other">%d эффект</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d эффект</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="subscreen_notification_smart_reply_child_account_dialog_content">
+        <item quantity="other">Та Galaxy AI-н дэвшилтэт оюун ухааны онцлогуудыг ашиглахын тулд та дор хаяж %d настай байх ёстой.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Та Galaxy AI-н дэвшилтэт оюун ухааны онцлогуудыг ашиглахын тулд та дор хаяж %d настай байх ёстой.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

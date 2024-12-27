@@ -1,0 +1,57 @@
+package com.android.systemui.qs;
+
+import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.RectF;
+import android.util.AttributeSet;
+import android.view.View;
+import com.android.settingslib.Utils;
+import com.android.systemui.R;
+
+/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
+/* loaded from: classes2.dex */
+public class DataUsageGraph extends View {
+    public final int mMarkerWidth;
+    public final Paint mTmpPaint;
+    public final RectF mTmpRect;
+    public final int mTrackColor;
+    public final int mUsageColor;
+    public final int mWarningColor;
+
+    public DataUsageGraph(Context context, AttributeSet attributeSet) {
+        super(context, attributeSet);
+        this.mTmpRect = new RectF();
+        this.mTmpPaint = new Paint();
+        Resources resources = context.getResources();
+        this.mTrackColor = Utils.getColorStateListDefaultColor(R.color.data_usage_graph_track, context);
+        this.mWarningColor = Utils.getColorStateListDefaultColor(R.color.data_usage_graph_warning, context);
+        this.mUsageColor = Utils.getColorAttrDefaultColor(context, android.R.attr.colorAccent, 0);
+        Utils.getColorAttrDefaultColor(context, android.R.attr.colorError, 0);
+        this.mMarkerWidth = resources.getDimensionPixelSize(R.dimen.data_usage_graph_marker_width);
+    }
+
+    @Override // android.view.View
+    public final void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
+        RectF rectF = this.mTmpRect;
+        Paint paint = this.mTmpPaint;
+        int width = getWidth();
+        int height = getHeight();
+        float f = width;
+        float f2 = 0L;
+        float f3 = (f2 / f2) * f;
+        rectF.set(0.0f, 0.0f, f, height);
+        paint.setColor(this.mTrackColor);
+        canvas.drawRect(rectF, paint);
+        float f4 = height;
+        rectF.set(0.0f, 0.0f, f3, f4);
+        paint.setColor(this.mUsageColor);
+        canvas.drawRect(rectF, paint);
+        float min = Math.min(Math.max(f3 - (this.mMarkerWidth / 2), 0.0f), width - this.mMarkerWidth);
+        rectF.set(min, 0.0f, this.mMarkerWidth + min, f4);
+        paint.setColor(this.mWarningColor);
+        canvas.drawRect(rectF, paint);
+    }
+}

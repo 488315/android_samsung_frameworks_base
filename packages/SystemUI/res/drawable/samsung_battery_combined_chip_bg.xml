@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape android:shape="rectangle"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@color/status_bar_battery_combined_chip_background_color_light" />
+    <corners android:radius="@dimen/status_bar_battery_chip_radius" />
+</shape>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="center_horizontal" android:orientation="vertical" android:id="@id/cd_bottom_sheet" android:background="@drawable/connected_display_dialog_bg" android:paddingTop="@dimen/dialog_top_padding" android:paddingBottom="@dimen/dialog_bottom_padding" android:layout_width="fill_parent" android:layout_height="wrap_content" android:paddingHorizontal="@dimen/dialog_side_padding"
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:androidprv="http://schemas.android.com/apk/prv/res/android">
+    <ImageView android:id="@id/connected_display_dialog_icon" android:background="@drawable/circular_background" android:padding="6.0dip" android:layout_width="@dimen/connected_display_dialog_logo_size" android:layout_height="@dimen/connected_display_dialog_logo_size" android:src="@drawable/sec_stat_sys_connected_display" android:tint="?android:^attr-private/materialColorOnSecondaryFixedVariant" android:importantForAccessibility="no" android:backgroundTint="?android:^attr-private/materialColorSecondaryFixedDim" />
+    <TextView android:textAppearance="@style/TextAppearance.Dialog.Title" android:gravity="center" android:id="@id/connected_display_dialog_title" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="16.0dip" android:text="@string/connected_display_dialog_start_mirroring" />
+    <TextView android:textAppearance="@style/TextAppearance.Dialog.Body" android:gravity="center" android:id="@id/dual_display_warning" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="16.0dip" android:text="@string/connected_display_dialog_dual_display_stop_warning" />
+    <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="16.0dip">
+        <Button android:id="@id/cancel" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/dismiss_dialog" style="@style/Widget.Dialog.Button.BorderButton" />
+        <Space android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="1.0" />
+        <Button android:id="@id/enable_display" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/mirror_display" style="@style/Widget.Dialog.Button" />
+    </LinearLayout>
+</LinearLayout>

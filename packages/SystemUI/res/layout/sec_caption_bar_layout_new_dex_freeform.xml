@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.wm.shell.windowdecor.WindowDecorLinearLayout android:id="@id/caption" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <FrameLayout android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <RelativeLayout android:id="@id/button_container" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <FrameLayout android:id="@id/more_button_set" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentEnd="true">
+                <com.android.wm.shell.windowdecor.widget.WindowMenuItemView android:id="@id/more_window" android:paddingTop="@dimen/sec_decor_button_padding_top" android:paddingBottom="@dimen/sec_decor_button_padding" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/sec_decor_button_more" android:contentDescription="@string/sec_decor_button_text_more" android:paddingStart="@dimen/sec_decor_button_padding" android:paddingEnd="@dimen/sec_decor_button_padding_large" />
+            </FrameLayout>
+            <LinearLayout android:id="@id/primary_button_set" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_toStartOf="@id/more_button_set">
+                <com.android.wm.shell.windowdecor.widget.WindowMenuItemView android:id="@id/minimize_window" android:src="@drawable/sec_decor_desktop_button_minimize" android:contentDescription="@string/sec_decor_button_text_minimize" style="@style/NewDexFreeformCaptionButtonStyle" />
+                <com.android.wm.shell.windowdecor.widget.WindowMenuItemView android:id="@id/maximize_window" android:src="@drawable/sec_decor_button_maximize" android:contentDescription="@string/sec_decor_button_text_maximize" style="@style/NewDexFreeformCaptionButtonStyle" />
+                <com.android.wm.shell.windowdecor.widget.WindowMenuItemView android:id="@id/close_window" android:src="@drawable/sec_decor_button_close" android:contentDescription="@string/sec_decor_button_text_close" style="@style/NewDexFreeformCaptionButtonStyle" />
+            </LinearLayout>
+            <LinearLayout android:id="@id/secondary_button_set" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_toStartOf="@id/primary_button_set">
+                <com.android.wm.shell.windowdecor.widget.WindowMenuItemView android:id="@id/pinning_window" android:src="@drawable/sec_decor_desktop_button_window_pin" android:contentDescription="@string/sec_decor_button_text_window_pin" app:hasIconBackground="true" style="@style/NewDexFreeformCaptionButtonStyle" />
+                <com.android.wm.shell.windowdecor.widget.WindowMenuItemView android:id="@id/split_window" android:src="@drawable/sec_decor_button_split_leftright" android:contentDescription="@string/sec_decor_button_text_split" style="@style/NewDexFreeformCaptionButtonStyle" />
+            </LinearLayout>
+        </RelativeLayout>
+        <FrameLayout android:id="@id/slider_container" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <com.android.wm.shell.windowdecor.widget.WindowDecorSlider android:layout_gravity="center" android:id="@id/slider" android:layout_width="220.0dip" android:layout_height="@dimen/sec_decor_button_size" android:paddingStart="21.0dip" android:paddingEnd="21.0dip" />
+        </FrameLayout>
+    </FrameLayout>
+</com.android.wm.shell.windowdecor.WindowDecorLinearLayout>

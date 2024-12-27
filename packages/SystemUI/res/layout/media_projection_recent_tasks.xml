@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="center" android:orientation="vertical" android:background="?android:colorBackground" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <FrameLayout android:id="@id/media_projection_recent_tasks_container" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <androidx.recyclerview.widget.RecyclerView android:id="@id/media_projection_recent_tasks_recycler" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+        <ProgressBar android:layout_gravity="center" android:id="@id/media_projection_recent_tasks_loader" android:layout_width="@dimen/media_projection_app_selector_loader_size" android:layout_height="@dimen/media_projection_app_selector_loader_size" android:indeterminate="true" android:indeterminateOnly="true" />
+    </FrameLayout>
+    <ImageView android:layout_width="72.0dip" android:layout_height="2.0dip" android:layout_marginTop="24.0dip" android:layout_marginBottom="8.0dip" android:src="@android:drawable/ic_input_extract_action_previous" android:tint="?android:textColorSecondary" android:importantForAccessibility="no" />
+</LinearLayout>

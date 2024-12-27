@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="abc_slice_duration_days">
+        <item quantity="other">%d na araw ang nakalipas</item>
+        <item quantity="one">%d araw ang nakalipas</item>
+    </plurals>
+    <plurals name="abc_slice_duration_min">
+        <item quantity="other">%d na min ang nakalipas</item>
+        <item quantity="one">%d min ang nakalipas</item>
+    </plurals>
+    <plurals name="abc_slice_duration_years">
+        <item quantity="other">%d na taon ang nakalipas</item>
+        <item quantity="one">%d taon ang nakalipas</item>
+    </plurals>
+    <plurals name="controls_item_number_of_favorites">
+        <item quantity="other">%d item ang napili</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d item ang napili</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="globalactions_force_restart_message">
+        <item quantity="other">I-press at i-hold ang Side button at Volume down key nang sabay nang higit sa %d segundo para i-restart ang telepono mo.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">I-press at i-hold ang Side button at Volume down key nang sabay nang higit sa %d segundo para i-restart ang telepono mo.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_attempt_left">
+        <item quantity="other">%d tangka ang nalalabi</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d tangka ang nalalabi</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_attempt_left_before_permanent_locking">
+        <item quantity="other">%d tangka ang nalalabi bago ang permanenteng pag-lock</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d tangka ang nalalabi bago ang permanenteng pag-lock</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_secure_attempts_to_unlock_with_fingerprints">
+        <item quantity="other">%d tangkang mag-unlock gamit ang mga fingerprint.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d tangkang mag-unlock gamit ang mga fingerprint.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_by_biometrics">
+        <item quantity="other">%d maling tangka na i-verify ang biometrics.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d maling tangka na i-verify ang biometrics.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_by_face">
+        <item quantity="other">%d maling tangka na i-verify ang mukha mo.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d maling tangka na i-verify ang mukha mo.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_by_fingerprint">
+        <item quantity="other">%d maling tangka na i-verify ang mga fingerprint.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d maling tangka na i-verify ang mga fingerprint.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_1_hour_and_min">
+        <item quantity="other">Subukang muli sa loob ng 1 oras %d minuto</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Subukang muli sa loob ng 1 oras %d minuto</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_biometric">
+        <item quantity="other">Subukang muli ang biometrics mo sa loob ng %d segundo</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Subukang muli ang biometrics mo sa loob ng %d segundo</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_face">
+        <item quantity="other">Subukang muli ang face recognition sa loob ng %d segundo</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Subukang muli ang face recognition sa loob ng %d segundo</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_fingerprint">
+        <item quantity="other">Subukang muli ang fingerprint mo sa loob ng %d segundo</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Subukang muli ang fingerprint mo sa loob ng %d segundo</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_hour">
+        <item quantity="other">Subukang muli sa loob ng %d oras</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Subukang muli sa loob ng %d oras</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_hour_and_1_min">
+        <item quantity="other">Subukang muli sa loob ng %d oras 1 minuto</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Subukang muli sa loob ng %d oras 1 minuto</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_min">
+        <item quantity="other">Subukang muli sa loob ng %d minuto</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Subukang muli sa loob ng %d minuto</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_sec">
+        <item quantity="other">Subukan muli sa loob ng %d segundo</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Subukan muli sa loob ng %d segundo</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_countdown">
+        <item quantity="other">Subukan muli sa loob ng %d segundo.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Subukan muli sa loob ng %d segundo.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_ucm_attempt_left">
+        <item quantity="other">%d tangka ang nalalabi</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d tangka ang nalalabi</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="mtrl_badge_content_description">
+        <item quantity="other">%d na bagong notification</item>
+        <item quantity="one">%d bagong notification</item>
+    </plurals>
+    <plurals name="n_speakers">
+        <item quantity="other">%d speaker</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d speaker</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="notification_insignificant_title">
+        <item quantity="other">%d pang notification</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d pang notification</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ongoing_activity_chip_count">
+        <item quantity="other">%d higit pang mga Live na notification</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d higit pang mga Live na notification</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="plural_notification_count">
+        <item quantity="other">%d notification</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d notification</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_qs_add_minimum">
+        <item quantity="other">%d button ang kailangan.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d button ang kailangan.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_qs_dnd_detail_fhl_hours_option">
+        <item quantity="other">Nang %d oras</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Nang %d oras</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_qs_unable_add_maximum">
+        <item quantity="other">Hindi makadaragdag ng higit sa %d button.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Hindi makadaragdag ng higit sa %d button.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_qs_unable_remove_minimum">
+        <item quantity="other">Hindi maalis ang button. Kailangan ng quick panel na magkaroon ng %d button man lang.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Hindi maalis ang button. Kailangan ng quick panel na magkaroon ng %d button man lang.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_qs_video_call_effects_num">
+        <item quantity="other">%d epekto</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d epekto</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="subscreen_notification_smart_reply_child_account_dialog_content">
+        <item quantity="other">Kailangan mong hindi bababa sa %d taong gulang upang magamit ang mga feature ng advanced intelligence ng Galaxy AI.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Kailangan mong hindi bababa sa %d taong gulang upang magamit ang mga feature ng advanced intelligence ng Galaxy AI.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

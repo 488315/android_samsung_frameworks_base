@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <include android:layout_gravity="center_horizontal" android:id="@id/control" android:layout_width="@dimen/sec_control_base_item_size" android:layout_height="@dimen/sec_control_base_item_size" android:layout_marginTop="18.0dip" android:layout_marginBottom="24.0dip" layout="@layout/sec_controls_base_item" />
+</FrameLayout>

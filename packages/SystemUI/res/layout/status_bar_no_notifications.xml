@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.systemui.statusbar.EmptyShadeView android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout android:gravity="center" android:layout_gravity="center" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <com.android.systemui.shared.shadow.DoubleShadowTextView android:textAppearance="@style/TextAppearance.SecRegular" android:textSize="17.0sp" android:textColor="@color/sec_no_notification_text_color" android:gravity="center" android:id="@id/no_notifications" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/empty_shade_text" app:ambientShadowAlpha="0.0" app:ambientShadowBlur="@dimen/shadow_radius" app:ambientShadowOffsetX="@dimen/shadow_difference" app:ambientShadowOffsetY="@dimen/shadow_difference" app:keyShadowAlpha="0.2" app:keyShadowBlur="@dimen/shadow_radius" app:keyShadowOffsetX="@dimen/shadow_difference" app:keyShadowOffsetY="@dimen/shadow_difference" />
+        <TextView android:textAppearance="?android:textAppearanceButton" android:gravity="center" android:layout_gravity="center_horizontal" android:id="@id/no_notifications_footer" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/unlock_to_see_notif_text" android:drawablePadding="8.0dip" />
+    </LinearLayout>
+</com.android.systemui.statusbar.EmptyShadeView>

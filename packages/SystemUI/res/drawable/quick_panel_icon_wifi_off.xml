@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list android:oneshot="true"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_wifi_off_000" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_wifi_off_001" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_wifi_off_002" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_wifi_off_003" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_wifi_off_004" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_wifi_off_005" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_wifi_off_006" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_wifi_off_007" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_wifi_off_008" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_wifi_off_009" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_wifi_off_010" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_wifi_off_011" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_wifi_off_012" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_wifi_off_013" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_wifi_off_014" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_wifi_off_015" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_wifi_off_016" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_wifi_off_017" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_wifi_off_018" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_wifi_off_019" />
+</animation-list>

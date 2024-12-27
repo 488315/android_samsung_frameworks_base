@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.systemui.shade.NotificationShadeWindowView android:id="@id/legacy_window_root" android:fitsSystemWindows="true" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:sysui="http://schemas.android.com/apk/res-auto">
+    <ImageView android:id="@id/fake_wallpaper" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="fill_parent" android:scaleType="centerCrop" />
+    <View android:id="@id/communal_ui_stub" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+    <com.android.systemui.statusbar.phone.CapturedBlurContainer android:id="@id/captured_blur_container" android:background="#ff5d5d5d" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="fill_parent" android:alpha="0.0" android:importantForAccessibility="no" sysui:ignoreRightInset="true" />
+    <com.android.systemui.statusbar.phone.SecPanelBackground android:id="@id/notification_panel_background" android:background="@color/open_theme_qp_bg_color" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="fill_parent" android:alpha="0.0" android:importantForAccessibility="no" sysui:ignoreRightInset="true" />
+    <com.android.systemui.scrim.ScrimView android:id="@id/scrim_behind" android:layout_width="fill_parent" android:layout_height="fill_parent" sysui:ignoreRightInset="true" />
+    <com.android.systemui.scrim.ScrimView android:id="@id/scrim_notifications" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="fill_parent" sysui:ignoreRightInset="true" />
+    <com.android.systemui.statusbar.LightRevealScrim android:id="@id/light_reveal_scrim" android:layout_width="fill_parent" android:layout_height="fill_parent" sysui:ignoreRightInset="true" />
+    <include android:visibility="invisible" android:layout_width="fill_parent" android:layout_height="fill_parent" sysui:ignoreRightInset="true" layout="@layout/status_bar_expanded" /> /> <com.android.systemui.keyguard.ui.view.KeyguardRootView android:id="@id/keyguard_root_view" android:clipChildren="false" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+    <com.android.systemui.statusbar.notification.stack.ui.view.SharedNotificationContainer android:id="@id/shared_notification_container" android:clipChildren="false" android:clipToPadding="false" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+    <include layout="@layout/brightness_mirror_container" />
+    <com.android.systemui.scrim.ScrimView android:id="@id/scrim_in_front" android:layout_width="fill_parent" android:layout_height="fill_parent" sysui:ignoreRightInset="true" />
+    <LinearLayout android:gravity="center_horizontal" android:layout_gravity="center|top" android:orientation="vertical" android:id="@id/keyguard_message_area_container" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginTop="@dimen/status_bar_height">
+        <com.android.keyguard.AuthKeyguardMessageArea android:ellipsize="marquee" android:gravity="center" android:id="@id/keyguard_message_area" android:focusable="true" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/keyguard_lock_padding" android:singleLine="true" style="@style/Keyguard.TextView" />
+    </LinearLayout>
+    <FrameLayout android:id="@id/keyguard_bouncer_container" android:background="@android:color/transparent" android:visibility="invisible" android:clipChildren="false" android:clipToPadding="false" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="1.0" />
+    <ViewStub android:id="@id/multi_shade_stub" android:layout="@layout/multi_shade" android:inflatedId="@id/multi_shade" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+    <com.android.systemui.biometrics.AuthRippleView android:id="@id/auth_ripple" android:layout_width="fill_parent" android:layout_height="fill_parent" android:importantForAccessibility="no" sysui:ignoreRightInset="true" />
+    <FrameLayout android:id="@id/keyguard_mdm_overlay_container" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+</com.android.systemui.shade.NotificationShadeWindowView>

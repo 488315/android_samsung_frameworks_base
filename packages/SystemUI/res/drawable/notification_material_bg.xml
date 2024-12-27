@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple android:color="?android:colorControlHighlight"
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:androidprv="http://schemas.android.com/apk/prv/res/android">
+    <item android:id="@id/notification_focus_overlay">
+        <shape>
+            <solid android:color="?android:^attr-private/colorSurface" />
+        </shape>
+    </item>
+    <item android:id="@id/radial_gradient_view">
+        <shape android:shape="rectangle">
+            <gradient android:startColor="#00ff0000" android:endColor="#00ff0000" android:type="radial" android:gradientRadius="160.0dip" />
+        </shape>
+    </item>
+</ripple>

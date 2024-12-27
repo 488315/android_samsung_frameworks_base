@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge android:gravity="center_vertical" android:orientation="horizontal" android:id="@id/seekbar_frame" android:clipChildren="false" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <FrameLayout android:id="@id/icon_start_frame" android:focusable="true" android:clipChildren="false" android:layout_width="@dimen/magnification_setting_seekbar_button_min_clickable_item_size" android:layout_height="@dimen/sec_widget_list_icon_create_height">
+        <ImageView android:layout_gravity="center" android:id="@id/icon_start" android:background="?android:selectableItemBackgroundBorderless" android:focusable="false" android:layout_width="@dimen/sec_widget_list_icon_create_width" android:layout_height="@dimen/sec_widget_list_icon_create_height" android:src="@drawable/sec_display_ic_minus_mtrl" android:scaleType="center" android:adjustViewBounds="true" android:contentDescription="@string/accessibility_magnification_zoom_out" />
+    </FrameLayout>
+    <androidx.appcompat.widget.SeslSeekBar android:layout_gravity="center_vertical" android:id="@id/seekbar" android:focusable="true" android:layout_width="0.0dip" android:layout_height="@dimen/sec_widget_seekbar_height" android:max="7" android:layout_weight="1.0" android:paddingStart="@dimen/sec_widget_seekbar_padding_start" android:paddingEnd="@dimen/sec_widget_seekbar_padding_end" android:min="0" />
+    <FrameLayout android:id="@id/icon_end_frame" android:focusable="true" android:clipChildren="false" android:layout_width="@dimen/magnification_setting_seekbar_button_min_clickable_item_size" android:layout_height="@dimen/sec_widget_list_icon_create_height">
+        <ImageView android:layout_gravity="center" android:id="@id/icon_end" android:background="?android:selectableItemBackgroundBorderless" android:focusable="false" android:layout_width="@dimen/sec_widget_list_icon_create_width" android:layout_height="@dimen/sec_widget_list_icon_create_height" android:src="@drawable/sec_display_ic_plus_mtrl" android:scaleType="center" android:adjustViewBounds="true" android:contentDescription="@string/accessibility_magnification_zoom_in" />
+    </FrameLayout>
+</merge>

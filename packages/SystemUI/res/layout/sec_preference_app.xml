@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="center_vertical" android:background="?android:listChoiceBackgroundIndicator" android:layout_width="fill_parent" android:layout_height="wrap_content" android:minHeight="?android:listPreferredItemHeightSmall" android:paddingStart="?android:listPreferredItemPaddingStart" android:paddingEnd="@dimen/sec_app_list_item_switch_padding_end"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <FrameLayout android:gravity="start|center" android:id="@id/icon_frame" android:layout_width="wrap_content" android:layout_height="wrap_content" android:minWidth="@dimen/sec_app_list_item_icon_widget_width" android:paddingEnd="@dimen/sec_app_list_item_app_icon_margin_end">
+        <androidx.preference.internal.PreferenceImageView android:layout_gravity="center" android:id="@android:id/icon" android:layout_width="wrap_content" android:layout_height="wrap_content" app:maxHeight="@dimen/sec_app_list_item_icon_width" app:maxWidth="@dimen/sec_app_list_item_icon_width" />
+    </FrameLayout>
+    <LinearLayout android:orientation="vertical" android:paddingTop="@dimen/sec_app_list_item_padding_vertical" android:paddingBottom="@dimen/sec_app_list_item_padding_vertical" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0">
+        <TextView android:textAppearance="?android:textAppearanceListItem" android:ellipsize="marquee" android:id="@android:id/title" android:fadingEdge="horizontal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:singleLine="true" android:hyphenationFrequency="normalFast" android:lineBreakWordStyle="phrase" />
+        <LinearLayout android:orientation="vertical" android:id="@id/summary_container" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <TextView android:textAppearance="?android:textAppearanceSmall" android:id="@android:id/summary" android:layout_width="fill_parent" android:layout_height="wrap_content" android:textAlignment="viewStart" android:hyphenationFrequency="normalFast" android:lineBreakWordStyle="phrase" />
+            <TextView android:textAppearance="?android:textAppearanceSmall" android:ellipsize="end" android:id="@id/appendix" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:maxLines="1" android:textAlignment="viewEnd" />
+        </LinearLayout>
+        <ProgressBar android:id="@android:id/progress" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="4.0dip" android:max="100" style="?android:progressBarStyleHorizontal" />
+    </LinearLayout>
+    <LinearLayout android:gravity="center" android:orientation="vertical" android:id="@android:id/widget_frame" android:layout_width="wrap_content" android:layout_height="fill_parent" />
+</LinearLayout>

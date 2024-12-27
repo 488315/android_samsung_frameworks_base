@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:theme="@style/Theme.SystemUI.QuickSettings.Header" android:id="@id/quick_qs_date_buttons" android:tag="expand_anim" android:clickable="false" android:clipChildren="false" android:clipToPadding="false" android:layout_width="fill_parent" android:layout_height="@dimen/sec_qs_buttons_container_height" android:layout_marginTop="@dimen/sec_qs_buttons_container_margin_top" android:layout_marginBottom="@dimen/sec_qs_buttons_container_margin_bottom"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:systemui="http://schemas.android.com/apk/res-auto" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <FrameLayout android:id="@id/clock_date_buttons_container" android:tag="open_anim" android:clipChildren="false" android:clipToPadding="false" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <LinearLayout android:layout_gravity="start|center" android:id="@id/clock_parent" android:clipChildren="false" android:clipToPadding="false" android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <com.android.systemui.statusbar.policy.QSClockHeaderView android:textAppearance="@style/SecQuickStatusBarHeaderTextStyle" android:textSize="@dimen/clock_text_size" android:id="@id/header_clock" android:tag="header_clock" android:clipChildren="false" android:clipToPadding="false" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="1.0dip" android:singleLine="true" android:fontFamily="sec" android:paddingStart="@dimen/sec_style_qs_header_clock_buttons_start_padding" android:paddingEnd="@dimen/sec_style_qs_header_clock_buttons_end_padding" android:textFontWeight="600" app:showDark="false" />
+            <com.android.systemui.statusbar.policy.QSShortenDate android:textAppearance="@style/SecQuickStatusBarHeaderTextStyle" android:textSize="@dimen/date_text_size" android:id="@id/header_date" android:tag="header_date" android:clipChildren="false" android:clipToPadding="false" android:layout_width="wrap_content" android:layout_height="wrap_content" android:singleLine="true" android:fontFamily="sec" android:textFontWeight="400" />
+        </LinearLayout>
+        <LinearLayout android:gravity="end" android:layout_gravity="end|center" android:id="@id/header_settings_container" android:clipChildren="false" android:clipToPadding="false" android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <include layout="@layout/qs_button_impl" />
+        </LinearLayout>
+    </FrameLayout>
+</LinearLayout>

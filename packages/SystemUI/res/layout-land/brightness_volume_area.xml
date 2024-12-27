@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="center" android:orientation="vertical" android:clickable="true" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <FrameLayout android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <LinearLayout android:layout_gravity="center" android:orientation="vertical" android:id="@id/flex_panel_brightness_area" android:layout_width="fill_parent" android:layout_height="fill_parent">
+            <LinearLayout android:gravity="center" android:layout_gravity="center" android:id="@id/media_brightness_layout" android:background="@drawable/icon_background" android:layout_width="@dimen/flex_panel_volume_icon_size" android:layout_height="@dimen/flex_panel_volume_icon_size" android:layout_marginTop="15.0dip" android:layout_centerHorizontal="true">
+                <ImageView android:layout_gravity="center" android:id="@id/brightness_icon" android:layout_width="@dimen/flex_panel_volume_icon_size" android:layout_height="@dimen/flex_panel_volume_icon_size" android:src="@drawable/ic_brightness2" android:tint="@color/panel_menu_icon_color" android:contentDescription="@string/flex_panel_brightness" />
+            </LinearLayout>
+            <androidx.appcompat.widget.SeslSeekBar android:layout_gravity="center_horizontal" android:id="@id/media_brightness_seekbar" android:paddingTop="10.0dip" android:paddingBottom="30.0dip" android:visibility="invisible" android:layout_width="wrap_content" android:layout_height="fill_parent" android:progress="100" android:contentDescription="@string/flex_panel_brightness" android:paddingStart="2.0dip" android:paddingEnd="2.0dip" app:seslSeekBarMode="expand_vertical" />
+        </LinearLayout>
+        <LinearLayout android:layout_gravity="center" android:orientation="vertical" android:id="@id/flex_panel_volume_area" android:layout_width="fill_parent" android:layout_height="fill_parent" android:minWidth="@dimen/basic_panel_width">
+            <FrameLayout android:gravity="center" android:layout_gravity="center" android:id="@id/media_volume_layout" android:background="@drawable/icon_background" android:layout_width="@dimen/flex_panel_volume_icon_size" android:layout_height="@dimen/flex_panel_volume_icon_size" android:layout_marginTop="15.0dip">
+                <FrameLayout android:layout_gravity="center" android:id="@id/media_volume_icon_layout" android:visibility="visible" android:layout_width="@dimen/flex_panel_volume_icon_size" android:layout_height="@dimen/flex_panel_volume_icon_size">
+                    <ImageView android:layout_gravity="center" android:id="@id/volume_icon" android:layout_width="@dimen/flex_panel_volume_icon_size" android:layout_height="@dimen/flex_panel_volume_icon_size" android:src="@drawable/ic_ringtone_sound" android:tint="@color/panel_menu_icon_color_expand" android:contentDescription="@string/flex_panel_volume" />
+                </FrameLayout>
+                <FrameLayout android:layout_gravity="center" android:id="@id/media_volume_animated_icon_layout" android:visibility="invisible" android:layout_width="@dimen/flex_panel_volume_icon_size" android:layout_height="@dimen/flex_panel_volume_icon_size">
+                    <FrameLayout android:layout_gravity="center" android:id="@id/volume_splash_container" android:layout_width="fill_parent" android:layout_height="wrap_content" android:rotation="45.0">
+                        <ImageView android:layout_gravity="center" android:id="@id/volume_icon_mute_splash" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/ic_audio_mute_splash" />
+                    </FrameLayout>
+                    <ImageView android:layout_gravity="center" android:id="@id/volume_media_icon_mute" android:layout_width="@dimen/flex_panel_volume_icon_size" android:layout_height="@dimen/flex_panel_volume_icon_size" android:src="@drawable/ic_audio_media_mute" android:tint="@color/panel_menu_icon_color" />
+                    <ImageView android:layout_gravity="center" android:id="@id/volume_media_icon_note" android:layout_width="16.0dip" android:layout_height="@dimen/flex_panel_volume_icon_size" android:src="@drawable/ic_audio_media_note" android:tint="@color/panel_menu_icon_color_expand" />
+                    <ImageView android:id="@id/volume_media_icon_wave_s" android:layout_width="4.0dip" android:layout_height="@dimen/flex_panel_volume_icon_size" android:src="@drawable/ic_audio_media_wave_s" android:tint="@color/panel_menu_icon_color" android:alpha="0.5" />
+                    <ImageView android:id="@id/volume_media_icon_wave_l" android:layout_width="5.0dip" android:layout_height="@dimen/flex_panel_volume_icon_size" android:src="@drawable/ic_audio_media_wave_l" android:tint="@color/panel_menu_icon_color" android:alpha="0.5" />
+                </FrameLayout>
+            </FrameLayout>
+            <androidx.appcompat.widget.SeslSeekBar android:layout_gravity="center_horizontal" android:id="@id/media_volume_seekbar" android:paddingTop="10.0dip" android:paddingBottom="30.0dip" android:visibility="invisible" android:layout_width="wrap_content" android:layout_height="fill_parent" android:progress="100" android:contentDescription="@string/flex_panel_volume" android:paddingStart="2.0dip" android:paddingEnd="2.0dip" app:seslSeekBarMode="expand_vertical" />
+        </LinearLayout>
+    </FrameLayout>
+</LinearLayout>

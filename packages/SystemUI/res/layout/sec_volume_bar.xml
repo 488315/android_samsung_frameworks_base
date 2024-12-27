@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:id="@id/volume_bar" android:tag="expand_anim" android:clipChildren="false" android:clipToPadding="false" android:layout_width="fill_parent" android:layout_height="@dimen/brightness_bar_height" style="@style/RecoilSmallAnimator"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout android:id="@id/slider_container" android:tag="open_anim" android:layout_width="fill_parent" android:layout_height="fill_parent" android:paddingStart="@dimen/qs_header_bar_side_padding" android:paddingEnd="@dimen/qs_header_bar_side_padding">
+        <com.android.systemui.qs.bar.BrightnessVolumeRoundedView android:layout_width="fill_parent" android:layout_height="fill_parent">
+            <com.android.systemui.qs.bar.VolumeToggleSeekBar android:id="@id/slider" android:background="@null" android:layout_width="fill_parent" android:layout_height="fill_parent" android:progressDrawable="@drawable/sec_brightness_progress_gradient_drawable" android:thumb="@drawable/sec_qs_slider_thumb" android:layout_centerVertical="true" android:layout_alignParentStart="true" android:layout_alignParentEnd="true" android:splitTrack="false" />
+        </com.android.systemui.qs.bar.BrightnessVolumeRoundedView>
+        <LinearLayout android:orientation="horizontal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_centerVertical="true">
+            <com.android.systemui.volume.view.icon.QPVolumeIcon android:layout_gravity="center_horizontal" android:id="@id/qs_volume_button" android:layout_width="32.0dip" android:layout_height="32.0dip" android:layout_centerVertical="true" android:contentDescription="@null" android:layout_marginStart="6.0dip" android:layout_alignParentStart="true" />
+            <ImageView android:layout_gravity="center_horizontal" android:id="@id/qs_volume_panel_status_icon" android:visibility="gone" android:layout_width="18.0dip" android:layout_height="fill_parent" android:src="@drawable/ic_qp_volume_control_dnd" android:scaleType="centerInside" android:layout_centerVertical="true" />
+        </LinearLayout>
+    </RelativeLayout>
+    <LinearLayout android:gravity="center" android:orientation="horizontal" android:id="@id/volume_tile_layout" android:visibility="visible" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+</LinearLayout>

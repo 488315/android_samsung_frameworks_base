@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape android:shape="rectangle"
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:androidprv="http://schemas.android.com/apk/prv/res/android">
+    <solid android:color="?android:^attr-private/materialColorTertiary" />
+    <stroke android:width="@dimen/remote_input_view_text_stroke" android:color="?android:^attr-private/materialColorPrimaryFixedDim" />
+    <padding android:left="12.0dip" android:top="0.0dip" android:right="12.0dip" android:bottom="0.0dip" />
+    <corners android:radius="24.0dip" />
+</shape>

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="popup_menu_bg_stroke_width">3.0px</dimen>
+    <dimen name="screenshot_bg_protection_height">375.0dip</dimen>
+</resources>

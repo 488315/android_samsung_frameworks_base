@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.wm.shell.windowdecor.WindowDecorLinearLayout android:id="@id/caption" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <RelativeLayout android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <LinearLayout android:id="@id/primary_button_set" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentEnd="true">
+            <com.android.wm.shell.windowdecor.widget.WindowMenuItemView android:id="@id/minimize_window" android:src="@drawable/sec_decor_desktop_button_minimize" android:contentDescription="@string/sec_decor_button_text_minimize" style="@style/NewDexFullscreenCaptionButtonStyle" />
+            <com.android.wm.shell.windowdecor.widget.WindowMenuItemView android:id="@id/split_window" android:src="@drawable/sec_decor_button_split_leftright" android:contentDescription="@string/sec_decor_button_text_split" style="@style/NewDexFullscreenCaptionButtonStyle" />
+            <com.android.wm.shell.windowdecor.widget.WindowMenuItemView android:id="@id/freeform_window" android:src="@drawable/sec_decor_button_freeform" android:contentDescription="@string/sec_decor_button_text_freeform" style="@style/NewDexFullscreenCaptionButtonStyle" />
+            <com.android.wm.shell.windowdecor.widget.WindowMenuItemView android:id="@id/close_window" android:paddingTop="@dimen/sec_decor_button_padding" android:paddingBottom="@dimen/sec_decor_button_padding" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/sec_decor_button_close" android:contentDescription="@string/sec_decor_button_text_close" android:paddingStart="@dimen/sec_decor_button_padding" android:paddingEnd="@dimen/sec_decor_button_padding_large" />
+        </LinearLayout>
+    </RelativeLayout>
+</com.android.wm.shell.windowdecor.WindowDecorLinearLayout>

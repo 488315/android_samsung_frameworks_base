@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="center" android:layout_gravity="center" android:orientation="vertical" android:id="@id/item_root" android:layout_width="@dimen/soundcraft_noise_effect_box_icon_long" android:layout_height="100.0dip"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView android:layout_gravity="center" android:id="@id/item_icon" android:background="@drawable/soundcraft_icon_background_unselected" android:layout_width="@dimen/soundcraft_noise_effect_box_icon" android:layout_height="@dimen/soundcraft_noise_effect_box_icon" android:layout_marginTop="4.0dip" android:layout_marginBottom="2.0dip" android:src="@drawable/soundcraft_ic_buds3_anc_off_unselelcted" android:scaleType="centerInside" />
+    <TextView android:textSize="12.0dip" android:textColor="#fffafaff" android:layout_gravity="center" android:id="@id/item_name" android:layout_width="@dimen/soundcraft_noise_effect_box_icon_long" android:layout_height="50.0dip" android:fontFamily="sec" android:textAlignment="center" android:textFontWeight="400" />
+</LinearLayout>

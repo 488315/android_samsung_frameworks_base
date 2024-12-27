@@ -1,0 +1,53 @@
+package com.android.systemui.audio.soundcraft.interfaces.wearable.requester;
+
+import android.content.Context;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.os.Messenger;
+import android.util.Log;
+import com.android.systemui.audio.soundcraft.model.buds.BudsModel;
+import com.google.gson.Gson;
+import kotlin.jvm.internal.DefaultConstructorMarker;
+
+/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
+/* loaded from: classes.dex */
+public final class UpdateInfoRequester extends BudsPluginServiceRequester {
+    public final BudsModel budsModel;
+
+    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
+    public final class Companion {
+        private Companion() {
+        }
+
+        public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
+            this();
+        }
+    }
+
+    static {
+        new Companion(null);
+    }
+
+    public UpdateInfoRequester(Context context, String str, BudsModel budsModel) {
+        super(context, str);
+        this.budsModel = budsModel;
+    }
+
+    @Override // com.android.systemui.audio.soundcraft.interfaces.wearable.requester.BudsPluginServiceRequester
+    public final void execute() {
+        Log.d("SoundCraft.wearable.UpdateInfoRequester", "execute : budsPluginPackageName=" + this.budsPluginPackageName);
+        StringBuilder sb = new StringBuilder("requestUpdateBudsInfo : jsonString=");
+        BudsModel budsModel = this.budsModel;
+        sb.append(budsModel);
+        Log.d("SoundCraft.wearable.UpdateInfoRequester", sb.toString());
+        Messenger messenger = this.messenger;
+        if (messenger != null) {
+            Message obtain = Message.obtain((Handler) null, 1003);
+            Bundle bundle = new Bundle();
+            bundle.putString("result", new Gson().toJson(budsModel));
+            obtain.setData(bundle);
+            messenger.send(obtain);
+        }
+    }
+}

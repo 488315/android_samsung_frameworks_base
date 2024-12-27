@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView android:textSize="14.0sp" android:textColor="?android:^attr-private/materialColorOnTertiaryFixed" android:gravity="center_vertical" android:layout_width="fill_parent" android:layout_height="@android:dimen/text_size_display_3_material" android:layout_marginStart="@android:dimen/secondary_waterfall_display_left_edge_size" android:layout_marginEnd="@android:dimen/secondary_waterfall_display_left_edge_size"
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:androidprv="http://schemas.android.com/apk/prv/res/android" />

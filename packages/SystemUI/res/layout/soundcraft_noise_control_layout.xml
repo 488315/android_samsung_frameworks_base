@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.systemui.audio.soundcraft.view.noisecontrol.NoiseControlBoxView android:layout_gravity="center" android:orientation="vertical" android:id="@id/soundcraft_noise_control_box" android:background="@drawable/soundcraft_detailed_container_background" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="20.0dip" android:minHeight="123.0dip"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:systemui="http://schemas.android.com/apk/res-auto">
+    <FrameLayout android:layout_gravity="center_horizontal" android:id="@id/soundcraft_active_noise_canceling_bar" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="10.0dip" android:layout_marginBottom="10.0dip" android:minHeight="60.0dip" />
+    <FrameLayout android:layout_gravity="center_horizontal" android:id="@id/soundcraft_effect_box_container" android:paddingTop="@dimen/soundcraft_noise_effect_box_padding_top" android:layout_width="fill_parent" android:layout_height="wrap_content" android:paddingStart="@dimen/soundcraft_noise_effect_box_start_end_padding" android:paddingEnd="@dimen/soundcraft_noise_effect_box_start_end_padding">
+        <com.android.systemui.audio.soundcraft.view.noisecontrol.NoiseControlLineView android:layout_gravity="start" android:id="@id/soundcraft_effect_line" android:layout_width="fill_parent" android:layout_height="50.0dip" />
+        <com.android.systemui.audio.soundcraft.view.noisecontrol.NoiseControlBoxEffectView android:gravity="center|top" android:layout_gravity="center_horizontal" android:orientation="horizontal" android:id="@id/soundcraft_noise_control_effect_view" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+    </FrameLayout>
+</com.android.systemui.audio.soundcraft.view.noisecontrol.NoiseControlBoxView>

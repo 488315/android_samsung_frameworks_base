@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector android:height="22.0dip" android:width="22.0dip" android:viewportWidth="22.0" android:viewportHeight="22.0"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <path android:fillColor="@color/flex_panel_floating_icon" android:pathData="M11.008,17.287L8.135,17.287C7.756,17.287 7.448,16.979 7.448,16.6C7.448,16.22 7.756,15.912 8.135,15.912L11.008,15.912C11.388,15.912 11.696,16.22 11.696,16.6C11.696,16.979 11.388,17.287 11.008,17.287M14.957,3L8.311,3C7.045,3 6.02,4.026 6.02,5.292L6.02,10.311C6.02,10.835 5.948,11.354 5.807,11.858L4.1,16.845C3.693,18.034 4.578,19.272 5.834,19.272L12.873,19.272C14.105,19.272 15.187,18.451 15.52,17.264L16.718,13.47C17.07,12.355 17.249,11.192 17.249,10.022L17.249,5.292C17.249,4.026 16.223,3 14.957,3" android:strokeColor="#00000000" android:strokeWidth="1.0" android:fillType="nonZero" />
+</vector>

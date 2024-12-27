@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.systemui.statusbar.AlphaOptimizedFrameLayout android:id="@id/carrier_logo_frame" android:layout_width="wrap_content" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <FrameLayout android:id="@id/carrier_logo_wrap_for_hun" android:layout_width="wrap_content" android:layout_height="fill_parent">
+        <com.android.systemui.statusbar.phone.logo.CarrierLogoView android:layout_gravity="center" android:id="@id/carrier_logo" android:layout_width="wrap_content" android:layout_height="fill_parent" android:defaultFocusHighlightEnabled="false" />
+    </FrameLayout>
+</com.android.systemui.statusbar.AlphaOptimizedFrameLayout>

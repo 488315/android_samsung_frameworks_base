@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="lb_onboarding_start_button_translation_offset">-16.0dip</dimen>
+    <dimen name="media_output_dialog_icon_left_radius">0.0dip</dimen>
+    <dimen name="media_output_dialog_icon_right_radius">28.0dip</dimen>
+</resources>

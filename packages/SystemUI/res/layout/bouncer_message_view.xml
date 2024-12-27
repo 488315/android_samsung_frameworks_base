@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.android.keyguard.BouncerKeyguardMessageArea android:id="@id/bouncer_primary_message_area" android:focusable="true" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/keyguard_lock_padding" style="@style/Keyguard.Bouncer.PrimaryMessage" />
+    <com.android.keyguard.BouncerKeyguardMessageArea android:id="@id/bouncer_secondary_message_area" android:focusable="true" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/secondary_message_padding" style="@style/Keyguard.Bouncer.SecondaryMessage" />
+</merge>

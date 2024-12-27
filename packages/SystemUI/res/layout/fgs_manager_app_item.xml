@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="center" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="32.0dip"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView android:id="@id/fgs_manager_app_item_icon" android:layout_width="28.0dip" android:layout_height="28.0dip" android:layout_marginEnd="12.0dip" />
+    <LinearLayout android:orientation="vertical" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0">
+        <TextView android:gravity="start" android:id="@id/fgs_manager_app_item_label" android:layout_width="fill_parent" android:layout_height="wrap_content" style="@style/FgsManagerAppLabel" />
+        <TextView android:gravity="start" android:id="@id/fgs_manager_app_item_duration" android:layout_width="fill_parent" android:layout_height="wrap_content" style="@style/FgsManagerAppDuration" />
+    </LinearLayout>
+    <Button android:id="@id/fgs_manager_app_item_stop_button" android:layout_width="wrap_content" android:layout_height="wrap_content" android:minHeight="48.0dip" android:text="@string/fgs_manager_app_item_stop_button_label" android:layout_marginStart="12.0dip" style="?android:buttonBarNeutralButtonStyle" />
+</LinearLayout>

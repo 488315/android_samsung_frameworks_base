@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.wm.shell.naturalswitching.NonDragTarget android:layout_width="fill_parent" android:layout_height="fill_parent" android:layoutDirection="ltr"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView android:id="@id/non_target" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+    <ImageView android:id="@id/non_target_blur" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:alpha="0.0" />
+</com.android.wm.shell.naturalswitching.NonDragTarget>

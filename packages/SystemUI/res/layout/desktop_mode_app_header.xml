@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.wm.shell.windowdecor.WindowDecorLinearLayout android:gravity="center_horizontal" android:orientation="horizontal" android:id="@id/desktop_mode_caption" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:androidprv="http://schemas.android.com/apk/prv/res/android">
+    <LinearLayout android:orientation="horizontal" android:id="@id/open_menu_button" android:focusable="true" android:clickable="true" android:layout_width="wrap_content" android:layout_height="40.0dip" android:layout_marginStart="12.0dip">
+        <ImageView android:layout_gravity="center_vertical" android:id="@id/application_icon" android:layout_width="@dimen/desktop_mode_caption_icon_radius" android:layout_height="@dimen/desktop_mode_caption_icon_radius" android:scaleType="centerCrop" android:contentDescription="@string/app_icon_text" android:layout_marginStart="6.0dip" />
+        <TextView android:textAppearance="@android:style/TextAppearance.Material.Title" android:textSize="14.0sp" android:layout_gravity="center_vertical" android:id="@id/application_name" android:layout_width="0.0dip" android:layout_height="20.0dip" android:maxWidth="86.0dip" android:layout_weight="1.0" android:layout_marginStart="8.0dip" android:lineHeight="20.0dip" android:textFontWeight="500" />
+        <ImageButton android:layout_gravity="center_vertical" android:id="@id/expand_menu_button" android:background="@null" android:focusable="false" android:clickable="false" android:layout_width="16.0dip" android:layout_height="16.0dip" android:src="@drawable/ic_baseline_expand_more_24" android:scaleType="fitCenter" android:contentDescription="@string/expand_menu_text" android:layout_marginHorizontal="8.0dip" />
+    </LinearLayout>
+    <View android:id="@id/caption_handle" android:layout_width="wrap_content" android:layout_height="40.0dip" android:layout_weight="1.0" />
+    <com.android.wm.shell.windowdecor.MaximizeButtonView android:layout_gravity="end" android:id="@id/maximize_button_view" android:focusable="true" android:clickable="true" android:layout_width="44.0dip" android:layout_height="40.0dip" android:layout_marginHorizontal="8.0dip" />
+    <ImageButton android:gravity="end" android:id="@id/close_window" android:layout_width="44.0dip" android:layout_height="40.0dip" android:src="@drawable/desktop_mode_header_ic_close" android:scaleType="centerCrop" android:contentDescription="@string/close_button_text" android:layout_marginEnd="8.0dip" android:paddingHorizontal="10.0dip" android:paddingVertical="8.0dip" />
+</com.android.wm.shell.windowdecor.WindowDecorLinearLayout>

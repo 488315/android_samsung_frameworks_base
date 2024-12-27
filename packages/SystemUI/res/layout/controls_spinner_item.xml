@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="start|center" android:orientation="horizontal" android:background="@drawable/controls_popup_item_background" android:layout_width="fill_parent" android:layout_height="@dimen/control_apps_popup_item_height" android:paddingStart="@dimen/control_menu_horizontal_padding" android:paddingEnd="@dimen/control_menu_horizontal_padding"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView android:id="@id/app_icon" android:layout_width="@dimen/controls_header_app_icon_size" android:layout_height="@dimen/controls_header_app_icon_size" android:contentDescription="@null" android:layout_marginEnd="@dimen/control_menu_horizontal_padding" />
+    <TextView android:id="@id/controls_spinner_item" android:layout_width="wrap_content" android:layout_height="wrap_content" style="@style/Control.Spinner.Item" />
+</LinearLayout>

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView android:textSize="@dimen/ksh_item_text_size" android:textColor="?android:^attr-private/materialColorOnTertiaryFixed" android:gravity="center" android:padding="@dimen/ksh_item_padding" android:layout_width="wrap_content" android:layout_height="fill_parent" android:layout_marginLeft="0.0dip" android:layout_marginRight="0.0dip" android:minHeight="32.0dip" android:text="@string/keyboard_shortcut_join" android:singleLine="true"
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:androidprv="http://schemas.android.com/apk/prv/res/android" />

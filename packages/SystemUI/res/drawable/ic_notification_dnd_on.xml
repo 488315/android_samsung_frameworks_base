@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector android:height="@dimen/notification_dnd_status_icon_size" android:width="@dimen/notification_dnd_status_icon_size" android:viewportWidth="24.0" android:viewportHeight="24.0"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <path android:fillColor="#fffcfcff" android:pathData="M12,2.5C17.2,2.5 21.5,6.8 21.5,12C21.5,17.2 17.2,21.5 12,21.5C6.8,21.5 2.5,17.2 2.5,12C2.5,6.8 6.8,2.5 12,2.5ZM16.5,11L7.5,11C6.9,11 6.5,11.4 6.5,12L6.506,12.125C6.558,12.655 6.943,13 7.5,13L16.5,13C17.1,13 17.5,12.6 17.5,12L17.494,11.875C17.442,11.345 17.057,11 16.5,11Z" android:strokeColor="#fffcfcff" android:strokeWidth="1.0" android:fillType="nonZero" />
+</vector>

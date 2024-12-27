@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="abc_slice_duration_days">
+        <item quantity="other">Prieš %d d.</item>
+        <item quantity="one">Prieš %d d.</item>
+        <item quantity="few">Prieš %d d.</item>
+        <item quantity="many">Prieš %d d.</item>
+    </plurals>
+    <plurals name="abc_slice_duration_min">
+        <item quantity="other">Prieš %d min.</item>
+        <item quantity="one">Prieš %d min.</item>
+        <item quantity="few">Prieš %d min.</item>
+        <item quantity="many">Prieš %d min.</item>
+    </plurals>
+    <plurals name="abc_slice_duration_years">
+        <item quantity="other">Prieš %d m.</item>
+        <item quantity="one">Prieš %d m.</item>
+        <item quantity="few">Prieš %d m.</item>
+        <item quantity="many">Prieš %d m.</item>
+    </plurals>
+    <plurals name="controls_item_number_of_favorites">
+        <item quantity="other">Pasirinkta %d elementų</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Pasirinktas %d elementas</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Pasirinkti %d elementai</item>
+        <item quantity="many">Pasirinkta %d elementų</item>
+    </plurals>
+    <plurals name="globalactions_force_restart_message">
+        <item quantity="other">Kad paleistumėte telefoną iš naujo, vienu metu paspauskite ir ilgiau nei %d sek. palaikykite šoninį ir garsumo mažinimo mygtukus.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Kad paleistumėte telefoną iš naujo, vienu metu paspauskite ir ilgiau nei %d sek. palaikykite šoninį ir garsumo mažinimo mygtukus.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Kad paleistumėte telefoną iš naujo, vienu metu paspauskite ir ilgiau nei %d sek. palaikykite šoninį ir garsumo mažinimo mygtukus.</item>
+        <item quantity="many">Kad paleistumėte telefoną iš naujo, vienu metu paspauskite ir ilgiau nei %d sek. palaikykite šoninį ir garsumo mažinimo mygtukus.</item>
+    </plurals>
+    <plurals name="kg_attempt_left">
+        <item quantity="other">Liko %d bandymų</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Liko %d bandymas</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Liko %d bandymai</item>
+        <item quantity="many">Liko %d bandymo</item>
+    </plurals>
+    <plurals name="kg_attempt_left_before_permanent_locking">
+        <item quantity="other">Liko %d bandymų prieš užblokuojant visam laikui</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Liko %d bandymas prieš užblokuojant visam laikui</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Liko %d bandymai prieš užblokuojant visam laikui</item>
+        <item quantity="many">Liko %d bandymų prieš užblokuojant visam laikui</item>
+    </plurals>
+    <plurals name="kg_secure_attempts_to_unlock_with_fingerprints">
+        <item quantity="other">%d bandymai atrakinti pirštų atspaudais.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d bandymas atrakinti pirštų atspaudais.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">%d bandymai atrakinti pirštų atspaudais.</item>
+        <item quantity="many">%d bandymai atrakinti pirštų atspaudais.</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_by_biometrics">
+        <item quantity="other">%d nesėkmingų bandymų patvirtinti biometrinius duomenis.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d nesėkmingas bandymas patvirtinti biometrinius duomenis.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">%d nesėkmingi bandymai patvirtinti biometrinius duomenis.</item>
+        <item quantity="many">%d nesėkmingų bandymų patvirtinti biometrinius duomenis.</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_by_face">
+        <item quantity="other">%d nesėkmingų bandymų patvirtinti savo veidą.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d nesėkmingas bandymas patvirtinti savo veidą.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">%d nesėkmingi bandymai patvirtinti savo veidą.</item>
+        <item quantity="many">%d nesėkmingų bandymų patvirtinti savo veidą.</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_by_fingerprint">
+        <item quantity="other">%d nesėkmingų bandymų patvirtinti pirštų atspaudus.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d nesėkmingas bandymas patvirtinti pirštų atspaudus.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">%d nesėkmingi bandymai patvirtinti pirštų atspaudus.</item>
+        <item quantity="many">%d nesėkmingų bandymų patvirtinti pirštų atspaudus.</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_1_hour_and_min">
+        <item quantity="other">Bandykite dar kartą po 1 val. %d min.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Bandykite dar kartą po 1 val. %d min.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Bandykite dar kartą po 1 val. %d min.</item>
+        <item quantity="many">Bandykite dar kartą po 1 val. %d min.</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_biometric">
+        <item quantity="other">Bandykite naudoti biometrinius duomenis dar kartą po %d sek.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Bandykite naudoti biometrinius duomenis dar kartą po %d sek.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Bandykite naudoti biometrinius duomenis dar kartą po %d sek.</item>
+        <item quantity="many">Bandykite naudoti biometrinius duomenis dar kartą po %d sek.</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_face">
+        <item quantity="other">Veido atpažinimą bandykite naudoti dar kartą po %d sek.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Veido atpažinimą bandykite naudoti dar kartą po %d sek.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Veido atpažinimą bandykite naudoti dar kartą po %d sek.</item>
+        <item quantity="many">Veido atpažinimą bandykite naudoti dar kartą po %d sek.</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_fingerprint">
+        <item quantity="other">Bandykite naudoti pirštų atspaudus dar kartą po %d sek.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Bandykite naudoti pirštų atspaudus dar kartą po %d sek.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Bandykite naudoti pirštų atspaudus dar kartą po %d sek.</item>
+        <item quantity="many">Bandykite naudoti pirštų atspaudus dar kartą po %d sek.</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_hour">
+        <item quantity="other">Bandykite dar kartą po %d val.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Bandykite dar kartą po %d val.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Bandykite dar kartą po %d val.</item>
+        <item quantity="many">Bandykite dar kartą po %d val.</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_hour_and_1_min">
+        <item quantity="other">Bandykite dar kartą po %d val. 1 min.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Bandykite dar kartą po %d val. 1 min.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Bandykite dar kartą po %d val. 1 min.</item>
+        <item quantity="many">Bandykite dar kartą po %d val. 1 min.</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_min">
+        <item quantity="other">Bandykite dar kartą po %d min.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Bandykite dar kartą po %d min.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Bandykite dar kartą po %d min.</item>
+        <item quantity="many">Bandykite dar kartą po %d min.</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_sec">
+        <item quantity="other">Bandykite dar kartą po %d sek.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Bandykite dar kartą po %d sek.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Bandykite dar kartą po %d sek.</item>
+        <item quantity="many">Bandykite dar kartą po %d sek.</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_countdown">
+        <item quantity="other">Bandykite dar kartą po %d sekundžių.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Bandykite dar kartą po %d sekundės.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Bandykite dar kartą po %d sekundžių.</item>
+        <item quantity="many">Bandykite dar kartą po %d sekundės.</item>
+    </plurals>
+    <plurals name="kg_ucm_attempt_left">
+        <item quantity="other">Liko %d bandymų</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Liko %d bandymas</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Liko %d bandymai</item>
+        <item quantity="many">Liko %d bandymo</item>
+    </plurals>
+    <plurals name="mtrl_badge_content_description">
+        <item quantity="other">%d naujų pranešimų</item>
+        <item quantity="one">%d naujas pranešimas</item>
+        <item quantity="few">%d nauji pranešimai</item>
+        <item quantity="many">%d naujo pranešimo</item>
+    </plurals>
+    <plurals name="n_speakers">
+        <item quantity="other">%d garsiakalbių</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d garsiakalbis</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">%d garsiakalbiai</item>
+        <item quantity="many">%d garsiakalbių</item>
+    </plurals>
+    <plurals name="notification_insignificant_title">
+        <item quantity="other">Dar %d pranešimų</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Dar %d pranešimas</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Dar %d pranešimai</item>
+        <item quantity="many">Dar %d pranešimų</item>
+    </plurals>
+    <plurals name="ongoing_activity_chip_count">
+        <item quantity="other">Dar %d tiesioginių pranešimų</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Dar %d tiesioginis pranešimas</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Dar %d tiesioginiai pranešimai</item>
+        <item quantity="many">Dar %d tiesioginių pranešimų</item>
+    </plurals>
+    <plurals name="plural_notification_count">
+        <item quantity="other">%d pranešimų</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d pranešimas</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">%d pranešimai</item>
+        <item quantity="many">%d pranešimų</item>
+    </plurals>
+    <plurals name="sec_qs_add_minimum">
+        <item quantity="other">Reikalinga %d mygtukų.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Reikalingas %d mygtukas.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Reikalingi %d mygtukai.</item>
+        <item quantity="many">Reikalinga %d mygtukų.</item>
+    </plurals>
+    <plurals name="sec_qs_dnd_detail_fhl_hours_option">
+        <item quantity="other">%d val.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d val.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">%d val.</item>
+        <item quantity="many">%d val.</item>
+    </plurals>
+    <plurals name="sec_qs_unable_add_maximum">
+        <item quantity="other">Negalima pridėti daugiau nei %d mygtukų.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Negalima pridėti daugiau nei %d mygtuko.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Negalima pridėti daugiau nei %d mygtukų.</item>
+        <item quantity="many">Negalima pridėti daugiau nei %d mygtukų.</item>
+    </plurals>
+    <plurals name="sec_qs_unable_remove_minimum">
+        <item quantity="other">Negalima pašalinti mygtuko. Sparčiajame skydelyje turi būti bent %d mygtukų.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Negalima pašalinti mygtuko. Sparčiajame skydelyje turi būti bent %d mygtukas.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Negalima pašalinti mygtuko. Sparčiajame skydelyje turi būti bent %d mygtukai.</item>
+        <item quantity="many">Negalima pašalinti mygtuko. Sparčiajame skydelyje turi būti bent %d mygtukų.</item>
+    </plurals>
+    <plurals name="sec_qs_video_call_effects_num">
+        <item quantity="other">%d efektų</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d efektas</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">%d efektai</item>
+        <item quantity="many">%d efektų</item>
+    </plurals>
+    <plurals name="subscreen_notification_smart_reply_child_account_dialog_content">
+        <item quantity="other">Kad galėtumėte naudotis „Galaxy AI“ pažangiojo intelekto funkcijomis, jums turi būti bent %d m.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Kad galėtumėte naudotis „Galaxy AI“ pažangiojo intelekto funkcijomis, jums turi būti bent %d m.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Kad galėtumėte naudotis „Galaxy AI“ pažangiojo intelekto funkcijomis, jums turi būti bent %d m.</item>
+        <item quantity="many">Kad galėtumėte naudotis „Galaxy AI“ pažangiojo intelekto funkcijomis, jums turi būti bent %d m.</item>
+    </plurals>
+</resources>

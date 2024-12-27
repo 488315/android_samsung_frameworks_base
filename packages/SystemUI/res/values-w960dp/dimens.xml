@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="control_action_button_size">30.0dip</dimen>
+    <dimen name="control_battery_gauge_font_size">11.0dip</dimen>
+    <dimen name="control_battery_icon_size">20.0dip</dimen>
+    <dimen name="control_icon_shadow_size">18.0dip</dimen>
+    <dimen name="control_status_icon_size">20.0dip</dimen>
+    <item type="dimen" name="ksh_dialog_width_ratio">75.0%</item>
+    <dimen name="sec_control_base_item_size">108.0dip</dimen>
+    <dimen name="sec_control_icon_size">36.0dip</dimen>
+    <dimen name="sec_control_text_size">11.0sp</dimen>
+    <item type="dimen" name="sesl_config_prefSnackWidth">37.5%</item>
+</resources>

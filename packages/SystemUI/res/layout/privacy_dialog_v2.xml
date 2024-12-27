@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:androidprv="http://schemas.android.com/apk/prv/res/android">
+    <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="24.0dip" android:layout_marginStart="16.0dip" android:layout_marginEnd="16.0dip">
+        <LinearLayout android:gravity="center" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent">
+            <TextView android:textAppearance="?android:textAppearanceLarge" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="12.0dip" android:text="@string/privacy_dialog_title" android:fontFamily="@android:string/dynamic_mode_notification_summary_v2" />
+            <TextView android:textAppearance="?android:textAppearanceSmall" android:textColor="?android:^attr-private/materialColorOnTertiaryFixed" android:gravity="center" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="20.0dip" android:text="@string/privacy_dialog_summary" />
+        </LinearLayout>
+        <LinearLayout android:orientation="vertical" android:id="@id/privacy_dialog_items_container" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="20.0dip" />
+        <LinearLayout android:orientation="horizontal" android:id="@id/button_layout" android:focusable="false" android:clickable="false" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="18.0dip">
+            <LinearLayout android:layout_gravity="start|center" android:orientation="vertical" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="1.0">
+                <Button android:ellipsize="end" android:gravity="center" android:id="@id/privacy_dialog_more_button" android:focusable="true" android:clickable="true" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/privacy_dialog_more_button" android:maxLines="1" style="@style/Widget.Dialog.Button.BorderButton" />
+            </LinearLayout>
+            <LinearLayout android:layout_gravity="end|center" android:layout_width="wrap_content" android:layout_height="wrap_content">
+                <Button android:ellipsize="end" android:gravity="center" android:id="@id/privacy_dialog_close_button" android:focusable="true" android:clickable="true" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/privacy_dialog_done_button" android:maxLines="1" style="@style/Widget.Dialog.Button.BorderButton" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

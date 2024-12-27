@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.systemui.qs.SecQSSwitchPreference android:orientation="vertical" android:background="@drawable/btn_borderless_rect" android:paddingTop="@dimen/sec_qs_detail_item_category_padding_top_bottom" android:paddingBottom="@dimen/sec_qs_detail_item_category_padding_top_bottom" android:focusable="true" android:clickable="true" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.android.keyguard.AlphaOptimizedLinearLayout android:theme="@style/Theme.AppCompat.DayNight" android:id="@id/switchPreferenceLinearLayout" android:layout_width="fill_parent" android:layout_height="wrap_content" android:paddingStart="@dimen/sec_qs_detail_items_side_padding" android:paddingEnd="@dimen/sec_qs_detail_items_side_padding" android:stateListAnimator="?seslLargeTouchAnimator">
+        <com.android.keyguard.AlphaOptimizedLinearLayout android:layout_gravity="center" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="1.0" android:layout_marginEnd="@dimen/sec_qs_detail_item_margin_end">
+            <TextView android:textAppearance="@style/TextAppearance.QS.DetailCatetoryItem" android:textColor="@color/sec_qs_detail_primary_text_color" android:id="@id/title" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+            <TextView android:textAppearance="@style/QSDetailItemSummary" android:id="@id/title_summary" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+        </com.android.keyguard.AlphaOptimizedLinearLayout>
+        <androidx.appcompat.widget.SwitchCompat android:theme="@style/Theme.AppCompat.DayNight" android:layout_gravity="center" android:id="@id/title_switch" android:focusable="false" android:clickable="false" android:layout_width="wrap_content" android:layout_height="wrap_content" android:importantForAccessibility="no" app:trackTint="@color/qs_switch_background_color" style="@style/QSDetailSwitchRipple" />
+    </com.android.keyguard.AlphaOptimizedLinearLayout>
+</com.android.systemui.qs.SecQSSwitchPreference>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="horizontal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:paddingHorizontal="@dimen/freeform_container_item_preview_padding_half"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <FrameLayout android:background="@drawable/freeform_container_item_preview_bg" android:layout_width="wrap_content" android:layout_height="wrap_content" android:clipToOutline="true">
+        <ImageView android:id="@id/freeform_container_item_preview" android:layout_width="@dimen/freeform_container_item_preview_width" android:layout_height="@dimen/freeform_container_item_preview_height" android:scaleType="centerCrop" />
+    </FrameLayout>
+</LinearLayout>

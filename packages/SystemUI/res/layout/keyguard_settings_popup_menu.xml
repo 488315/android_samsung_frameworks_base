@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.systemui.animation.view.LaunchableLinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:background="@drawable/keyguard_settings_popup_menu_background" android:padding="@dimen/keyguard_settings_popup_menu_padding" android:layout_width="wrap_content" android:layout_height="wrap_content" android:minHeight="@dimen/keyguard_affordance_fixed_height"
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:androidprv="http://schemas.android.com/apk/prv/res/android">
+    <ImageView android:id="@id/icon" android:layout_width="@dimen/keyguard_settings_popup_menu_icon_height" android:layout_height="@dimen/keyguard_settings_popup_menu_icon_width" android:tint="?android:^attr-private/materialColorOnSurfaceInverse" android:importantForAccessibility="no" android:layout_marginEnd="@dimen/keyguard_settings_popup_menu_icon_end_margin" />
+    <TextView android:textAppearance="?android:textAppearanceMedium" android:textSize="14.0sp" android:textColor="?android:^attr-private/materialColorOnSurfaceInverse" android:ellipsize="end" android:id="@id/text" android:layout_width="wrap_content" android:layout_height="wrap_content" android:maxLines="1" />
+</com.android.systemui.animation.view.LaunchableLinearLayout>

@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dream android:previewImage="@drawable/homecontrols_sq" android:showClockAndComplications="false" android:dreamCategory="0x00000002"
+  xmlns:android="http://schemas.android.com/apk/res/android" />

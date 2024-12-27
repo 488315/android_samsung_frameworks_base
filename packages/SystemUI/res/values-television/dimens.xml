@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item type="dimen" name="config_pictureInPictureDefaultSizePercent">0.2</item>
+    <dimen name="pip_corner_radius">0.0dip</dimen>
+    <dimen name="pip_keep_clear_area_padding">16.0dip</dimen>
+</resources>

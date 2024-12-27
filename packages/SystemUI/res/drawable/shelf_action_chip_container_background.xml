@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<inset android:insetLeft="@dimen/overlay_action_container_minimum_edge_spacing" android:insetRight="@dimen/overlay_action_container_minimum_edge_spacing"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <shape android:shape="rectangle"
+      xmlns:androidprv="http://schemas.android.com/apk/prv/res/android">
+        <solid android:color="?android:^attr-private/materialColorSurfaceContainerHighest" />
+        <corners android:radius="10000.0dip" />
+    </shape>
+</inset>

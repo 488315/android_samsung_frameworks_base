@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list android:autoMirrored="true"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@id/volume_seekbar_progress">
+        <shape android:shape="rectangle">
+            <size android:height="@dimen/volume_seekbar_width" android:width="@dimen/volume_seekbar_width" />
+            <corners android:radius="@dimen/volume_seekbar_radius" />
+            <gradient android:startColor="@color/volume_seekbar_progress_color_start_blur" android:endColor="@color/volume_seekbar_progress_color_blur" android:type="linear" />
+        </shape>
+    </item>
+</layer-list>

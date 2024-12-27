@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@android:id/background">
+        <selector>
+            <item android:state_enabled="true">
+                <shape android:shape="rectangle">
+                    <corners android:radius="54.0px" />
+                    <solid android:color="@color/subroom_seekbar_track_background_enabled" />
+                    <stroke android:width="1.0dip" android:color="@color/subscreen_brightness_stroke_color" />
+                </shape>
+            </item>
+            <item android:state_enabled="false">
+                <shape android:shape="rectangle">
+                    <corners android:radius="54.0px" />
+                    <solid android:color="@color/subroom_seekbar_track_background_disabled" />
+                    <stroke android:width="1.0dip" android:color="@color/subscreen_brightness_stroke_color" />
+                </shape>
+            </item>
+        </selector>
+    </item>
+    <item android:id="@android:id/progress">
+        <clip>
+            <selector>
+                <item android:state_enabled="true">
+                    <shape android:shape="rectangle">
+                        <corners android:radius="54.0px" />
+                        <solid android:color="@color/tw_progress_color_control_activated" />
+                        <stroke android:width="1.0dip" android:color="@color/subscreen_brightness_stroke_color" />
+                    </shape>
+                </item>
+                <item android:state_enabled="false">
+                    <shape android:shape="rectangle">
+                        <corners android:radius="54.0px" />
+                        <solid android:color="@color/subroom_seekbar_progress_background_disabled" />
+                    </shape>
+                </item>
+            </selector>
+        </clip>
+    </item>
+</layer-list>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <FrameLayout android:id="@id/wallpaper_area" android:layout_width="fill_parent" android:layout_height="fill_parent" android:importantForAccessibility="no" />
+    <FrameLayout android:background="@color/panel_background_blur_color" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+    <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <LinearLayout android:gravity="left" android:orientation="vertical" android:layout_width="wrap_content" android:layout_height="fill_parent">
+            <LinearLayout android:orientation="vertical" android:id="@id/main_floating_area" android:layout_width="wrap_content" android:layout_height="fill_parent" android:layout_marginStart="@dimen/basic_panel_left_margin">
+                <LinearLayout android:gravity="top" android:orientation="vertical" android:id="@id/upper_area" android:layout_width="wrap_content" android:layout_height="fill_parent">
+                    <GridView android:id="@id/gridView" android:background="@drawable/flex_panel_background_expand" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+                </LinearLayout>
+                <com.android.wm.shell.controlpanel.widget.BrightnessVolumeView android:id="@id/brightness_volume_view" android:background="@drawable/flex_panel_background_expand" android:visibility="gone" android:layout_width="@dimen/basic_panel_width" android:layout_height="fill_parent" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+    <FrameLayout android:gravity="center_horizontal" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <LinearLayout android:orientation="horizontal" android:id="@id/media_background_area" android:layout_width="fill_parent" android:layout_height="fill_parent">
+            <include android:id="@id/media_area" layout="@layout/flex_floating_media_panel" />
+        </LinearLayout>
+    </FrameLayout>
+</FrameLayout>

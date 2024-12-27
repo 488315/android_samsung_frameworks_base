@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="10.0dip"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView android:textSize="@dimen/clear_cover_subscreen_noti_title_text_size" android:textStyle="bold" android:textColor="@color/subscreen_notification_text_color" android:ellipsize="end" android:id="@id/group_item_title" android:layout_width="fill_parent" android:layout_height="wrap_content" android:maxLines="1" android:fontFamily="roboto-medium" />
+    <TextView android:textSize="@dimen/clear_cover_subscreen_noti_content_text_size" android:textColor="@color/subscreen_notification_content_text_color" android:ellipsize="end" android:id="@id/group_item_content" android:layout_width="fill_parent" android:layout_height="wrap_content" android:maxLines="1" android:fontFamily="roboto-regular" />
+</LinearLayout>

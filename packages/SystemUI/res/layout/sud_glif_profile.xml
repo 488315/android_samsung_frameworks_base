@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="horizontal" android:id="@id/sud_layout_profile" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" style="?sudGlifAccountContainerStyle"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView android:id="@id/sud_account_avatar" android:layout_width="wrap_content" android:layout_height="wrap_content" android:contentDescription="@null" style="?sudGlifAccountAvatarStyle" />
+    <TextView android:gravity="left" android:id="@id/sud_account_name" android:layout_width="wrap_content" android:layout_height="wrap_content" style="?sudGlifAccountNameStyle" />
+</LinearLayout>

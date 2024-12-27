@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView android:ellipsize="end" android:gravity="center_vertical" android:id="@id/hearing_devices_preset_option_text" android:layout_width="fill_parent" android:layout_height="wrap_content" android:minHeight="@dimen/hearing_devices_preset_spinner_height" android:textDirection="locale" android:paddingStart="@dimen/hearing_devices_preset_spinner_text_padding_start" style="?android:spinnerDropDownItemStyle"
+  xmlns:android="http://schemas.android.com/apk/res/android" />

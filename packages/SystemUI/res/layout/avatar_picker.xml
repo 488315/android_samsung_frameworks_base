@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.setupdesign.GlifLayout android:icon="@drawable/ic_account_circle_outline" android:id="@id/glif_layout" android:layout_width="fill_parent" android:layout_height="fill_parent" app:sucHeaderText="@string/avatar_picker_title" app:sucUsePartnerResource="true"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout android:gravity="center_horizontal" android:layout_width="fill_parent" android:layout_height="fill_parent" style="@style/SudContentFrame">
+        <androidx.recyclerview.widget.RecyclerView android:id="@id/avatar_grid" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+    </LinearLayout>
+</com.google.android.setupdesign.GlifLayout>

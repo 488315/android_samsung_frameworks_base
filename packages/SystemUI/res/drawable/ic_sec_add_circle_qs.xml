@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:gravity="center" android:drawable="@drawable/quick_panel_mum_add_new" />
+    <item android:gravity="center" android:height="@dimen/max_avatar_size" android:width="@dimen/max_avatar_size">
+        <shape android:shape="oval">
+            <stroke android:width="5.5dip" android:color="@color/sec_qs_user_detail_icon_muted" />
+        </shape>
+    </item>
+</layer-list>

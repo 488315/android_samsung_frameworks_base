@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen android:key="screen"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <androidx.preference.SwitchPreferenceCompat android:title="@string/controls_settings_show_devices_while_phone_is_locked" android:key="ControlsSettingsUseWhilePhoneIsLocked" android:summary="@string/controls_settings_show_devices_while_phone_is_locked_description" />
+    <androidx.preference.SwitchPreferenceCompat android:title="@string/controls_settings_control_devices_while_phone_is_locked" android:key="ControlsSettingsControlWhilePhoneIsLocked" android:summary="@string/controls_settings_control_devices_while_phone_is_locked_description" />
+</PreferenceScreen>

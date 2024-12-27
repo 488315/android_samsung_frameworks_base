@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.wm.shell.common.bubbles.BubblePopupView android:gravity="center_horizontal" android:layout_gravity="center_horizontal" android:orientation="vertical" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/bubble_popup_margin_top" android:elevation="@dimen/bubble_manage_menu_elevation" android:layout_marginHorizontal="@dimen/bubble_popup_margin_horizontal"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView android:layout_width="32.0dip" android:layout_height="32.0dip" android:src="@drawable/pip_ic_settings" android:tint="?android:colorAccent" android:contentDescription="@null" />
+    <TextView android:textAppearance="@android:style/TextAppearance.DeviceDefault.Headline" android:textColor="?android:textColorPrimary" android:ellipsize="end" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="16.0dip" android:maxWidth="@dimen/bubble_popup_content_max_width" android:text="@string/bubble_bar_education_manage_title" android:maxLines="1" />
+    <TextView android:textAppearance="@android:style/TextAppearance.DeviceDefault" android:textColor="?android:textColorSecondary" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="16.0dip" android:maxWidth="@dimen/bubble_popup_content_max_width" android:text="@string/bubble_bar_education_manage_text" android:textAlignment="center" />
+</com.android.wm.shell.common.bubbles.BubblePopupView>

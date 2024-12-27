@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Button android:textSize="@dimen/ongoing_activity_card_item_sub_text_size" android:textColor="@color/ongoing_activity_card_item_sub_text_color" android:ellipsize="end" android:gravity="center" android:id="@id/ongoing_action_text_button" android:background="@drawable/ongoing_activity_action_text_button_bg" android:layout_width="0.0dip" android:layout_height="wrap_content" android:minHeight="@dimen/ongoing_activity_expanded_view_action_text_button_height" android:maxLines="1" android:layout_weight="1.0" android:textAllCaps="false" android:fontFamily="sec" android:textFontWeight="600"
+  xmlns:android="http://schemas.android.com/apk/res/android" />

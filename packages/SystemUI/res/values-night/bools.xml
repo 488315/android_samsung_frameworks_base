@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <bool name="control_navigation_bar_light_theme">false</bool>
+    <bool name="control_status_bar_light_theme">false</bool>
+    <bool name="sec_use_light_navi_bar">false</bool>
+    <bool name="sec_use_light_status_bar">false</bool>
+    <bool name="theme_status_bar_icon_color">false</bool>
+    <bool name="window_light_status_bar_light_theme">false</bool>
+</resources>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape android:shape="rectangle"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <gradient android:startColor="#ffff0000" android:endColor="#00ff0000" android:type="radial" android:gradientRadius="160.0dip" />
+    <corners android:radius="@dimen/ongoing_activity_card_bg_radius" />
+</shape>

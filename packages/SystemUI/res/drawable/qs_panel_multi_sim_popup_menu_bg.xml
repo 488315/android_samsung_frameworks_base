@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/sec_qs_multisim_preffered_slot_background" />
+            <corners android:radius="@dimen/qs_multisim_popup_menu_bg_radius" />
+            <stroke android:width="0.75dip" android:color="@color/sec_qs_multisim_popup_menu_border_color" />
+        </shape>
+    </item>
+</layer-list>

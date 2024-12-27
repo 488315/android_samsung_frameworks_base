@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="controls_item_number_of_favorites">
+        <item quantity="other">%d элемент таңдалды</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d элемент таңдалды</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="globalactions_force_restart_message">
+        <item quantity="other">Телефоныңызды қайта іске қосу үшін Бүйір мен Дыбыс деңгейін азайту түймелерін бір уақытта %d секундтан ұзағырақ басып тұрыңыз.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Телефоныңызды қайта іске қосу үшін Бүйір мен Дыбыс деңгейін азайту түймелерін бір уақытта %d секундтан ұзағырақ басып тұрыңыз.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_attempt_left">
+        <item quantity="other">%d әрекет қалды</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d әрекет қалды</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_attempt_left_before_permanent_locking">
+        <item quantity="other">Тұрақты құлыптау алдында %d әрекет қалды</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Тұрақты құлыптау алдында %d әрекет қалды</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_secure_attempts_to_unlock_with_fingerprints">
+        <item quantity="other">Саусақ ізімен құлпын ашуға %d әрекет жасалды.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Саусақ ізімен құлпын ашуға %d әрекет жасалды.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_by_biometrics">
+        <item quantity="other">Биометриялық деректерді растау үшін %d рет қате әрекет жасалды.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Биометриялық деректерді растау үшін %d қате әрекет жасалды.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_by_face">
+        <item quantity="other">Бетіңізді растау үшін %d қате әрекет жасалды.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Бетіңізді растау үшін %d қате әрекет жасалды.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_by_fingerprint">
+        <item quantity="other">Саусақ іздерін растау үшін %d рет қате әрекет жасалды.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Саусақ іздерін растау үшін %d қате әрекет жасалды.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_1_hour_and_min">
+        <item quantity="other">Әрекетті 1 сағат %d минуттан кейн қайталап көріңіз</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Әрекетті 1 сағат %d минуттан кейн қайталап көріңіз</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_biometric">
+        <item quantity="other">Биометриялық деректер әрекетін %d секунд ішінде қайталап көріңіз</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Биометриялық деректер әрекетін %d секунд ішінде қайталап көріңіз</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_face">
+        <item quantity="other">Бет тануды %d секундтан кейін қайталап көріңіз</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Бет тануды %d секундтан кейін қайталап көріңіз</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_fingerprint">
+        <item quantity="other">Саусақ іздері әрекетін %d секунд ішінде қайталап көріңіз</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Саусақ іздері әрекетін %d секунд ішінде қайталап көріңіз</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_hour">
+        <item quantity="other">%d сағаттан кейін әрекетті қайталап көріңіз</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Әрекетті %d сағаттан кейін қайталап көріңіз</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_hour_and_1_min">
+        <item quantity="other">Әрекетті %d сағат 1 минуттан кейін қайталап көріңіз</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Әрекетті %d сағат 1 минуттан кейін қайталап көріңіз</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_min">
+        <item quantity="other">Әрекетті %d минуттан кейін қайталап көріңіз</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Әрекетті %d минуттан кейін қайталап көріңіз</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_sec">
+        <item quantity="other">%d секундтан кейін әрекетті қайталау</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d секундтан кейін әрекетті қайталау</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_countdown">
+        <item quantity="other">Әрекетті %d секундтан кейін қайталаңыз.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Әрекетті %d секундтан кейін қайталаңыз.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_ucm_attempt_left">
+        <item quantity="other">%d әрекет қалды</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d әрекет қалды</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="n_speakers">
+        <item quantity="other">%d динамик</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d динамик</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="notification_insignificant_title">
+        <item quantity="other">Тағы %d хабарландыру</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Тағы %d хабарландыру</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ongoing_activity_chip_count">
+        <item quantity="other">Тағы %d Тікелей хабарландыру</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Тағы %d Тікелей хабарландыру</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="plural_notification_count">
+        <item quantity="other">%d хабарландыру</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d хабарландыру</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_qs_add_minimum">
+        <item quantity="other">%d түйме қажет.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d түйме қажет.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_qs_dnd_detail_fhl_hours_option">
+        <item quantity="other">%d сағат бойы</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d сағат бойы</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_qs_unable_add_maximum">
+        <item quantity="other">%d түймеден артық қосу мүмкін емес.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d түймеден артық қосу мүмкін емес.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_qs_unable_remove_minimum">
+        <item quantity="other">Түймені жою мүмкін емес. Жылдам тақтада кем дегенде %d түйме болуы қажет.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Түймені жою мүмкін емес. Жылдам тақтада кем дегенде %d түйме болуы қажет.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_qs_video_call_effects_num">
+        <item quantity="other">%d әсер</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d әсер</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="subscreen_notification_smart_reply_child_account_dialog_content">
+        <item quantity="other">Galaxy AI жетілдірілген интеллект мүмкіндіктерін пайдалану үшін, сіз кемінде %d жаста болуыңыз қажет.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Galaxy AI жетілдірілген интеллект мүмкіндіктерін пайдалану үшін, сіз кемінде %d жаста болуыңыз қажет.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

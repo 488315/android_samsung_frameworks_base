@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="horizontal" android:id="@id/item_root" android:paddingTop="12.0dip" android:paddingBottom="12.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:paddingStart="22.0dip" android:paddingEnd="22.0dip"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView android:textSize="16.0dip" android:textColor="#fffafaff" android:layout_gravity="center" android:id="@id/item_name" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Options" android:layout_weight="1.0" />
+    <androidx.appcompat.widget.SwitchCompat android:theme="@style/Theme.AppCompat.DayNight" android:gravity="center" android:layout_gravity="center" android:id="@id/item_switch" android:focusable="false" android:clickable="true" android:layout_width="wrap_content" android:layout_height="20.0dip" android:minWidth="35.0dip" android:importantForAccessibility="no" app:trackTint="@color/qs_switch_background_color" />
+</LinearLayout>

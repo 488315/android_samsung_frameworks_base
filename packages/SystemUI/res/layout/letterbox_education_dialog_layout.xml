@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.wm.shell.compatui.LetterboxEduDialogLayout style="@style/LetterboxDialog"
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:androidprv="http://schemas.android.com/apk/prv/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <FrameLayout android:id="@id/letterbox_education_dialog_container" android:background="@drawable/letterbox_education_dialog_background" android:layout_width="0.0dip" android:layout_height="wrap_content" android:alpha="0.0" android:layout_marginHorizontal="@dimen/letterbox_education_dialog_margin" app:layout_constrainedHeight="true" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent" app:layout_constraintWidth_max="@dimen/letterbox_education_dialog_width">
+        <ScrollView android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <LinearLayout android:gravity="center_horizontal" android:orientation="vertical" android:paddingLeft="56.0dip" android:paddingTop="32.0dip" android:paddingRight="56.0dip" android:paddingBottom="32.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <ImageView android:layout_width="@dimen/letterbox_education_dialog_title_icon_width" android:layout_height="@dimen/letterbox_education_dialog_title_icon_height" android:layout_marginBottom="17.0dip" android:src="@drawable/letterbox_education_ic_light_bulb" />
+                <TextView android:textAppearance="@android:style/TextAppearance.DeviceDefault.Headline" android:textSize="24.0sp" android:textColor="?android:textColorPrimary" android:id="@id/letterbox_education_dialog_title" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/letterbox_education_dialog_title" android:lineSpacingExtra="4.0sp" android:fontFamily="@android:string/conversation_single_line_name_display" android:textAlignment="center" />
+                <LinearLayout android:gravity="top" android:orientation="horizontal" android:paddingTop="48.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content">
+                    <com.android.wm.shell.compatui.LetterboxEduDialogActionLayout android:layout_width="wrap_content" android:layout_height="wrap_content" app:icon="@drawable/letterbox_education_ic_reposition" app:text="@string/letterbox_education_reposition_text" />
+                    <com.android.wm.shell.compatui.LetterboxEduDialogActionLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="@dimen/letterbox_education_dialog_space_between_actions" app:icon="@drawable/letterbox_education_ic_split_screen" app:text="@string/letterbox_education_split_screen_text" />
+                </LinearLayout>
+                <Button android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small" android:textSize="14.0sp" android:textStyle="bold" android:textColor="?android:textColorPrimaryInverse" android:id="@id/letterbox_education_dialog_dismiss_button" android:background="@drawable/letterbox_education_dismiss_button_background_ripple" android:layout_width="fill_parent" android:layout_height="56.0dip" android:layout_marginTop="40.0dip" android:text="@string/letterbox_education_got_it" android:contentDescription="@string/letterbox_education_got_it" android:fontFamily="@android:string/conversation_single_line_image_placeholder" android:textAlignment="center" android:fontWeight="500" android:lineHeight="20.0dip" />
+            </LinearLayout>
+        </ScrollView>
+    </FrameLayout>
+</com.android.wm.shell.compatui.LetterboxEduDialogLayout>

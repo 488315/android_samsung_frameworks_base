@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:paddingTop="@null" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <FrameLayout android:layout_width="fill_parent" android:layout_height="0.0dip" android:minHeight="24.0dip" android:layout_weight="1.0">
+        <ScrollView android:scrollbarStyle="outsideOverlay" android:paddingBottom="@null" android:layout_width="fill_parent" android:layout_height="wrap_content" android:paddingStart="@null" android:paddingEnd="@null">
+            <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <TextView android:id="@id/message" android:paddingBottom="@null" android:layout_width="wrap_content" android:layout_height="wrap_content" android:lineSpacingExtra="@null" android:textAlignment="viewStart" android:layout_marginStart="@null" android:layout_marginEnd="@null" android:breakStrategy="simple" />
+                <CheckBox android:textSize="@null" android:id="@id/option_show_restart_popup" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/decor_caption_compatibility_dialog_option" />
+            </LinearLayout>
+        </ScrollView>
+    </FrameLayout>
+    <LinearLayout android:orientation="horizontal" android:paddingBottom="@null" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layoutDirection="locale" android:paddingStart="@null" android:paddingEnd="@null" style="?buttonBarStyle">
+        <Button android:textSize="@null" android:textStyle="bold" android:textColor="@color/tw_dialog_button_text_color_material" android:id="@id/customButton2" android:background="@null" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="1.0" android:fontFamily="sec-roboto-light" />
+        <View android:layout_gravity="center_vertical" android:background="@color/sem_dialog_divider" android:layout_width="1.0dip" android:layout_height="16.0dip" />
+        <Button android:textSize="@null" android:textStyle="bold" android:textColor="@color/tw_dialog_button_text_color_material" android:id="@id/customButton1" android:background="@null" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="1.0" android:fontFamily="sec-roboto-light" />
+    </LinearLayout>
+</LinearLayout>

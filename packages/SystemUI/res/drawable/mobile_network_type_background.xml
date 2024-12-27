@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape android:shape="rectangle"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <corners android:topLeftRadius="0.0dip" android:topRightRadius="@dimen/status_bar_mobile_container_corner_radius" android:bottomLeftRadius="@dimen/status_bar_mobile_container_corner_radius" android:bottomRightRadius="0.0dip" />
+    <solid android:color="#ffffffff" />
+    <padding android:left="2.0sp" android:right="2.0sp" />
+</shape>

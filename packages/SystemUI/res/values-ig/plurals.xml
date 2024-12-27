@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="n_speakers">
+        <item quantity="other">Ọka okwu %d</item>
+        <item quantity="zero">%d speakers</item>
+        <item quantity="one">%d speaker</item>
+        <item quantity="two">%d speakers</item>
+        <item quantity="few">%d speakers</item>
+        <item quantity="many">%d speakers</item>
+    </plurals>
+    <plurals name="notification_insignificant_title">
+        <item quantity="other">%d more notifications</item>
+        <item quantity="zero">%d more notifications</item>
+        <item quantity="one">%d more notification</item>
+        <item quantity="two">%d more notifications</item>
+        <item quantity="few">%d more notifications</item>
+        <item quantity="many">%d more notifications</item>
+    </plurals>
+</resources>

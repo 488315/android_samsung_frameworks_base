@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.systemui.dreams.DreamOverlayContainerView android:id="@id/dream_overlay_container" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ImageView android:id="@id/glanceable_hub_handle" android:background="@drawable/hub_handle" android:visibility="gone" android:layout_width="4.0dip" android:layout_height="220.0dip" android:layout_centerVertical="true" android:contentDescription="UI indicator for swiping open the glanceable hub" android:layout_marginEnd="12.0dip" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="parent" />
+    <androidx.constraintlayout.widget.ConstraintLayout android:id="@id/dream_overlay_content" android:clipChildren="false" android:clipToPadding="false" android:layout_width="fill_parent" android:layout_height="0.0dip" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintTop_toBottomOf="@id/dream_overlay_status_bar" />
+    <include layout="@layout/ambient_status_bar_view" />
+</com.android.systemui.dreams.DreamOverlayContainerView>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent" android:animateLayoutChanges="true"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/sec_brightness_detail_settings_margin_top">
+        <com.android.systemui.settings.brightness.BrightnessDetailSliderView android:id="@id/detail_slider" android:layout_width="fill_parent" android:layout_height="@dimen/sec_brightness_detail_slider_height" android:contentDescription="@string/accessibility_brightness" android:importantForAccessibility="no" android:paddingStart="@dimen/brightness_detail_padding" android:paddingEnd="@dimen/brightness_detail_padding">
+            <RelativeLayout android:id="@id/slider_container" android:layout_width="fill_parent" android:layout_height="fill_parent">
+                <com.android.systemui.qs.bar.BrightnessVolumeRoundedView android:layout_width="fill_parent" android:layout_height="fill_parent">
+                    <com.android.systemui.settings.brightness.ToggleSeekBar android:id="@id/detail_seekbar" android:background="@null" android:layout_width="fill_parent" android:layout_height="fill_parent" android:progressDrawable="@drawable/sec_brightness_detail_progress_drawable" android:thumb="@null" android:layout_centerVertical="true" android:layout_alignParentStart="true" android:layout_alignParentEnd="true" android:splitTrack="false" />
+                </com.android.systemui.qs.bar.BrightnessVolumeRoundedView>
+                <com.airbnb.lottie.LottieAnimationView android:id="@id/brightness_icon" android:layout_width="@dimen/sec_brightness_icon_width" android:layout_height="@dimen/sec_brightness_icon_height" android:layout_centerVertical="true" android:contentDescription="@null" android:layout_marginStart="@dimen/sec_brightness_detail_sun_icon_margin_start" android:layout_alignParentStart="true" />
+            </RelativeLayout>
+        </com.android.systemui.settings.brightness.BrightnessDetailSliderView>
+    </LinearLayout>
+</LinearLayout>

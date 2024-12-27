@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:id="@id/screen_share_permission_dialog" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:androidprv="http://schemas.android.com/apk/prv/res/android">
+    <LinearLayout android:gravity="center_horizontal" android:orientation="vertical" android:paddingTop="@dimen/dialog_top_padding" android:paddingBottom="@dimen/dialog_bottom_padding" android:layout_width="fill_parent" android:layout_height="wrap_content" android:paddingStart="@dimen/dialog_side_padding" android:paddingEnd="@dimen/dialog_side_padding">
+        <ImageView android:id="@id/screen_share_dialog_icon" android:layout_width="@dimen/screenrecord_logo_size" android:layout_height="@dimen/screenrecord_logo_size" android:src="@drawable/ic_media_projection_permission" android:tint="?android:^attr-private/materialColorPrimaryFixedDim" android:importantForAccessibility="no" />
+        <TextView android:textAppearance="@style/TextAppearance.Dialog.Title" android:gravity="center" android:id="@id/screen_share_dialog_title" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/screenrecord_title_margin_top" />
+        <Spinner android:gravity="center_vertical" android:id="@id/screen_share_mode_spinner" android:background="@drawable/screenshare_options_spinner_background" android:layout_width="fill_parent" android:layout_height="@dimen/screenrecord_spinner_height" android:layout_marginTop="@dimen/screenrecord_spinner_margin" android:layout_marginBottom="@dimen/screenrecord_spinner_margin" android:popupBackground="@drawable/screenrecord_options_spinner_popup_background" />
+        <ViewStub android:id="@id/options_stub" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+        <TextView android:gravity="start" android:id="@id/text_warning" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/screenrecord_permission_dialog_warning_entire_screen" style="@style/TextAppearance.Dialog.Body.Message" />
+        <com.android.internal.widget.ButtonBarLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/screenrecord_buttons_margin_top">
+            <Button android:id="@android:id/button2" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/cancel" android:layout_weight="0.0" style="@style/Widget.Dialog.Button.BorderButton" />
+            <Space android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="1.0" />
+            <Button android:id="@android:id/button1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/screenrecord_continue" android:layout_weight="0.0" style="@style/Widget.Dialog.Button" />
+        </com.android.internal.widget.ButtonBarLayout>
+    </LinearLayout>
+</ScrollView>

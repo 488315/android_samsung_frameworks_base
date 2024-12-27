@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple android:color="@color/control_action_background_ripple"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@id/background">
+        <androidx.appcompat.util.SeslShapeDrawable>
+            <solid android:color="@color/sec_control_default_background" />
+            <corners android:radius="@dimen/sec_control_corner_radius" />
+        </androidx.appcompat.util.SeslShapeDrawable>
+    </item>
+    <item android:id="@id/clip_layer">
+        <clip android:clipOrientation="horizontal">
+            <androidx.appcompat.util.SeslShapeDrawable>
+                <solid android:color="@android:color/transparent" />
+                <corners android:radius="@dimen/sec_control_corner_radius" />
+            </androidx.appcompat.util.SeslShapeDrawable>
+        </clip>
+    </item>
+</ripple>

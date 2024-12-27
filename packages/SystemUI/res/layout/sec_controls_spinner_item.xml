@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="fill_parent" android:minHeight="47.0dip"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <FrameLayout android:id="@id/spinner_container" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0">
+        <LinearLayout android:layout_gravity="center_vertical" android:orientation="horizontal" android:layout_width="wrap_content" android:layout_height="fill_parent" android:layout_marginEnd="@dimen/basic_interaction_side_margin">
+            <include layout="@layout/controls_spinner_base_item" />
+        </LinearLayout>
+        <com.android.systemui.controls.ui.view.ControlsAppCompatSpinner android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" android:id="@id/controls_app_spinner" android:layout_width="wrap_content" android:layout_height="fill_parent" android:backgroundTint="@color/control_spinner_item_single_text_color" />
+    </FrameLayout>
+    <LinearLayout android:layout_gravity="center_vertical" android:id="@id/launch_button_layout" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content">
+        <Button android:textAppearance="@style/TextAppearance.Font.SemiBold" android:textSize="15.0sp" android:textColor="@color/basic_interaction_contained_button_text" android:id="@id/launch_button" android:background="@drawable/control_contained_button_bg_ripple" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/sec_controls_open_app" style="@style/ControlContainedButton" />
+    </LinearLayout>
+</LinearLayout>

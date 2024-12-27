@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector android:height="20.0dip" android:width="20.0dip" android:viewportWidth="20.0" android:viewportHeight="20.0"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <path android:fillColor="@color/control_spinner_item_text_color" android:pathData="M18.7912,4.721C18.5137,4.4435 18.0627,4.4444 17.7861,4.722L8.541,13.9965C8.4794,14.0562 8.4093,14.0656 8.3723,14.0656C8.3363,14.0656 8.2653,14.0562 8.2047,13.9965L2.2146,7.9875C1.937,7.709 1.4871,7.709 1.2095,7.9856C0.931,8.2632 0.93,8.7132 1.2076,8.9907L7.1986,14.9997C7.5122,15.3142 7.929,15.4867 8.3723,15.4867C8.8166,15.4867 9.2335,15.3142 9.5461,14.9997L18.7931,5.7262C19.0697,5.4477 19.0688,4.9977 18.7912,4.721" android:strokeColor="#00000000" android:strokeWidth="1.0" android:fillType="evenOdd" />
+</vector>

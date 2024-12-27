@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:androidprv="http://schemas.android.com/apk/prv/res/android">
+    <item android:top="@dimen/settingslib_switch_thumb_margin" android:bottom="@dimen/settingslib_switch_thumb_margin">
+        <shape android:shape="oval">
+            <size android:height="@dimen/settingslib_switch_thumb_size" android:width="@dimen/settingslib_switch_thumb_size" />
+            <solid android:color="?android:^attr-private/materialColorOnPrimaryFixedVariant" />
+        </shape>
+    </item>
+</layer-list>

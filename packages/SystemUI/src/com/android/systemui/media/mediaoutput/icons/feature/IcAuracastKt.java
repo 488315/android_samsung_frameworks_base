@@ -1,0 +1,117 @@
+package com.android.systemui.media.mediaoutput.icons.feature;
+
+import androidx.compose.material.icons.filled.CloseKt$$ExternalSyntheticOutline0;
+import androidx.compose.material.icons.filled.KeyboardCommandKeyKt$$ExternalSyntheticOutline0;
+import androidx.compose.ui.graphics.ColorKt;
+import androidx.compose.ui.graphics.PathFillType;
+import androidx.compose.ui.graphics.SolidColor;
+import androidx.compose.ui.graphics.StrokeCap;
+import androidx.compose.ui.graphics.StrokeJoin;
+import androidx.compose.ui.graphics.vector.ImageVector;
+import androidx.compose.ui.graphics.vector.PathBuilder;
+import androidx.compose.ui.unit.Dp;
+import com.samsung.android.knox.custom.IKnoxCustomManager;
+import kotlin.Lazy;
+import kotlin.LazyKt__LazyJVMKt;
+import kotlin.jvm.functions.Function0;
+import kotlin.jvm.internal.DefaultConstructorMarker;
+
+/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
+/* loaded from: classes2.dex */
+public abstract class IcAuracastKt {
+    public static final Lazy IcAuracast$delegate = LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.systemui.media.mediaoutput.icons.feature.IcAuracastKt$IcAuracast$2
+        @Override // kotlin.jvm.functions.Function0
+        public final Object invoke() {
+            float f = (float) 32.0d;
+            Dp.Companion companion = Dp.Companion;
+            ImageVector.Builder builder = new ImageVector.Builder("IcAuracast", f, f, 32.0f, 32.0f, 0L, 0, false, IKnoxCustomManager.Stub.TRANSACTION_setUsbConnectionType, null);
+            DefaultConstructorMarker defaultConstructorMarker = null;
+            SolidColor solidColor = new SolidColor(ColorKt.Color(4278190080L), defaultConstructorMarker);
+            SolidColor solidColor2 = new SolidColor(ColorKt.Color(0), defaultConstructorMarker);
+            StrokeCap.Companion.getClass();
+            StrokeJoin.Companion.getClass();
+            PathFillType.Companion.getClass();
+            PathBuilder pathBuilder = new PathBuilder();
+            pathBuilder.moveTo(8.9628f, 2.5815f);
+            pathBuilder.lineTo(1.3144f, 14.0854f);
+            pathBuilder.curveTo(1.282f, 14.1344f, 1.2279f, 14.1617f, 1.1712f, 14.1617f);
+            pathBuilder.curveTo(1.1523f, 14.1617f, 1.132f, 14.159f, 1.1131f, 14.1508f);
+            pathBuilder.curveTo(1.0388f, 14.1236f, 0.9928f, 14.0486f, 1.0009f, 13.9696f);
+            pathBuilder.curveTo(1.5185f, 9.0425f, 4.4103f, 4.6916f, 8.7385f, 2.3309f);
+            pathBuilder.curveTo(8.8074f, 2.2927f, 8.8939f, 2.3077f, 8.9466f, 2.3663f);
+            pathBuilder.curveTo(8.9993f, 2.4249f, 9.0061f, 2.5134f, 8.9628f, 2.5788f);
+            KeyboardCommandKeyKt$$ExternalSyntheticOutline0.m(pathBuilder, 8.9628f, 2.5815f, 23.4759f, 28.6515f);
+            pathBuilder.lineTo(8.9791f, 28.6515f);
+            pathBuilder.curveTo(8.9155f, 28.6515f, 8.8534f, 28.6815f, 8.8223f, 28.7374f);
+            pathBuilder.curveTo(8.7737f, 28.8232f, 8.8047f, 28.9267f, 8.8845f, 28.9744f);
+            pathBuilder.curveTo(11.1317f, 30.2998f, 13.6695f, 31.0f, 16.2234f, 31.0f);
+            pathBuilder.curveTo(18.7774f, 31.0f, 21.3111f, 30.3012f, 23.5556f, 28.9785f);
+            pathBuilder.curveTo(23.6097f, 28.9458f, 23.6489f, 28.8886f, 23.6476f, 28.8245f);
+            pathBuilder.curveTo(23.6476f, 28.7265f, 23.5678f, 28.6515f, 23.4759f, 28.6515f);
+            pathBuilder.close();
+            pathBuilder.moveTo(23.7881f, 2.5161f);
+            pathBuilder.curveTo(23.657f, 2.4358f, 23.507f, 2.5856f, 23.5813f, 2.7218f);
+            pathBuilder.lineTo(30.7176f, 15.6629f);
+            pathBuilder.curveTo(30.7932f, 15.8004f, 31.0f, 15.7459f, 31.0f, 15.5893f);
+            pathBuilder.curveTo(31.0f, 10.0478f, 28.1109f, 5.197f, 23.7881f, 2.5175f);
+            KeyboardCommandKeyKt$$ExternalSyntheticOutline0.m(pathBuilder, 23.7881f, 2.5161f, 22.6381f, 26.3944f);
+            pathBuilder.curveTo(24.8772f, 26.3944f, 26.892f, 25.2324f, 28.0271f, 23.2885f);
+            pathBuilder.curveTo(29.1622f, 21.3433f, 29.1919f, 19.0044f, 28.1055f, 17.0305f);
+            pathBuilder.lineTo(20.8909f, 3.9301f);
+            pathBuilder.curveTo(19.9652f, 2.2505f, 18.3531f, 1.1866f, 16.4653f, 1.0109f);
+            pathBuilder.curveTo(16.264f, 1.0027f, 16.0951f, 1.0f, 15.9356f, 1.0f);
+            pathBuilder.curveTo(15.7761f, 1.0f, 15.6032f, 1.0041f, 15.4086f, 1.0109f);
+            pathBuilder.lineTo(15.4059f, 1.0109f);
+            pathBuilder.curveTo(15.4059f, 1.0109f, 15.3748f, 1.0123f, 15.3748f, 1.0123f);
+            pathBuilder.curveTo(13.5938f, 1.1825f, 12.033f, 2.1674f, 11.0898f, 3.7163f);
+            pathBuilder.curveTo(11.0506f, 3.7789f, 6.8021f, 10.56f, 2.486f, 17.4719f);
+            pathBuilder.lineTo(2.4806f, 17.4814f);
+            pathBuilder.curveTo(2.1131f, 18.0712f, 2.0036f, 18.7905f, 2.1806f, 19.4566f);
+            pathBuilder.curveTo(2.7333f, 21.5408f, 3.4387f, 22.6415f, 3.99f, 23.3675f);
+            pathBuilder.curveTo(4.0089f, 23.3934f, 4.0319f, 23.4057f, 4.0589f, 23.4057f);
+            pathBuilder.curveTo(4.09f, 23.4057f, 4.1224f, 23.3893f, 4.1414f, 23.3648f);
+            pathBuilder.curveTo(4.1576f, 23.3444f, 4.1616f, 23.3185f, 4.1522f, 23.2885f);
+            pathBuilder.curveTo(3.7225f, 21.7261f, 3.9225f, 20.1636f, 4.7184f, 18.8899f);
+            pathBuilder.curveTo(9.0115f, 12.0135f, 13.2857f, 5.1929f, 13.3249f, 5.1289f);
+            pathBuilder.lineTo(13.3357f, 5.1112f);
+            pathBuilder.curveTo(13.8924f, 4.193f, 14.8613f, 3.6454f, 15.9288f, 3.6454f);
+            pathBuilder.curveTo(15.9491f, 3.6454f, 15.9694f, 3.6454f, 15.9897f, 3.6454f);
+            pathBuilder.curveTo(17.0829f, 3.6686f, 18.0518f, 4.257f, 18.5815f, 5.2201f);
+            pathBuilder.lineTo(25.7961f, 18.3205f);
+            pathBuilder.curveTo(26.4245f, 19.4607f, 26.4082f, 20.8134f, 25.7515f, 21.9386f);
+            pathBuilder.curveTo(25.0948f, 23.0624f, 23.9299f, 23.734f, 22.6354f, 23.734f);
+            pathBuilder.lineTo(12.656f, 23.734f);
+            pathBuilder.curveTo(11.7357f, 23.734f, 10.9087f, 23.215f, 10.4979f, 22.3799f);
+            pathBuilder.curveTo(10.1344f, 21.6416f, 10.1871f, 20.7303f, 10.6317f, 20.0001f);
+            pathBuilder.lineTo(15.4505f, 12.1157f);
+            pathBuilder.curveTo(15.5248f, 11.9931f, 15.6545f, 11.9209f, 15.7964f, 11.9209f);
+            pathBuilder.curveTo(15.9383f, 11.9209f, 16.0815f, 12.0026f, 16.1532f, 12.1334f);
+            pathBuilder.lineTo(18.4328f, 16.3085f);
+            pathBuilder.curveTo(18.4963f, 16.4257f, 18.499f, 16.5674f, 18.4396f, 16.6886f);
+            pathBuilder.curveTo(18.3828f, 16.803f, 18.2788f, 16.8793f, 18.1558f, 16.897f);
+            pathBuilder.curveTo(18.1369f, 16.8997f, 18.118f, 16.9011f, 18.0977f, 16.9011f);
+            pathBuilder.lineTo(15.6343f, 16.9011f);
+            pathBuilder.curveTo(14.9086f, 16.9011f, 14.3005f, 17.4773f, 14.2762f, 18.1857f);
+            pathBuilder.curveTo(14.264f, 18.5494f, 14.3951f, 18.894f, 14.6464f, 19.1556f);
+            pathBuilder.curveTo(14.8978f, 19.4171f, 15.2343f, 19.5615f, 15.5951f, 19.5615f);
+            pathBuilder.lineTo(19.5166f, 19.5615f);
+            pathBuilder.curveTo(19.9355f, 19.5615f, 20.322f, 19.7917f, 20.5246f, 20.1622f);
+            pathBuilder.lineTo(20.8571f, 20.7711f);
+            pathBuilder.curveTo(20.9017f, 20.8529f, 20.9922f, 20.9837f, 21.0746f, 21.0654f);
+            pathBuilder.curveTo(21.3327f, 21.3337f, 21.6881f, 21.489f, 22.0516f, 21.489f);
+            pathBuilder.curveTo(22.2543f, 21.489f, 22.4476f, 21.4427f, 22.6286f, 21.3501f);
+            pathBuilder.curveTo(22.9516f, 21.1853f, 23.1867f, 20.9019f, 23.2935f, 20.5546f);
+            pathBuilder.curveTo(23.3989f, 20.2072f, 23.3624f, 19.8394f, 23.1881f, 19.5206f);
+            pathBuilder.lineTo(17.7518f, 9.5424f);
+            pathBuilder.curveTo(17.3734f, 8.8491f, 16.6788f, 8.4227f, 15.8937f, 8.4036f);
+            pathBuilder.curveTo(15.8761f, 8.4036f, 15.8572f, 8.4036f, 15.8383f, 8.4036f);
+            pathBuilder.curveTo(15.0762f, 8.4036f, 14.3816f, 8.7946f, 13.9816f, 9.4498f);
+            pathBuilder.lineTo(8.3629f, 18.6434f);
+            pathBuilder.curveTo(7.3913f, 20.2344f, 7.3494f, 22.1579f, 8.2534f, 23.7884f);
+            pathBuilder.curveTo(9.1574f, 25.419f, 10.8033f, 26.393f, 12.656f, 26.393f);
+            CloseKt$$ExternalSyntheticOutline0.m(pathBuilder, 22.6354f, 26.393f, 22.6381f, 26.3944f);
+            ImageVector.Builder.m491addPathoIyEayM$default(builder, pathBuilder._nodes, 0, solidColor, solidColor2, 1.0f, 0, 0, 4.0f);
+            return builder.build();
+        }
+    });
+}

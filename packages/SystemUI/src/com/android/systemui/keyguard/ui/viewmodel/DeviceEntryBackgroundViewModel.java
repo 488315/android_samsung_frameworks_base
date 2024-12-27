@@ -1,0 +1,24 @@
+package com.android.systemui.keyguard.ui.viewmodel;
+
+import android.content.Context;
+import com.android.systemui.common.ui.domain.interactor.ConfigurationInteractor;
+import com.android.systemui.keyguard.domain.interactor.KeyguardTransitionInteractor;
+import kotlinx.coroutines.flow.FlowKt;
+import kotlinx.coroutines.flow.StateFlow;
+import kotlinx.coroutines.flow.internal.ChannelFlowTransformLatest;
+
+/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
+/* loaded from: classes2.dex */
+public final class DeviceEntryBackgroundViewModel {
+    public final ChannelFlowTransformLatest alpha;
+    public final ChannelFlowTransformLatest color;
+    public final Context context;
+
+    public DeviceEntryBackgroundViewModel(Context context, DeviceEntryIconViewModel deviceEntryIconViewModel, KeyguardTransitionInteractor keyguardTransitionInteractor, ConfigurationInteractor configurationInteractor, LockscreenToAodTransitionViewModel lockscreenToAodTransitionViewModel, AodToLockscreenTransitionViewModel aodToLockscreenTransitionViewModel, GoneToAodTransitionViewModel goneToAodTransitionViewModel, PrimaryBouncerToAodTransitionViewModel primaryBouncerToAodTransitionViewModel, OccludedToAodTransitionViewModel occludedToAodTransitionViewModel, OccludedToLockscreenTransitionViewModel occludedToLockscreenTransitionViewModel, DreamingToLockscreenTransitionViewModel dreamingToLockscreenTransitionViewModel, AlternateBouncerToAodTransitionViewModel alternateBouncerToAodTransitionViewModel, GoneToLockscreenTransitionViewModel goneToLockscreenTransitionViewModel, GoneToDozingTransitionViewModel goneToDozingTransitionViewModel, PrimaryBouncerToDozingTransitionViewModel primaryBouncerToDozingTransitionViewModel, LockscreenToDozingTransitionViewModel lockscreenToDozingTransitionViewModel, DozingToLockscreenTransitionViewModel dozingToLockscreenTransitionViewModel, AlternateBouncerToDozingTransitionViewModel alternateBouncerToDozingTransitionViewModel, DreamingToAodTransitionViewModel dreamingToAodTransitionViewModel, PrimaryBouncerToLockscreenTransitionViewModel primaryBouncerToLockscreenTransitionViewModel) {
+        this.context = context;
+        DeviceEntryBackgroundViewModel$special$$inlined$flatMapLatest$1 deviceEntryBackgroundViewModel$special$$inlined$flatMapLatest$1 = new DeviceEntryBackgroundViewModel$special$$inlined$flatMapLatest$1(null, configurationInteractor, this);
+        StateFlow stateFlow = deviceEntryIconViewModel.useBackgroundProtection;
+        this.color = FlowKt.transformLatest(stateFlow, deviceEntryBackgroundViewModel$special$$inlined$flatMapLatest$1);
+        this.alpha = FlowKt.transformLatest(stateFlow, new DeviceEntryBackgroundViewModel$special$$inlined$flatMapLatest$2(null, lockscreenToAodTransitionViewModel, aodToLockscreenTransitionViewModel, goneToAodTransitionViewModel, primaryBouncerToAodTransitionViewModel, occludedToAodTransitionViewModel, occludedToLockscreenTransitionViewModel, dreamingToLockscreenTransitionViewModel, alternateBouncerToAodTransitionViewModel, goneToLockscreenTransitionViewModel, goneToDozingTransitionViewModel, primaryBouncerToDozingTransitionViewModel, lockscreenToDozingTransitionViewModel, dozingToLockscreenTransitionViewModel, alternateBouncerToDozingTransitionViewModel, dreamingToAodTransitionViewModel, primaryBouncerToLockscreenTransitionViewModel, keyguardTransitionInteractor));
+    }
+}

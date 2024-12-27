@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:layout_gravity="center" android:id="@id/volume_animated_media_icon" android:visibility="visible" android:layout_width="36.0dip" android:layout_height="36.0dip" android:layoutDirection="ltr"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <FrameLayout android:layout_gravity="center" android:id="@id/volume_splash_container" android:layout_width="fill_parent" android:layout_height="wrap_content" android:rotation="45.0">
+        <ImageView android:layout_gravity="center" android:id="@id/volume_icon_mute_splash" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/tw_ic_sub_large_screen_audio_mute_splash" />
+    </FrameLayout>
+    <ImageView android:layout_gravity="center" android:id="@id/volume_media_icon_mute" android:layout_width="36.0dip" android:layout_height="36.0dip" android:src="@drawable/tw_ic_audio_media_mute_mtrl" android:tint="@color/sub_large_display_volume_icon_color" />
+    <ImageView android:id="@id/volume_media_icon_note" android:layout_width="18.0dip" android:layout_height="fill_parent" android:src="@drawable/tw_ic_audio_media_note" android:tint="@color/sub_large_display_volume_icon_color" />
+    <ImageView android:id="@id/volume_media_icon_wave_s" android:layout_width="5.0dip" android:layout_height="fill_parent" android:src="@drawable/tw_ic_audio_media_wave_s" android:tint="@color/sub_large_display_volume_icon_color" android:alpha="0.0" />
+    <ImageView android:id="@id/volume_media_icon_wave_l" android:layout_width="6.0dip" android:layout_height="fill_parent" android:src="@drawable/tw_ic_audio_media_wave_l" android:tint="@color/sub_large_display_volume_icon_color" android:alpha="0.0" />
+</FrameLayout>

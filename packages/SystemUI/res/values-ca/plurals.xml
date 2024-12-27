@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="abc_slice_duration_days">
+        <item quantity="other">Fa %d dies</item>
+        <item quantity="one">Fa %d dia</item>
+    </plurals>
+    <plurals name="abc_slice_duration_min">
+        <item quantity="other">Fa %d min</item>
+        <item quantity="one">Fa %d min</item>
+    </plurals>
+    <plurals name="abc_slice_duration_years">
+        <item quantity="other">Fa %d anys</item>
+        <item quantity="one">Fa %d any</item>
+    </plurals>
+    <plurals name="controls_item_number_of_favorites">
+        <item quantity="other">"S'han seleccionat %d elements"</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">"S'ha seleccionat %d element"</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="globalactions_force_restart_message">
+        <item quantity="other">Mantén premuts els botons Funció i Volum avall simultàniament durant més de %d segons per reiniciar el telèfon.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">"Mantén premuts els botons Funció i Volum avall simultàniament durant més d'%d segon per reiniciar el telèfon."</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_attempt_left">
+        <item quantity="other">Queden %d intents</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Queda %d intent</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_attempt_left_before_permanent_locking">
+        <item quantity="other">Queden %d intents abans del bloqueig permanent</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Queda %d intent abans del bloqueig permanent</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_secure_attempts_to_unlock_with_fingerprints">
+        <item quantity="other">%d intents de desbloquejar amb empremtes.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d intent de desbloquejar amb empremtes.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_by_biometrics">
+        <item quantity="other">%d intents incorrectes de verificar les dades biomètriques.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d intent incorrecte de verificar les dades biomètriques.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_by_face">
+        <item quantity="other">%d intents incorrectes de verificar la cara.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d intent incorrecte de verificar la cara.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_by_fingerprint">
+        <item quantity="other">%d intents incorrectes de verificar les empremtes.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d intent incorrecte de verificar les empremtes.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_1_hour_and_min">
+        <item quantity="other">"Torna-ho a intentar d'aquí a 1 hora i %d minuts"</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">"Torna-ho a intentar d'aquí a 1 hora i %d minut"</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_biometric">
+        <item quantity="other">"Torna a provar les dades biomètriques d'aquí a %d segons"</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">"Torna a provar les dades biomètriques d'aquí a %d segon"</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_face">
+        <item quantity="other">"Torna a intentar el reconeixement facial d'aquí a %d segons"</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">"Torna a intentar el reconeixement facial d'aquí a %d segon"</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_fingerprint">
+        <item quantity="other">"Torna a provar l'empremta d'aquí a %d segons"</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">"Torna a provar l'empremta d'aquí a %d segon"</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_hour">
+        <item quantity="other">"Torna-ho a intentar d'aquí a %d hores"</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">"Torna-ho a intentar d'aquí a %d hora"</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_hour_and_1_min">
+        <item quantity="other">"Torna-ho a intentar d'aquí a %d hores i 1 minut"</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">"Torna-ho a intentar d'aquí a %d hora i 1 minut"</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_min">
+        <item quantity="other">"Torna-ho a intentar d'aquí a %d minuts"</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">"Torna-ho a intentar d'aquí a %d minut"</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_sec">
+        <item quantity="other">"Torna-ho a intentar d'aquí a %d segons"</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">"Torna-ho a intentar d'aquí a %d segon"</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_countdown">
+        <item quantity="other">"Si us plau, torna-ho a intentar d'aquí a %d segons."</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">"Si us plau, torna-ho a intentar d'aquí a %d segon."</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_ucm_attempt_left">
+        <item quantity="other">Queden %d intents</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Queda %d intent</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="mtrl_badge_content_description">
+        <item quantity="other">%d notificacions noves</item>
+        <item quantity="one">%d notificació nova</item>
+    </plurals>
+    <plurals name="n_speakers">
+        <item quantity="other">%d altaveus</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d altaveu</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="notification_insignificant_title">
+        <item quantity="other">%d notificacions més</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d notificació més</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ongoing_activity_chip_count">
+        <item quantity="other">%d notificacions en directe més</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d notificació en directe més</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="plural_notification_count">
+        <item quantity="other">%d notificacions</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d notificació</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_qs_add_minimum">
+        <item quantity="other">%d botons són necessaris.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d botó és necessari.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_qs_dnd_detail_fhl_hours_option">
+        <item quantity="other">Durant %d hores</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Durant %d hora</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_qs_unable_add_maximum">
+        <item quantity="other">No es poden afegir més de %d botons.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">"No es pot afegir més d'%d botó."</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_qs_unable_remove_minimum">
+        <item quantity="other">No es pot eliminar el botó. Cal que el Tauler ràpid tingui com a mínim %d botons.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">No es pot eliminar el botó. Cal que el Tauler ràpid tingui com a mínim %d botó.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_qs_video_call_effects_num">
+        <item quantity="other">%d efectes</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d efecte</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="subscreen_notification_smart_reply_child_account_dialog_content">
+        <item quantity="other">"Cal tenir almenys %d anys per utilitzar les funcions d'intel·ligència avançada de Galaxy AI."</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">"Cal tenir almenys %d any per utilitzar les funcions d'intel·ligència avançada de Galaxy AI."</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

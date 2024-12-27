@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="2.5dip" />
+            <size android:height="5.0dip" android:width="45.0dip" />
+            <solid android:color="@color/sec_decor_handle_stroke_color" />
+        </shape>
+    </item>
+    <item android:id="@id/fill_view">
+        <inset android:inset="@dimen/sec_decor_handle_stroke_thickness">
+            <shape android:shape="rectangle">
+                <corners android:radius="2.0dip" />
+                <size android:height="4.0dip" android:width="44.0dip" />
+                <solid android:color="@color/sec_decor_handle_selector" />
+            </shape>
+        </inset>
+    </item>
+</layer-list>

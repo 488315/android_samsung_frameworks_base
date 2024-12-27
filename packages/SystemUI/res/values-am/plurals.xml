@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="abc_slice_duration_days">
+        <item quantity="other">%d ቀናት በፊት</item>
+        <item quantity="one">%d ቀናት በፊት</item>
+    </plurals>
+    <plurals name="abc_slice_duration_min">
+        <item quantity="other">%d ደቂቃ በፊት</item>
+        <item quantity="one">%d ደቂቃ በፊት</item>
+    </plurals>
+    <plurals name="abc_slice_duration_years">
+        <item quantity="other">%d ዓመት በፊት</item>
+        <item quantity="one">%d ዓመት በፊት</item>
+    </plurals>
+    <plurals name="mtrl_badge_content_description">
+        <item quantity="other">%d አዲስ ማሳወቂያዎች</item>
+        <item quantity="one">%d አዲስ ማሳወቂያዎች</item>
+    </plurals>
+    <plurals name="n_speakers">
+        <item quantity="other">%d ድምጽ ማጉያዎች</item>
+        <item quantity="zero">%d speakers</item>
+        <item quantity="one">%d speaker</item>
+        <item quantity="two">%d speakers</item>
+        <item quantity="few">%d speakers</item>
+        <item quantity="many">%d speakers</item>
+    </plurals>
+    <plurals name="notification_insignificant_title">
+        <item quantity="other">%d more notifications</item>
+        <item quantity="zero">%d more notifications</item>
+        <item quantity="one">%d more notification</item>
+        <item quantity="two">%d more notifications</item>
+        <item quantity="few">%d more notifications</item>
+        <item quantity="many">%d more notifications</item>
+    </plurals>
+</resources>

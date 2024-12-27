@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:id="@id/setting_layout" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <include layout="@layout/qs_setting_edit_actionbar" />
+    </LinearLayout>
+    <ScrollView android:scrollbars="none" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <LinearLayout android:layout_gravity="center_horizontal" android:orientation="vertical" android:id="@id/main_content" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <LinearLayout android:gravity="center" android:layout_gravity="center" android:orientation="horizontal" android:id="@id/edit_tile_type_container" android:background="@drawable/qs_setting_edit_button_ripple" android:focusable="false" android:clickable="false" android:layout_width="fill_parent" android:layout_height="@dimen/qs_edit_tile_type_container_height" android:layout_marginBottom="14.0dip">
+                <LinearLayout android:gravity="center" android:orientation="vertical" android:id="@id/top_tile_edit_button_container" android:background="@drawable/qs_setting_edit_content_ripple" android:focusable="true" android:clickable="true" android:layout_width="@dimen/qs_tile_edit_button_container_width" android:layout_height="@dimen/qs_tile_edit_button_container_height" style="@style/RecoilSmallAnimator">
+                    <TextView android:textSize="@dimen/qs_setting_text_size" android:textColor="@color/qs_edit_content_text_color" android:layout_gravity="bottom|center" android:id="@id/qs_setting_top_text" android:layout_width="wrap_content" android:layout_height="@dimen/qs_setting_text_height" android:layout_marginTop="@dimen/qs_setting_text_top_margin" android:text="@string/qs_edit_top" android:maxLines="1" android:fontFamily="sec" android:textFontWeight="400" />
+                    <ImageView android:layout_width="wrap_content" android:layout_height="@dimen/qs_setting_edit_select_image_height" android:src="@drawable/qs_setting_edit_select_top" android:scaleType="fitCenter" android:adjustViewBounds="true" />
+                    <TextView android:textSize="@dimen/qs_setting_edit_text_size" android:textColor="@color/qs_edit_content_text_color" android:gravity="center" android:layout_gravity="center" android:id="@id/qs_setting_top_edit_text" android:background="@drawable/qs_setting_edit_button_edit_ripple" android:paddingLeft="@dimen/qs_edit_text_container_padding" android:paddingRight="@dimen/qs_edit_text_container_padding" android:focusable="false" android:clickable="false" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/qs_setting_edit_text_top_margin" android:layout_marginBottom="@dimen/qs_setting_edit_text_bottom_margin" android:minWidth="@dimen/qs_setting_edit_text_min_width" android:minHeight="@dimen/qs_setting_edit_text_min_height" android:text="@string/qs_edit_title" android:fontFamily="sec" android:textFontWeight="600" />
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout android:orientation="vertical" android:id="@id/open_quick_settings" android:background="@drawable/qs_setting_edit_button_ripple" android:focusable="true" android:visibility="gone" android:clickable="true" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="14.0dip">
+                <include layout="@layout/qs_setting_edit_content_button" />
+            </LinearLayout>
+            <LinearLayout android:orientation="vertical" android:id="@id/popup_container" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="14.0dip" />
+            <LinearLayout android:orientation="vertical" android:id="@id/isolated_buttons" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <LinearLayout android:orientation="vertical" android:id="@id/multi_sim" android:background="@drawable/qs_setting_edit_button_ripple" android:focusable="true" android:visibility="gone" android:clickable="true" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="14.0dip">
+                    <include layout="@layout/qs_setting_edit_content_button" />
+                </LinearLayout>
+                <LinearLayout android:orientation="vertical" android:id="@id/smart_view" android:background="@drawable/qs_setting_edit_button_ripple" android:focusable="true" android:visibility="gone" android:clickable="true" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="14.0dip">
+                    <include layout="@layout/qs_setting_edit_content_button" />
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout android:orientation="vertical" android:id="@id/separate_panel" android:background="@drawable/qs_setting_edit_button_ripple" android:focusable="true" android:clickable="true" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="14.0dip">
+                <include layout="@layout/qs_setting_edit_content_button" />
+            </LinearLayout>
+            <LinearLayout android:orientation="vertical" android:id="@id/contact_us" android:background="@drawable/qs_setting_edit_button_ripple" android:focusable="true" android:clickable="true" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="14.0dip">
+                <include layout="@layout/qs_setting_edit_content_button" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:androidprv="http://schemas.android.com/apk/prv/res/android">
+    <item android:state_focused="true">
+        <inset android:inset="-5.0dip">
+            <shape>
+                <corners android:radius="16.0dip" />
+                <stroke android:width="3.0dip" android:color="?android:^attr-private/materialColorSurfaceBright" />
+            </shape>
+        </inset>
+    </item>
+</selector>

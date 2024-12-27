@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="abc_slice_duration_days">
+        <item quantity="other">Há %d dias.</item>
+        <item quantity="one">Há %d dia.</item>
+    </plurals>
+    <plurals name="abc_slice_duration_min">
+        <item quantity="other">Há %d minutos.</item>
+        <item quantity="one">Há %d minuto.</item>
+    </plurals>
+    <plurals name="abc_slice_duration_years">
+        <item quantity="other">Há %d anos.</item>
+        <item quantity="one">Há %d ano.</item>
+    </plurals>
+    <plurals name="controls_item_number_of_favorites">
+        <item quantity="other">%d itens selecionados</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d item selecionado</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="globalactions_force_restart_message">
+        <item quantity="other">Prima sem soltar o Botão lateral e o Botão de diminuir volume simultaneamente durante mais de %d segundos, para reiniciar o seu telefone.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Prima sem soltar o Botão lateral e o Botão de diminuir volume simultaneamente durante mais de %d segundo, para reiniciar o seu telefone.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_attempt_left">
+        <item quantity="other">Restam %d tentativas</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Resta %d tentativa</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_attempt_left_before_permanent_locking">
+        <item quantity="other">Restam %d tentativas antes do bloqueio permanente</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Resta %d tentativa antes do bloqueio permanente</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_secure_attempts_to_unlock_with_fingerprints">
+        <item quantity="other">%d tentativas para desbloquear com impressões digitais.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d tentativa para desbloquear com impressões digitais.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_by_biometrics">
+        <item quantity="other">%d tentativas incorretas de verificar dados biométricos.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d tentativa incorreta de verificar dados biométricos.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_by_face">
+        <item quantity="other">%d tentativas incorretas de verificar o seu rosto.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d tentativa incorreta de verificar o seu rosto.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_by_fingerprint">
+        <item quantity="other">%d tentativas incorretas de verificar impressões digitais.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d tentativa incorreta de verificar impressões digitais.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_1_hour_and_min">
+        <item quantity="other">Tente novamente em 1 hora e %d minutos</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Tente novamente em 1 hora e %d minuto</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_biometric">
+        <item quantity="other">Tente os seus dados biométricos novamente em %d segundos</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Tente os seus dados biométricos novamente em %d segundo</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_face">
+        <item quantity="other">Tentar o reconhecimento de rosto novamente dentro de %d segundos</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Tentar o reconhecimento de rosto novamente dentro de %d segundo</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_fingerprint">
+        <item quantity="other">Tente a sua impressão digital novamente em %d segundos</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Tente a sua impressão digital novamente em %d segundo</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_hour">
+        <item quantity="other">Tente novamente em %d horas</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Tente novamente em %d hora</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_hour_and_1_min">
+        <item quantity="other">Tente novamente em %d horas e 1 minuto</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Tente novamente em %d hora e 1 minuto</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_min">
+        <item quantity="other">Tente novamente em %d minutos</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Tente novamente em %d minuto</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_sec">
+        <item quantity="other">Tente novamente dentro de %d segundos</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Tente novamente dentro de %d segundo</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_countdown">
+        <item quantity="other">Tente novamente dentro de %d segundos.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Tente novamente dentro de %d segundo.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_ucm_attempt_left">
+        <item quantity="other">Restam %d tentativas</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Resta %d tentativa</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="mtrl_badge_content_description">
+        <item quantity="other">%d novas notificações</item>
+        <item quantity="one">%d nova notificação</item>
+    </plurals>
+    <plurals name="n_speakers">
+        <item quantity="other">%d altifalantes</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d altifalante</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="notification_insignificant_title">
+        <item quantity="other">Mais %d notificações</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Mais %d notificação</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ongoing_activity_chip_count">
+        <item quantity="other">Mais %d Notificações em tempo real</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Mais %d Notificação em tempo real</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="plural_notification_count">
+        <item quantity="other">%d notificações</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d notificação</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_qs_add_minimum">
+        <item quantity="other">%d botões requeridos.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d botão requerido.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_qs_dnd_detail_fhl_hours_option">
+        <item quantity="other">Durante %d horas</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Durante %d hora</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_qs_unable_add_maximum">
+        <item quantity="other">Impossível adicionar mais de %d botões.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Impossível adicionar mais de %d botão.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_qs_unable_remove_minimum">
+        <item quantity="other">Impossível remover botão. O Painel instantâneo tem de ter pelo menos %d botões.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Impossível remover botão. O Painel instantâneo tem de ter pelo menos %d botão.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_qs_video_call_effects_num">
+        <item quantity="other">%d efeitos</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d efeito</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="subscreen_notification_smart_reply_child_account_dialog_content">
+        <item quantity="other">Tem de ter pelo menos %d anos de idade para utilizar as funcionalidades de inteligência avançada da Galaxy AI.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Tem de ter pelo menos %d ano de idade para utilizar as funcionalidades de inteligência avançada da Galaxy AI.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

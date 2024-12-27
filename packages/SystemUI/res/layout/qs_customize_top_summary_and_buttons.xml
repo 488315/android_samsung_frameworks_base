@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:id="@id/qs_customize_top_summary_buttons" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <FrameLayout android:gravity="center_vertical" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="13.0dip" android:minHeight="@dimen/qs_edit_buttons_height" android:paddingHorizontal="@dimen/qs_edit_done_reset_button_margin">
+        <FrameLayout android:layout_gravity="left" android:id="@id/left_button" style="@style/SecCustomizeButtonStyle">
+            <TextView android:id="@id/button_text" android:text="@string/quick_settings_reset" style="@style/SecCustomizeButtonTextStyle" />
+        </FrameLayout>
+        <FrameLayout android:layout_gravity="right" android:id="@id/right_button" style="@style/SecCustomizeButtonStyle">
+            <TextView android:id="@id/button_text" android:text="@string/sec_quick_settings_done" style="@style/SecCustomizeButtonTextStyle" />
+        </FrameLayout>
+    </FrameLayout>
+    <LinearLayout android:gravity="center" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginVertical="@dimen/qs_edit_available_active_between_margin" android:paddingHorizontal="@dimen/qs_edit_done_reset_button_margin">
+        <TextView android:ellipsize="marquee" android:id="@id/qs_edit_summary" android:text="@string/qp_edit_button_summary" style="@style/SecCustomizeSummaryStyle" />
+        <TextView android:id="@id/qs_edit_more_summary" android:visibility="gone" android:text="@plurals/sec_qs_add_minimum" style="@style/SecCustomizeSummaryStyle" />
+    </LinearLayout>
+</LinearLayout>

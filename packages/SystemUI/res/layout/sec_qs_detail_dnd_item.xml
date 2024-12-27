@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="center_vertical" android:orientation="vertical" android:background="@drawable/detail_btn_borderless_rect" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:gravity="center_vertical" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content" android:minHeight="@dimen/qs_detail_dnd_item_height">
+        <CheckedTextView android:textSize="@dimen/qs_detail_dnd_check_text_size" android:textColor="@color/dnd_detail_unselected_text_color" android:id="@id/check_text" android:checkMark="@null" style="@style/dndTile_checkbox_style" />
+        <TextView android:textSize="@dimen/qs_detail_dnd_check_summary_text_size" android:textColor="@color/dnd_detail_unselected_text_summary_color" android:id="@id/check_summary" android:visibility="gone" android:minHeight="@dimen/qs_detail_dnd_check_summary_text_height" style="@style/dndTile_checkbox_style" />
+    </LinearLayout>
+    <View android:layout_gravity="center_horizontal" android:id="@id/divider" android:background="@color/dnd_detail_divider_color" android:layout_width="fill_parent" android:layout_height="@dimen/qs_toggle_divider_height" />
+</LinearLayout>

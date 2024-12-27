@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge android:layout_gravity="end|center" android:id="@id/connected_display_chip" android:layout_width="wrap_content" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <FrameLayout android:gravity="center" android:layout_gravity="center" android:id="@id/icons_rounded_container" android:background="@drawable/statusbar_chip_bg" android:clipToPadding="false" android:layout_width="wrap_content" android:layout_height="@dimen/ongoing_appops_chip_height" android:maxWidth="@dimen/ongoing_appops_chip_max_width" android:minWidth="@dimen/ongoing_appops_chip_min_width" android:clipToOutline="true">
+        <ImageView android:layout_gravity="center" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/sec_stat_sys_connected_display" android:scaleType="centerInside" android:tint="@android:color/black" android:layout_marginHorizontal="10.0dip" android:layout_marginVertical="3.0dip" />
+    </FrameLayout>
+</merge>

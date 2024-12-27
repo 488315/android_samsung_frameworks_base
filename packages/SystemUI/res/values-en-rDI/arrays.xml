@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="battery_labels">
+        <item>IDS_ST_BODY_0P</item>
+        <item>IDS_ST_BODY_50P</item>
+        <item>IDS_ST_BODY_100P</item>
+    </string-array>
+    <string-array name="subscreen_quick_reply_list">
+        <item>WDS_IME_MBODY_YES_M_TEMPLATE_ABB</item>
+        <item>WDS_IME_NPBODY_YES_PLEASE</item>
+        <item>WDS_IME_MBODY_OK_M_TEMPLATE_ABB</item>
+        <item>WDS_IME_MBODY_NO_M_TEMPLATE_ABB</item>
+        <item>WDS_IME_NPBODY_NO_THANKS</item>
+        <item>WDS_IME_MBODY_NOPE_M_TEMPLATE_ABB</item>
+        <item>WDS_IME_MBODY_THANKS_M_TEMPLATE_ABB</item>
+        <item>WDS_IME_NPBODY_MUCH_APPRECIATED_ABB</item>
+        <item>WDS_WMGR_MBODY_ON_MY_WAY_M_TEXT_TEMPLATE_ABB</item>
+        <item>WDS_WMGR_MBODY_WHATS_UP_Q_M_TEXT_TEMPLATE_ABB</item>
+        <item>WDS_IME_NPBODY_LATER</item>
+        <item>WDS_WMGR_MBODY_NICE_M_TEXT_TEMPLATE_ABB</item>
+        <item>WDS_WMGR_MBODY_I_AGREE_M_TEXT_TEMPLATE_ABB</item>
+        <item>WDS_WMGR_MBODY_GREAT_E_M_TEXT_TEMPLATE_ABB</item>
+        <item>WDS_WMGR_MBODY_WHAT_Q_M_TEXT_TEMPLATE_ABB</item>
+        <item>WDS_WMGR_MBODY_OMG_E_M_TEXT_TEMPLATE_ABB</item>
+    </string-array>
+</resources>

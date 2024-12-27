@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="center" android:layout_gravity="center_vertical" android:id="@id/subscreen_noti_list_icon_layout" android:layout_width="@dimen/subscreen_noti_list_icon_area_width_b5" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <FrameLayout android:layout_gravity="center_vertical" android:layout_width="wrap_content" android:layout_height="wrap_content">
+        <ImageView android:id="@id/group_icon_shadow" android:focusable="false" android:visibility="gone" android:layout_width="@dimen/subscreen_noti_icon_size_b5" android:layout_height="@dimen/subscreen_noti_icon_size_b5" android:layout_marginTop="4.0dip" android:src="@drawable/subscreen_notification_icon_circle" android:importantForAccessibility="no" android:layout_alignParentStart="true" />
+        <ImageView android:id="@id/app_icon" android:layout_width="@dimen/subscreen_noti_icon_size_b5" android:layout_height="@dimen/subscreen_noti_icon_size_b5" android:antialias="true" android:adjustViewBounds="true" />
+        <ImageView android:id="@id/icon" android:padding="@dimen/subscreen_noti_icon_circle_padding_b5" android:layout_width="@dimen/subscreen_noti_icon_size_b5" android:layout_height="@dimen/subscreen_noti_icon_size_b5" />
+        <ImageView android:id="@id/icon_conversation" android:visibility="gone" android:layout_width="@dimen/subscreen_noti_conversation_icon_size_b5" android:layout_height="@dimen/subscreen_noti_conversation_icon_size_b5" />
+        <ImageView android:layout_gravity="bottom" android:id="@id/subscreen_notification_sub_icon" android:visibility="gone" android:layout_width="@dimen/subscreen_noti_sub_icon_size_b5" android:layout_height="@dimen/subscreen_noti_sub_icon_size_b5" android:antialias="true" android:adjustViewBounds="true" android:layout_marginStart="@dimen/subscreen_noti_sub_icon_margin_start_b5" />
+        <ImageView android:layout_gravity="bottom" android:id="@id/subscreen_notification_important_badge_ring" android:visibility="gone" android:clipToPadding="false" android:layout_width="@dimen/subscreen_noti_sub_icon_size_b5" android:layout_height="@dimen/subscreen_noti_sub_icon_size_b5" android:antialias="true" android:scaleType="center" android:adjustViewBounds="true" android:layout_marginStart="@dimen/subscreen_noti_sub_icon_margin_start_b5" android:forceHasOverlappingRendering="false" />
+    </FrameLayout>
+</LinearLayout>

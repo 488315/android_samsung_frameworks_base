@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="controls_item_number_of_favorites">
+        <item quantity="other">%d elementu hautatu dira</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d elementu hautatu da</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="globalactions_force_restart_message">
+        <item quantity="other">Telefonoa berrabiarazteko, sakatu eta eutsi Funtzioa botoiari eta Bolumena jaisteko botoiari aldi berean %d segundoz gutxienez.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Telefonoa berrabiarazteko, sakatu eta eutsi Funtzioa botoiari eta Bolumena jaisteko botoiari aldi berean %d segundoz gutxienez.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_attempt_left">
+        <item quantity="other">%d saiakera geratzen dira</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d saiakera geratzen da</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_attempt_left_before_permanent_locking">
+        <item quantity="other">%d saiakera geratzen zaizkizu betiko blokeatu aurretik</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d saiakera geratzen zaizu betiko blokeatu aurretik</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_secure_attempts_to_unlock_with_fingerprints">
+        <item quantity="other">Hatz aztarna bidez desblokeatzeko %d saiakera.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Hatz aztarna bidez desblokeatzeko %d saiakera.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_by_biometrics">
+        <item quantity="other">Datu biometrikoak egiaztatzeko %d saiakera oker egin dira.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Datu biometrikoak egiaztatzeko %d saiakera oker egin da.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_by_face">
+        <item quantity="other">Aurpegia egiaztatzeko %d saiakera oker egin dira.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Aurpegia egiaztatzeko %d saiakera oker egin da.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_by_fingerprint">
+        <item quantity="other">Hatz aztarnak egiaztatzeko %d saiakera oker egin dira.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Hatz aztarnak egiaztatzeko %d saiakera oker egin da.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_1_hour_and_min">
+        <item quantity="other">Saiatu berriz 1 ordu eta %d minutu barru</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Saiatu berriz 1 ordu eta %d minutu barru</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_biometric">
+        <item quantity="other">Probatu datu biometrikoak berriz %d segundo barru</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Probatu datu biometrikoak berriz %d segundo barru</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_face">
+        <item quantity="other">Ekin berriz aurpegi bidezko hautemateari %d segundo barru</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Ekin berriz aurpegi bidezko hautemateari %d segundo barru</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_fingerprint">
+        <item quantity="other">Probatu hatz aztarnak berriz %d segundo barru</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Probatu hatz aztarnak berriz %d segundo barru</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_hour">
+        <item quantity="other">Saiatu berriz %d ordu barru</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Saiatu berriz %d ordu barru</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_hour_and_1_min">
+        <item quantity="other">Saiatu berriz %d ordu eta 1 minutu barru</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Saiatu berriz %d ordu eta 1 minutu barru</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_min">
+        <item quantity="other">Saiatu berriz %d minutu barru</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Saiatu berriz %d minutu barru</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_sec">
+        <item quantity="other">Saiatu berriz %d segundo barru</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Saiatu berriz %d segundo barru</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_countdown">
+        <item quantity="other">Saiatu berriz %d segundo barru.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Saiatu berriz %d segundo barru.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_ucm_attempt_left">
+        <item quantity="other">%d saiakera geratzen dira</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d saiakera geratzen da</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="n_speakers">
+        <item quantity="other">%d bozgorailu</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d bozgorailu</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="notification_insignificant_title">
+        <item quantity="other">Beste %d jakinarazpen</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Beste %d jakinarazpen</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ongoing_activity_chip_count">
+        <item quantity="other">Zuzeneko beste %d jakinarazpen</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Zuzeneko beste jakinarazpen %d</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="plural_notification_count">
+        <item quantity="other">%d jakinarazpen</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d jakinarazpen</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_qs_add_minimum">
+        <item quantity="other">%d botoi behar dira.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d botoi behar da.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_qs_dnd_detail_fhl_hours_option">
+        <item quantity="other">%d orduz</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d orduz</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_qs_unable_add_maximum">
+        <item quantity="other">Gehienez ere %d botoi gehi daitezke.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Gehienez ere %d botoi gehi daiteke.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_qs_unable_remove_minimum">
+        <item quantity="other">Ezin da kendu botoia. Panel azkarrak %d ikono izan behar ditu gutxienez.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Ezin da kendu botoia. Panel azkarrak %d ikono izan behar du gutxienez.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_qs_video_call_effects_num">
+        <item quantity="other">%d efektu</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d efektu</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="subscreen_notification_smart_reply_child_account_dialog_content">
+        <item quantity="other">Gutxienez %d urte izan behar dituzu Galaxy AI-ren adimen aurreratuko eginbideak erabiltzeko.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Gutxienez %d urte izan behar duzu Galaxy AI-ren adimen aurreratuko eginbideak erabiltzeko.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

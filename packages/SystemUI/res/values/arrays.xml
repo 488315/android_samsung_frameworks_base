@@ -1,0 +1,1667 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="animator_duration_scale_entries">
+        <item>Animation off</item>
+        <item>Animation scale .5x</item>
+        <item>Animation scale 1x</item>
+        <item>Animation scale 1.5x</item>
+        <item>Animation scale 2x</item>
+        <item>Animation scale 5x</item>
+        <item>Animation scale 10x</item>
+    </string-array>
+    <string-array name="animator_duration_scale_values">
+        <item>0</item>
+        <item>.5</item>
+        <item>1</item>
+        <item>1.5</item>
+        <item>2</item>
+        <item>5</item>
+        <item>10</item>
+    </string-array>
+    <string-array name="app_process_limit_entries">
+        <item>Standard limit</item>
+        <item>No background processes</item>
+        <item>At most 1 process</item>
+        <item>At most 2 processes</item>
+        <item>At most 3 processes</item>
+        <item>At most 4 processes</item>
+    </string-array>
+    <string-array name="app_process_limit_values">
+        <item>-1</item>
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+    <array name="avatar_image_descriptions" />
+    <array name="avatar_images" />
+    <array name="background_style1">
+        <item>@drawable/rounded_ripple</item>
+    </array>
+    <array name="background_style2">
+        <item>@drawable/left_rounded_ripple</item>
+        <item>@drawable/right_rounded_ripple</item>
+    </array>
+    <array name="background_style3">
+        <item>@drawable/left_rounded_ripple</item>
+        <item>@drawable/square_ripple</item>
+        <item>@drawable/right_rounded_ripple</item>
+    </array>
+    <array name="background_style4">
+        <item>@drawable/left_rounded_ripple</item>
+        <item>@drawable/square_ripple</item>
+        <item>@drawable/square_ripple</item>
+        <item>@drawable/right_rounded_ripple</item>
+    </array>
+    <string-array name="battery_labels">
+        <item>0%</item>
+        <item>50%</item>
+        <item>100%</item>
+    </string-array>
+    <string-array name="battery_options">
+        <item>Always show percentage</item>
+        <item>Show percentage when charging (default)</item>
+        <item>"Don't show this icon"</item>
+    </string-array>
+    <integer-array name="batterymeter_bolt_points">
+        <item>73</item>
+        <item>0</item>
+        <item>392</item>
+        <item>0</item>
+        <item>201</item>
+        <item>259</item>
+        <item>442</item>
+        <item>259</item>
+        <item>4</item>
+        <item>703</item>
+        <item>157</item>
+        <item>334</item>
+        <item>0</item>
+        <item>334</item>
+    </integer-array>
+    <integer-array name="batterymeter_color_levels">
+        <item>15</item>
+        <item>100</item>
+    </integer-array>
+    <array name="batterymeter_color_values">
+        <item>?android:colorError</item>
+        <item>@android:color/white</item>
+    </array>
+    <integer-array name="batterymeter_plus_points">
+        <item>3</item>
+        <item>0</item>
+        <item>5</item>
+        <item>0</item>
+        <item>5</item>
+        <item>3</item>
+        <item>8</item>
+        <item>3</item>
+        <item>8</item>
+        <item>5</item>
+        <item>5</item>
+        <item>5</item>
+        <item>5</item>
+        <item>8</item>
+        <item>3</item>
+        <item>8</item>
+        <item>3</item>
+        <item>5</item>
+        <item>0</item>
+        <item>5</item>
+        <item>0</item>
+        <item>3</item>
+        <item>3</item>
+        <item>3</item>
+    </integer-array>
+    <array name="biometric_dialog_package_names_for_logo_with_overrides" />
+    <string-array name="bluetooth_a2dp_codec_bits_per_sample_summaries">
+        <item>Use System Selection (Default)</item>
+        <item>16 bits/sample</item>
+        <item>24 bits/sample</item>
+        <item>32 bits/sample</item>
+    </string-array>
+    <string-array name="bluetooth_a2dp_codec_bits_per_sample_titles">
+        <item>Use System Selection (Default)</item>
+        <item>16 bits/sample</item>
+        <item>24 bits/sample</item>
+        <item>32 bits/sample</item>
+    </string-array>
+    <string-array name="bluetooth_a2dp_codec_channel_mode_summaries">
+        <item>Use System Selection (Default)</item>
+        <item>Mono</item>
+        <item>Stereo</item>
+    </string-array>
+    <string-array name="bluetooth_a2dp_codec_channel_mode_titles">
+        <item>Use System Selection (Default)</item>
+        <item>Mono</item>
+        <item>Stereo</item>
+    </string-array>
+    <string-array name="bluetooth_a2dp_codec_ldac_playback_quality_summaries">
+        <item>Optimized for Audio Quality</item>
+        <item>Balanced Audio And Connection Quality</item>
+        <item>Optimized for Connection Quality</item>
+        <item>Best Effort (Adaptive Bit Rate)</item>
+    </string-array>
+    <string-array name="bluetooth_a2dp_codec_ldac_playback_quality_titles">
+        <item>Optimized for Audio Quality (990kbps/909kbps)</item>
+        <item>Balanced Audio And Connection Quality (660kbps/606kbps)</item>
+        <item>Optimized for Connection Quality (330kbps/303kbps)</item>
+        <item>Best Effort (Adaptive Bit Rate)</item>
+    </string-array>
+    <string-array name="bluetooth_a2dp_codec_sample_rate_summaries">
+        <item>Use System Selection (Default)</item>
+        <item>44.1 kHz</item>
+        <item>48.0 kHz</item>
+        <item>88.2 kHz</item>
+        <item>96.0 kHz</item>
+    </string-array>
+    <string-array name="bluetooth_a2dp_codec_sample_rate_titles">
+        <item>Use System Selection (Default)</item>
+        <item>44.1 kHz</item>
+        <item>48.0 kHz</item>
+        <item>88.2 kHz</item>
+        <item>96.0 kHz</item>
+    </string-array>
+    <string-array name="bluetooth_a2dp_codec_summaries">
+        <item>Use System Selection (Default)</item>
+        <item>SBC</item>
+        <item>AAC</item>
+        <item>Qualcomm® aptX™ audio</item>
+        <item>Qualcomm® aptX™ HD audio</item>
+        <item>LDAC</item>
+        <item>LC3</item>
+        <item>Opus</item>
+    </string-array>
+    <string-array name="bluetooth_a2dp_codec_titles">
+        <item>Use System Selection (Default)</item>
+        <item>SBC</item>
+        <item>AAC</item>
+        <item>Qualcomm® aptX™ audio</item>
+        <item>Qualcomm® aptX™ HD audio</item>
+        <item>LDAC</item>
+        <item>LC3</item>
+        <item>Opus</item>
+    </string-array>
+    <string-array name="bluetooth_audio_active_device_summaries">
+        <item></item>
+        <item>, active</item>
+        <item>, active (media)</item>
+        <item>, active (phone)</item>
+    </string-array>
+    <string-array name="bluetooth_avrcp_version_values">
+        <item>avrcp15</item>
+        <item>avrcp13</item>
+        <item>avrcp14</item>
+        <item>avrcp16</item>
+    </string-array>
+    <string-array name="bluetooth_avrcp_versions">
+        <item>AVRCP 1.5 (Default)</item>
+        <item>AVRCP 1.3</item>
+        <item>AVRCP 1.4</item>
+        <item>AVRCP 1.6</item>
+    </string-array>
+    <string-array name="bluetooth_map_version_values">
+        <item>map12</item>
+        <item>map13</item>
+        <item>map14</item>
+    </string-array>
+    <string-array name="bluetooth_map_versions">
+        <item>MAP 1.2 (Default)</item>
+        <item>MAP 1.3</item>
+        <item>MAP 1.4</item>
+    </string-array>
+    <array name="bouncer_pin_shapes">
+        <item>@drawable/pin_dot_shape_1_avd</item>
+        <item>@drawable/pin_dot_shape_2_avd</item>
+        <item>@drawable/pin_dot_shape_3_avd</item>
+        <item>@drawable/pin_dot_shape_4_avd</item>
+        <item>@drawable/pin_dot_shape_5_avd</item>
+        <item>@drawable/pin_dot_shape_6_avd</item>
+    </array>
+    <string-array name="bt_hci_snoop_log_entries">
+        <item>Disabled</item>
+        <item>Enabled Filtered</item>
+        <item>Enabled</item>
+    </string-array>
+    <string-array name="bt_hci_snoop_log_filters_entries">
+        <item>Leave only ACL headers</item>
+        <item>Filter A2DP media packets</item>
+        <item>Filter RFCOMM channel</item>
+    </string-array>
+    <string-array name="bt_hci_snoop_log_filters_values">
+        <item>headers</item>
+        <item>profiles.a2dp</item>
+        <item>profiles.rfcomm</item>
+    </string-array>
+    <string-array name="bt_hci_snoop_log_profile_filter_entries">
+        <item>Disable</item>
+        <item>Fill with string of characters</item>
+        <item>Leave only header</item>
+        <item>Fully remove</item>
+    </string-array>
+    <string-array name="bt_hci_snoop_log_profile_filter_values">
+        <item>disabled</item>
+        <item>magic</item>
+        <item>header</item>
+        <item>fullfilter</item>
+    </string-array>
+    <string-array name="bt_hci_snoop_log_values">
+        <item>disabled</item>
+        <item>filtered</item>
+        <item>full</item>
+    </string-array>
+    <array name="bt_icon_bg_colors">
+        <item>@color/bt_color_bg_1</item>
+        <item>@color/bt_color_bg_2</item>
+        <item>@color/bt_color_bg_3</item>
+        <item>@color/bt_color_bg_4</item>
+        <item>@color/bt_color_bg_5</item>
+        <item>@color/bt_color_bg_6</item>
+        <item>@color/bt_color_bg_7</item>
+    </array>
+    <array name="bt_icon_fg_colors">
+        <item>@color/bt_color_icon_1</item>
+        <item>@color/bt_color_icon_2</item>
+        <item>@color/bt_color_icon_3</item>
+        <item>@color/bt_color_icon_4</item>
+        <item>@color/bt_color_icon_5</item>
+        <item>@color/bt_color_icon_6</item>
+        <item>@color/bt_color_icon_7</item>
+    </array>
+    <string-array name="cached_apps_freezer_entries">
+        <item>@string/cached_apps_freezer_device_default</item>
+        <item>@string/cached_apps_freezer_enabled</item>
+        <item>@string/cached_apps_freezer_disabled</item>
+    </string-array>
+    <string-array name="cached_apps_freezer_values">
+        <item>device_default</item>
+        <item>enabled</item>
+        <item>disabled</item>
+    </string-array>
+    <array name="carrierId_2032_iconOverrides">
+        <item>5G_PLUS</item>
+        <item>@drawable/ic_5g_plus_mobiledata_default</item>
+    </array>
+    <string-array name="clock_options">
+        <item>Show hours, minutes, and seconds</item>
+        <item>Show hours and minutes (default)</item>
+        <item>"Don't show this icon"</item>
+    </string-array>
+    <string-array name="color_mode_descriptions">
+        <item>Enhanced colors</item>
+        <item>Natural colors as seen by the eye</item>
+        <item>Colors optimized for digital content</item>
+    </string-array>
+    <integer-array name="color_mode_ids">
+        <item>0</item>
+        <item>-1</item>
+        <item>7</item>
+    </integer-array>
+    <string-array name="color_mode_names">
+        <item>Vibrant (default)</item>
+        <item>Natural</item>
+        <item>Standard</item>
+    </string-array>
+    <string-array name="config_MediaPanel_Exclude">
+        <item>com.samsung.android.bixby.agent</item>
+        <item>com.samsung.android.app.notes</item>
+    </string-array>
+    <string-array name="config_appsSupportMultiInstancesSplit">
+        <item>com.android.chrome</item>
+    </string-array>
+    <integer-array name="config_cameraLaunchGestureVibePattern">
+        <item>0</item>
+        <item>400</item>
+    </integer-array>
+    <array name="config_collapsed_statusbar_icon_blocklist">
+        <item>@null</item>
+        <item>@null</item>
+        <item>@null</item>
+    </array>
+    <array name="config_communalWidgetAllowlist" />
+    <string-array name="config_controlsPreferredPackages">
+        <item>com.google.android.apps.chromecast.app</item>
+    </string-array>
+    <integer-array name="config_doze_brightness_sensor_to_brightness">
+        <item>-1</item>
+        <item>2</item>
+        <item>5</item>
+        <item>27</item>
+        <item>28</item>
+    </integer-array>
+    <integer-array name="config_doze_brightness_sensor_to_scrim_opacity">
+        <item>-1</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+    </integer-array>
+    <array name="config_face_acquire_device_entry_ignorelist" />
+    <array name="config_face_auth_props" />
+    <integer-array name="config_face_auth_wake_up_triggers">
+        <item>1</item>
+        <item>4</item>
+        <item>6</item>
+        <item>7</item>
+        <item>9</item>
+        <item>12</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+    </integer-array>
+    <array name="config_face_help_msgs_defer_until_timeout" />
+    <integer-array name="config_face_help_msgs_ignore">
+        <item>20</item>
+        <item>23</item>
+        <item>24</item>
+    </integer-array>
+    <integer-array name="config_face_help_msgs_when_fingerprint_enrolled">
+        <item>3</item>
+        <item>25</item>
+        <item>26</item>
+    </integer-array>
+    <integer-array name="config_face_help_msgs_when_fingerprint_enrolled_unfolded">
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>25</item>
+        <item>26</item>
+    </integer-array>
+    <array name="config_fingerprint_listen_on_occluding_activity_packages" />
+    <array name="config_inner_face_auth_props" />
+    <string-array name="config_keyguardQuickAffordanceDefaults">
+        <item>bottom_start:home</item>
+        <item>bottom_end:wallet</item>
+    </string-array>
+    <string-array name="config_keyguardQuickAffordanceSlots">
+        <item>bottom_start:1</item>
+        <item>bottom_end:1</item>
+    </string-array>
+    <array name="config_keyguard_statusbar_icon_blocklist">
+        <item>@null</item>
+        <item>@null</item>
+        <item>@null</item>
+    </array>
+    <integer-array name="config_notification_snooze_times">
+        <item>15</item>
+        <item>30</item>
+        <item>60</item>
+        <item>120</item>
+    </integer-array>
+    <string-array name="config_pluginAllowlist">
+        <item>com.android.systemui</item>
+        <item>com.samsung.android.app.aodservice</item>
+        <item>com.samsung.android.app.clockpack</item>
+    </string-array>
+    <string-array name="config_quickSettingsAutoAdd">
+        <item>accessibility_font_scaling_has_been_changed:font_scaling</item>
+    </string-array>
+    <array name="config_quickSettingsHearingDevicesRelatedToolIcon" />
+    <array name="config_quickSettingsHearingDevicesRelatedToolName" />
+    <array name="config_roundedCornerBottomDrawableArray">
+        <item>@drawable/rounded_corner_bottom</item>
+        <item>@drawable/rounded_corner_bottom_secondary</item>
+    </array>
+    <array name="config_roundedCornerDrawableArray">
+        <item>@drawable/rounded</item>
+        <item>@drawable/rounded_secondary</item>
+    </array>
+    <array name="config_roundedCornerTopDrawableArray">
+        <item>@drawable/rounded_corner_top</item>
+        <item>@drawable/rounded_corner_top_secondary</item>
+    </array>
+    <string-array name="config_safeUIServiceComponents">
+        <item>com.android.systemui.statusbar.phone.SafeUIStatusBarWindowController</item>
+    </string-array>
+    <array name="config_statusBarIconsToExclude">
+        <item>@null</item>
+        <item>@null</item>
+    </array>
+    <string-array name="config_status_bar_system_icon_allowlist">
+        <item>@string/status_bar_remote_lock</item>
+        <item>@null</item>
+        <item>@null</item>
+        <item>@null</item>
+        <item>@null</item>
+        <item>@null</item>
+        <item>@null</item>
+        <item>@null</item>
+        <item>@null</item>
+        <item>@null</item>
+        <item>@null</item>
+        <item>@null</item>
+        <item>@null</item>
+        <item>@null</item>
+        <item>@null</item>
+        <item>@null</item>
+    </string-array>
+    <string-array name="config_systemUIServiceComponentsPerUser">
+        <item>com.android.systemui.util.NotificationChannels</item>
+    </string-array>
+    <string-array name="debug_hw_overdraw_entries">
+        <item>Off</item>
+        <item>Show overdraw areas</item>
+        <item>Show areas for Deuteranomaly</item>
+    </string-array>
+    <string-array name="debug_hw_overdraw_values">
+        <item>false</item>
+        <item>show</item>
+        <item>show_deuteranomaly</item>
+    </string-array>
+    <array name="doze_brightness_sensor_name_posture_mapping" />
+    <integer-array name="doze_single_tap_uses_prox_posture_mapping">
+        <item>1</item>
+        <item>1</item>
+        <item>1</item>
+        <item>1</item>
+    </integer-array>
+    <string-array name="drag_and_drop_multi_instance_allow_list">
+        <item>Y29tLm1pY3Jvc29mdC5vZmZpY2Uub2ZmaWNlaHVicm93</item>
+        <item>Y29tLm1pY3Jvc29mdC50ZWFtcw==</item>
+    </string-array>
+    <string-array name="drag_and_split_calling_package_block_list">
+        <item>android.server.wm.dndsourceapp</item>
+    </string-array>
+    <string-array name="drag_and_split_mime_type_block_list">
+        <item>application/vnd.android.package-archive</item>
+        <item>application/octet-stream</item>
+    </string-array>
+    <string-array name="drag_and_split_multi_instance_block_list_until_support_aosp_multi_instance">
+        <item>Y29tLmFuZHJvaWQuY2hyb21l</item>
+    </string-array>
+    <string-array name="enable_opengl_traces_entries">
+        <item>None</item>
+        <item>Logcat</item>
+        <item>Systrace (Graphics)</item>
+        <item>Call stack on glGetError</item>
+    </string-array>
+    <string-array name="enable_opengl_traces_values">
+        <item>0</item>
+        <item>1</item>
+        <item>systrace</item>
+        <item>error</item>
+    </string-array>
+    <string-array name="entryvalues_font_size">
+        <item>0.85</item>
+        <item>1.0</item>
+        <item>1.15</item>
+        <item>1.30</item>
+        <item>1.50</item>
+        <item>1.80</item>
+        <item>2.0</item>
+    </string-array>
+    <string-array name="grammatical_gender_entries">
+        <item>@string/not_specified</item>
+        <item>@string/neuter</item>
+        <item>@string/feminine</item>
+        <item>@string/masculine</item>
+    </string-array>
+    <string-array name="grammatical_gender_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+    <string-array name="hdcp_checking_summaries">
+        <item>Never use HDCP checking</item>
+        <item>Use HDCP checking for DRM content only</item>
+        <item>Always use HDCP checking</item>
+    </string-array>
+    <string-array name="hdcp_checking_titles">
+        <item>Never check</item>
+        <item>Check for DRM content only</item>
+        <item>Always check</item>
+    </string-array>
+    <string-array name="hdcp_checking_values">
+        <item>never</item>
+        <item>drm-only</item>
+        <item>always</item>
+    </string-array>
+    <string-array name="lockscreen_num_pad_klondike">
+        <item>+</item>
+        <item></item>
+        <item>ABC</item>
+        <item>DEF</item>
+        <item>GHI</item>
+        <item>JKL</item>
+        <item>MNO</item>
+        <item>PQRS</item>
+        <item>TUV</item>
+        <item>WXYZ</item>
+    </string-array>
+    <array name="multisim_esim_icon_res_id_list">
+        <item>@drawable/quick_panel_icon_esim_preffered_slot_1</item>
+        <item>@drawable/quick_panel_icon_esim_preffered_slot_2</item>
+        <item>@drawable/quick_panel_icon_esim_preffered_slot_travel</item>
+        <item>@drawable/quick_panel_icon_esim_preffered_slot_business_trip</item>
+        <item>@drawable/quick_panel_icon_esim_preffered_slot_call</item>
+        <item>@drawable/quick_panel_icon_esim_preffered_slot_sms</item>
+        <item>@drawable/quick_panel_icon_esim_preffered_slot_mms</item>
+        <item>@drawable/quick_panel_icon_esim_preffered_slot_internet</item>
+        <item>@drawable/quick_panel_icon_esim_preffered_slot_home</item>
+        <item>@drawable/quick_panel_icon_esim_preffered_slot_office</item>
+        <item>@drawable/quick_panel_icon_esim_preffered_slot_heart</item>
+        <item>@drawable/quick_panel_icon_esim_preffered_slot_num_01</item>
+        <item>@drawable/quick_panel_icon_esim_preffered_slot_num_02</item>
+        <item>@drawable/quick_panel_icon_esim_preffered_slot_num_03</item>
+    </array>
+    <array name="multisim_psim_icon_res_id_list">
+        <item>@drawable/quick_panel_icon_preffered_slot_1</item>
+        <item>@drawable/quick_panel_icon_preffered_slot_2</item>
+        <item>@drawable/quick_panel_icon_preffered_slot_travel</item>
+        <item>@drawable/quick_panel_icon_preffered_slot_business_trip</item>
+        <item>@drawable/quick_panel_icon_preffered_slot_call</item>
+        <item>@drawable/quick_panel_icon_preffered_slot_sms</item>
+        <item>@drawable/quick_panel_icon_preffered_slot_mms</item>
+        <item>@drawable/quick_panel_icon_preffered_slot_internet</item>
+        <item>@drawable/quick_panel_icon_preffered_slot_home</item>
+        <item>@drawable/quick_panel_icon_preffered_slot_office</item>
+        <item>@drawable/quick_panel_icon_preffered_slot_heart</item>
+        <item>@drawable/quick_panel_icon_preffered_slot_num_01</item>
+        <item>@drawable/quick_panel_icon_preffered_slot_num_02</item>
+        <item>@drawable/quick_panel_icon_preffered_slot_num_03</item>
+    </array>
+    <string-array name="nav_bar_button_values">
+        <item>clipboard</item>
+        <item>key</item>
+        <item>menu_ime</item>
+        <item>space</item>
+    </string-array>
+    <string-array name="nav_bar_buttons">
+        <item>Clipboard</item>
+        <item>Keycode</item>
+        <item>Rotate confirm, keyboard switcher</item>
+        <item>None</item>
+    </string-array>
+    <string-array name="nav_bar_layouts">
+        <item>Normal</item>
+        <item>Compact</item>
+        <item>Left-leaning</item>
+        <item>Right-leaning</item>
+    </string-array>
+    <string-array name="nav_bar_layouts_values">
+        <item>default</item>
+        <item>left;back,home,recent;right</item>
+        <item>left,back,home,recent,right;space;space</item>
+        <item>space;space;left,back,home,recent,right</item>
+    </string-array>
+    <string-array name="overlay_display_devices_entries">
+        <item>None</item>
+        <item>480p</item>
+        <item>480p (secure)</item>
+        <item>720p</item>
+        <item>720p (secure)</item>
+        <item>1080p</item>
+        <item>1080p (secure)</item>
+        <item>4K</item>
+        <item>4K (secure)</item>
+        <item>4K (upscaled)</item>
+        <item>4K (upscaled, secure)</item>
+        <item>720p, 1080p (dual screen)</item>
+    </string-array>
+    <string-array name="overlay_display_devices_values">
+        <item></item>
+        <item>720x480/142</item>
+        <item>720x480/142,secure</item>
+        <item>1280x720/213</item>
+        <item>1280x720/213,secure</item>
+        <item>1920x1080/320</item>
+        <item>1920x1080/320,secure</item>
+        <item>3840x2160/320</item>
+        <item>3840x2160/320,secure</item>
+        <item>1920x1080/320|3840x2160/640</item>
+        <item>1920x1080/320|3840x2160/640,secure</item>
+        <item>1280x720/213;1920x1080/320</item>
+    </string-array>
+    <string-array name="people_space_widget_support_cell_size">
+        <item>1x1</item>
+        <item>2x1</item>
+        <item>2x2</item>
+    </string-array>
+    <array name="proximity_sensor_posture_mapping" />
+    <array name="proximity_sensor_secondary_posture_mapping" />
+    <string-array name="quick_settings_flashlight_proper_noun_search_keywords">
+        <item>플래시</item>
+        <item>플래쉬</item>
+        <item>후레시</item>
+        <item>후레쉬</item>
+        <item>flash</item>
+        <item>flashlight</item>
+    </string-array>
+    <string-array name="sec_bluetooth_a2dp_codec_bits_per_sample_summaries">
+        <item>Use System Selection (Default)</item>
+        <item>16 bits/sample</item>
+        <item>24 bits/sample</item>
+        <item>32 bits/sample</item>
+        <item>24/32 bits/sample</item>
+    </string-array>
+    <string-array name="sec_bluetooth_a2dp_codec_bits_per_sample_titles">
+        <item>Use System Selection (Default)</item>
+        <item>16 bits/sample</item>
+        <item>24 bits/sample</item>
+        <item>32 bits/sample</item>
+        <item>24/32 bits/sample</item>
+    </string-array>
+    <string-array name="sec_bluetooth_a2dp_codec_summaries">
+        <item>SBC</item>
+        <item>AAC</item>
+        <item>Qualcomm® aptX™ audio</item>
+        <item>LDAC</item>
+        <item>SSC (Samsung Seamless Codec)</item>
+    </string-array>
+    <string-array name="sec_bluetooth_a2dp_codec_titles">
+        <item>SBC</item>
+        <item>AAC</item>
+        <item>Qualcomm® aptX™ audio</item>
+        <item>LDAC</item>
+        <item>SSC (Samsung Seamless Codec)</item>
+    </string-array>
+    <string-array name="select_logd_size_lowram_titles">
+        <item>Off</item>
+        <item>64K</item>
+        <item>256K</item>
+        <item>1M</item>
+    </string-array>
+    <string-array name="select_logd_size_summaries">
+        <item>Off</item>
+        <item>64K per log buffer</item>
+        <item>256K per log buffer</item>
+        <item>1M per log buffer</item>
+        <item>4M per log buffer</item>
+        <item>8M per log buffer</item>
+    </string-array>
+    <string-array name="select_logd_size_titles">
+        <item>Off</item>
+        <item>64K</item>
+        <item>256K</item>
+        <item>1M</item>
+        <item>4M</item>
+        <item>8M</item>
+    </string-array>
+    <string-array name="select_logd_size_values">
+        <item>32768</item>
+        <item>65536</item>
+        <item>262144</item>
+        <item>1048576</item>
+        <item>4194304</item>
+        <item>8388608</item>
+    </string-array>
+    <string-array name="select_logpersist_summaries">
+        <item>Off</item>
+        <item>All log buffers</item>
+        <item>All but radio log buffers</item>
+        <item>kernel log buffer only</item>
+    </string-array>
+    <string-array name="select_logpersist_titles">
+        <item>Off</item>
+        <item>All</item>
+        <item>All but radio</item>
+        <item>kernel only</item>
+    </string-array>
+    <string-array name="select_logpersist_values">
+        <item></item>
+        <item>all</item>
+        <item>default,security,kernel</item>
+        <item>kernel</item>
+    </string-array>
+    <string-array name="services_always_show_magnification_settings">
+        <item>com.android.switchaccess.SwitchAccessService</item>
+        <item>com.google.android.apps.accessibility.voiceaccess.JustSpeakService</item>
+    </string-array>
+    <string-array name="show_non_rect_clip_entries">
+        <item>Off</item>
+        <item>Draw non-rectangular clip region in blue</item>
+        <item>Highlight tested drawing commands in green</item>
+    </string-array>
+    <string-array name="show_non_rect_clip_values">
+        <item>hide</item>
+        <item>region</item>
+        <item>highlight</item>
+    </string-array>
+    <string-array name="simulate_color_space_entries">
+        <item>@string/daltonizer_mode_disabled</item>
+        <item>@string/daltonizer_mode_monochromacy</item>
+        <item>@string/daltonizer_mode_deuteranomaly</item>
+        <item>@string/daltonizer_mode_protanomaly</item>
+        <item>@string/daltonizer_mode_tritanomaly</item>
+    </string-array>
+    <string-array name="simulate_color_space_values">
+        <item>-1</item>
+        <item>0</item>
+        <item>2</item>
+        <item>1</item>
+        <item>3</item>
+    </string-array>
+    <string-array name="subscreen_quick_reply_list">
+        <item>Yes</item>
+        <item>Yes, please</item>
+        <item>Ok</item>
+        <item>No</item>
+        <item>No Thanks</item>
+        <item>Nope</item>
+        <item>Thanks</item>
+        <item>Much appreciated</item>
+        <item>On my way</item>
+        <item>"What's up?"</item>
+        <item>Later</item>
+        <item>Nice</item>
+        <item>I agree</item>
+        <item>Great!</item>
+        <item>What?</item>
+        <item>OMG!</item>
+    </string-array>
+    <string-array name="sw_blf_color_array">
+        <item>\#08ffb000</item>
+        <item>\#0effae00</item>
+        <item>\#13ffad00</item>
+        <item>\#19ffab00</item>
+        <item>\#1fffa900</item>
+        <item>\#24ffa800</item>
+        <item>\#2bffa600</item>
+        <item>\#32ffa400</item>
+        <item>\#3affa300</item>
+        <item>\#42ffa100</item>
+        <item>\#49ffa000</item>
+    </string-array>
+    <string-array name="system_ui_packages">
+        <item>com.android.keyguard</item>
+        <item>com.android.systemui</item>
+    </string-array>
+    <string-array name="theme_app_icon_drawable">
+        <item>ic_phone_shortcut</item>
+        <item>ic_phone_shortcut</item>
+        <item>ic_phone_shortcut</item>
+        <item>ic_phone_shortcut</item>
+        <item>ic_phone_shortcut</item>
+        <item>ic_phone_shortcut</item>
+        <item>ic_phone_shortcut</item>
+        <item>ic_contact_shortcut</item>
+        <item>ic_contact_shortcut</item>
+        <item>ic_contact_shortcut</item>
+        <item>ic_message_shortcut</item>
+        <item>ic_message_shortcut</item>
+        <item>ic_message_shortcut</item>
+        <item>ic_message_shortcut</item>
+        <item>ic_message_shortcut</item>
+        <item>ic_message_shortcut</item>
+        <item>ic_message_shortcut</item>
+        <item>ic_internet_shortcut</item>
+        <item>ic_internet_shortcut</item>
+        <item>ic_email_shortcut</item>
+        <item>ic_email_shortcut</item>
+        <item>ic_email_shortcut</item>
+        <item>ic_email_shortcut</item>
+        <item>ic_email_shortcut</item>
+        <item>ic_email_shortcut</item>
+        <item>ic_email_shortcut</item>
+        <item>ic_email_shortcut</item>
+        <item>ic_email_shortcut</item>
+        <item>ic_camera_shortcut</item>
+        <item>ic_camera_shortcut</item>
+        <item>ic_gallery_shortcut</item>
+        <item>ic_gallery_shortcut</item>
+        <item>ic_gallery_shortcut</item>
+        <item>ic_gallery_shortcut</item>
+        <item>ic_music_shortcut</item>
+        <item>ic_music_shortcut</item>
+        <item>ic_music_shortcut</item>
+        <item>ic_music_shortcut</item>
+        <item>ic_music_shortcut</item>
+        <item>ic_music_shortcut</item>
+        <item>ic_music_shortcut</item>
+        <item>ic_s_planner_shortcut</item>
+        <item>ic_s_planner_shortcut</item>
+        <item>ic_clock_shortcut</item>
+        <item>ic_clock_shortcut</item>
+        <item>ic_clock_shortcut</item>
+        <item>ic_clock_shortcut</item>
+        <item>ic_clock_shortcut</item>
+        <item>ic_clock_shortcut</item>
+        <item>ic_settings_shortcut</item>
+        <item>ic_settings_shortcut</item>
+        <item>ic_settings_shortcut</item>
+        <item>ic_settings_shortcut</item>
+        <item>ic_settings_shortcut</item>
+        <item>ic_myfiles_shortcut</item>
+        <item>ic_myfiles_shortcut</item>
+        <item>ic_shealth_shortcut</item>
+        <item>ic_shealth_shortcut</item>
+        <item>ic_video_shortcut</item>
+        <item>ic_video_shortcut</item>
+        <item>ic_calculator_shortcut</item>
+        <item>ic_calculator_shortcut</item>
+        <item>ic_smartmanager_shortcut</item>
+        <item>ic_smartmanager_shortcut</item>
+        <item>ic_smartmanager_shortcut</item>
+        <item>ic_smartmanager_shortcut</item>
+        <item>ic_smartmanager_shortcut</item>
+        <item>ic_smartmanager_shortcut</item>
+        <item>1</item>
+        <item>ic_voicerecorder_shortcut</item>
+        <item>ic_voicerecorder_shortcut</item>
+        <item>ic_dmb_shortcut</item>
+        <item>ic_dmb_shortcut</item>
+        <item>ic_dmb_shortcut</item>
+        <item>ic_dmb_shortcut</item>
+        <item>ic_radio_shortcut</item>
+        <item>ic_radio_shortcut</item>
+        <item>ic_notes_shortcut</item>
+        <item>ic_notes_shortcut</item>
+        <item>ic_notes_shortcut</item>
+        <item>ic_notes_shortcut</item>
+        <item>ic_notes_shortcut</item>
+        <item>ic_side_sync_shortcut</item>
+        <item>ic_gear_shortcut</item>
+        <item>ic_samsungpay_shortcut</item>
+        <item>ic_samsungpay_shortcut</item>
+        <item>ic_samsungpay_shortcut</item>
+        <item>ic_samsungpay_shortcut</item>
+        <item>ic_themestore_shortcut</item>
+        <item>ic_themestore_shortcut</item>
+        <item>ic_themestore_shortcut</item>
+        <item>ic_galaxycare_shortcut</item>
+        <item>ic_galaxycare_shortcut</item>
+        <item>ic_galaxycare_shortcut</item>
+        <item>ic_galaxycare_shortcut</item>
+        <item>ic_galaxycare_shortcut</item>
+        <item>ic_penup_shortcut</item>
+        <item>ic_penup_shortcut</item>
+        <item>ic_samsung_connect_shortcut</item>
+        <item>ic_samsung_connect_shortcut</item>
+        <item>ic_tips_shortcut</item>
+        <item>ic_ar_zone_shortcut</item>
+        <item>ic_ar_zone_shortcut</item>
+        <item>ic_bixby_shortcut</item>
+        <item>ic_bixby_shortcut</item>
+        <item>ic_tvplus_shortcut</item>
+        <item>ic_tvplus_shortcut</item>
+        <item>ic_samsung_free_shortcut</item>
+        <item>ic_samsung_free_shortcut</item>
+        <item>ic_galaxy_store_shortcut</item>
+        <item>ic_galaxy_store_shortcut</item>
+        <item>ic_game_launcher_shortcut</item>
+        <item>ic_game_launcher_shortcut</item>
+        <item>ic_galaxy_shop_shortcut</item>
+        <item>ic_galaxy_shop_shortcut</item>
+    </string-array>
+    <string-array name="theme_app_icon_package">
+        <item>com.sec.android.app.contacts.RecntcallEntryActivity</item>
+        <item>com.samsung.android.dialer.finder.LogsFindoSearchResultsActivity</item>
+        <item>com.samsung.android.dialer</item>
+        <item>com.samsung.android.dialer.DialtactsActivity</item>
+        <item>com.samsung.android.incallui</item>
+        <item>com.android.server.telecom</item>
+        <item>com.android.phone</item>
+        <item>com.samsung.android.contacts.activities.PeopleActivity</item>
+        <item>com.samsung.contacts</item>
+        <item>com.samsung.android.app.contacts</item>
+        <item>com.android.mms.ui.ConversationComposer</item>
+        <item>com.android.mms.ui.ComposeMessageMms</item>
+        <item>com.samsung.android.messaging.ui.ConversationComposer</item>
+        <item>com.samsung.android.messaging.ui.ComposeMessageMms</item>
+        <item>com.android.mms</item>
+        <item>com.samsung.android.messaging</item>
+        <item>com.google.android.apps.messaging</item>
+        <item>com.sec.android.app.sbrowser.SBrowserMainActivity</item>
+        <item>com.sec.android.app.sbrowser</item>
+        <item>com.samsung.android.email.provider.Email</item>
+        <item>com.android.email.activity.Welcome</item>
+        <item>com.samsung.android.email.composer.activity.MessageCompose</item>
+        <item>com.samsung.android.email.ui.activity.MessageListXL</item>
+        <item>com.samsung.android.email.widget</item>
+        <item>com.samsung.android.email.ui</item>
+        <item>com.samsung.android.email.composer</item>
+        <item>com.samsung.android.email.provider</item>
+        <item>com.samsung.android.email.sync</item>
+        <item>com.sec.android.app.camera.Camera</item>
+        <item>com.sec.android.app.camera</item>
+        <item>com.sec.android.gallery3d.app.GalleryActivity</item>
+        <item>com.sec.android.gallery3d.app.GalleryOpaqueActivity</item>
+        <item>com.sec.android.gallery3d</item>
+        <item>com.samsung.android.widget.pictureframe</item>
+        <item>com.samsung.android.app.music.common.MusicApplication</item>
+        <item>com.sec.android.app.music.service.PlayerService</item>
+        <item>com.sec.android.app.music.common.activity.MusicMainActivity</item>
+        <item>com.sec.android.app.music</item>
+        <item>com.samsung.android.app.music.chn</item>
+        <item>com.samsung.android.app.music.common.activity.MusicMainActivity</item>
+        <item>com.samsung.android.app.music.service.PlayerService</item>
+        <item>com.samsung.android.calendar</item>
+        <item>com.samsung.android.app.calendar</item>
+        <item>com.sec.android.app.clockpackage.ClockPackage</item>
+        <item>com.sec.android.app.clockpackage.common.activity.ClockPackageApplication</item>
+        <item>com.sec.android.app.clockpackage.alarm.activity.AlarmAddExecutable</item>
+        <item>com.sec.android.app.clockpackage.worldclock.viewmodel.WorldclockGlobeMain</item>
+        <item>com.sec.android.app.clockpackage.alarm.activity.AlarmWidgetListActivity</item>
+        <item>com.sec.android.app.clockpackage</item>
+        <item>com.android.settings.Settings</item>
+        <item>com.android.settings</item>
+        <item>com.android.settings.intelligence</item>
+        <item>com.samsung.android.privacydashboard</item>
+        <item>com.samsung.accessibility</item>
+        <item>com.sec.android.app.myfiles.common.MainActivity</item>
+        <item>com.sec.android.app.myfiles</item>
+        <item>com.samsung.android.app.shealth.home.HomeMainActivity</item>
+        <item>com.sec.android.app.shealth</item>
+        <item>com.samsung.android.videolist.list.activity.VideoList</item>
+        <item>com.samsung.android.videolist</item>
+        <item>com.sec.android.app.popupcalculator.Calculator</item>
+        <item>com.sec.android.app.popupcalculator</item>
+        <item>com.samsung.android.sm.ui.cstyleboard.SmartManagerDashBoardActivity</item>
+        <item>com.samsung.android.sm.app.dashboard.SmartManagerDashBoardActivity</item>
+        <item>com.samsung.android.sm.base.SmApplication</item>
+        <item>com.samsung.android.sm</item>
+        <item>com.samsung.android.lool</item>
+        <item>com.samsung.android.sm_cn</item>
+        <item>1</item>
+        <item>com.sec.android.app.voicenote</item>
+        <item>com.sec.android.app.voicenote.main.VNMainActivity</item>
+        <item>com.sec.android.app.dmb.activity.DMBFullScreenView</item>
+        <item>com.samsung.android.app.dtv.dmb.activity.DMBFullScreenView</item>
+        <item>com.sec.android.app.dmb.activity.DMBFullScreenView</item>
+        <item>com.samsung.android.app.dtv.dmb.activity.DMBFullScreenView</item>
+        <item>com.sec.android.app.fm.MainActivity</item>
+        <item>com.sec.android.app.fm</item>
+        <item>com.samsung.android.app.notes.memolist.MemoListActivity</item>
+        <item>com.samsung.android.app.notes</item>
+        <item>com.samsung.android.app.notes.provider.SDocProvider</item>
+        <item>com.samsung.android.app.notes.provider.NotesSyncProvider</item>
+        <item>com.samsung.android.app.notes.provider.SDocControlProvider</item>
+        <item>com.sec.android.sidesync30.ui.SideSyncActivity</item>
+        <item>om.samsung.android.app.watchmanager</item>
+        <item>com.samsung.android.spay.ui.SpayMainActivity</item>
+        <item>com.samsung.android.spay</item>
+        <item>com.srin.rajaampat.view.activity.SplashScreenActivity</item>
+        <item>com.samsung.android.rajaampat</item>
+        <item>com.samsung.android.themestore.activity.MainActivity</item>
+        <item>com.samsung.android.themestore</item>
+        <item>com.samsung.android.themestore.ThemeApp</item>
+        <item>com.samsung.android.voc.VocApplication</item>
+        <item>com.samsung.android.voc.LauncherActivity</item>
+        <item>com.samsung.android.voc</item>
+        <item>com.samsung.oh</item>
+        <item>com.samsung.oh.MainActivity</item>
+        <item>com.sec.penup</item>
+        <item>com.sec.penup.ui.SplashActivity</item>
+        <item>com.samsung.android.oneconnect.QcApplication.ui.contentssharing.ContentsSharingActivity</item>
+        <item>com.samsung.android.oneconnect.QcApplication</item>
+        <item>com.samsung.android.app.tips</item>
+        <item>com.samsung.android.arzone</item>
+        <item>com.samsung.android.arzone.ARZoneLauncher</item>
+        <item>com.samsung.android.bixby.assistanthome.AssistantHomeLauncherActivity</item>
+        <item>com.samsung.android.bixby.agent</item>
+        <item>com.samsung.android.tvplus</item>
+        <item>com.samsung.android.tvplus.MainActivity</item>
+        <item>com.samsung.android.app.spage</item>
+        <item>com.samsung.android.app.spage.main.LauncherActivity</item>
+        <item>com.sec.android.app.samsungapps</item>
+        <item>com.sec.android.app.samsungapps.SamsungAppsMainActivity</item>
+        <item>com.samsung.android.game.gamehome.activity.StartActivity</item>
+        <item>com.samsung.android.game.gamehome</item>
+        <item>com.samsung.android.galaxy</item>
+        <item>com.samsung.android.galaxy.MainActivity</item>
+    </string-array>
+    <string-array name="tile_ids">
+        <item>Wifi</item>
+        <item>QPBE1001</item>
+        <item>QPBS1001</item>
+        <item>SoundMode</item>
+        <item>QPBE1002</item>
+        <item>QPBS1002</item>
+        <item>Bluetooth</item>
+        <item>QPBE1003</item>
+        <item>QPBS1003</item>
+        <item>RotationLock</item>
+        <item>QPBE1004</item>
+        <item>QPBS1004</item>
+        <item>AirplaneMode</item>
+        <item>QPBE1005</item>
+        <item>QPBS1005</item>
+        <item>Flashlight</item>
+        <item>QPBE1006</item>
+        <item>QPBS1006</item>
+        <item>BatteryMode</item>
+        <item>QPBE1007</item>
+        <item>QPBS1007</item>
+        <item>PowerShare</item>
+        <item>QPBE1008</item>
+        <item>QPBS1008</item>
+        <item>MobileData</item>
+        <item>QPBE1009</item>
+        <item>QPBS1009</item>
+        <item>Hotspot</item>
+        <item>QPBE1010</item>
+        <item>QPBS1010</item>
+        <item>WindowsLink</item>
+        <item>QPBE1011</item>
+        <item>QPBS1011</item>
+        <item>QRScanner</item>
+        <item>QPBE1012</item>
+        <item>NONE</item>
+        <item>BlueLightFilter</item>
+        <item>QPBE1013</item>
+        <item>QPBS1013</item>
+        <item>Location</item>
+        <item>QPBE1014</item>
+        <item>QPBS1014</item>
+        <item>AllShareCast</item>
+        <item>QPBE1015</item>
+        <item>NONE</item>
+        <item>Dnd</item>
+        <item>QPBE1016</item>
+        <item>QPBS1016</item>
+        <item>DesktopMode</item>
+        <item>QPBE1017</item>
+        <item>QPBS1017</item>
+        <item>NearbyShare</item>
+        <item>QPBE1018</item>
+        <item>QPBS1018</item>
+        <item>SecureFolder</item>
+        <item>QPBE1019</item>
+        <item>QPBS1019</item>
+        <item>Nfc</item>
+        <item>QPBE1020</item>
+        <item>QPBS1020</item>
+        <item>Aod</item>
+        <item>QPBE1021</item>
+        <item>QPBS1021</item>
+        <item>ScreenRecorder</item>
+        <item>QPBE1022</item>
+        <item>QPBS1022</item>
+        <item>Sync</item>
+        <item>QPBE1023</item>
+        <item>QPBS1023</item>
+        <item>EdgeLighting</item>
+        <item>QPBE1024</item>
+        <item>QPBS1024</item>
+        <item>InstantSession</item>
+        <item>QPBE1025</item>
+        <item>QPBS1025</item>
+        <item>Dolby</item>
+        <item>QPBE1026</item>
+        <item>QPBS1026</item>
+        <item>SpenRemote</item>
+        <item>QPBE1027</item>
+        <item>QPBS1027</item>
+        <item>KidsHome</item>
+        <item>QPBE1028</item>
+        <item>NONE</item>
+        <item>ShareLive</item>
+        <item>QPBE1029</item>
+        <item>QPBS1029</item>
+        <item>UiModeNight</item>
+        <item>QPBE1030</item>
+        <item>QPBS1030</item>
+        <item>Routines</item>
+        <item>QPBE1031</item>
+        <item>QPBS1031</item>
+        <item>FocusMode</item>
+        <item>QPBE1032</item>
+        <item>QPBS1032</item>
+        <item>CMC</item>
+        <item>QPBE1033</item>
+        <item>QPBS1033</item>
+        <item>DailyBoard</item>
+        <item>QPBE1034</item>
+        <item>QPBS1034</item>
+        <item>UDC</item>
+        <item>QPBE1035</item>
+        <item>QPBS1035</item>
+        <item>PowerPlanning</item>
+        <item>QPBE1036</item>
+        <item>QPBS1036</item>
+        <item>TVMode</item>
+        <item>QPBE1037</item>
+        <item>QPBS1037</item>
+        <item>TurnOn5g</item>
+        <item>QPBE1038</item>
+        <item>QPBS1038</item>
+        <item>VoLte</item>
+        <item>QPBE1039</item>
+        <item>QPBS1039</item>
+        <item>WifiCalling</item>
+        <item>QPBE1040</item>
+        <item>QPBS1040</item>
+        <item>RedPacket</item>
+        <item>QPBE1041</item>
+        <item>QPBS1041</item>
+        <item>BikeMode</item>
+        <item>QPBE1042</item>
+        <item>QPBS1042</item>
+        <item>SecondScreen</item>
+        <item>QPBE1043</item>
+        <item>QPBS1043</item>
+        <item>ScreenCapture</item>
+        <item>QPBE1044</item>
+        <item>NONE</item>
+        <item>WorkMode</item>
+        <item>QPBE1045</item>
+        <item>QPBS1045</item>
+        <item>HomeHub</item>
+        <item>QPBE1046</item>
+        <item>QPBS1046</item>
+        <item>CameraToggle</item>
+        <item>QPBE1047</item>
+        <item>QPBS1047</item>
+        <item>MicrophoneToggle</item>
+        <item>QPBE1048</item>
+        <item>QPBS1048</item>
+        <item>ExtraDim</item>
+        <item>QPBE1049</item>
+        <item>QPBS1049</item>
+        <item>CreateNote</item>
+        <item>QPBE1050</item>
+        <item>QPBS1050</item>
+        <item>LifestyleMode</item>
+        <item>QPBE1052</item>
+        <item>QPBS1052</item>
+        <item>com.google.android.apps.miphone.aiai.captions.quicksetting.CaptionsTileService</item>
+        <item>QPBE1053</item>
+        <item>QPBS1053</item>
+        <item>com.google.audio.hearing.visualization.accessibility.dolphin.service.DolphinTileService</item>
+        <item>QPBE1054</item>
+        <item>QPBS1054</item>
+        <item>com.google.audio.hearing.visualization.accessibility.scribe.service.ScribeTileService</item>
+        <item>QPBE1055</item>
+        <item>QPBS1055</item>
+        <item>HighContrastFont</item>
+        <item>QPBE1056</item>
+        <item>QPBS1056</item>
+        <item>ColorInversion</item>
+        <item>QPBE1057</item>
+        <item>QPBS1057</item>
+        <item>ColorLens</item>
+        <item>QPBE1058</item>
+        <item>QPBS1058</item>
+        <item>ColorAdjustment</item>
+        <item>QPBE1059</item>
+        <item>QPBS1059</item>
+        <item>SecureWiFi</item>
+        <item>QPBE1060</item>
+        <item>QPBS1060</item>
+        <item>Protect Battery</item>
+        <item>QPBE1061</item>
+        <item>QPBS1061</item>
+        <item>Performance Optimization</item>
+        <item>QPBE1062</item>
+        <item>QPBS1062</item>
+        <item>Multi control</item>
+        <item>QPBE1063</item>
+        <item>QPBS1063</item>
+        <item>Translator</item>
+        <item>QPBE1064</item>
+        <item>QPBS1064</item>
+        <item>CameraSharing</item>
+        <item>QPBE1065</item>
+        <item>QPBS1065</item>
+        <item>EmergencySharing</item>
+        <item>QPBE1066</item>
+        <item>QPBS1066</item>
+        <item>Finder</item>
+        <item>QPBE1067</item>
+        <item>NONE</item>
+        <item>NearByDevice</item>
+        <item>QPBE1068</item>
+        <item>NONE</item>
+        <item>Brightness_level_cover</item>
+        <item>QPDS2025</item>
+        <item>None</item>
+        <item>Adaptive brightness</item>
+        <item>QPDS2027</item>
+        <item>None</item>
+        <item>Flashlight_level</item>
+        <item>QPDS1014</item>
+        <item>None</item>
+        <item>Detail_switch</item>
+        <item>QPDE1008</item>
+        <item>None</item>
+        <item>Brightness_more_cover</item>
+        <item>QPPE2023</item>
+        <item>None</item>
+        <item>Brightness_bar_cover</item>
+        <item>QPPE2024</item>
+        <item>None</item>
+        <item>brightness_bar_detail_cover)</item>
+        <item>QPPE2025</item>
+        <item>None</item>
+    </string-array>
+    <string-array name="tile_states_airplane">
+        <item>Unavailable</item>
+        <item>Off</item>
+        <item>On</item>
+    </string-array>
+    <string-array name="tile_states_alarm">
+        <item>Unavailable</item>
+        <item>Off</item>
+        <item>On</item>
+    </string-array>
+    <string-array name="tile_states_battery">
+        <item>Unavailable</item>
+        <item>Off</item>
+        <item>On</item>
+    </string-array>
+    <string-array name="tile_states_bt">
+        <item>Unavailable</item>
+        <item>Off</item>
+        <item>On</item>
+    </string-array>
+    <string-array name="tile_states_cameratoggle">
+        <item>Unavailable</item>
+        <item>Off</item>
+        <item>On</item>
+    </string-array>
+    <string-array name="tile_states_cast">
+        <item>Unavailable</item>
+        <item>Off</item>
+        <item>On</item>
+    </string-array>
+    <string-array name="tile_states_cell">
+        <item>Unavailable</item>
+        <item>Off</item>
+        <item>On</item>
+    </string-array>
+    <string-array name="tile_states_color_correction">
+        <item>Unavailable</item>
+        <item>Off</item>
+        <item>On</item>
+    </string-array>
+    <string-array name="tile_states_controls">
+        <item>Unavailable</item>
+        <item>Off</item>
+        <item>On</item>
+    </string-array>
+    <string-array name="tile_states_dark">
+        <item>Unavailable</item>
+        <item>Off</item>
+        <item>On</item>
+    </string-array>
+    <string-array name="tile_states_default">
+        <item>@string/tile_unavailable</item>
+        <item>@string/switch_bar_off</item>
+        <item>@string/switch_bar_on</item>
+    </string-array>
+    <string-array name="tile_states_dnd">
+        <item>Unavailable</item>
+        <item>Off</item>
+        <item>On</item>
+    </string-array>
+    <string-array name="tile_states_dream">
+        <item>Unavailable</item>
+        <item>Off</item>
+        <item>On</item>
+    </string-array>
+    <string-array name="tile_states_flashlight">
+        <item>Unavailable</item>
+        <item>Off</item>
+        <item>On</item>
+    </string-array>
+    <string-array name="tile_states_font_scaling">
+        <item>Unavailable</item>
+        <item>Off</item>
+        <item>On</item>
+    </string-array>
+    <string-array name="tile_states_hearing_devices">
+        <item>Unavailable</item>
+        <item>Off</item>
+        <item>On</item>
+    </string-array>
+    <string-array name="tile_states_hotspot">
+        <item>Unavailable</item>
+        <item>Off</item>
+        <item>On</item>
+    </string-array>
+    <string-array name="tile_states_internet">
+        <item>Unavailable</item>
+        <item>Off</item>
+        <item>On</item>
+    </string-array>
+    <string-array name="tile_states_inversion">
+        <item>Unavailable</item>
+        <item>Off</item>
+        <item>On</item>
+    </string-array>
+    <string-array name="tile_states_location">
+        <item>Unavailable</item>
+        <item>Off</item>
+        <item>On</item>
+    </string-array>
+    <string-array name="tile_states_mictoggle">
+        <item>Unavailable</item>
+        <item>Off</item>
+        <item>On</item>
+    </string-array>
+    <string-array name="tile_states_night">
+        <item>Unavailable</item>
+        <item>Off</item>
+        <item>On</item>
+    </string-array>
+    <string-array name="tile_states_onehanded">
+        <item>Unavailable</item>
+        <item>Off</item>
+        <item>On</item>
+    </string-array>
+    <string-array name="tile_states_qr_code_scanner">
+        <item>Unavailable</item>
+        <item>Off</item>
+        <item>On</item>
+    </string-array>
+    <string-array name="tile_states_record_issue">
+        <item>Unavailable</item>
+        <item>Off</item>
+        <item>On</item>
+    </string-array>
+    <string-array name="tile_states_reduce_brightness">
+        <item>Unavailable</item>
+        <item>Off</item>
+        <item>On</item>
+    </string-array>
+    <string-array name="tile_states_reverse">
+        <item>Unavailable</item>
+        <item>Off</item>
+        <item>On</item>
+    </string-array>
+    <string-array name="tile_states_rotation">
+        <item>Unavailable</item>
+        <item>Off</item>
+        <item>On</item>
+    </string-array>
+    <string-array name="tile_states_saver">
+        <item>Unavailable</item>
+        <item>Off</item>
+        <item>On</item>
+    </string-array>
+    <string-array name="tile_states_screenrecord">
+        <item>Unavailable</item>
+        <item>Off</item>
+        <item>On</item>
+    </string-array>
+    <string-array name="tile_states_wallet">
+        <item>Unavailable</item>
+        <item>Off</item>
+        <item>On</item>
+    </string-array>
+    <string-array name="tile_states_wifi">
+        <item>Unavailable</item>
+        <item>Off</item>
+        <item>On</item>
+    </string-array>
+    <string-array name="tile_states_work">
+        <item>Unavailable</item>
+        <item>Off</item>
+        <item>On</item>
+    </string-array>
+    <string-array name="track_frame_time_entries">
+        <item>Off</item>
+        <item>On screen as bars</item>
+        <item>In adb shell dumpsys gfxinfo</item>
+    </string-array>
+    <string-array name="track_frame_time_values">
+        <item>false</item>
+        <item>visual_bars</item>
+        <item>true</item>
+    </string-array>
+    <string-array name="transition_animation_scale_entries">
+        <item>Animation off</item>
+        <item>Animation scale .5x</item>
+        <item>Animation scale 1x</item>
+        <item>Animation scale 1.5x</item>
+        <item>Animation scale 2x</item>
+        <item>Animation scale 5x</item>
+        <item>Animation scale 10x</item>
+    </string-array>
+    <string-array name="transition_animation_scale_values">
+        <item>0</item>
+        <item>.5</item>
+        <item>1</item>
+        <item>1.5</item>
+        <item>2</item>
+        <item>5</item>
+        <item>10</item>
+    </string-array>
+    <string-array name="tts_demo_string_langs">
+        <item>eng</item>
+        <item>fra</item>
+        <item>deu</item>
+        <item>ita</item>
+        <item>spa</item>
+        <item>kor</item>
+    </string-array>
+    <string-array name="tts_demo_strings">
+        <item>This is an example of speech synthesis in English.</item>
+        <item>Voici un échantillon de synthèse vocale en français.</item>
+        <item>Dies ist ein Beispiel für Sprachsynthese in Deutsch.</item>
+        <item>Questo è un esempio di sintesi vocale in italiano.</item>
+        <item>Este es un ejemplo de síntesis de voz en español.</item>
+        <item>이것은 한국어 음성 합성의 예입니다.</item>
+    </string-array>
+    <string-array name="tts_rate_entries">
+        <item>60%</item>
+        <item>80%</item>
+        <item>100%</item>
+        <item>150%</item>
+        <item>200%</item>
+        <item>250%</item>
+        <item>300%</item>
+        <item>350%</item>
+        <item>400%</item>
+    </string-array>
+    <string-array name="tts_rate_values">
+        <item>60</item>
+        <item>80</item>
+        <item>100</item>
+        <item>150</item>
+        <item>200</item>
+        <item>250</item>
+        <item>300</item>
+        <item>350</item>
+        <item>400</item>
+    </string-array>
+    <string-array name="usb_configuration_titles">
+        <item>Charging</item>
+        <item>MTP (Media Transfer Protocol)</item>
+        <item>PTP (Picture Transfer Protocol)</item>
+        <item>RNDIS (USB Ethernet)</item>
+        <item>Audio Source</item>
+        <item>MIDI</item>
+    </string-array>
+    <string-array name="usb_configuration_values">
+        <item>none</item>
+        <item>mtp</item>
+        <item>ptp</item>
+        <item>rndis</item>
+        <item>audio_source</item>
+        <item>midi</item>
+    </string-array>
+    <string-array name="verification_code_spec_chn">
+        <item>尾号</item>
+    </string-array>
+    <string-array name="verification_code_strong_chn">
+        <item>校验码</item>
+        <item>随机码</item>
+        <item>验证码</item>
+        <item>口令</item>
+        <item>认证码</item>
+        <item>动态码</item>
+        <item>动态密码</item>
+    </string-array>
+    <string-array name="verification_code_strong_ind">
+        <item>kode verifikasi</item>
+        <item>kode masuk</item>
+        <item>kode otentikasi</item>
+        <item>kode konfirmasi</item>
+        <item>kode aktivasi</item>
+        <item>kode keamanan</item>
+        <item>paycode</item>
+    </string-array>
+    <string-array name="verification_code_strong_kor">
+        <item>인증번호</item>
+        <item>인증코드</item>
+        <item>인증 번호</item>
+        <item>인증 코드</item>
+        <item>승인번호</item>
+        <item>승인 번호</item>
+    </string-array>
+    <string-array name="verification_code_strong_mal">
+        <item>kod pengesahan</item>
+        <item>kod pengaktifan</item>
+        <item>kod keselamatan</item>
+        <item>kod log masuk</item>
+    </string-array>
+    <array name="verification_code_strong_mym" />
+    <string-array name="verification_code_strong_otp_default">
+        <item>one-time password</item>
+        <item>one-time-password</item>
+        <item>one-time pin</item>
+        <item>one-time-pin</item>
+        <item>one time password</item>
+        <item>one time pin</item>
+        <item>otp</item>
+        <item>verification code</item>
+        <item>activation code</item>
+        <item>confirmation code</item>
+        <item>authentication code</item>
+        <item>security code</item>
+        <item>login code</item>
+        <item>etac</item>
+        <item>pin</item>
+        <item>校验码</item>
+        <item>随机码</item>
+        <item>验证码</item>
+        <item>口令</item>
+        <item>认证码</item>
+        <item>动态码</item>
+        <item>动态密码</item>
+    </string-array>
+    <string-array name="verification_code_strong_phi">
+        <item>code ng pagpapatunay</item>
+        <item>code ng seguridad</item>
+    </string-array>
+    <array name="verification_code_strong_sin" />
+    <string-array name="verification_code_strong_thl">
+        <item>รหัสยืนยัน</item>
+        <item>รหัสเปิดใช้งาน</item>
+        <item>รหัสยืนยัน</item>
+        <item>รหัสรับรองความถูกต้อง</item>
+        <item>รหัสความปลอดภัย</item>
+        <item>รหัสเข้าสู่ระบบ</item>
+    </string-array>
+    <string-array name="verification_code_strong_vn">
+        <item>ma xac thuc</item>
+        <item>mã xác thực</item>
+        <item>ma xac minh</item>
+        <item>mã xác minh</item>
+        <item>ma xac nhan</item>
+        <item>mã xác nhận</item>
+        <item>ma kich hoat</item>
+        <item>mã kích hoạt</item>
+        <item>ma bao mat</item>
+        <item>mã bảo mật</item>
+        <item>ma su dung</item>
+        <item>mã sủ dụng</item>
+        <item>ma giao dich</item>
+        <item>mã giao dịch</item>
+        <item>ma dang ky</item>
+        <item>mã đăng ký</item>
+        <item>ma so</item>
+        <item>mã số</item>
+        <item>day so</item>
+        <item>dãy số</item>
+    </string-array>
+    <string-array name="verification_code_weak_ind">
+        <item>kode</item>
+        <item>kata sandi</item>
+    </string-array>
+    <string-array name="verification_code_weak_kor">
+        <item>코드</item>
+        <item>인증</item>
+    </string-array>
+    <string-array name="verification_code_weak_mal">
+        <item>kod</item>
+        <item>laluan</item>
+    </string-array>
+    <array name="verification_code_weak_mym" />
+    <string-array name="verification_code_weak_otp_default">
+        <item>code</item>
+        <item>tac</item>
+        <item>password</item>
+        <item>verify</item>
+        <item>尾号</item>
+    </string-array>
+    <array name="verification_code_weak_phi" />
+    <array name="verification_code_weak_sin" />
+    <string-array name="verification_code_weak_thl">
+        <item>รหัส</item>
+        <item>รหัสผ่าน</item>
+    </string-array>
+    <string-array name="verification_code_weak_vn">
+        <item>mat khau</item>
+        <item>mật khẩu</item>
+        <item>xac thuc</item>
+        <item>xác thực</item>
+    </string-array>
+    <string-array name="wifi_status">
+        <item></item>
+        <item>Scanning…</item>
+        <item>Connecting…</item>
+        <item>Authenticating…</item>
+        <item>Obtaining IP address…</item>
+        <item>Connected</item>
+        <item>Suspended</item>
+        <item>Disconnecting…</item>
+        <item>Disconnected</item>
+        <item>Unsuccessful</item>
+        <item>Blocked</item>
+        <item>Temporarily avoiding poor connection</item>
+    </string-array>
+    <string-array name="wifi_status_with_ssid">
+        <item></item>
+        <item>Scanning…</item>
+        <item>Connecting to %1$s…</item>
+        <item>Authenticating with %1$s…</item>
+        <item>Obtaining IP address from %1$s…</item>
+        <item>Connected to %1$s</item>
+        <item>Suspended</item>
+        <item>Disconnecting from %1$s…</item>
+        <item>Disconnected</item>
+        <item>Unsuccessful</item>
+        <item>Blocked</item>
+        <item>Temporarily avoiding poor connection</item>
+    </string-array>
+    <string-array name="wifitrackerlib_wifi_status">
+        <item></item>
+        <item>Scanning…</item>
+        <item>Connecting…</item>
+        <item>Authenticating…</item>
+        <item>Obtaining IP address…</item>
+        <item>Connected</item>
+        <item>Suspended</item>
+        <item>Disconnecting…</item>
+        <item>Disconnected</item>
+        <item>Unsuccessful</item>
+        <item>Blocked</item>
+        <item>Temporarily avoiding poor connection</item>
+    </string-array>
+    <string-array name="window_animation_scale_entries">
+        <item>Animation off</item>
+        <item>Animation scale .5x</item>
+        <item>Animation scale 1x</item>
+        <item>Animation scale 1.5x</item>
+        <item>Animation scale 2x</item>
+        <item>Animation scale 5x</item>
+        <item>Animation scale 10x</item>
+    </string-array>
+    <string-array name="window_animation_scale_values">
+        <item>0</item>
+        <item>.5</item>
+        <item>1</item>
+        <item>1.5</item>
+        <item>2</item>
+        <item>5</item>
+        <item>10</item>
+    </string-array>
+</resources>

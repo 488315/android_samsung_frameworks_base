@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:layout_gravity="center_horizontal" android:focusable="false" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="8.0dip" android:layout_marginBottom="@dimen/subscreen_noti_button_l_cut_bottom_margin_b5"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <FrameLayout android:layout_gravity="end" android:id="@id/subcreen_item_clear_all_layout" android:background="@drawable/subscreen_notification_clear_button_bg_selector_b5" android:layout_width="wrap_content" android:layout_height="wrap_content" android:maxWidth="260.0dip" android:maxHeight="@dimen/subscreen_noti_button_height_b5" android:minWidth="@dimen/subscreen_noti_button_width_b5" android:minHeight="@dimen/subscreen_noti_button_height_b5" android:layout_marginEnd="10.0dip">
+        <TextView android:textSize="13.0dip" android:textStyle="bold" android:textColor="@color/subscreen_notification_footer_button_text_color_white" android:gravity="center" android:layout_gravity="center" android:id="@id/subcreen_item_clear_all" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/clear_all_notifications_text_b5" android:fontFamily="sec" android:layout_marginHorizontal="16.0dip" android:textFontWeight="600" />
+    </FrameLayout>
+</FrameLayout>

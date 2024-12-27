@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape android:shape="rectangle"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@color/kg_knox_background_color" />
+    <corners android:radius="@dimen/kg_knox_guard_input_box_corner_radius" />
+    <padding android:left="16.0dip" android:top="12.0dip" android:right="16.0dip" android:bottom="12.0dip" />
+</shape>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:gravity="fill_horizontal|center" android:id="@android:id/background">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/sec_brightness_dual_slider_background_color" />
+            <corners android:radius="@dimen/sec_brightness_slider_corner_radius" />
+            <stroke android:width="@dimen/sec_brightness_slider_background_stroke_width" android:color="@color/sec_brightness_slider_background_stroke_color" />
+        </shape>
+    </item>
+    <item android:gravity="fill_horizontal|center" android:id="@android:id/progress">
+        <scale android:scaleWidth="100%">
+            <shape android:shape="rectangle">
+                <corners android:radius="@dimen/sec_brightness_slider_corner_radius" />
+                <solid android:color="@color/sec_brightness_dual_slider_foreground_color" />
+                <stroke android:width="@dimen/sec_brightness_slider_background_stroke_width" android:color="@color/sec_brightness_slider_background_stroke_color" />
+            </shape>
+        </scale>
+    </item>
+</layer-list>

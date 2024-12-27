@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="start|center" android:orientation="vertical" android:id="@id/broadcast_info_area" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <View android:layout_marginBottom="6.0dip" style="@style/BroadcastDialog.Divider.Horizontal" />
+    <LinearLayout android:orientation="horizontal" android:id="@id/broadcast_qrcode_layout" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <ImageView android:gravity="start|center" android:id="@id/qrcode_view" android:layout_width="@dimen/media_output_qrcode_size" android:layout_height="@dimen/media_output_qrcode_size" android:src="@android:color/transparent" android:layout_marginStart="82.0dip" />
+        <ImageView android:id="@id/broadcast_info" android:clickable="true" android:layout_width="@dimen/media_output_broadcast_info" android:layout_height="@dimen/media_output_broadcast_info" android:layout_marginTop="168.0dip" android:src="@drawable/ic_info_outline" android:tint="?android:textColorTertiary" android:layout_marginStart="31.0dip" />
+    </LinearLayout>
+    <LinearLayout android:orientation="horizontal" android:id="@id/broadcast_name_layout" android:layout_width="wrap_content" android:layout_height="wrap_content" android:paddingStart="@dimen/media_output_broadcast_info_item_padding_start" android:paddingEnd="@dimen/media_output_broadcast_info_item_padding_end">
+        <LinearLayout android:orientation="vertical" android:layout_width="0.0dip" android:layout_weight="1.0" style="@style/BroadcastDialog.InfoItem">
+            <TextView android:id="@id/broadcast_name_title" android:text="@string/media_output_broadcast_name" style="@style/BroadcastDialog.InfoItem.Title" />
+            <TextView android:id="@id/broadcast_name_summary" style="@style/BroadcastDialog.InfoItem.Summary" />
+        </LinearLayout>
+        <View style="@style/BroadcastDialog.Divider.Vertical" />
+        <FrameLayout android:layout_gravity="end|center" android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <ImageView android:id="@id/broadcast_name_edit" style="@style/BroadcastDialog.InfoItem.Edit" />
+        </FrameLayout>
+    </LinearLayout>
+    <LinearLayout android:orientation="horizontal" android:id="@id/broadcast_code_layout" android:layout_width="wrap_content" android:layout_height="wrap_content" android:paddingStart="@dimen/media_output_broadcast_info_item_padding_start" android:paddingEnd="@dimen/media_output_broadcast_info_item_padding_end">
+        <LinearLayout android:orientation="vertical" android:layout_width="0.0dip" android:layout_weight="1.0" style="@style/BroadcastDialog.InfoItem">
+            <TextView android:id="@id/broadcast_code_title" android:text="@string/media_output_broadcast_code" style="@style/BroadcastDialog.InfoItem.Title" />
+            <TextView android:id="@id/broadcast_code_summary" style="@style/BroadcastDialog.InfoItem.Summary" />
+        </LinearLayout>
+        <FrameLayout android:layout_gravity="end|center" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginEnd="26.0dip">
+            <ImageView android:id="@id/broadcast_code_eye" android:background="?android:selectableItemBackground" android:focusable="true" android:clickable="true" android:layout_width="20.0dip" android:layout_height="16.0dip" android:src="@drawable/ic_broadcast_code_eye" android:tint="?android:textColorPrimary" />
+        </FrameLayout>
+        <View style="@style/BroadcastDialog.Divider.Vertical" />
+        <FrameLayout android:layout_gravity="end|center" android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <ImageView android:id="@id/broadcast_code_edit" style="@style/BroadcastDialog.InfoItem.Edit" />
+        </FrameLayout>
+    </LinearLayout>
+    <View android:layout_marginTop="14.0dip" android:layout_marginBottom="20.0dip" style="@style/BroadcastDialog.Divider.Horizontal" />
+</LinearLayout>

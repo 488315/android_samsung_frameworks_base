@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:id="@id/subroom_presentation_view" android:background="@color/subscreen_settings_flashlight_background" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <include android:id="@id/subroom_flashlight_button_settings" android:visibility="gone" layout="@layout/subscreen_flashlight_button_settings" />
+    <include android:id="@id/subroom_flashlight_turnOff" android:visibility="gone" layout="@layout/subscreen_flashlight_turnoff" />
+    <include android:id="@id/subroom_flashlight_turnOn" android:visibility="gone" layout="@layout/subscreen_flashlight_turnon" />
+    <RelativeLayout android:id="@id/subroom_back_button" android:padding="@dimen/subscreen_back_button_margin" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content">
+        <ImageView android:id="@id/back_image_view" android:layout_width="@dimen/subscreen_back_button_width" android:layout_height="@dimen/subscreen_back_button_height" android:src="@drawable/subroom_back_button" android:tint="@color/subscreen_settings_flashlight_back_button_color" android:contentDescription="@string/accessibility_back" style="@style/SubscreenBackButtonImage" />
+    </RelativeLayout>
+</FrameLayout>

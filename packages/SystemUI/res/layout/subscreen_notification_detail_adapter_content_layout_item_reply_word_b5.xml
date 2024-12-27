@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:id="@id/subscreen_detail_reply_item_layout" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ImageView android:layout_gravity="center" android:id="@id/subscreen_detail_word_line_top" android:visibility="gone" android:layout_width="160.0dip" android:layout_height="1.0dip" android:src="@drawable/subscreen_notification_detail_content_reply_line_b5" />
+    <LinearLayout android:gravity="center" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content" android:minHeight="39.0dip">
+        <TextView android:textSize="@dimen/subscreen_noti_detail_content_text_size_b5" android:textColor="@color/subscreen_notification_text_color_white_b5" android:id="@id/subscreen_detail_word" android:layout_width="wrap_content" android:layout_height="wrap_content" android:fontFamily="sec" android:textAlignment="center" android:textFontWeight="400" />
+    </LinearLayout>
+    <ImageView android:layout_gravity="center" android:id="@id/subscreen_detail_word_line" android:layout_width="160.0dip" android:layout_height="1.0dip" android:src="@color/subscreen_notification_quick_reply_divider_color_b5" />
+</LinearLayout>

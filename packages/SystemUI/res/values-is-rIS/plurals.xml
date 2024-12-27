@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="controls_item_number_of_favorites">
+        <item quantity="other">%d atriði valin</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d atriði valið</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="globalactions_force_restart_message">
+        <item quantity="other">Haltu hliðartakkanum og takkanum til að lækka hljóðstyrk samtímis inni í meira en %d sekúndur til að endurræsa símann.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Haltu hliðartakkanum og takkanum til að lækka hljóðstyrk samtímis inni í meira en %d sekúndu til að endurræsa símann.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_attempt_left">
+        <item quantity="other">%d tilraunir eftir</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d tilraun eftir</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_attempt_left_before_permanent_locking">
+        <item quantity="other">%d tilraunir eftir áður en símanum verður læst varanlega</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d tilraun eftir áður en símanum verður læst varanlega</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_secure_attempts_to_unlock_with_fingerprints">
+        <item quantity="other">%d tilraunir til að opna með fingrafari.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d tilraun til að opna með fingrafari.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_by_biometrics">
+        <item quantity="other">%d rangar tilraunir gerðar til að staðfesta lífkenni.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d röng tilraun gerð til að staðfesta lífkenni.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_by_face">
+        <item quantity="other">%d rangar tilraunir gerðar til að staðfesta andlitið á þér.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d röng tilraun gerð til að staðfesta andlitið á þér.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_by_fingerprint">
+        <item quantity="other">%d rangar tilraunir gerðar til að staðfesta fingraför.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d röng tilraun gerð til að staðfesta fingraför.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_1_hour_and_min">
+        <item quantity="other">Reyndu aftur eftir 1 klukkustund og %d mínútur</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Reyndu aftur eftir 1 klukkustund og %d mínútu</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_biometric">
+        <item quantity="other">Prófaðu lífkennin aftur eftir %d sekúndur</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Prófaðu lífkennin aftur eftir %d sekúndu</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_face">
+        <item quantity="other">Prófaðu að nota andlitsgreiningu aftur eftir %d sekúndur</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Prófaðu að nota andlitsgreiningu aftur eftir %d sekúndu</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_fingerprint">
+        <item quantity="other">Prófaðu fingrafarið aftur eftir %d sekúndur</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Prófaðu fingrafarið aftur eftir %d sekúndu</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_hour">
+        <item quantity="other">Reyndu aftur eftir %d klukkustundir</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Reyndu aftur eftir %d klukkustund</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_hour_and_1_min">
+        <item quantity="other">Reyndu aftur eftir %d klukkustundir og 1 mínútu</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Reyndu aftur eftir %d klukkustund og 1 mínútu</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_min">
+        <item quantity="other">Reyndu aftur eftir %d mínútur</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Reyndu aftur eftir %d mínútu</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_sec">
+        <item quantity="other">Reyndu aftur eftir %d sekúndur</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Reyndu aftur eftir %d sekúndu</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_countdown">
+        <item quantity="other">Reyndu aftur eftir %d sekúndur.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Reyndu aftur eftir %d sekúndu.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_ucm_attempt_left">
+        <item quantity="other">%d tilraunir eftir</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d tilraun eftir</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="n_speakers">
+        <item quantity="other">%d hátalarar</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d hátalari</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="notification_insignificant_title">
+        <item quantity="other">%d tilkynningar í viðbót</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d tilkynning í viðbót</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ongoing_activity_chip_count">
+        <item quantity="other">%d tilkynningar í rauntíma í viðbót</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d tilkynning í rauntíma í viðbót</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="plural_notification_count">
+        <item quantity="other">%d tilkynningar</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d tilkynning</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_qs_add_minimum">
+        <item quantity="other">Nauðsynlegt er að hafa %d hnappa.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Nauðsynlegt er að hafa %d hnapp.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_qs_dnd_detail_fhl_hours_option">
+        <item quantity="other">Í %d klukkustundir</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Í %d klukkustund</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_qs_unable_add_maximum">
+        <item quantity="other">Ekki er hægt að bæta við meira en %d hnöppum.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Ekki er hægt að bæta við meira en %d hnappi.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_qs_unable_remove_minimum">
+        <item quantity="other">Ekki er hægt að fjarlægja hnapp. Flýtistika þarf að hafa minnst %d hnappa.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Ekki er hægt að fjarlægja hnapp. Flýtistika þarf að hafa minnst %d hnapp.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_qs_video_call_effects_num">
+        <item quantity="other">%d áhrif</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d áhrif</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="subscreen_notification_smart_reply_child_account_dialog_content">
+        <item quantity="other">Þú verður að hafa náð minnst %d ára aldri til að nota háþróaða gervigreindareiginleika Galaxy AI.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Þú verður að hafa náð minnst %d árs aldri til að nota háþróaða gervigreindareiginleika Galaxy AI.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

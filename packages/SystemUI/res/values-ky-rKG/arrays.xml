@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="battery_labels">
+        <item>0%</item>
+        <item>50%</item>
+        <item>100%</item>
+    </string-array>
+    <string-array name="subscreen_quick_reply_list">
+        <item>Ооба</item>
+        <item>Ооба, рахмат</item>
+        <item>ОК</item>
+        <item>Жок</item>
+        <item>Жок, рахмат</item>
+        <item>Жок, жакпайт</item>
+        <item>Рахмат</item>
+        <item>Кыйла бааланган</item>
+        <item>Мен жолдомун</item>
+        <item>Эмне болду?</item>
+        <item>Кийинчерээк</item>
+        <item>Жакшы</item>
+        <item>Макулмун</item>
+        <item>Соонун!</item>
+        <item>Кандай?</item>
+        <item>Кудаай!</item>
+    </string-array>
+</resources>

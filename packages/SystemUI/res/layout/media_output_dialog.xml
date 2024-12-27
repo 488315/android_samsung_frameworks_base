@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:id="@id/media_output_dialog" android:background="@drawable/media_output_dialog_background" android:layout_width="@dimen/large_dialog_width" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:gravity="start|center" android:orientation="horizontal" android:id="@id/media_metadata_section" android:paddingTop="16.0dip" android:paddingBottom="16.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:paddingStart="16.0dip" android:paddingEnd="16.0dip">
+        <ImageView android:id="@id/header_icon" android:layout_width="72.0dip" android:layout_height="72.0dip" android:importantForAccessibility="no" />
+        <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content" android:paddingStart="12.0dip">
+            <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <ImageView android:gravity="center_vertical" android:id="@id/app_source_icon" android:layout_width="20.0dip" android:layout_height="20.0dip" android:importantForAccessibility="no" />
+                <Space android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="1.0" />
+                <ImageView android:gravity="center_vertical" android:id="@id/broadcast_icon" android:padding="12.0dip" android:focusable="true" android:visibility="gone" android:clickable="true" android:layout_width="48.0dip" android:layout_height="48.0dip" android:src="@drawable/settings_input_antenna" android:contentDescription="@string/broadcasting_description_is_broadcasting" />
+            </LinearLayout>
+            <TextView android:textSize="16.0sp" android:textColor="?android:textColorPrimary" android:ellipsize="end" android:gravity="center_vertical" android:id="@id/header_title" android:layout_width="wrap_content" android:layout_height="wrap_content" android:maxLines="1" android:fontFamily="@android:string/dynamic_mode_notification_title" />
+            <TextView android:textSize="14.0sp" android:textColor="?android:textColorSecondary" android:ellipsize="end" android:gravity="center_vertical" android:id="@id/header_subtitle" android:layout_width="wrap_content" android:layout_height="wrap_content" android:maxLines="1" android:fontFamily="@android:string/conversation_single_line_image_placeholder" />
+        </LinearLayout>
+    </LinearLayout>
+    <ViewStub android:id="@id/broadcast_qrcode" android:layout="@layout/media_output_broadcast_area" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+    <LinearLayout android:orientation="vertical" android:id="@id/device_list" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="1.0">
+        <androidx.recyclerview.widget.RecyclerView android:id="@id/list_result" android:paddingTop="8.0dip" android:scrollbars="vertical" android:clipToPadding="false" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+    </LinearLayout>
+    <LinearLayout android:orientation="vertical" android:id="@id/cast_app_section" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="20.0dip" android:layout_marginBottom="@dimen/dialog_bottom_padding" android:layout_marginStart="@dimen/dialog_side_padding" android:layout_marginEnd="@dimen/dialog_side_padding">
+        <TextView android:textSize="16.0sp" android:textColor="?android:textColorPrimary" android:ellipsize="end" android:layout_gravity="start|center" android:id="@id/launch_app_title" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/media_output_dialog_launch_app_text" android:maxLines="1" android:fontFamily="@android:string/dynamic_mode_notification_title" />
+        <Button android:id="@id/launch_app_button" android:layout_width="wrap_content" android:layout_height="wrap_content" android:drawablePadding="5.0dip" style="@style/Widget.Dialog.Button.BorderButton" />
+    </LinearLayout>
+    <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="4.0dip" android:layout_marginBottom="@dimen/dialog_bottom_padding" android:layout_marginStart="@dimen/dialog_side_padding" android:layout_marginEnd="@dimen/dialog_side_padding">
+        <Button android:id="@id/stop" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/media_output_dialog_button_stop_casting" style="@style/Widget.Dialog.Button.BorderButton" />
+        <Space android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="1.0" />
+        <Button android:id="@id/done" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/inline_done_button" style="@style/Widget.Dialog.Button" />
+    </LinearLayout>
+</LinearLayout>

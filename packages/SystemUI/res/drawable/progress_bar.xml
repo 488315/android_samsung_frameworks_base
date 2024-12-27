@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list android:paddingMode="stack"
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:androidprv="http://schemas.android.com/apk/prv/res/android">
+    <item android:gravity="fill_horizontal|center" android:id="@android:id/background">
+        <shape android:layout_width="fill_parent" android:layout_height="fill_parent" android:shape="rectangle">
+            <corners android:radius="30.0dip" />
+            <solid android:color="?android:^attr-private/materialColorSurfaceDim" />
+        </shape>
+    </item>
+    <item android:gravity="fill_horizontal|center" android:id="@android:id/progress">
+        <clip>
+            <shape android:layout_width="fill_parent" android:layout_height="fill_parent" android:shape="rectangle">
+                <corners android:radius="30.0dip" />
+                <solid android:color="?android:textColorPrimary" />
+            </shape>
+        </clip>
+    </item>
+</layer-list>

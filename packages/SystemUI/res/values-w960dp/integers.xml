@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item type="integer" name="control_basic_width_percentage">0.875</item>
+</resources>

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.systemui.statusbar.phone.TouchInterceptFrameLayout android:gravity="center_vertical" android:layout_gravity="start|center" android:id="@id/ongoing_activity_capsule" android:layout_width="wrap_content" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <androidx.recyclerview.widget.RecyclerView android:theme="@style/Theme.AppCompat.DayNight" android:layout_gravity="start|center" android:orientation="vertical" android:id="@id/capsule_recyclerview" android:scrollbars="none" android:clipToPadding="true" android:layout_width="wrap_content" android:layout_height="@dimen/ongoing_activity_chip_top_height" android:layout_marginEnd="@dimen/ongoing_activity_chip_end_margin" android:layout_alignParentStart="true" android:nestedScrollingEnabled="false" />
+</com.android.systemui.statusbar.phone.TouchInterceptFrameLayout>

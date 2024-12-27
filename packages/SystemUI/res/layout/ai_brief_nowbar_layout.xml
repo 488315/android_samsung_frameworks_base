@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="horizontal" android:id="@id/ai_brief_now_bar_container" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layoutDirection="locale"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <FrameLayout android:layout_gravity="center" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layoutDirection="locale" android:layout_marginStart="12.0dip">
+        <com.airbnb.lottie.LottieAnimationView android:layout_gravity="center" android:id="@id/ai_brief_now_bar_four_star_image" android:layout_width="24.0dip" android:layout_height="24.0dip" android:scaleType="centerCrop" android:importantForAccessibility="no" app:lottie_rawRes="@raw/now_brief_four_star" />
+        <FrameLayout android:id="@id/ai_brief_now_bar_icon_container" android:layout_width="32.0dip" android:layout_height="32.0dip">
+            <com.airbnb.lottie.LottieAnimationView android:layout_gravity="center" android:id="@id/ai_brief_now_bar_image" android:layout_width="24.0dip" android:layout_height="24.0dip" android:scaleType="centerCrop" android:importantForAccessibility="no" />
+        </FrameLayout>
+    </FrameLayout>
+    <LinearLayout android:layout_gravity="center_vertical" android:orientation="vertical" android:layout_width="wrap_content" android:layout_height="wrap_content" android:paddingEnd="16.0dip" android:layout_marginStart="8.0dip">
+        <com.android.systemui.aibrief.ui.BriefNowBarTextView android:textSize="16.0dip" android:textColor="@color/brief_now_bar_text_color" android:id="@id/ai_brief_main_text" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/ai_brief_nowbar_title" android:fontFamily="sec" android:textFontWeight="600" />
+        <com.android.systemui.aibrief.ui.BriefNowBarTextView android:textSize="12.0dip" android:textColor="@color/brief_now_bar_sub_text_color" android:id="@id/ai_brief_sub_text" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/ai_brief_nowbar_sub_title_morning" android:fontFamily="sec" android:textFontWeight="400" />
+    </LinearLayout>
+</LinearLayout>

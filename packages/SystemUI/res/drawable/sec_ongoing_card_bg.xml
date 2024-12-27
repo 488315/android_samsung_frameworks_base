@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple android:color="@color/ongoing_activity_card_action_ripple_color"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@android:id/mask">
+        <shape android:shape="rectangle">
+            <solid android:color="@android:color/white" />
+            <corners android:radius="@dimen/ongoing_activity_card_bg_radius" />
+        </shape>
+    </item>
+    <item android:id="@android:id/background">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/ongoing_activity_card_item_background_color" />
+            <corners android:radius="@dimen/ongoing_activity_card_bg_radius" />
+        </shape>
+    </item>
+</ripple>

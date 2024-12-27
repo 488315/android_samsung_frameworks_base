@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:id="@id/sud_layout_header" android:layout_width="fill_parent" android:layout_height="wrap_content" style="@style/SudGlifHeaderContainer"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ProgressBar android:id="@id/sud_glif_top_progress_bar" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="?sudMarginStart" android:layout_marginRight="?sudMarginStart" android:indeterminate="true" style="?android:progressBarStyleHorizontal" />
+    <FrameLayout android:id="@id/sud_layout_icon_container" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" style="@style/SudGlifIconContainer">
+        <ImageView android:id="@id/sud_layout_icon" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:contentDescription="@null" style="?sudGlifIconStyle" />
+    </FrameLayout>
+    <TextView android:id="@id/suc_layout_title" android:layout_width="fill_parent" android:layout_height="wrap_content" style="?sudGlifHeaderTitleStyle" />
+    <include layout="@layout/sud_glif_profile" />
+    <ViewStub android:id="@id/sud_layout_progress_stub" android:layout="@layout/sud_progress_bar" android:inflatedId="@id/sud_layout_progress" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="?sudMarginStart" android:layout_marginTop="@dimen/sud_glif_progress_bar_margin_vertical" android:layout_marginRight="?sudMarginStart" android:layout_marginBottom="@dimen/sud_glif_progress_bar_margin_vertical" />
+    <com.google.android.setupdesign.view.RichTextView android:id="@id/sud_layout_subtitle" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" style="?sudGlifDescriptionStyle" />
+    <ProgressBar android:id="@id/sud_glif_progress_bar" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="?sudMarginStart" android:layout_marginRight="?sudMarginStart" android:indeterminate="true" style="?android:progressBarStyleHorizontal" />
+</LinearLayout>

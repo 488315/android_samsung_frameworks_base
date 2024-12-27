@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:id="@id/group_adapter_layout" android:background="@drawable/subscreen_notification_group_type_item_background_b5" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="@dimen/subscreen_noti_list_top_margin_b5" android:elevation="4.0dip" android:layout_marginHorizontal="@dimen/subscreen_noti_list_horizontal_margin_b5"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout android:layout_gravity="center_vertical" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginStart="@dimen/subscreen_noti_text_layout_start_margin_b5" android:layout_marginEnd="@dimen/subscreen_noti_list_end_margin_b5" android:layout_marginVertical="@dimen/subscreen_noti_list_one_line_item_vertical_margin_b5">
+        <FrameLayout android:id="@id/custom_remote_views" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+    </LinearLayout>
+</LinearLayout>

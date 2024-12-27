@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:id="@id/group_adapter_layout" android:background="@drawable/subscreen_notification_group_type_item_background_b5" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="@dimen/subscreen_noti_list_top_margin_b5" android:elevation="4.0dip" android:layout_marginHorizontal="@dimen/subscreen_noti_list_horizontal_margin_b5"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:minHeight="@dimen/subscreen_noti_list_one_line_item_height_b5">
+        <FrameLayout android:layout_gravity="center_vertical" android:visibility="gone" android:layout_width="@dimen/subscreen_noti_icon_size_b5" android:layout_height="@dimen/subscreen_noti_icon_size_b5" android:layout_marginStart="@dimen/subscreen_noti_icon_start_margin_b5" android:layout_marginVertical="12.0dip">
+            <ImageView android:id="@id/icon" android:padding="@dimen/subscreen_noti_icon_circle_padding_b5" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+            <ImageView android:id="@id/icon_conversation" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+            <ImageView android:layout_gravity="end|bottom|center" android:id="@id/subscreen_notification_sub_icon" android:visibility="gone" android:layout_width="@dimen/subscreen_noti_sub_icon_size_b5" android:layout_height="@dimen/subscreen_noti_sub_icon_size_b5" android:antialias="true" android:adjustViewBounds="true" />
+        </FrameLayout>
+        <TextView android:textSize="@dimen/subscreen_noti_group_detail_text_size_b5" android:textStyle="bold" android:textColor="@color/subscreen_notification_common_text_color_b5" android:ellipsize="end" android:layout_gravity="center_vertical" android:id="@id/hide_content_app_name" android:layout_width="wrap_content" android:layout_height="wrap_content" android:maxLines="1" android:fontFamily="sec" android:layout_marginStart="@dimen/subscreen_noti_text_layout_start_margin_b5" android:layout_marginEnd="@dimen/subscreen_noti_list_end_margin_b5" android:layout_marginVertical="@dimen/subscreen_noti_list_one_line_item_vertical_margin_b5" android:textFontWeight="600" />
+    </LinearLayout>
+</LinearLayout>

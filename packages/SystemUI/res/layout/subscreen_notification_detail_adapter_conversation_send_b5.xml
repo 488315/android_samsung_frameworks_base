@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="end" android:layout_gravity="end" android:orientation="horizontal" android:id="@id/detail_content_item_layout" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginEnd="10.0dip"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:layout_gravity="bottom" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="@dimen/subscreen_noti_detail_conversation_bottom_margin_small_b5">
+        <DateTimeView android:textSize="11.0dip" android:textColor="@color/subscreen_notification_conversation_clock_text_color_b5" android:id="@id/detail_clock" android:visibility="visible" android:layout_width="wrap_content" android:layout_height="wrap_content" android:fontFamily="sec" android:layout_marginEnd="2.0dip" android:textFontWeight="400" />
+    </LinearLayout>
+    <LinearLayout android:orientation="vertical" android:layout_width="wrap_content" android:layout_height="wrap_content">
+        <TextView android:textSize="@dimen/subscreen_noti_detail_content_text_size_b5" android:textColor="@color/subscreen_notification_detail_send_msg_text_color_b5" android:gravity="center_vertical" android:id="@id/detail_content_text" android:background="@drawable/subscreen_notification_detail_send_msg_bg_b5" android:visibility="visible" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="@dimen/subscreen_noti_detail_conversation_bottom_margin_small_b5" android:maxWidth="250.0dip" android:minHeight="32.0dip" android:includeFontPadding="false" android:fontFamily="sec" android:textDirection="locale" android:textAlignment="viewStart" android:paddingHorizontal="12.0dip" android:paddingVertical="7.0dip" android:textFontWeight="400" />
+        <ImageView android:id="@id/detail_content_image" android:background="@drawable/subscreen_notification_detail_content_image_background_b5" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="@dimen/subscreen_noti_detail_conversation_bottom_margin_small_b5" android:adjustViewBounds="true" android:maxWidth="250.0dip" android:clipToOutline="true" />
+    </LinearLayout>
+</LinearLayout>

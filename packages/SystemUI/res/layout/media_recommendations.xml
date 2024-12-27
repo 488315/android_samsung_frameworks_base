@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.systemui.util.animation.TransitionLayout android:theme="@style/MediaPlayer" android:id="@id/media_recommendations_updated" android:background="@drawable/qs_media_background" android:clipChildren="false" android:clipToPadding="false" android:layout_width="fill_parent" android:layout_height="wrap_content" android:forceHasOverlappingRendering="false"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <View android:id="@id/sizing_view" android:layout_width="fill_parent" android:layout_height="@dimen/qs_media_session_height_expanded" />
+    <TextView android:id="@id/media_rec_title" android:text="@string/controls_media_smartspace_rec_header" style="@style/MediaPlayer.Recommendation.Header" />
+    <FrameLayout android:id="@id/media_cover1_container" style="@style/MediaPlayer.Recommendation.AlbumContainer.Updated">
+        <include layout="@layout/media_recommendation_view" />
+    </FrameLayout>
+    <FrameLayout android:id="@id/media_cover2_container" style="@style/MediaPlayer.Recommendation.AlbumContainer.Updated">
+        <include layout="@layout/media_recommendation_view" />
+    </FrameLayout>
+    <FrameLayout android:id="@id/media_cover3_container" style="@style/MediaPlayer.Recommendation.AlbumContainer.Updated">
+        <include layout="@layout/media_recommendation_view" />
+    </FrameLayout>
+    <include layout="@layout/media_long_press_menu" />
+</com.android.systemui.util.animation.TransitionLayout>

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:id="@id/floating_button" android:layout_width="fill_parent" android:layout_height="fill_parent" android:contentDescription="@string/flex_mode_close_button"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:id="@id/icon_area" android:background="@drawable/floating_flex_panel_collapse_button_background" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="@dimen/flex_panel_floating_icon_left_margin" android:elevation="@dimen/flex_panel_floating_icon_elevation" />
+</LinearLayout>

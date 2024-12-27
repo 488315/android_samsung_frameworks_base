@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.systemui.audio.soundcraft.view.battery.BatteryInfoBoxView android:gravity="center" android:orientation="vertical" android:id="@id/soundcraft_battery_info_box" android:background="@null" android:paddingBottom="18.0dip" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:minHeight="22.0dip"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:gravity="center" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <LinearLayout android:orientation="horizontal" android:id="@id/buds_battery_view" android:layout_width="wrap_content" android:layout_height="fill_parent">
+            <ImageView android:id="@id/buds_icon_left" android:layout_width="16.0dip" android:layout_height="22.0dip" android:src="@drawable/soundcraft_ic_buds3_left_solid" android:tint="#e6fafaff" />
+            <ImageView android:id="@id/buds_icon_right" android:layout_width="16.0dip" android:layout_height="22.0dip" android:src="@drawable/soundcraft_ic_buds3_right_solid" android:tint="#e6fafaff" />
+            <TextView android:textSize="17.0dip" android:textColor="#e6fafaff" android:id="@id/buds_battery_info_text" android:layout_width="wrap_content" android:layout_height="22.0dip" android:fontFamily="sec" android:paddingStart="4.0dip" android:paddingEnd="12.0dip" android:textFontWeight="600" />
+        </LinearLayout>
+        <LinearLayout android:orientation="horizontal" android:id="@id/cradle_battery_view" android:layout_width="wrap_content" android:layout_height="fill_parent">
+            <ImageView android:id="@id/cradle_icon" android:layout_width="22.0dip" android:layout_height="22.0dip" android:src="@drawable/soundcraft_ic_buds3_case_solid" android:tint="#e6fafaff" />
+            <TextView android:textSize="17.0dip" android:textColor="#e6fafaff" android:id="@id/cradle_battery_info_text" android:layout_width="wrap_content" android:layout_height="22.0dip" android:fontFamily="sec" android:paddingStart="4.0dip" android:textFontWeight="600" />
+        </LinearLayout>
+    </LinearLayout>
+</com.android.systemui.audio.soundcraft.view.battery.BatteryInfoBoxView>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="config_keyguardQuickAffordanceDefaults">
+        <item>bottom_start:home</item>
+        <item>bottom_end:create_note</item>
+    </string-array>
+</resources>

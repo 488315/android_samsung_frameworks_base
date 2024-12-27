@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:paddingLeft="?android:dialogPreferredPadding" android:paddingRight="?android:dialogPreferredPadding" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <EditText android:id="@id/broadcast_edit_text" android:layout_width="fill_parent" android:layout_height="wrap_content" android:minHeight="48.0dip" android:textAlignment="viewStart" />
+    <TextView android:id="@id/broadcast_error_message" android:visibility="invisible" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="6.0dip" style="@style/TextAppearance.ErrorText" />
+</LinearLayout>

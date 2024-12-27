@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.systemui.audio.soundcraft.view.volume.VolumeBarView android:gravity="center" android:orientation="vertical" android:id="@id/soundcraft_volume_box" android:background="@null" android:layout_width="fill_parent" android:layout_height="wrap_content" android:minHeight="22.0dip"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <FrameLayout android:id="@id/seekbar_container" android:paddingTop="@dimen/soundcraft_seekbar_top_padding" android:paddingBottom="@dimen/soundcraft_seekbar_top_padding" android:layout_width="fill_parent" android:layout_height="48.0dip" android:paddingStart="@dimen/soundcraft_seekbar_margin" android:paddingEnd="@dimen/soundcraft_seekbar_margin">
+        <RelativeLayout android:layout_width="fill_parent" android:layout_height="fill_parent">
+            <com.android.systemui.audio.soundcraft.view.volume.SoundCraftVolumeSeekBar android:id="@id/volume_seekbar" android:background="@null" android:layout_width="fill_parent" android:layout_height="fill_parent" android:progressDrawable="@drawable/sec_soundcraft_seekbar_drawable" android:thumb="@null" android:splitTrack="false" />
+            <com.android.systemui.audio.soundcraft.view.volume.SoundCraftVolumeIcon android:id="@id/volume_icon" android:layout_width="@dimen/soundcraft_seekbar_icon_size" android:layout_height="@dimen/soundcraft_seekbar_icon_size" android:layout_marginTop="10.0dip" android:scaleType="centerInside" android:tint="@color/qs_tile_icon_on_dim_tint_color" android:layout_centerVertical="true" android:layout_marginStart="3.0dip" android:layout_alignParentStart="true" />
+            <ImageView android:id="@id/volume_status_icon" android:layout_width="12.0dip" android:layout_height="12.0dip" android:layout_marginTop="10.0dip" android:src="@drawable/ic_qp_volume_control_dnd" android:scaleType="fitCenter" android:tint="@color/qs_tile_icon_on_dim_tint_color" android:layout_centerVertical="true" android:layout_marginStart="35.0dip" android:layout_alignParentStart="true" />
+        </RelativeLayout>
+    </FrameLayout>
+</com.android.systemui.audio.soundcraft.view.volume.VolumeBarView>

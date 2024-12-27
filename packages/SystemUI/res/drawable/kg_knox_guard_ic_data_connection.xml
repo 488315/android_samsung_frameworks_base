@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector android:height="40.0dip" android:width="40.0dip" android:viewportWidth="40.0" android:viewportHeight="40.0"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <path android:fillColor="@color/kg_knox_tint_color" android:pathData="M16.1548,23.5913l0,-11.9913l-2.6087,0l0,11.9904l-2.1009,-2.1835l-1.88,1.8087l5.2843,5.4922l5.2878,-5.4922l-1.88,-1.8087z" android:strokeColor="#00000000" android:strokeWidth="1.0" android:fillType="nonZero" />
+    <path android:fillColor="@color/kg_knox_tint_color" android:pathData="M29.6504,16.7965l-5.2843,-5.4922l-5.2878,5.4913l1.88,1.8096l2.1026,-2.1852l0,11.9913l2.6087,0l0,-11.9896l2.1017,2.1835z" android:strokeColor="#00000000" android:strokeWidth="1.0" android:fillType="nonZero" />
+</vector>

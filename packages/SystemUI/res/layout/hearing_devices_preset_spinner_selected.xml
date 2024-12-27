@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:paddingTop="@dimen/hearing_devices_preset_spinner_text_padding_vertical" android:paddingBottom="@dimen/hearing_devices_preset_spinner_text_padding_vertical" android:layout_width="fill_parent" android:layout_height="wrap_content" android:minHeight="@dimen/hearing_devices_preset_spinner_height" android:paddingStart="@dimen/hearing_devices_preset_spinner_text_padding_start"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView android:textAppearance="@style/TextAppearance.Dialog.Title" android:textSize="14.0sp" android:gravity="center_vertical" android:layout_width="fill_parent" android:layout_height="0.0dip" android:text="@string/hearing_devices_preset_label" android:layout_weight="1.0" android:lineSpacingExtra="6.0dip" android:fontFamily="@android:string/dynamic_mode_notification_title" android:textDirection="locale" />
+    <TextView android:textAppearance="@style/TextAppearance.Dialog.Body" android:ellipsize="end" android:gravity="center_vertical" android:id="@id/hearing_devices_preset_option_text" android:layout_width="fill_parent" android:layout_height="0.0dip" android:maxLines="1" android:layout_weight="1.0" android:lineSpacingExtra="6.0dip" android:textDirection="locale" />
+</LinearLayout>

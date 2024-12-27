@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:id="@id/frame_layout" android:background="@drawable/sec_qs_ripple_drawable" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:orientation="vertical" android:id="@id/qs_customize_tile_chunk_dummy_container" android:background="@drawable/sec_edit_background" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <com.android.systemui.qs.customize.view.AnimatableTileGridLayout android:orientation="horizontal" android:id="@id/tileLayout" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/qs_customize_tile_layout_padding_top" android:minHeight="@dimen/sec_style_qs_tile_icon_size" />
+        <LinearLayout android:gravity="center" android:layout_gravity="bottom" android:orientation="horizontal" android:id="@id/handler" android:layout_width="fill_parent" android:layout_height="@dimen/qs_customize_tile_layout_handler" />
+    </LinearLayout>
+    <FrameLayout android:id="@id/grey_screen" android:background="@drawable/qs_customizer_grey_screen" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+    <FrameLayout android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <ImageView android:layout_gravity="bottom|center" android:orientation="horizontal" android:id="@id/handler_bar" android:layout_width="wrap_content" android:layout_height="@dimen/sec_tile_chunk_layout_indicator_height" android:layout_marginBottom="12.0dip" android:src="@drawable/sec_scroll_indicator_customizer" />
+    </FrameLayout>
+    <FrameLayout android:layout_gravity="center" android:id="@id/tile_edit_button" android:background="@drawable/qs_customizer_layout_edit_button" android:layout_width="wrap_content" android:layout_height="wrap_content" android:minWidth="65.0dip" android:minHeight="36.0dip" style="@style/RecoilSmallAnimator">
+        <TextView android:text="@string/qs_edit_title" android:textFontWeight="600" style="@style/SecCustomizeButtonTextStyle" />
+    </FrameLayout>
+</FrameLayout>

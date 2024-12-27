@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="abc_slice_duration_days">
+        <item quantity="other">%d napja</item>
+        <item quantity="one">%d napja</item>
+    </plurals>
+    <plurals name="abc_slice_duration_min">
+        <item quantity="other">%d perce</item>
+        <item quantity="one">%d perce</item>
+    </plurals>
+    <plurals name="abc_slice_duration_years">
+        <item quantity="other">%d éve</item>
+        <item quantity="one">%d éve</item>
+    </plurals>
+    <plurals name="controls_item_number_of_favorites">
+        <item quantity="other">%d elem kijelölve</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d elem kijelölve</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="globalactions_force_restart_message">
+        <item quantity="other">A telefon újraindításához tartsa nyomva az Oldalsó és a Halkítás gombot egyszerre több mint %d másodpercig.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">A telefon újraindításához tartsa nyomva az Oldalsó és a Halkítás gombot egyszerre több mint %d másodpercig.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_attempt_left">
+        <item quantity="other">Még %d alkalommal próbálkozhat</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Még %d alkalommal próbálkozhat</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_attempt_left_before_permanent_locking">
+        <item quantity="other">%d próbálkozása maradt a végleges zárolásig</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d próbálkozása maradt a végleges zárolásig</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_secure_attempts_to_unlock_with_fingerprints">
+        <item quantity="other">%d alkalommal próbálta meg ujjlenyomatával feloldani.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d alkalommal próbálta meg ujjlenyomatával feloldani.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_by_biometrics">
+        <item quantity="other">%d helytelen kísérlet történt a biometrikus azonosításra.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d helytelen kísérlet történt a biometrikus azonosításra.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_by_face">
+        <item quantity="other">%d helytelen kísérlet történt az arcfelismeréses azonosításra.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d helytelen kísérlet történt az arcfelismeréses azonosításra.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_by_fingerprint">
+        <item quantity="other">%d helytelen kísérlet történt az ujjlenyomatos azonosításra.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d helytelen kísérlet történt az ujjlenyomatos azonosításra.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_1_hour_and_min">
+        <item quantity="other">Próbálkozzon újra 1 óra %d perc múlva</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Próbálkozzon újra 1 óra %d perc múlva</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_biometric">
+        <item quantity="other">Próbálkozzon újra a biometrikus adatai használatával %d másodperc múlva</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Próbálkozzon újra a biometrikus adatai használatával %d másodperc múlva</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_face">
+        <item quantity="other">Próbálkozzon újra az arcfelismeréssel %d másodperc múlva</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Próbálkozzon újra az arcfelismeréssel %d másodperc múlva</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_fingerprint">
+        <item quantity="other">Próbálkozzon újra az ujjlenyomata használatával %d másodperc múlva</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Próbálkozzon újra az ujjlenyomata használatával %d másodperc múlva</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_hour">
+        <item quantity="other">Próbálkozzon újra %d óra múlva</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Próbálkozzon újra %d óra múlva</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_hour_and_1_min">
+        <item quantity="other">Próbálkozzon újra %d óra 1 perc múlva</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Próbálkozzon újra %d óra 1 perc múlva</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_min">
+        <item quantity="other">Próbálkozzon újra %d perc múlva</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Próbálkozzon újra %d perc múlva</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_sec">
+        <item quantity="other">Próbálja meg %d másodperc múlva</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Próbálja meg %d másodperc múlva</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_countdown">
+        <item quantity="other">Próbálja újra %d másodperc múlva.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Próbálja újra %d másodperc múlva.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_ucm_attempt_left">
+        <item quantity="other">Még %d alkalommal próbálkozhat</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Még %d alkalommal próbálkozhat</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="mtrl_badge_content_description">
+        <item quantity="other">%d új értesítés</item>
+        <item quantity="one">%d új értesítés</item>
+    </plurals>
+    <plurals name="n_speakers">
+        <item quantity="other">%d hangszóró</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d hangszóró</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="notification_insignificant_title">
+        <item quantity="other">%d további értesítés</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d további értesítés</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ongoing_activity_chip_count">
+        <item quantity="other">%d további élő értesítés</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d további élő értesítés</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="plural_notification_count">
+        <item quantity="other">%d értesítés</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d értesítés</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_qs_add_minimum">
+        <item quantity="other">%d gomb szükséges.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d gomb szükséges.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_qs_dnd_detail_fhl_hours_option">
+        <item quantity="other">%d órára</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d órára</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_qs_unable_add_maximum">
+        <item quantity="other">Legfeljebb %d gomb adható hozzá.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Legfeljebb %d gomb adható hozzá.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_qs_unable_remove_minimum">
+        <item quantity="other">Nem lehet eltávolítani a gombot. A Gyorspanelen legalább %d gombnak kell lennie.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Nem lehet eltávolítani a gombot. A Gyorspanelen legalább %d gombnak kell lennie.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_qs_video_call_effects_num">
+        <item quantity="other">%d effekt</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d effekt</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="subscreen_notification_smart_reply_child_account_dialog_content">
+        <item quantity="other">Legalább %d évesnek kell lennie a Galaxy AI fejlett intelligenciát alkalmazó funkcióinak használatához.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Legalább %d évesnek kell lennie a Galaxy AI fejlett intelligenciát alkalmazó funkcióinak használatához.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:orientation="vertical" android:background="@color/sec_widget_round_and_bgcolor" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <com.google.android.material.appbar.AppBarLayout android:layout_gravity="top" android:id="@id/app_bar" android:fitsSystemWindows="true" android:layout_width="fill_parent" android:layout_height="wrap_content" app:layout_behavior="com.google.android.material.appbar.AppBarLayout$Behavior" style="@style/Widget.Design.AppBarLayout">
+            <androidx.appcompat.widget.Toolbar android:theme="@style/Theme.Settings.Toolbar" android:layout_gravity="bottom" android:id="@id/action_bar" android:layout_width="fill_parent" android:layout_height="?android:actionBarSize" android:text="@string/avatar_picker_title" app:contentInsetEnd="24.0dip" app:layout_collapseMode="pin" />
+        </com.google.android.material.appbar.AppBarLayout>
+        <androidx.core.widget.NestedScrollView android:id="@id/scroll_view" android:scrollbars="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent" android:fillViewport="true" android:overScrollMode="always" app:layout_constrainedHeight="true" app:layout_constraintBottom_toTopOf="@id/button_bar" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@id/app_bar">
+            <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <LinearLayout android:layout_gravity="center" android:orientation="horizontal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/sec_avatar_picker_margin_top" android:layout_marginBottom="@dimen/sec_avatar_picker_margin_bottom">
+                    <LinearLayout android:layout_gravity="center|top" android:orientation="vertical" android:id="@id/gallery_btn" android:layout_width="wrap_content" android:layout_height="wrap_content" android:minHeight="@dimen/sec_avatar_size_in_picker" android:layout_weight="1.0">
+                        <ImageView android:layout_gravity="center" android:padding="@dimen/sec_avatar_picker_padding" android:layout_width="@dimen/sec_avatar_size_in_picker" android:layout_height="@dimen/sec_avatar_size_in_picker" android:src="@drawable/sec_ic_btn_galley" android:maxWidth="@dimen/sec_avatar_size_in_picker" />
+                        <TextView android:textSize="18.0dip" android:ellipsize="none" android:layout_gravity="center" android:id="@id/gallerty_name" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/sec_avatar_picker_name_margin_top" android:minWidth="@dimen/sec_avatar_picker_label_min_width" android:text="@string/gallery" android:maxLines="1" android:singleLine="true" android:textAlignment="center" style="@style/TextAppearance.AppCompat.Button" />
+                    </LinearLayout>
+                    <LinearLayout android:layout_gravity="center|top" android:orientation="vertical" android:id="@id/camera_btn" android:layout_width="wrap_content" android:layout_height="wrap_content" android:minHeight="@dimen/sec_avatar_size_in_picker" android:layout_weight="1.0">
+                        <ImageView android:layout_gravity="center" android:padding="@dimen/sec_avatar_picker_padding" android:layout_width="@dimen/sec_avatar_size_in_picker" android:layout_height="@dimen/sec_avatar_size_in_picker" android:src="@drawable/sec_ic_btn_camera" android:maxWidth="@dimen/sec_avatar_size_in_picker" />
+                        <TextView android:textSize="18.0dip" android:ellipsize="none" android:layout_gravity="center" android:id="@id/camera_name" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/sec_avatar_picker_name_margin_top" android:minWidth="@dimen/sec_avatar_picker_label_min_width" android:text="@string/camera" android:maxLines="1" android:singleLine="true" android:textAlignment="center" style="@style/TextAppearance.AppCompat.Button" />
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout android:gravity="center|top" android:layout_gravity="center" android:layout_width="fill_parent" android:layout_height="fill_parent" style="@style/SudContentFrame">
+                    <androidx.recyclerview.widget.RecyclerView android:layout_gravity="center_horizontal" android:id="@id/avatar_grid" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+        <RelativeLayout android:layout_gravity="bottom" android:id="@id/button_bar" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="0.0" app:layout_constraintBaseline_toBaselineOf="parent" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@id/scroll_view">
+            <View android:id="@id/bottom_divider" android:layout_width="fill_parent" style="@style/sec_widget_bottom_bar_divider" />
+            <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:weightSum="0.0" style="@style/sec_widget_bottom_bar_container">
+                <Button android:id="@id/cancel_button" android:layout_width="fill_parent" android:layout_height="@dimen/sec_avatar_picker_button_height" android:text="@string/cancel_button" style="@style/sec_widget_bottom_bar_button" />
+                <Button android:id="@id/save_button" android:layout_width="fill_parent" android:layout_height="@dimen/sec_avatar_picker_button_height" android:text="@string/save_button" style="@style/sec_widget_bottom_bar_button" />
+            </LinearLayout>
+        </RelativeLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

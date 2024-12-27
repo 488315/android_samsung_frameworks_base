@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="battery_labels">
+        <item>0%</item>
+        <item>50%</item>
+        <item>100%</item>
+    </string-array>
+    <string-array name="subscreen_quick_reply_list">
+        <item>Bəli</item>
+        <item>Bəli, zəhmət olmasa</item>
+        <item>OK</item>
+        <item>Xeyr</item>
+        <item>Xeyr</item>
+        <item>Yox</item>
+        <item>Təşəkkürlər</item>
+        <item>Daha çox xoşlanan</item>
+        <item>Yoldayam</item>
+        <item>Nə var, nə yox?</item>
+        <item>Daha sonra</item>
+        <item>Gözəl</item>
+        <item>Razıyam</item>
+        <item>Əla!</item>
+        <item>Nə?</item>
+        <item>OMG!</item>
+    </string-array>
+</resources>

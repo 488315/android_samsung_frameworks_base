@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="battery_labels">
+        <item>0%</item>
+        <item>50%</item>
+        <item>100%</item>
+    </string-array>
+    <string-array name="subscreen_quick_reply_list">
+        <item>បាទ/ចាស</item>
+        <item>បាទ/ចាស, សូម​អញ្ជើញ</item>
+        <item>ព្រម</item>
+        <item>ទេ</item>
+        <item>ទេ សូម​អរគុណ</item>
+        <item>មិន​អ្ហេ៎</item>
+        <item>សូម​អរគុណ</item>
+        <item>គួរ​ឲ្យ​សរសើរ​ខ្លាំង</item>
+        <item>នៅ​តាម​ផ្លូវ</item>
+        <item>មាន​រឿង​អី?</item>
+        <item>ពេលក្រោយ</item>
+        <item>ល្អ</item>
+        <item>ខ្ញុំ​យល់ព្រម</item>
+        <item>អស្ចារ្យ!</item>
+        <item>អ្វី?</item>
+        <item>ឱ ព្រះ​ជា​ម្ចាស់!</item>
+    </string-array>
+</resources>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.systemui.qp.SubroomFlashLightSettingsView android:id="@id/airplane_image_button_wrapper" style="@style/SubscreenButtonWrapperStyle"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:id="@id/flashlight_background" style="@style/SubscreenImageWrapperStyle">
+        <ImageView android:id="@id/flashlight_image_view" android:src="@drawable/quick_panel_icon_flashlight" style="@style/SubscreenButtonImage" />
+    </LinearLayout>
+</com.android.systemui.qp.SubroomFlashLightSettingsView>

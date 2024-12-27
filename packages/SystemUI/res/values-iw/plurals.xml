@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="abc_slice_duration_days">
+        <item quantity="other">לפני %d ימים</item>
+        <item quantity="one">לפני יום אחד (%d)</item>
+        <item quantity="two">לפני %d ימים</item>
+        <item quantity="many">לפני %d ימים</item>
+    </plurals>
+    <plurals name="abc_slice_duration_min">
+        <item quantity="other">לפני %d דק’</item>
+        <item quantity="one">לפני %d דק’</item>
+        <item quantity="two">לפני %d דק’</item>
+        <item quantity="many">לפני %d דק’</item>
+    </plurals>
+    <plurals name="abc_slice_duration_years">
+        <item quantity="other">לפני %d שנים</item>
+        <item quantity="one">לפני שנה (%d)</item>
+        <item quantity="two">לפני %d שנים</item>
+        <item quantity="many">לפני %d שנים</item>
+    </plurals>
+    <plurals name="controls_item_number_of_favorites">
+        <item quantity="other">%d פריטים נבחרו</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">נבחר פריט %d</item>
+        <item quantity="two">%d פריטים נבחרו</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">%d פריטים נבחרו</item>
+    </plurals>
+    <plurals name="globalactions_force_restart_message">
+        <item quantity="other">"כדי להפעיל מחדש את הטלפון, לחץ לחיצה ארוכה במשך יותר מ-%d שניות על הלחצן הצידי ועל לחצן 'הנמך עוצמת קול' במקביל."</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">"כדי להפעיל מחדש את הטלפון, לחץ לחיצה ארוכה במשך יותר משנייה %d על הלחצן הצידי ועל לחצן 'הנמך עוצמת קול' במקביל."</item>
+        <item quantity="two">"כדי להפעיל מחדש את הטלפון, לחץ לחיצה ארוכה במשך יותר מ-%d שניות על הלחצן הצידי ועל לחצן 'הנמך עוצמת קול' במקביל."</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">"כדי להפעיל מחדש את הטלפון, לחץ לחיצה ארוכה במשך יותר מ-%d שניות על הלחצן הצידי ועל לחצן 'הנמך עוצמת קול' במקביל."</item>
+    </plurals>
+    <plurals name="kg_attempt_left">
+        <item quantity="other">נותרו %d ניסיונות</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">נותר %d ניסיון</item>
+        <item quantity="two">נותרו %d ניסיונות</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">נותרו %d ניסיונות</item>
+    </plurals>
+    <plurals name="kg_attempt_left_before_permanent_locking">
+        <item quantity="other">נותרו %d ניסיונות לפני הנעילה הסופית</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">נותר ניסיון %d לפני הנעילה הסופית</item>
+        <item quantity="two">נותרו %d ניסיונות לפני הנעילה הסופית</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">נותרו %d ניסיונות לפני הנעילה הסופית</item>
+    </plurals>
+    <plurals name="kg_secure_attempts_to_unlock_with_fingerprints">
+        <item quantity="other">%d ניסיונות לביטול נעילה באמצעות טביעות אצבע.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">ניסיון %d לביטול נעילה באמצעות טביעות אצבע.</item>
+        <item quantity="two">%d ניסיונות לביטול נעילה באמצעות טביעות אצבע.</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">%d ניסיונות לביטול נעילה באמצעות טביעות אצבע.</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_by_biometrics">
+        <item quantity="other">בוצעו %d ניסיונות שגויים לאמת נתונים ביומטריים.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">בוצע ניסיון שגוי (%d) לאמת נתונים ביומטריים.</item>
+        <item quantity="two">בוצעו %d ניסיונות שגויים לאמת נתונים ביומטריים.</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">בוצעו %d ניסיונות שגויים לאמת נתונים ביומטריים.</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_by_face">
+        <item quantity="other">בוצעו %d ניסיונות שגויים לאמת את נתוני הפנים שלך.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">בוצע ניסיון שגוי (%d) לאמת את נתוני הפנים שלך.</item>
+        <item quantity="two">בוצעו %d ניסיונות שגויים לאמת את נתוני הפנים שלך.</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">בוצעו %d ניסיונות שגויים לאמת את נתוני הפנים שלך.</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_by_fingerprint">
+        <item quantity="other">בוצעו %d ניסיונות שגויים לאמת טביעות אצבע.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">בוצע ניסיון שגוי אחד (%d) לאמת טביעות אצבע.</item>
+        <item quantity="two">בוצעו %d ניסיונות שגויים לאמת טביעות אצבע.</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">בוצעו %d ניסיונות שגויים לאמת טביעות אצבע.</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_1_hour_and_min">
+        <item quantity="other">נסה שוב בעוד שעה אחת ו-%d דקות</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">נסה שוב בעוד שעה אחת ודקה %d</item>
+        <item quantity="two">נסה שוב בעוד שעה אחת ו-%d דקות</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">נסה שוב בעוד שעה אחת ו-%d דקות</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_biometric">
+        <item quantity="other">נסה זיהוי ביומטרי פעם נוספת בעוד %d שניות</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">נסה זיהוי ביומטרי פעם נוספת בעוד %d שנייה</item>
+        <item quantity="two">נסה זיהוי ביומטרי פעם נוספת בעוד %d שניות</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">נסה זיהוי ביומטרי פעם נוספת בעוד %d שניות</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_face">
+        <item quantity="other">נסה זיהוי פנים שוב בעוד %d שניות</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">נסה זיהוי פנים שוב בעוד %d שניות</item>
+        <item quantity="two">נסה זיהוי פנים שוב בעוד %d שניות</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">נסה זיהוי פנים שוב בעוד %d שניות</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_fingerprint">
+        <item quantity="other">נסה זיהוי טביעת אצבע פעם נוספת בעוד %d שניות</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">נסה זיהוי טביעת אצבע פעם נוספת בעוד %d שנייה</item>
+        <item quantity="two">נסה זיהוי טביעת אצבע פעם נוספת בעוד %d שניות</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">נסה זיהוי טביעת אצבע פעם נוספת בעוד %d שניות</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_hour">
+        <item quantity="other">נסה שוב בעוד %d שעות</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">נסה שוב בעוד שעה %d</item>
+        <item quantity="two">נסה שוב בעוד %d שעות</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">נסה שוב בעוד %d שעות</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_hour_and_1_min">
+        <item quantity="other">נסה שוב בעוד %d שעות ודקה אחת</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">נסה שוב בעוד %d שעה דקה אחת</item>
+        <item quantity="two">נסה שוב בעוד %d שעות ודקה אחת</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">נסה שוב בעוד %d שעות ודקה אחת</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_min">
+        <item quantity="other">נסה שוב בעוד %d דקות</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">נסה שוב בעוד דקה %d</item>
+        <item quantity="two">נסה שוב בעוד %d דקות</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">נסה שוב בעוד %d דקות</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_sec">
+        <item quantity="other">נסה שוב בעוד %d שניות</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">נסה שוב בעוד שנייה אחת (%d)</item>
+        <item quantity="two">נסה שוב בעוד %d שניות</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">נסה שוב בעוד %d שניות</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_countdown">
+        <item quantity="other">נסה שוב בעוד %d שניות.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">נסה שוב בעוד %d שנייה.</item>
+        <item quantity="two">נסה שוב בעוד %d שניות.</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">נסה שוב בעוד %d שניות.</item>
+    </plurals>
+    <plurals name="kg_ucm_attempt_left">
+        <item quantity="other">נותרו %d ניסיונות</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">נותר %d ניסיון</item>
+        <item quantity="two">נותרו %d ניסיונות</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">נותרו %d ניסיונות</item>
+    </plurals>
+    <plurals name="mtrl_badge_content_description">
+        <item quantity="other">%d התראות חדשות</item>
+        <item quantity="one">%d התראות חדשות</item>
+        <item quantity="two">%d התראות חדשות</item>
+    </plurals>
+    <plurals name="n_speakers">
+        <item quantity="other">%d רמקולים</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d רמקול</item>
+        <item quantity="two">%d רמקולים</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">%d רמקולים</item>
+    </plurals>
+    <plurals name="notification_insignificant_title">
+        <item quantity="other">עוד %d התראות</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">עוד %d התראה</item>
+        <item quantity="two">עוד %d התראות</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">עוד %d התראות</item>
+    </plurals>
+    <plurals name="ongoing_activity_chip_count">
+        <item quantity="other">עוד %d התראות בזמן אמת</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">עוד התראה בזמן אמת %d</item>
+        <item quantity="two">עוד %d התראות בזמן אמת</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">עוד %d התראות בזמן אמת</item>
+    </plurals>
+    <plurals name="plural_notification_count">
+        <item quantity="other">%d התראות</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">התראה %d</item>
+        <item quantity="two">%d התראות</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">%d התראות</item>
+    </plurals>
+    <plurals name="sec_qs_add_minimum">
+        <item quantity="other">נדרשים %d לחצנים.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">נדרש לחצן %d.</item>
+        <item quantity="two">נדרשים %d לחצנים.</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">נדרשים %d לחצנים.</item>
+    </plurals>
+    <plurals name="sec_qs_dnd_detail_fhl_hours_option">
+        <item quantity="other">למשך %d שעות</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">למשך שעה אחת (%d)</item>
+        <item quantity="two">למשך %d שעות</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">למשך %d שעות</item>
+    </plurals>
+    <plurals name="sec_qs_unable_add_maximum">
+        <item quantity="other">לא ניתן להוסיף יותר מ-%d לחצנים.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">ניתן להוסיף לכל היותר לחצן אחד (%d).</item>
+        <item quantity="two">לא ניתן להוסיף יותר מ-%d לחצנים.</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">לא ניתן להוסיף יותר מ-%d לחצנים.</item>
+    </plurals>
+    <plurals name="sec_qs_unable_remove_minimum">
+        <item quantity="other">לא ניתן להסיר את הלחצן. חובה להשאיר לפחות %d לחצנים בחלונית המהירה.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">לא ניתן להסיר את הלחצן. חובה להשאיר לפחות %d לחצן בחלונית המהירה.</item>
+        <item quantity="two">לא ניתן להסיר את הלחצן. חובה להשאיר לפחות %d לחצנים בחלונית המהירה.</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">לא ניתן להסיר את הלחצן. חובה להשאיר לפחות %d לחצנים בחלונית המהירה.</item>
+    </plurals>
+    <plurals name="sec_qs_video_call_effects_num">
+        <item quantity="other">%d אפקטים</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">אפקט %d</item>
+        <item quantity="two">%d אפקטים</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">%d אפקטים</item>
+    </plurals>
+    <plurals name="subscreen_notification_smart_reply_child_account_dialog_content">
+        <item quantity="other">עליך להיות לפחות בן או בת %d שנים כדי להשתמש בתכונות החכמות המתקדמות של Galaxy AI.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">עליך להיות לפחות בן %d שנה כדי להשתמש בתכונות החכמות המתקדמות של Galaxy AI.</item>
+        <item quantity="two">עליך להיות לפחות בן או בת %d שנים כדי להשתמש בתכונות החכמות המתקדמות של Galaxy AI.</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">עליך להיות לפחות בן או בת %d שנים כדי להשתמש בתכונות החכמות המתקדמות של Galaxy AI.</item>
+    </plurals>
+</resources>

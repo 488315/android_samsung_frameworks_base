@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="biometric_auth_pattern_view_size">348.0dip</dimen>
+    <dimen name="biometric_prompt_logo_description_top_padding">16.0dip</dimen>
+    <item type="dimen" name="biometric_prompt_one_pane_medium_horizontal_guideline_padding">@dimen/biometric_dialog_border_padding</item>
+    <dimen name="biometric_prompt_one_pane_medium_top_guideline_padding">56.0dip</dimen>
+    <dimen name="biometric_prompt_top_scroll_view_bottom_padding">32.0dip</dimen>
+    <dimen name="biometric_prompt_top_scroll_view_horizontal_padding">32.0dip</dimen>
+    <dimen name="control_list_horizontal_spacing">16.0dip</dimen>
+    <dimen name="controls_content_margin_horizontal">24.0dip</dimen>
+    <dimen name="controls_content_padding">24.0dip</dimen>
+    <dimen name="design_navigation_max_width">320.0dip</dimen>
+    <dimen name="design_snackbar_action_inline_max_width">0.0dip</dimen>
+    <dimen name="design_snackbar_background_corner_radius">2.0dip</dimen>
+    <dimen name="design_snackbar_extra_spacing_horizontal">24.0dip</dimen>
+    <dimen name="design_snackbar_max_width">576.0dip</dimen>
+    <dimen name="design_snackbar_min_width">320.0dip</dimen>
+    <item type="dimen" name="design_snackbar_padding_vertical_2lines">@dimen/design_snackbar_padding_vertical</item>
+    <dimen name="design_tab_scrollable_min_width">160.0dip</dimen>
+    <dimen name="global_actions_grid_item_layout_height">80.0dip</dimen>
+    <dimen name="heads_up_pinned_elevation">5.0dip</dimen>
+    <dimen name="hover_system_icons_container_padding_bottom">2.0dip</dimen>
+    <dimen name="hover_system_icons_container_padding_end">4.0dip</dimen>
+    <dimen name="hover_system_icons_container_padding_start">3.0dip</dimen>
+    <dimen name="hover_system_icons_container_padding_top">2.0dip</dimen>
+    <dimen name="immersive_mode_cling_width">600.0dip</dimen>
+    <dimen name="keyguard_affordance_height">80.0dip</dimen>
+    <dimen name="keyguard_affordance_width">120.0dip</dimen>
+    <dimen name="keyguard_carrier_text_margin">24.0dip</dimen>
+    <dimen name="keyguard_security_view_top_margin">12.0dip</dimen>
+    <dimen name="keyguard_smartspace_top_offset">0.0dip</dimen>
+    <dimen name="kg_framed_avatar_size">48.0dip</dimen>
+    <dimen name="kg_pin_klondike_font_size_tablet">9.0dip</dimen>
+    <dimen name="kg_pin_num_pad_font_size_tablet">26.0dip</dimen>
+    <dimen name="kg_status_line_font_size">16.0sp</dimen>
+    <dimen name="kg_user_switcher_text_size">18.0sp</dimen>
+    <dimen name="ksh_layout_width">488.0dip</dimen>
+    <dimen name="large_dialog_width">472.0dip</dimen>
+    <dimen name="large_screen_shade_header_height">42.0dip</dimen>
+    <item type="dimen" name="lockscreen_shade_notifications_scrim_transition_delay">@dimen/lockscreen_shade_scrim_transition_distance</item>
+    <item type="dimen" name="lockscreen_shade_qs_transition_delay">@dimen/lockscreen_shade_scrim_transition_distance</item>
+    <item type="dimen" name="mr_dialog_fixed_width_major">60.000004%</item>
+    <item type="dimen" name="mr_dialog_fixed_width_minor">90.0%</item>
+    <dimen name="mtrl_bottomappbar_height">64.0dip</dimen>
+    <dimen name="multi_user_avatar_keyguard_size">30.0dip</dimen>
+    <dimen name="navigation_key_padding">25.0dip</dimen>
+    <dimen name="navigation_key_width">128.0dip</dimen>
+    <dimen name="notification_side_paddings_for_tablet">15.0dip</dimen>
+    <dimen name="qqs_panel_side_padding_tablet">30.0dip</dimen>
+    <dimen name="qqs_panel_width_tablet">492.0dip</dimen>
+    <dimen name="qs_brightness_margin_bottom">16.0dip</dimen>
+    <dimen name="qs_framed_avatar_size">60.0dip</dimen>
+    <dimen name="qs_panel_padding_top">8.0dip</dimen>
+    <dimen name="screen_pinning_request_button_width">128.0dip</dimen>
+    <dimen name="screen_pinning_request_frame_padding">22.0dip</dimen>
+    <dimen name="screen_pinning_request_side_width">8.0dip</dimen>
+    <dimen name="screen_pinning_request_width">400.0dip</dimen>
+    <dimen name="sec_media_player_side_padding_tablet">15.0dip</dimen>
+    <dimen name="status_bar_battery_end_padding">4.0dip</dimen>
+    <item type="dimen" name="status_bar_header_height_keyguard">@dimen/status_bar_height</item>
+    <dimen name="status_bar_icons_padding_bottom">2.0dip</dimen>
+    <dimen name="status_bar_icons_padding_top">2.0dip</dimen>
+    <dimen name="status_bar_padding_end">0.0dip</dimen>
+    <dimen name="sud_decor_padding_top">256.0dip</dimen>
+    <dimen name="sud_glif_button_margin_end">92.0dip</dimen>
+    <dimen name="sud_glif_button_margin_start">80.0dip</dimen>
+    <dimen name="sud_glif_content_padding_top">0.0dip</dimen>
+    <dimen name="sud_glif_content_padding_top_material_you">0.0dip</dimen>
+    <dimen name="sud_glif_footer_bar_min_height">72.0dip</dimen>
+    <dimen name="sud_glif_footer_bar_padding_end_material_you">116.0dip</dimen>
+    <dimen name="sud_glif_footer_bar_padding_start_material_you">104.0dip</dimen>
+    <dimen name="sud_glif_footer_padding_end">92.0dip</dimen>
+    <dimen name="sud_glif_footer_padding_start">80.0dip</dimen>
+    <dimen name="sud_glif_header_title_size_material_you">44.0sp</dimen>
+    <dimen name="sud_glif_icon_margin_top_material_you">24.0dip</dimen>
+    <dimen name="sud_glif_margin_end">96.0dip</dimen>
+    <dimen name="sud_glif_margin_end_material_you">120.0dip</dimen>
+    <dimen name="sud_glif_margin_start">96.0dip</dimen>
+    <dimen name="sud_glif_margin_start_material_you">120.0dip</dimen>
+    <dimen name="sud_glif_primary_button_button_margin_start_material_you">24.0dip</dimen>
+    <item type="dimen" name="sud_illustration_aspect_ratio">0.0</item>
+    <dimen name="sud_items_glif_icon_divider_inset">144.0dip</dimen>
+    <dimen name="sud_items_glif_text_divider_inset">96.0dip</dimen>
+    <dimen name="sud_items_summary_text_size_material_you">16.0sp</dimen>
+    <dimen name="widget_big_font_size">100.0dip</dimen>
+    <dimen name="widget_label_font_size">18.0sp</dimen>
+    <dimen name="abc_config_prefDialogWidth">580.0dip</dimen>
+</resources>

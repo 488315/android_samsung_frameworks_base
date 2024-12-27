@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="notification_panel_margin_horizontal">48.0dip</dimen>
+    <dimen name="qqs_layout_padding_bottom">16.0dip</dimen>
+    <dimen name="qs_tiles_page_horizontal_margin">32.0dip</dimen>
+    <dimen name="status_view_margin_horizontal">62.0dip</dimen>
+</resources>

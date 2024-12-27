@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="bottom" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView android:textAppearance="@style/TextAppearance.Font.SemiBold" android:textSize="13.0sp" android:textColor="@color/control_sub_header_text" android:gravity="start" android:layout_gravity="bottom" android:id="@id/controls_zone_header" android:paddingTop="11.75dip" android:paddingBottom="@dimen/basic_interaction_sub_header_bottom_padding" android:layout_width="fill_parent" android:layout_height="wrap_content" android:minHeight="@dimen/basic_interaction_sub_header_min_height" android:paddingHorizontal="@dimen/accessibility_focus_highlight_stroke_width" />
+</LinearLayout>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:id="@id/sud_layout_template_content" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_weight="1.0">
+        <LinearLayout android:orientation="vertical" android:id="@id/sud_landscape_header_area" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="@dimen/sud_glif_land_header_area_weight">
+            <ViewStub android:id="@id/sud_layout_sticky_header" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+            <com.google.android.setupdesign.view.BottomScrollView android:id="@id/sud_header_scroll_view" android:layout_width="fill_parent" android:layout_height="fill_parent" android:fillViewport="true" android:scrollIndicators="?sudScrollIndicators">
+                <include layout="@layout/sud_glif_header" />
+            </com.google.android.setupdesign.view.BottomScrollView>
+        </LinearLayout>
+        <LinearLayout android:orientation="vertical" android:id="@id/sud_landscape_content_area" android:paddingTop="?sudGlifContentPaddingTop" style="@style/SudLandContentContianerStyle">
+            <FrameLayout android:id="@id/sud_layout_content" android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_weight="1.0" />
+        </LinearLayout>
+    </LinearLayout>
+    <ViewStub android:id="@id/suc_layout_footer" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+</LinearLayout>

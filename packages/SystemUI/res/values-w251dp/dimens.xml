@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="sesl_index_tip_horizontal_margin">20.0dip</dimen>
+    <dimen name="sesl_list_divider_inset">16.0dip</dimen>
+    <dimen name="sesl_list_image_end_padding">16.0dip</dimen>
+    <dimen name="sesl_list_item_padding_end">8.0dip</dimen>
+    <dimen name="sesl_list_item_padding_horizontal">18.0dip</dimen>
+    <dimen name="sesl_switchbar_margin_end">22.0dip</dimen>
+    <dimen name="sesl_switchbar_margin_start">18.0dip</dimen>
+</resources>

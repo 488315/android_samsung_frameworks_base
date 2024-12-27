@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.systemui.qp.SubroomBrightnessSettingsView android:orientation="vertical" android:id="@id/subroom_brightness_settings_view_id" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layoutDirection="ltr"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:layout_gravity="center|top" android:background="@android:color/transparent" android:layout_width="fill_parent" android:layout_height="@dimen/sub_qp_settings_container_h">
+        <FrameLayout android:layout_gravity="center_vertical" android:background="@android:color/transparent" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <com.android.systemui.qp.SubScreenBrightnessToggleSeekBar android:disabledAlpha="1.0" android:id="@id/subroom_brightness_seekbar" android:background="@null" android:clickable="true" android:layout_width="fill_parent" android:layout_height="fill_parent" android:maxHeight="@dimen/subscreen_brightness_seekbar_height" android:progress="60" android:progressDrawable="@drawable/subroom_seekbar_background_detail" android:minHeight="@dimen/subscreen_brightness_seekbar_height" android:thumb="@null" android:paddingStart="@dimen/seekbar_padding_start" android:paddingEnd="@dimen/seekbar_padding_start" android:splitTrack="false" android:thumbTint="@color/transparent" />
+        </FrameLayout>
+    </LinearLayout>
+</com.android.systemui.qp.SubroomBrightnessSettingsView>

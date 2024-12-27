@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:id="@id/item_root" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <FrameLayout android:id="@id/stack_pip_layout" android:background="@drawable/sec_ongoing_card_bg" android:layout_width="fill_parent" android:layout_height="wrap_content" android:elevation="@dimen/ongoing_activity_expanded_view_elevation" android:outlineAmbientShadowColor="@color/ongoing_activity_card_item_shadow_color">
+        <FrameLayout android:id="@id/stack_expand_contents" android:background="@drawable/ongoing_acitivity_gradient_background" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+        <FrameLayout android:layout_gravity="center_vertical" android:id="@id/pip_dummy_chip_layout" android:visibility="invisible" android:layout_width="@dimen/oa_expanded_view_first_icon_size" android:layout_height="@dimen/oa_expanded_view_first_icon_size" android:layout_marginStart="@dimen/ongoing_activity_expanded_view_progress_start_margin">
+            <FrameLayout android:gravity="center" android:id="@id/dummy_capsule_remote_container" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="fill_parent" android:maxWidth="@dimen/ongoing_activity_chip_max_width" android:paddingHorizontal="@dimen/ongoing_activity_chip_padding_side_for_custom" />
+            <LinearLayout android:gravity="center" android:layout_gravity="center_vertical" android:orientation="horizontal" android:id="@id/dummy_capsule_item_top_layout" android:clipToPadding="false" android:layout_width="fill_parent" android:layout_height="fill_parent" android:paddingHorizontal="@dimen/ongoing_activity_chip_padding_side"
+              xmlns:android="http://schemas.android.com/apk/res/android">
+                <ImageView android:id="@id/dummy_capsule_item_app_icon" android:layout_width="@dimen/ongoing_activity_chip_size" android:layout_height="@dimen/ongoing_activity_chip_size" android:scaleType="fitCenter" />
+                <FrameLayout android:gravity="center" android:layout_gravity="center_vertical" android:id="@id/dummy_capsule_item_noti_expanded_info" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignTop="@id/capsule_item_app_icon" android:layout_marginStart="@dimen/ongoing_activity_chip_margin_between" />
+            </LinearLayout>
+        </FrameLayout>
+    </FrameLayout>
+</FrameLayout>

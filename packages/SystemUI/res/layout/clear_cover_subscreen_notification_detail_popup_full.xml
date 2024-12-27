@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:id="@id/subscreen_notification_full_popup_frame" android:background="@android:color/black" android:focusable="true" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:layout_gravity="end" android:orientation="horizontal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="20.0dip" android:layout_marginEnd="20.0dip">
+        <ImageView android:id="@id/two_phone_icon" android:visibility="gone" android:layout_width="10.0dip" android:layout_height="@dimen/clear_cover_subscreen_noti_secure_icon_size" android:tint="@color/subscreen_notification_two_phone_icon_tint_color" />
+        <ImageView android:id="@id/secure_icon" android:visibility="gone" android:layout_width="@dimen/clear_cover_subscreen_noti_secure_icon_size" android:layout_height="@dimen/clear_cover_subscreen_noti_secure_icon_size" android:layout_marginStart="@dimen/clear_cover_subscreen_noti_icon_between_margin" />
+    </LinearLayout>
+    <LinearLayout android:layout_gravity="center" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginHorizontal="14.0dip">
+        <FrameLayout android:layout_gravity="center_horizontal" android:layout_width="@dimen/clear_cover_subscreen_noti_full_popup_icon_size" android:layout_height="@dimen/clear_cover_subscreen_noti_full_popup_icon_size">
+            <ImageView android:id="@id/subscreen_notification_header_icon" android:layout_width="fill_parent" android:layout_height="fill_parent" android:scaleType="centerCrop" />
+            <ImageView android:layout_gravity="end|bottom|center" android:id="@id/subscreen_notification_sub_icon" android:visibility="gone" android:layout_width="@dimen/clear_cover_subscreen_noti_full_popup_sub_icon_size" android:layout_height="@dimen/clear_cover_subscreen_noti_full_popup_sub_icon_size" android:antialias="true" android:adjustViewBounds="true" />
+        </FrameLayout>
+        <TextView android:textAppearance="@style/TextAppearance.SubscreenNotificationDetail" android:textSize="@dimen/clear_cover_subscreen_noti_full_popup_title_text_size" android:textStyle="bold" android:ellipsize="end" android:layout_gravity="center_horizontal" android:id="@id/subscreen_notification_title_text" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="10.0dip" android:singleLine="true" />
+        <TextView android:textAppearance="@style/TextAppearance.SubscreenNotificationDetail" android:textSize="@dimen/clear_cover_subscreen_noti_full_popup_title_text_size" android:ellipsize="end" android:gravity="center" android:layout_gravity="center_horizontal" android:id="@id/subscreen_notification_content_text" android:layout_width="wrap_content" android:layout_height="wrap_content" android:maxLines="2" android:textAlignment="center" />
+    </LinearLayout>
+</FrameLayout>

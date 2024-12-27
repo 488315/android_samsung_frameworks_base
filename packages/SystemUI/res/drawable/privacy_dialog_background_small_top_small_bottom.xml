@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple android:color="?android:colorControlHighlight"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@android:id/mask">
+        <shape android:shape="rectangle">
+            <corners android:topLeftRadius="@dimen/privacy_dialog_background_radius_small" android:topRightRadius="@dimen/privacy_dialog_background_radius_small" android:bottomLeftRadius="@dimen/privacy_dialog_background_radius_small" android:bottomRightRadius="@dimen/privacy_dialog_background_radius_small" />
+            <solid android:color="@android:color/white" />
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:topLeftRadius="@dimen/privacy_dialog_background_radius_small" android:topRightRadius="@dimen/privacy_dialog_background_radius_small" android:bottomLeftRadius="@dimen/privacy_dialog_background_radius_small" android:bottomRightRadius="@dimen/privacy_dialog_background_radius_small" />
+            <solid android:color="@android:color/white" />
+        </shape>
+    </item>
+</ripple>

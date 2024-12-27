@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<inset
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:androidprv="http://schemas.android.com/apk/prv/res/android">
+    <ripple android:color="?android:colorControlHighlight" android:radius="24.0dip">
+        <item>
+            <shape android:shape="oval">
+                <size android:height="24.0dip" android:width="24.0dip" />
+                <solid android:color="?android:^attr-private/materialColorSurfaceContainerHighest" />
+            </shape>
+        </item>
+    </ripple>
+</inset>

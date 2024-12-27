@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector android:height="44.0dip" android:width="44.0dip" android:viewportWidth="44.0" android:viewportHeight="44.0"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:aapt="http://schemas.android.com/aapt">
+    <path android:fillColor="#ffffffff" android:pathData="M38.846,4.889C34.81,0.825 28.762,0 22,0C15.238,0 9.189,0.825 5.154,4.889C1.938,8.128 0,13.424 0,22C0,30.576 1.938,35.872 5.154,39.111C9.19,43.175 15.238,44 22,44C28.761,44 34.81,43.175 38.845,39.111C42.062,35.872 44,30.576 44,22C44,13.424 42.062,8.128 38.846,4.889Z" android:strokeColor="#00000000" android:strokeWidth="1.0" android:fillType="evenOdd" />
+    <group>
+        <clip-path android:pathData="M38.846,4.889C34.81,0.825 28.762,0 22,0C15.238,0 9.189,0.825 5.154,4.889C1.938,8.128 0,13.424 0,22C0,30.576 1.938,35.872 5.154,39.111C9.19,43.175 15.238,44 22,44C28.761,44 34.81,43.175 38.845,39.111C42.062,35.872 44,30.576 44,22C44,13.424 42.062,8.128 38.846,4.889Z" />
+        <path android:fillColor="#ffd8d8d8" android:pathData="M22,6C22,14.731 28.994,21.829 37.685,21.997L38,22C29.269,22 22.171,28.994 22.003,37.685L22,38C22,29.163 14.837,22 6,22C14.837,22 22,14.837 22,6Z" android:strokeColor="#00000000" android:strokeWidth="1.0" android:fillType="evenOdd" />
+    </group>
+    <group>
+        <clip-path android:pathData="M38.846,4.889C34.81,0.825 28.762,0 22,0C15.238,0 9.189,0.825 5.154,4.889C1.938,8.128 0,13.424 0,22C0,30.576 1.938,35.872 5.154,39.111C9.19,43.175 15.238,44 22,44C28.761,44 34.81,43.175 38.845,39.111C42.062,35.872 44,30.576 44,22C44,13.424 42.062,8.128 38.846,4.889Z" />
+        <path android:fillColor="@drawable/$ongoing_gemini_app_icon__0" android:pathData="M22,6C22,14.731 28.994,21.829 37.685,21.997L38,22C29.269,22 22.171,28.994 22.003,37.685L22,38C22,29.163 14.837,22 6,22C14.837,22 22,14.837 22,6Z" android:strokeColor="#00000000" android:strokeWidth="1.0" android:fillType="evenOdd" />
+    </group>
+</vector>

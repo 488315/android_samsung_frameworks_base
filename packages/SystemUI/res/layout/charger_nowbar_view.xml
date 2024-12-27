@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.systemui.power.ChargerNowBarView android:layout_width="fill_parent" android:layout_height="fill_parent" android:layoutDirection="locale"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.airbnb.lottie.LottieAnimationView android:id="@id/battery_progressbar" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+    <RelativeLayout android:clipChildren="false" android:clipToPadding="false" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <ImageView android:id="@id/battery_icon_shadow" android:layout_width="@dimen/charging_now_bar_icon_size" android:layout_height="@dimen/charging_now_bar_icon_size" android:layout_margin="@dimen/charging_now_bar_margin" android:src="@drawable/nowbar_charging_icon_shadow" android:layout_centerVertical="true" android:alpha="0.0" />
+        <ImageView android:id="@id/battery_icon" android:layout_width="@dimen/charging_now_bar_icon_size" android:layout_height="@dimen/charging_now_bar_icon_size" android:layout_margin="@dimen/charging_now_bar_margin" android:src="@drawable/nowbar_battery_charging_icon" android:layout_centerVertical="true" android:alpha="0.0" />
+        <RelativeLayout android:orientation="horizontal" android:id="@id/battery_level_container" android:clipChildren="false" android:clipToPadding="false" android:layout_width="fill_parent" android:layout_height="fill_parent" android:alpha="0.0" android:paddingVertical="@dimen/charging_now_bar_battery_container_padding_vertical">
+            <TextView android:textSize="@dimen/charging_now_bar_percent_size" android:id="@id/battery_percent_rtl" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignBaseline="@id/battery_level" android:fontFamily="sec" android:layout_toStartOf="@id/battery_level" android:textFontWeight="600" />
+            <TextView android:textSize="@dimen/charging_now_bar_level_size" android:id="@id/battery_level" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_centerInParent="true" android:fontFamily="sec" android:textFontWeight="600" />
+            <TextView android:textSize="@dimen/charging_now_bar_percent_size" android:id="@id/battery_percent" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignBaseline="@id/battery_level" android:fontFamily="sec" android:layout_toEndOf="@id/battery_level" android:textFontWeight="600" />
+        </RelativeLayout>
+    </RelativeLayout>
+</com.android.systemui.power.ChargerNowBarView>

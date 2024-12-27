@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.keyguard.KeyguardClockSwitch android:layout_gravity="center|top" android:id="@id/keyguard_clock_container" android:clipChildren="false" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.android.keyguard.KeyguardClockFrame android:id="@id/lockscreen_clock_view" android:visibility="invisible" android:clipChildren="false" android:layout_width="wrap_content" android:layout_height="@dimen/small_clock_height" android:layout_alignParentTop="true" android:paddingStart="@dimen/clock_padding_start" android:layout_alignParentStart="true" />
+    <com.android.keyguard.KeyguardClockFrame android:id="@id/lockscreen_clock_view_large" android:visibility="gone" android:clipChildren="false" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+    <com.android.keyguard.KeyguardStatusAreaView android:orientation="vertical" android:id="@id/keyguard_status_area" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_below="@id/lockscreen_clock_view" android:layout_alignParentStart="true">
+        <include android:id="@id/keyguard_slice_view" android:layout_width="fill_parent" android:layout_height="wrap_content" layout="@layout/keyguard_slice_view" />
+        <com.android.systemui.statusbar.phone.NotificationIconContainer android:id="@id/left_aligned_notification_icon_container" android:visibility="invisible" android:layout_width="fill_parent" android:layout_height="@dimen/notification_shelf_height" android:paddingStart="@dimen/below_clock_padding_start_icons" />
+    </com.android.keyguard.KeyguardStatusAreaView>
+</com.android.keyguard.KeyguardClockSwitch>

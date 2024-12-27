@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item type="layout" name="sud_glif_list_template_two_pane">@layout/sud_glif_list_template_card_two_pane</item>
+    <item type="layout" name="sud_glif_preference_template_two_pane">@layout/sud_glif_preference_template_card_two_pane</item>
+    <item type="layout" name="sud_glif_recycler_template_two_pane">@layout/sud_glif_recycler_template_card_two_pane</item>
+    <item type="layout" name="sud_glif_template_two_pane">@layout/sud_glif_template_card_two_pane</item>
+</resources>

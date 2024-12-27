@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="center" android:orientation="vertical" android:id="@id/tool_view" android:focusable="true" android:clickable="true" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="1.0"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <FrameLayout android:id="@id/icon_frame" android:background="@drawable/qs_hearing_devices_related_tools_background" android:focusable="false" android:layout_width="@dimen/hearing_devices_tool_icon_frame_width" android:layout_height="@dimen/hearing_devices_tool_icon_frame_height">
+        <ImageView android:layout_gravity="center" android:id="@id/tool_icon" android:focusable="false" android:layout_width="@dimen/hearing_devices_tool_icon_size" android:layout_height="@dimen/hearing_devices_tool_icon_size" android:scaleType="fitCenter" />
+    </FrameLayout>
+    <TextView android:textAppearance="@style/TextAppearance.Dialog.Body.Message" android:textSize="12.0sp" android:ellipsize="end" android:id="@id/tool_name" android:focusable="false" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/hearing_devices_layout_margin" android:maxLines="1" android:textDirection="locale" android:textAlignment="center" />
+</LinearLayout>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:id="@id/new_user_dialog_id" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:gravity="center" android:orientation="vertical" android:padding="@dimen/dialog_content_padding" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <ImageView android:id="@id/dialog_with_icon_icon" android:layout_width="wrap_content" android:layout_height="wrap_content" android:importantForAccessibility="no" />
+        <TextView android:gravity="center" android:id="@id/dialog_with_icon_title" android:layout_width="fill_parent" android:layout_height="wrap_content" android:hyphenationFrequency="fullFast" style="@style/DialogWithIconTitle" />
+        <TextView android:gravity="center" android:id="@id/dialog_with_icon_message" android:layout_width="fill_parent" android:layout_height="wrap_content" android:hyphenationFrequency="fullFast" style="@style/TextAppearanceSmall" />
+        <LinearLayout android:gravity="center" android:orientation="vertical" android:id="@id/custom_layout" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+        <LinearLayout android:gravity="center" android:orientation="horizontal" android:id="@id/button_panel" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <Button android:id="@id/button_cancel" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" style="@style/DialogButtonNegative" />
+            <Space android:layout_width="0.0dip" android:layout_height="1.0dip" android:layout_weight="1.0" />
+            <Button android:id="@id/button_back" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" style="@style/DialogButtonNegative" />
+            <Space android:layout_width="0.0dip" android:layout_height="1.0dip" android:layout_weight="0.05" />
+            <Button android:id="@id/button_ok" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" style="@style/DialogButtonPositive" />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

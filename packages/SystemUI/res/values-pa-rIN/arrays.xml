@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="battery_labels">
+        <item>0%</item>
+        <item>50%</item>
+        <item>100%</item>
+    </string-array>
+    <string-array name="subscreen_quick_reply_list">
+        <item>ਹਾਂ</item>
+        <item>ਹਾਂ, ਜ਼ਰੂਰ</item>
+        <item>ਓਕੇ</item>
+        <item>ਨਹੀਂ</item>
+        <item>ਨਹੀਂ ਧੰਨਵਾਦ</item>
+        <item>ਨਾਂਹ</item>
+        <item>ਧੰਨਵਾਦ</item>
+        <item>ਬਹੁਤ ਕਦਰ ਕੀਤੀ ਗਈ</item>
+        <item>ਰਸਤੇ ਵਿੱਚ ਹਾਂ</item>
+        <item>ਕੀ ਚੱਲ ਰਿਹਾ ਹੈ?</item>
+        <item>ਬਾਅਦ ਵਿੱਚ</item>
+        <item>ਚੰਗਾ</item>
+        <item>ਮੈਂ ਸਹਿਮਤ ਹਾਂ</item>
+        <item>ਬਹੁਤ ਵਧੀਆ!</item>
+        <item>ਕੀ?</item>
+        <item>OMG!</item>
+    </string-array>
+</resources>

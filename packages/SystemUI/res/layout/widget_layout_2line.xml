@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:id="@id/root" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <GridView android:gravity="center" android:layout_gravity="center" android:id="@id/gridview" android:paddingLeft="@dimen/widget_launcher_layout_left_right_padding" android:paddingTop="@dimen/widget_launcher_layout_2line_top_padding" android:paddingRight="@dimen/widget_launcher_layout_left_right_padding" android:scrollbars="none" android:clipToPadding="false" android:layout_width="fill_parent" android:layout_height="fill_parent" android:listSelector="@drawable/app_icon_selector" android:horizontalSpacing="@dimen/widget_launcher_layout_item_horizontal_spacing" android:verticalSpacing="@dimen/widget_launcher_layout_2line_item_vertical_spacing" android:stretchMode="columnWidth" android:numColumns="auto_fit" />
+</LinearLayout>

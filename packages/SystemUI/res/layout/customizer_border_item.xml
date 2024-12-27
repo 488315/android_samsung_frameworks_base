@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:gravity="center_horizontal" android:orientation="vertical" android:id="@id/dummy_bar_parent" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="@dimen/qs_customize_bar_margin"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <FrameLayout android:id="@id/dummy_bar_container" android:background="@drawable/qs_customizer_shape_roundborder" android:padding="3.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+</FrameLayout>

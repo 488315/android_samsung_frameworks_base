@@ -9,9 +9,8 @@ import java.lang.annotation.RetentionPolicy;
 /* loaded from: classes3.dex */
 public abstract class BroadcastInfoResponse implements Parcelable {
     public static final Parcelable.Creator<BroadcastInfoResponse> CREATOR =
-            new Parcelable.Creator<
-                    BroadcastInfoResponse>() { // from class:
-                                               // android.media.tv.BroadcastInfoResponse.1
+            new Parcelable.Creator<BroadcastInfoResponse>() { // from class:
+                // android.media.tv.BroadcastInfoResponse.1
                 /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public BroadcastInfoResponse createFromParcel(Parcel source) {

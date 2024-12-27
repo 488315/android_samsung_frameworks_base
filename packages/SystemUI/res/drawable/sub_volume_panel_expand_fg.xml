@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape android:shape="rectangle"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <corners android:radius="@dimen/volume_sub_large_display_dual_panel_radius" />
+    <solid android:color="@color/volume_panel_fg_color" />
+</shape>

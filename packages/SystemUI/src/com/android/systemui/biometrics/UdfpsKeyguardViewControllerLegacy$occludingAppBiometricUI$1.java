@@ -1,0 +1,11 @@
+package com.android.systemui.biometrics;
+
+/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
+/* loaded from: classes.dex */
+public final class UdfpsKeyguardViewControllerLegacy$occludingAppBiometricUI$1 {
+    public final /* synthetic */ UdfpsKeyguardViewControllerLegacy this$0;
+
+    public UdfpsKeyguardViewControllerLegacy$occludingAppBiometricUI$1(UdfpsKeyguardViewControllerLegacy udfpsKeyguardViewControllerLegacy) {
+        this.this$0 = udfpsKeyguardViewControllerLegacy;
+    }
+}

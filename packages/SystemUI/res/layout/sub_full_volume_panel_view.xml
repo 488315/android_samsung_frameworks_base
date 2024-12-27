@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.systemui.volume.view.subscreen.full.SubFullLayoutVolumePanelView android:gravity="right" android:layout_gravity="center|right" android:id="@id/volume_panel_view_root" android:layout_width="wrap_content" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <FrameLayout android:layout_gravity="right" android:id="@id/volume_panel_view" android:focusable="true" android:layout_width="wrap_content" android:layout_height="wrap_content">
+        <LinearLayout android:layout_gravity="center" android:orientation="horizontal" android:id="@id/volume_panel_row_container" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+        <ImageView android:layout_gravity="center|top" android:id="@id/volume_panel_expand_button" android:paddingTop="@dimen/sub_full_volume_icon_touch_padding" android:paddingBottom="@dimen/sub_full_volume_icon_touch_padding" android:layout_width="@dimen/sub_full_volume_icon_touch_size" android:layout_height="@dimen/sub_full_volume_icon_touch_size" android:layout_marginTop="@dimen/sub_full_volume_panel_icon_margin" android:src="@drawable/tw_ic_audio_more" android:scaleType="centerInside" android:tint="@color/volume_detail_icon_color" android:paddingStart="@dimen/sub_full_volume_icon_touch_padding" android:paddingEnd="@dimen/sub_full_volume_icon_touch_padding" />
+    </FrameLayout>
+    <include layout="@layout/sub_full_volume_panel_dual_view" />
+    <include layout="@layout/sub_full_volume_aod_panel_view" />
+</com.android.systemui.volume.view.subscreen.full.SubFullLayoutVolumePanelView>

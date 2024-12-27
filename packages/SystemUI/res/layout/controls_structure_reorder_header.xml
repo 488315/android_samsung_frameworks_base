@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:paddingTop="6.0dip" android:paddingBottom="14.0dip" android:clipToPadding="false" android:layout_width="fill_parent" android:layout_height="wrap_content" android:paddingStart="10.0dip" android:paddingEnd="10.0dip"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:id="@id/reorder_structure_layout" android:background="@drawable/control_reorder_structure_bg" android:layout_width="fill_parent" android:layout_height="@dimen/control_management_row_height">
+        <TextView android:textAppearance="@style/TextAppearance.Font.Regular" android:textSize="18.0sp" android:textColor="@color/control_manage_reorder_category_title" android:ellipsize="end" android:gravity="left" android:id="@id/reorder_title" android:layout_width="0.0dip" android:layout_height="wrap_content" android:maxLines="1" android:layout_weight="1.0" android:layout_marginStart="@dimen/basic_interaction_side_margin" />
+        <ImageView android:layout_gravity="center_vertical" android:id="@id/reorder_structure" android:layout_width="@dimen/sec_control_management_checkbox_size" android:layout_height="@dimen/sec_control_management_checkbox_size" android:src="@drawable/ic_tw_list_icon_reorder" android:contentDescription="@null" android:importantForAccessibility="no" android:layout_marginHorizontal="@dimen/basic_interaction_expand_button_side_margin" />
+    </LinearLayout>
+</LinearLayout>

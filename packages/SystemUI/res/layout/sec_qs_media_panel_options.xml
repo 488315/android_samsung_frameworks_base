@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:gravity="center" android:orientation="vertical" android:id="@id/qs_media_controls_options" android:layout_width="fill_parent" android:layout_height="fill_parent" android:paddingHorizontal="@dimen/sec_media_view_padding_start"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:gravity="center_vertical" android:layout_gravity="start" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/sec_media_view_padding_top">
+        <ImageView android:id="@id/sec_option_app_icon" android:layout_width="@dimen/sec_qs_media_icon_size" android:layout_height="@dimen/sec_qs_media_icon_size" android:src="@drawable/ic_clear" android:tint="@color/sec_qs_media_player_guts_header_color" android:layout_marginEnd="@dimen/sec_qs_media_player_app_icon_margin_end" />
+        <TextView android:textAppearance="@style/TextAppearance.SecRegular" android:textSize="@dimen/sec_qs_media_panel_options_app_name_text_size" android:textColor="@color/sec_qs_media_player_guts_header_color" android:id="@id/sec_option_app_text" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/controls_media_close_session" android:singleLine="true" />
+    </LinearLayout>
+    <LinearLayout android:gravity="center" android:layout_gravity="center" android:id="@id/sec_option_remove_button" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <TextView android:textAppearance="@style/TextAppearance.SecSemiBold" android:textSize="@dimen/sec_qs_media_panel_options_remove_text_size" android:textColor="@color/sec_qs_media_player_guts_buttons_color" android:gravity="center" android:id="@id/sec_remove_text" android:background="@drawable/sec_qs_media_player_guts_button_background" android:layout_width="120.0dip" android:layout_height="30.0dip" android:text="@string/sec_qs_media_player_remove" android:singleLine="true" />
+    </LinearLayout>
+    <LinearLayout android:gravity="center" android:layout_gravity="bottom|center" android:orientation="horizontal" android:id="@id/sec_option_buttons" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="@dimen/sec_qs_media_panel_options_bottom_margin" android:showDividers="middle">
+        <TextView android:textAppearance="@style/TextAppearance.SecSemiBold" android:textSize="@dimen/sec_qs_media_panel_options_cancel_text_size" android:textColor="@color/sec_qs_media_player_guts_buttons_color" android:gravity="center" android:id="@id/sec_cancel_text" android:layout_width="120.0dip" android:layout_height="wrap_content" android:text="@string/sec_qs_media_player_cancel" />
+    </LinearLayout>
+</FrameLayout>

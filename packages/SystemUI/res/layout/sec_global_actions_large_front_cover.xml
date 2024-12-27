@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:layout_gravity="center" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginStart="6.0dip" android:layout_marginEnd="6.0dip"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:gravity="center" android:layout_gravity="center" android:orientation="horizontal" android:id="@id/sec_global_actions_front_cover_item" android:layout_width="@dimen/sec_global_actions_front_large_cover_width" android:layout_height="wrap_content" android:minHeight="@dimen/sec_global_actions_front_large_cover_height" />
+    <FrameLayout android:gravity="center_horizontal" android:id="@id/sec_global_actions_front_cover_confirm" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+</FrameLayout>

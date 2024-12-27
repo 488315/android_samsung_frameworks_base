@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="center" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.android.keyguard.AlphaOptimizedLinearLayout android:gravity="center" android:layout_width="fill_parent" android:layout_height="wrap_content" android:paddingStart="@dimen/sec_qs_detail_items_side_padding" android:paddingEnd="@dimen/sec_qs_detail_items_side_padding">
+        <TextView android:textAppearance="@style/TextAppearance.QS.DetailHeader" android:textSize="@dimen/sec_qs_detail_header_text_size" android:id="@id/title" android:layout_width="0.0dip" android:layout_height="wrap_content" android:singleLine="true" android:layout_weight="1.0" android:fontFamily="sec" android:textAlignment="viewStart" android:textFontWeight="600" />
+        <ProgressBar android:theme="@style/Theme.AppCompat.DayNight" android:layout_gravity="center" android:id="@id/qs_detail_header_progress" android:visibility="gone" android:layout_width="@dimen/qs_detail_header_progress_size" android:layout_height="@dimen/qs_detail_header_progress_size" android:indeterminate="true" android:layout_marginEnd="12.0dip" />
+        <ViewStub android:theme="@style/Theme.AppCompat.DayNight" android:id="@id/toggle_stub" android:layout="@layout/sec_qs_detail_switch" android:inflatedId="@id/toggle" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+    </com.android.keyguard.AlphaOptimizedLinearLayout>
+</LinearLayout>

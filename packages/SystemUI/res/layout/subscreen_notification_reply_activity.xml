@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:background="@color/transparent" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:orientation="vertical" android:id="@id/reply_activity_main_layout" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <include layout="@layout/subscreen_notification_adapter_header_b5" />
+        <LinearLayout android:gravity="center" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:minHeight="@dimen/subscreen_noti_detail_reply_container_min_height_b5">
+            <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:id="@id/edit_text_container" android:background="@drawable/subscreen_notification_detail_edit_text_background_b5" android:layout_width="287.0dip" android:layout_height="wrap_content">
+                <com.android.systemui.widget.SystemUIEditText android:textSize="15.0dip" android:textColor="@color/subscreen_notification_text_color" android:textColorHint="#b3fafafa" android:ellipsize="end" android:gravity="center_vertical" android:id="@id/edit_responses" android:background="@null" android:layout_width="fill_parent" android:layout_height="wrap_content" android:hint="@string/subscreen_detail_adapter_reply_button_text" android:maxLines="2" android:layout_weight="1.0" android:inputType="textCapSentences|textMultiLine" android:imeOptions="flagNoFullscreen" android:fontFamily="sec" android:layout_marginHorizontal="16.0dip" android:layout_marginVertical="10.0dip" android:textFontWeight="400" />
+            </LinearLayout>
+            <ImageView android:id="@id/reply_send_button" android:background="@drawable/subscreen_notification_icon_button_bg" android:padding="5.0dip" android:layout_width="38.0dip" android:layout_height="38.0dip" android:src="@drawable/subscreen_notification_icon_send" android:scaleType="centerInside" android:contentDescription="@android:string/network_switch_type_name_unknown" android:layout_marginStart="6.0dip" android:backgroundTint="@color/subscreen_notification_quick_send_button_bg_color_b5" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

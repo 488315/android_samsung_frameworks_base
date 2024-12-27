@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <bool name="config_edgeToEdgeBottomSheetDialog">false</bool>
+    <bool name="config_navBarSupportPhoneLayoutProvider">false</bool>
+    <bool name="config_quickSettingsMediaLandscapeCollapsed">false</bool>
+    <bool name="config_use_large_screen_shade_header">true</bool>
+    <bool name="is_tablet">true</bool>
+    <bool name="qs_show_user_switcher_for_single_user">true</bool>
+    <bool name="sudUseTabletLayout">true</bool>
+    <bool name="update_bouncer_constraints">false</bool>
+    <bool name="volume_panel_is_large_screen">true</bool>
+</resources>

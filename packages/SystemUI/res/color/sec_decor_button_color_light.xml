@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:color="@color/sec_decor_icon_color_light" app:state_task_focused="true" />
+    <item android:color="@color/sec_decor_icon_color_light" android:alpha="@dimen/sec_decor_icon_disabled_alpha" />
+</selector>

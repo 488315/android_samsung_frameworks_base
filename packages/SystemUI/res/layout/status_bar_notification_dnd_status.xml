@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.systemui.statusbar.DndStatusView android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:orientation="horizontal" android:id="@id/notification_dnd_status_text_icon_container" android:layout_width="wrap_content" android:layout_height="@dimen/notification_dnd_status_view_height">
+        <ImageView android:layout_gravity="top" android:id="@id/notification_dnd_status_icon" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/ic_notification_dnd_on" android:layout_marginStart="@dimen/notification_dnd_status_icon_margin_start" android:layout_marginEnd="@dimen/notification_dnd_status_icon_margin_end" />
+        <TextView android:textAppearance="@style/TextAppearance.NotificationDndStatusView" android:layout_gravity="top" android:id="@id/notification_dnd_status_text" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Do not disturb is on until you turn it off." />
+    </LinearLayout>
+</com.android.systemui.statusbar.DndStatusView>

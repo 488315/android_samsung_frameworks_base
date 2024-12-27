@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:clipChildren="false" android:clipToPadding="false" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout android:gravity="top" android:layout_gravity="center_horizontal" android:id="@id/panel_adjusted_detail" android:clipChildren="false" android:clipToPadding="false" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <LinearLayout android:gravity="center" android:layout_gravity="center" android:orientation="vertical" android:id="@id/qs_detail_extended_container" android:clipChildren="false" android:clipToPadding="false" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <LinearLayout android:gravity="center" android:orientation="vertical" android:id="@id/qs_detail_extended_text_container" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <com.android.systemui.shared.shadow.DoubleShadowTextView android:textSize="@dimen/sec_qs_detail_header_container_text_size" android:textColor="@color/sec_qs_detail_header_text_color" android:gravity="center" android:id="@id/qs_detail_extended_text" android:layout_width="wrap_content" android:layout_height="wrap_content" android:fontFamily="sec" android:textFontWeight="600" app:ambientShadowBlur="@dimen/shadow_radius_header" app:keyShadowAlpha="0.3" app:keyShadowBlur="@dimen/shadow_radius_header" />
+            </LinearLayout>
+            <LinearLayout android:orientation="vertical" android:id="@id/qs_detail_extended_summary_container" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:minWidth="@dimen/qs_detail_extended_text_container_width" android:paddingStart="@dimen/sec_qs_detail_items_side_padding" android:paddingEnd="@dimen/sec_qs_detail_items_side_padding">
+                <TextView android:textSize="17.0sp" android:textColor="@color/sec_qs_detail_header_text_color" android:gravity="center" android:id="@id/qs_detail_extended_summary" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/quick_settings_dnd_summary" android:fontFamily="sec" android:fontWeight="400" />
+            </LinearLayout>
+            <com.android.systemui.qs.SecQSDetailContentView android:orientation="vertical" android:id="@id/qs_detail_parent" android:tag="target" android:background="@drawable/sec_qs_detailed_container_background" android:layout_width="fill_parent" android:layout_height="wrap_content" android:adjustViewBounds="true">
+                <include android:id="@id/qs_detail_header" android:layout_width="fill_parent" android:layout_height="@dimen/sec_qs_detail_header_height" layout="@layout/sec_qs_detail_header" />
+                <View android:layout_gravity="center_horizontal" android:id="@id/qs_toggle_divider" android:background="@color/qs_toggle_divider_color" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="@dimen/qs_toggle_divider_height" android:layout_marginStart="@dimen/qspanel_layout_detail_divider_side_padding" android:layout_marginEnd="@dimen/qspanel_layout_detail_divider_side_padding" />
+                <ScrollView android:id="@id/qs_detail_scroll" android:paddingTop="@dimen/sec_qs_detail_content_top_margin" android:layout_width="fill_parent" android:layout_height="0.0dip" android:fillViewport="true" android:layout_weight="1.0">
+                    <FrameLayout android:id="@id/qs_detail_content" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+                </ScrollView>
+                <include android:id="@id/qs_detail_buttons" android:layout_width="fill_parent" android:layout_height="wrap_content" android:minHeight="@dimen/sec_qs_detail_buttons_height" layout="@layout/sec_qs_detail_buttons" />
+            </com.android.systemui.qs.SecQSDetailContentView>
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout android:id="@id/qs_detail_full_screen_container" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+</FrameLayout>

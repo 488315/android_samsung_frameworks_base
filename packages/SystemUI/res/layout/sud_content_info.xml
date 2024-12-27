@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="horizontal" android:id="@id/sud_content_info_container" android:layout_width="fill_parent" android:layout_height="wrap_content" android:baselineAligned="false" style="@style/SudInfoContainer"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <FrameLayout android:gravity="start" android:layout_gravity="top" android:id="@id/sud_content_info_icon_container" android:layout_width="wrap_content" android:layout_height="wrap_content">
+        <ImageView android:id="@id/sud_content_info_icon" android:layout_width="@dimen/sud_content_info_icon_size" android:layout_height="@dimen/sud_content_info_icon_size" android:layout_marginEnd="@dimen/sud_content_info_icon_margin_end" />
+    </FrameLayout>
+    <LinearLayout android:gravity="center_vertical" android:orientation="vertical" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0">
+        <com.google.android.setupdesign.view.RichTextView android:gravity="start" android:id="@id/sud_content_info_description" android:layout_width="fill_parent" android:layout_height="wrap_content" android:textAlignment="viewStart" style="@style/SudInfoDescription" />
+    </LinearLayout>
+</LinearLayout>

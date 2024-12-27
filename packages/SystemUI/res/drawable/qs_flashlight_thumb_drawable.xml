@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/qs_flashlight_thumb_ripple_drawable" />
+    <item android:drawable="@drawable/qs_flashlight_thumb_background_drawable" />
+</layer-list>

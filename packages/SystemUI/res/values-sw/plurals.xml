@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="abc_slice_duration_days">
+        <item quantity="other">Siku %d zilizopita</item>
+        <item quantity="one">Siku %d iliyopita</item>
+    </plurals>
+    <plurals name="abc_slice_duration_min">
+        <item quantity="other">Dakika %d zilizopita</item>
+        <item quantity="one">Dakika %d iliyopita</item>
+    </plurals>
+    <plurals name="abc_slice_duration_years">
+        <item quantity="other">Miaka %d iliyopita</item>
+        <item quantity="one">Mwaka %d uliopita</item>
+    </plurals>
+    <plurals name="mtrl_badge_content_description">
+        <item quantity="other">Arifa %d mpya</item>
+        <item quantity="one">Arifa %d mpya</item>
+    </plurals>
+    <plurals name="n_speakers">
+        <item quantity="other">Wazungumzaji %d</item>
+        <item quantity="zero">%d speakers</item>
+        <item quantity="one">%d speaker</item>
+        <item quantity="two">%d speakers</item>
+        <item quantity="few">%d speakers</item>
+        <item quantity="many">%d speakers</item>
+    </plurals>
+    <plurals name="notification_insignificant_title">
+        <item quantity="other">%d more notifications</item>
+        <item quantity="zero">%d more notifications</item>
+        <item quantity="one">%d more notification</item>
+        <item quantity="two">%d more notifications</item>
+        <item quantity="few">%d more notifications</item>
+        <item quantity="many">%d more notifications</item>
+    </plurals>
+</resources>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:id="@id/parentPanel" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <FrameLayout android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <com.android.systemui.statusbar.phone.ongoingactivity.OngoingCardBackgroundContainer android:id="@id/ongoing_card_background" android:layout_width="fill_parent" android:layout_height="fill_parent">
+            <com.android.systemui.statusbar.phone.ongoingactivity.CardStackview.CardStackView android:id="@id/card_stack_view" android:paddingBottom="10.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" app:stack_max_size="3" />
+        </com.android.systemui.statusbar.phone.ongoingactivity.OngoingCardBackgroundContainer>
+    </FrameLayout>
+    <View android:id="@id/test_position" android:background="#500ff000" android:layout_width="2.0dip" android:layout_height="2.0dip" />
+</FrameLayout>

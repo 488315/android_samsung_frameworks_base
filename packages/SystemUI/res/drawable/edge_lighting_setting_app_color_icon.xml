@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="oval">
+            <size android:height="@dimen/setting_edge_lighting_style_color_icon_item_size" android:width="@dimen/setting_edge_lighting_style_color_icon_item_size" />
+            <stroke android:width="2.0px" android:color="@color/settings_edge_lighting_style_option_color_stroke" />
+        </shape>
+    </item>
+</layer-list>

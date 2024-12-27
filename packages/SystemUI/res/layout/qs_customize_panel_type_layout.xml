@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:id="@id/qs_view_type" android:background="@android:color/transparent" android:clipChildren="false" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <include layout="@layout/qs_setting_edit_actionbar" />
+    </LinearLayout>
+    <ScrollView android:layout_gravity="center" android:orientation="vertical" android:id="@id/edit_view_type_container" android:background="@drawable/qs_setting_edit_button_ripple" android:paddingTop="@dimen/qs_edit_view_type_top_padding" android:paddingBottom="@dimen/qs_edit_view_type_top_padding" android:focusable="false" android:clickable="false" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:paddingHorizontal="25.0dip">
+                <LinearLayout android:gravity="center" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="1.0">
+                    <ImageView android:background="@drawable/qs_viewtype_separately_help" android:layout_width="94.0dip" android:layout_height="184.0dip" />
+                    <TextView android:textSize="@dimen/qs_edit_view_type_text_size_regular" android:textColor="@color/qs_edit_content_text_color" android:id="@id/view_type_text_separate" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/qs_edit_view_type_text_top_margin" android:layout_marginBottom="@dimen/qs_edit_view_type_text_bottom_margin" android:text="@string/qs_edit_separate" android:fontFamily="sec" android:textFontWeight="400" />
+                </LinearLayout>
+                <LinearLayout android:gravity="center" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="1.0">
+                    <ImageView android:background="@drawable/qs_viewtype_all_help" android:layout_width="94.0dip" android:layout_height="184.0dip" />
+                    <TextView android:textSize="@dimen/qs_edit_view_type_text_size_regular" android:textColor="@color/qs_edit_content_text_color" android:id="@id/view_type_text_together" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/qs_edit_view_type_text_top_margin" android:layout_marginBottom="@dimen/qs_edit_view_type_text_bottom_margin" android:text="@string/qs_edit_together" android:fontFamily="sec" android:textFontWeight="400" />
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:paddingHorizontal="25.0dip">
+                <LinearLayout android:gravity="center" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="1.0">
+                    <RadioButton android:id="@id/radio_button_new" android:layout_width="32.0dip" android:layout_height="32.0dip" android:buttonTint="@color/qs_edit_content_text_color" />
+                </LinearLayout>
+                <LinearLayout android:gravity="center" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="1.0">
+                    <RadioButton android:id="@id/radio_button_old" android:layout_width="32.0dip" android:layout_height="32.0dip" android:buttonTint="@color/qs_edit_content_text_color" />
+                </LinearLayout>
+            </LinearLayout>
+            <TextView android:textSize="14.0sp" android:textColor="@color/qs_edit_content_text_color" android:layout_gravity="center" android:id="@id/edit_view_type_description" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="15.0dip" android:fontFamily="sec" android:layout_marginHorizontal="24.0dip" android:textFontWeight="400" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

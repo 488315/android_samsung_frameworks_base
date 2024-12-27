@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="battery_labels">
+        <item>0%</item>
+        <item>50%</item>
+        <item>100%</item>
+    </string-array>
+    <string-array name="subscreen_quick_reply_list">
+        <item>Так</item>
+        <item>Так, дзякуй</item>
+        <item>OK</item>
+        <item>Не</item>
+        <item>Не, дзякуй</item>
+        <item>Ну, не!</item>
+        <item>Дзякуй</item>
+        <item>Вялікі дзякуй</item>
+        <item>Ужо іду</item>
+        <item>Што новага?</item>
+        <item>Пазней</item>
+        <item>Добра</item>
+        <item>Згаджаюся</item>
+        <item>Выдатна!</item>
+        <item>Што?</item>
+        <item>НІЧОГА САБЕ!</item>
+    </string-array>
+</resources>

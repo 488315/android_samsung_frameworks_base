@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="controls_item_number_of_favorites">
+        <item quantity="other">არჩეულია %d ელემენტი</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">არჩეულია %d ელემენტი</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="globalactions_force_restart_message">
+        <item quantity="other">ტელეფონის გადასატვირთად ერთდროულად დააჭირეთ გვერდით და ხმის დაწევის ღილაკებს %d წამზე მეტი ხნით.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">ტელეფონის გადასატვირთად ერთდროულად დააჭირეთ გვერდით და ხმის დაწევის ღილაკებს %d წამზე მეტი ხნით.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_attempt_left">
+        <item quantity="other">დარჩა %d მცდელობა</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">დარჩა %d მცდელობა</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_attempt_left_before_permanent_locking">
+        <item quantity="other">სამუდამო დაბლოკვამდე დარჩა %d მცდელობა</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">სამუდამო დაბლოკვამდე დარჩა %d მცდელობა</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_secure_attempts_to_unlock_with_fingerprints">
+        <item quantity="other">ადგილი ჰქონდა თითის ანაბეჭდებით განბლოკვის %d მცდელობას.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">ადგილი ჰქონდა თითის ანაბეჭდებით განბლოკვის %d მცდელობას.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_by_biometrics">
+        <item quantity="other">ადგილი ჰქონდა ბიომეტრიული მონაცემების დამოწმების %d არასწორ მცდელობას.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">ადგილი ჰქონდა ბიომეტრიული მონაცემების დამოწმების %d არასწორ მცდელობას.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_by_face">
+        <item quantity="other">ადგილი ჰქონდა სახის დამოწმების %d არასწორ მცდელობას.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">ადგილი ჰქონდა სახის დამოწმების %d არასწორ მცდელობას.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_by_fingerprint">
+        <item quantity="other">ადგილი ჰქონდა თითის ანაბეჭდებით დამოწმების %d არასწორ მცდელობას.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">ადგილი ჰქონდა თითის ანაბეჭდების დამოწმების %d არასწორ მცდელობას.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_1_hour_and_min">
+        <item quantity="other">ისევ სცადეთ 1 საათსა და %d წუთში</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">ისევ სცადეთ 1 საათსა და %d წუთში</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_biometric">
+        <item quantity="other">%d წამში ისევ სცადეთ ბიომეტრიული მონაცემების გამოყენება</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d წამში ისევ სცადეთ ბიომეტრიული მონაცემების გამოყენება</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_face">
+        <item quantity="other">%d წამში ისევ სცადეთ სახის ამოცნობის გამოყენება</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d წამში ისევ სცადეთ სახის ამოცნობის გამოყენება</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_fingerprint">
+        <item quantity="other">%d წამში ისევ სცადეთ თითის ანაბეჭდის გამოყენება</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d წამში ისევ სცადეთ თითის ანაბეჭდის გამოყენება</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_hour">
+        <item quantity="other">ისევ მოსინჯეთ %d საათში</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">ისევ სცადეთ %d საათში</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_hour_and_1_min">
+        <item quantity="other">ისევ სცადეთ %d საათსა და 1 წუთში</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">ისევ სცადეთ %d საათსა და 1 წუთში</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_min">
+        <item quantity="other">ისევ სცადეთ %d წუთში</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">ისევ სცადეთ %d წუთში</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_sec">
+        <item quantity="other">კიდევ სცადეთ %d წამში</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">ისევ სცადეთ %d წამში</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_countdown">
+        <item quantity="other">კიდევ სცადეთ %d წამში.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">ისევ სცადეთ %d წამში.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_ucm_attempt_left">
+        <item quantity="other">დარჩა %d მცდელობა</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">დარჩა %d მცდელობა</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="n_speakers">
+        <item quantity="other">%d დინამიკი</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d დინამიკი</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="notification_insignificant_title">
+        <item quantity="other">კიდევ %d შეტყობინება</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">კიდევ %d შეტყობინება</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ongoing_activity_chip_count">
+        <item quantity="other">კიდევ %d პირდაპირი შეტყობინება</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">კიდევ %d პირდაპირი შეტყობინება</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="plural_notification_count">
+        <item quantity="other">%d შეტყობინება</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d შეტყობინება</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_qs_add_minimum">
+        <item quantity="other">საჭიროა %d ღილაკი.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">საჭიროა %d ღილაკი.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_qs_dnd_detail_fhl_hours_option">
+        <item quantity="other">%d საათით</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d საათით</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_qs_unable_add_maximum">
+        <item quantity="other">%d ღილაკზე მეტის დამატება შეუძლებელია.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d ღილაკზე მეტის დამატება შეუძლებელია.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_qs_unable_remove_minimum">
+        <item quantity="other">ღილაკის წაშლა შეუძლებელია. სწრაფ დაფაზე უნდა იყოს მინიმუმ %d ღილაკი.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">ღილაკის წაშლა შეუძლებელია. სწრაფ დაფაზე უნდა იყოს მინიმუმ %d ღილაკი.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_qs_video_call_effects_num">
+        <item quantity="other">%d ეფექტი</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d ეფექტი</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="subscreen_notification_smart_reply_child_account_dialog_content">
+        <item quantity="other">მინიმუმ %d წლის უნდა იყოთ, რომ გამოიყენოთ Galaxy AI-ს გაუმჯობესებული ინტელექტის ფუნქციები.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">მინიმუმ %d წლის უნდა იყოთ, რომ გამოიყენოთ Galaxy AI-ს გაუმჯობესებული ინტელექტის ფუნქციები.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

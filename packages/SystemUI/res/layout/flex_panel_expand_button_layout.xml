@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.wm.shell.controlpanel.activity.FloatingIconView android:clipChildren="false" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <FrameLayout android:id="@id/floating_button" android:clipChildren="false" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <FrameLayout android:id="@id/icon_area" android:clipChildren="false" android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <FrameLayout android:id="@id/icon_view" android:background="@drawable/floating_flex_panel_expand_button_background" android:layout_width="wrap_content" android:layout_height="wrap_content" android:contentDescription="@string/flex_mode_open_button" android:elevation="@dimen/flex_panel_floating_icon_elevation" />
+        </FrameLayout>
+    </FrameLayout>
+</com.android.wm.shell.controlpanel.activity.FloatingIconView>

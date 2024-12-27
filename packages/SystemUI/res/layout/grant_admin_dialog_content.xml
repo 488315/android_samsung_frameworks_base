@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:id="@id/grant_admin_view" android:paddingLeft="@dimen/dialog_content_padding" android:paddingRight="@dimen/dialog_content_padding" android:paddingBottom="@dimen/dialog_content_padding" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <RadioGroup android:orientation="vertical" android:id="@id/choose_admin" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <RadioButton android:id="@id/grant_admin_yes" android:paddingTop="@dimen/radio_button_padding" android:paddingBottom="@dimen/radio_button_padding" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/grant_admin" android:paddingStart="@dimen/radio_button_padding_start" />
+        <RadioButton android:id="@id/grant_admin_no" android:paddingTop="@dimen/radio_button_padding" android:paddingBottom="@dimen/radio_button_padding" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/not_grant_admin" android:paddingStart="@dimen/radio_button_padding_start" />
+    </RadioGroup>
+</LinearLayout>

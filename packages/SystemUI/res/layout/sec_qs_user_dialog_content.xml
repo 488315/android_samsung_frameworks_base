@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:sysui="http://schemas.android.com/apk/res-auto">
+    <ScrollView android:id="@id/scrollView" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <FrameLayout android:padding="20.0dip" android:layout_width="fill_parent" android:layout_height="fill_parent">
+            <com.android.systemui.qs.PseudoGridView android:layout_gravity="center" android:id="@id/grid" android:layout_width="wrap_content" android:layout_height="wrap_content" sysui:horizontalSpacing="9.0dip" sysui:verticalSpacing="10.0dip" />
+        </FrameLayout>
+    </ScrollView>
+</FrameLayout>

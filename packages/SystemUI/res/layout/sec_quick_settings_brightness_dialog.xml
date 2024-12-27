@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.systemui.settings.brightness.BrightnessSliderView android:layout_gravity="center" android:id="@id/brightness_slider" android:clipChildren="false" android:clipToPadding="false" android:layout_width="fill_parent" android:layout_height="@dimen/sec_brightness_height" android:contentDescription="@string/accessibility_brightness" android:importantForAccessibility="no"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:orientation="horizontal" android:id="@id/brightness_bar_container" android:tag="expand_anim" android:clipChildren="false" android:clipToPadding="false" android:layout_width="fill_parent" android:layout_height="fill_parent" style="@style/RecoilSmallAnimator">
+        <RelativeLayout android:id="@id/slider_container" android:tag="open_anim" android:layout_width="fill_parent" android:layout_height="fill_parent" android:paddingStart="@dimen/qs_header_bar_side_padding" android:paddingEnd="@dimen/qs_header_bar_side_padding">
+            <com.android.systemui.qs.bar.BrightnessVolumeRoundedView android:layout_width="fill_parent" android:layout_height="fill_parent">
+                <com.android.systemui.settings.brightness.ToggleSeekBar android:id="@id/slider" android:background="@null" android:layout_width="fill_parent" android:layout_height="fill_parent" android:progressDrawable="@drawable/sec_brightness_progress_gradient_drawable" android:thumb="@null" android:layout_centerVertical="true" android:layout_alignParentStart="true" android:layout_alignParentEnd="true" android:splitTrack="false" />
+            </com.android.systemui.qs.bar.BrightnessVolumeRoundedView>
+            <FrameLayout android:layout_width="32.0dip" android:layout_height="32.0dip" android:layout_centerVertical="true" android:layout_marginStart="@dimen/brightness_icons_margin" android:layout_alignParentStart="true">
+                <com.airbnb.lottie.LottieAnimationView android:layout_gravity="center" android:id="@id/brightness_icon" android:layout_width="@dimen/sec_brightness_icon_width" android:layout_height="@dimen/sec_brightness_icon_height" android:contentDescription="@null" />
+            </FrameLayout>
+            <include layout="@layout/sec_qs_button_brightness_detail" />
+        </RelativeLayout>
+        <LinearLayout android:gravity="center" android:orientation="horizontal" android:id="@id/brightness_tile_layout" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+    </LinearLayout>
+</com.android.systemui.settings.brightness.BrightnessSliderView>

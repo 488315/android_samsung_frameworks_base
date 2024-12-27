@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:left="?android:listPreferredItemPaddingStart" android:top="2.0dip" android:right="?android:listPreferredItemPaddingEnd">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/settingslib_materialColorSurfaceContainerHigh" />
+            <corners android:topLeftRadius="@dimen/settingslib_preference_corner_radius" android:topRightRadius="@dimen/settingslib_preference_corner_radius" android:bottomLeftRadius="4.0dip" android:bottomRightRadius="4.0dip" />
+        </shape>
+    </item>
+</layer-list>

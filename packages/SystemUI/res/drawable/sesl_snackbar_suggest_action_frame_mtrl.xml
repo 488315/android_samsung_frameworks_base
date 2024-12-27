@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.util.SeslShapeDrawable android:shape="rectangle"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <corners android:radius="22.0dip" />
+    <padding android:top="6.0dip" android:bottom="6.0dip" />
+    <solid android:color="@color/sesl_design_snackbar_suggest_background_color" />
+</androidx.appcompat.util.SeslShapeDrawable>

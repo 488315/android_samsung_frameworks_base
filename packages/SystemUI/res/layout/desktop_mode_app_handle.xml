@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.wm.shell.windowdecor.WindowDecorLinearLayout android:gravity="center_horizontal" android:id="@id/desktop_mode_caption" android:layout_width="wrap_content" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.android.wm.shell.windowdecor.HandleImageButton android:id="@id/caption_handle" android:background="@android:color/transparent" android:layout_width="@dimen/desktop_mode_fullscreen_decor_caption_width" android:layout_height="@dimen/desktop_mode_fullscreen_decor_caption_height" android:src="@drawable/decor_handle_dark" android:scaleType="fitXY" android:contentDescription="@string/handle_text" android:paddingHorizontal="10.0dip" android:paddingVertical="16.0dip" />
+</com.android.wm.shell.windowdecor.WindowDecorLinearLayout>

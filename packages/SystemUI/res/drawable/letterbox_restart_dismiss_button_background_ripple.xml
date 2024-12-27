@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<inset android:insetTop="@dimen/letterbox_restart_dialog_vertical_inset" android:insetBottom="@dimen/letterbox_restart_dialog_vertical_inset"
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:androidprv="http://schemas.android.com/apk/prv/res/android">
+    <ripple android:color="@color/letterbox_restart_dismiss_button_background_ripple">
+        <item android:id="@android:id/mask">
+            <shape android:shape="rectangle">
+                <corners android:radius="@dimen/letterbox_restart_dialog_button_radius" />
+                <solid android:color="@android:color/white" />
+            </shape>
+        </item>
+        <item>
+            <shape android:shape="rectangle">
+                <solid android:color="@android:color/transparent" />
+            </shape>
+        </item>
+        <item>
+            <shape android:shape="rectangle">
+                <stroke android:width="1.0dip" android:color="?android:^attr-private/colorAccentPrimaryVariant" />
+                <solid android:color="?android:^attr-private/colorSurface" />
+                <corners android:radius="@dimen/letterbox_restart_dialog_button_radius" />
+                <padding android:left="@dimen/letterbox_restart_dialog_horizontal_padding" android:top="@dimen/letterbox_restart_dialog_vertical_padding" android:right="@dimen/letterbox_restart_dialog_horizontal_padding" android:bottom="@dimen/letterbox_restart_dialog_vertical_padding" />
+            </shape>
+        </item>
+    </ripple>
+</inset>

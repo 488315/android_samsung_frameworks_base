@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:orientation="vertical" android:id="@id/main_layout" android:background="@drawable/clear_cover_subscreen_notification_list_type_item_background" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/clear_cover_subscreen_noti_list_layout_item_between_margin" android:layout_marginStart="@dimen/clear_cover_subscreen_noti_list_layout_margin" android:layout_marginEnd="@dimen/clear_cover_subscreen_noti_list_layout_margin"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout android:layout_width="fill_parent" android:layout_height="@dimen/clear_cover_subscreen_noti_icon_size" android:layout_marginTop="@dimen/clear_cover_subscreen_noti_list_item_layout_margin" android:layout_marginHorizontal="@dimen/clear_cover_subscreen_noti_list_item_layout_margin">
+        <ImageView android:id="@id/icon" android:layout_width="@dimen/clear_cover_subscreen_noti_icon_size" android:layout_height="@dimen/clear_cover_subscreen_noti_icon_size" />
+        <Space android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0" />
+        <LinearLayout android:gravity="center_vertical" android:layout_width="wrap_content" android:layout_height="fill_parent">
+            <ImageView android:id="@id/two_phone_icon" android:visibility="gone" android:layout_width="10.0dip" android:layout_height="@dimen/clear_cover_subscreen_noti_secure_icon_size" android:tint="@color/subscreen_notification_two_phone_icon_tint_color" />
+            <ImageView android:id="@id/secure_icon" android:visibility="gone" android:layout_width="@dimen/clear_cover_subscreen_noti_secure_icon_size" android:layout_height="@dimen/clear_cover_subscreen_noti_secure_icon_size" android:layout_marginStart="@dimen/clear_cover_subscreen_noti_icon_between_margin" />
+        </LinearLayout>
+    </LinearLayout>
+    <FrameLayout android:id="@id/custom_remote_views" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/clear_cover_subscreen_noti_title_text_top_margin" />
+    <FrameLayout android:id="@id/custom_normal_views" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <TextView android:textSize="@dimen/clear_cover_subscreen_noti_title_text_size" android:textStyle="bold" android:textColor="@color/subscreen_notification_text_color" android:ellipsize="end" android:id="@id/subscreen_notification_title_text" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/clear_cover_subscreen_noti_title_text_top_margin" android:layout_marginBottom="@dimen/clear_cover_subscreen_noti_last_text_item_bottom_margin" android:maxLines="1" android:fontFamily="roboto-medium" android:layout_marginStart="@dimen/clear_cover_subscreen_noti_list_item_layout_margin" android:layout_marginEnd="@dimen/clear_cover_subscreen_noti_list_item_layout_margin" />
+    </FrameLayout>
+</FrameLayout>

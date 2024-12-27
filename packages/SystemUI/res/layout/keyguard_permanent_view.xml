@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.keyguard.KeyguardPermanentView android:orientation="vertical" android:id="@id/keyguard_permanent_view" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:sysui="http://schemas.android.com/apk/res-auto">
+    <FrameLayout android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <LinearLayout android:gravity="center" android:layout_gravity="center" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <include android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" layout="@layout/keyguard_sec_bouncer_message_area" />
+            <com.android.systemui.widget.SystemUITextView android:gravity="center" android:id="@id/keyguard_permanent_lock_help_text" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/kg_permanent_locked" android:paddingStart="@dimen/kg_message_area_padding_side" android:paddingEnd="@dimen/kg_message_area_padding_side" sysui:originColor="origin_keyguard_message_area_text_color" sysui:whitebgColor="whitebg_keyguard_text_color" style="@style/keyguard_message_area_style" />
+        </LinearLayout>
+        <include android:gravity="center" android:layout_gravity="bottom|center" android:id="@id/keyguard_selector_fade_container" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="@dimen/kg_pin_eca_margin_bottom" layout="@layout/keyguard_emergency_button" />
+    </FrameLayout>
+</com.android.keyguard.KeyguardPermanentView>

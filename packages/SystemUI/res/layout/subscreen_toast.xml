@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:id="@id/subscreen_notification_toast_frame" android:background="@android:color/black" android:focusable="true" android:layout_width="fill_parent" android:layout_height="fill_parent" android:paddingStart="24.0px" android:paddingEnd="24.0px"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:layout_gravity="center_vertical" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <TextView android:textAppearance="@style/TextAppearance.SubscreenNotificationDetail" android:textSize="27.0px" android:id="@id/subscreen_notification_toast_text" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/subscreen_notification_detail_timed_out" android:textAlignment="center" />
+    </LinearLayout>
+</FrameLayout>

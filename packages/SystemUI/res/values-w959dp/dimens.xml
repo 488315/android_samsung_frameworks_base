@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item type="dimen" name="sesl_sliding_layout_default_open">true</item>
+    <dimen name="sesl_sliding_pane_contents_width">840.0dip</dimen>
+    <dimen name="sesl_sliding_pane_drawer_width">340.0dip</dimen>
+</resources>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.systemui.statusbar.pipeline.mobile.ui.view.ModernShadeCarrierGroupMobileView android:theme="@style/Theme.SystemUI.QuickSettings.Header" android:gravity="center_vertical" android:orientation="horizontal" android:id="@id/carrier_combo" android:layout_width="wrap_content" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.android.systemui.util.AutoMarqueeTextView android:textAppearance="@style/TextAppearance.QS.Status.Carriers" android:id="@id/mobile_carrier_text" android:visibility="gone" android:layout_width="0.0dip" android:layout_height="wrap_content" android:maxEms="7" android:singleLine="true" android:layout_weight="1.0" android:marqueeRepeatLimit="marquee_forever" android:textDirection="locale" android:layout_marginEnd="@dimen/qs_carrier_margin_width" />
+    <include android:visibility="gone" layout="@layout/status_bar_mobile_signal_group_new" />
+</com.android.systemui.statusbar.pipeline.mobile.ui.view.ModernShadeCarrierGroupMobileView>

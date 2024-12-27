@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="battery_labels">
+        <item>၀%</item>
+        <item>၅၀ %</item>
+        <item>100%</item>
+    </string-array>
+    <string-array name="subscreen_quick_reply_list">
+        <item>ဟုတ္ပါသည္</item>
+        <item>ဟုတ္ကဲ့၊ လုပ္ပါမည္</item>
+        <item>အိုေက</item>
+        <item>မဟုတ္ဘူး</item>
+        <item>ေက်းဇူးတင္ပါတယ္ မလိုပါ</item>
+        <item>ဟင့္အင္း</item>
+        <item>ေက်းဇူးပါ</item>
+        <item>ေက်းဇူးတင္ပါတယ္</item>
+        <item>လမ္းမွာ</item>
+        <item>ဘာျဖစ္ပါသလဲ?</item>
+        <item>ေနာက္မွ</item>
+        <item>ႏိုက္ၿမိဳ႕</item>
+        <item>ကၽြႏ္ုပ္ သေဘာတူသည္</item>
+        <item>ေကာင္းတာေပါ့!</item>
+        <item>ဘာလဲ?</item>
+        <item>OMG!</item>
+    </string-array>
+</resources>

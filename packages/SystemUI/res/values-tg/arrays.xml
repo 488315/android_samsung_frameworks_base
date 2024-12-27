@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="battery_labels">
+        <item>0%</item>
+        <item>50%</item>
+        <item>100%</item>
+    </string-array>
+    <string-array name="subscreen_quick_reply_list">
+        <item>Ҳа</item>
+        <item>Ҳа, бале</item>
+        <item>ОК</item>
+        <item>Не</item>
+        <item>Не, ташаккур</item>
+        <item>Не-е</item>
+        <item>Раҳмат</item>
+        <item>Хеле миннатдорем</item>
+        <item>Омада истодаам</item>
+        <item>Аҳволатон чӣ хел аст?</item>
+        <item>Дертар</item>
+        <item>Хуб</item>
+        <item>Ман розиям</item>
+        <item>Олӣ!</item>
+        <item>Чӣ?</item>
+        <item>ВАҲ!</item>
+    </string-array>
+</resources>

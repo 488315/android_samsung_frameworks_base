@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape android:shape="rectangle"
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:androidprv="http://schemas.android.com/apk/prv/res/android">
+    <solid android:color="?android:^attr-private/materialColorSurfaceContainerLowest" />
+    <size android:height="@dimen/keyguard_affordance_fixed_height" android:width="@dimen/keyguard_affordance_fixed_width" />
+    <corners android:radius="@dimen/keyguard_affordance_fixed_radius" />
+</shape>

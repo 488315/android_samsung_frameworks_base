@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:left="@dimen/rounded_slider_boundary_offset" android:top="@dimen/rounded_slider_boundary_offset" android:right="@dimen/rounded_slider_boundary_offset" android:bottom="@dimen/rounded_slider_boundary_offset">
+        <shape>
+            <solid android:color="?underSurface" />
+            <corners android:radius="@dimen/rounded_slider_background_rounded_corner" />
+        </shape>
+    </item>
+</layer-list>

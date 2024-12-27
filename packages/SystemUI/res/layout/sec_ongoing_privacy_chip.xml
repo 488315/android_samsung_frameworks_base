@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge android:id="@id/privacy_chip"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:gravity="center_vertical" android:layout_gravity="center" android:id="@id/icons_container" android:background="@drawable/sec_privacy_chip_bg" android:layout_width="wrap_content" android:layout_height="@dimen/sec_ongoing_appops_chip_height" android:paddingStart="@dimen/sec_ongoing_appops_chip_start_end_padding" android:paddingEnd="@dimen/sec_ongoing_appops_chip_start_end_padding" android:layout_marginStart="@dimen/sec_ongoing_appops_start_margin" android:layout_marginEnd="@dimen/sec_ongoing_appops_end_margin" />
+</merge>

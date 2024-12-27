@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_gravity="center_horizontal" android:orientation="vertical" android:id="@id/volume_warning_wallet_mini_contents" android:background="@color/transparent" android:clipChildren="false" android:layout_width="@dimen/volume_warning_popup_width_wallet_mini" android:layout_height="wrap_content" android:layout_marginTop="@dimen/volume_warning_popup_top_padding_wallet_mini"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView android:textAppearance="@style/TypoVolumeWarningWalletMiniText" android:gravity="top" android:id="@id/volume_warning_wallet_mini_dialog_text_view" android:layout_width="fill_parent" android:layout_height="@dimen/volume_warning_popup_text_view_height_wallet_mini" />
+    <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:id="@id/volume_warning_wallet_mini_dialog_buttons" android:layout_width="fill_parent" android:layout_height="@dimen/volume_warning_popup_button_height_wallet_mini">
+        <Button android:textAppearance="@style/TypoVolumeWarningWalletMiniButton" android:id="@id/negative_button" android:background="@color/transparent" android:layout_width="fill_parent" android:layout_height="fill_parent" android:text="@string/no" android:layout_weight="1.0" />
+        <View android:id="@id/divider" android:background="#33e6e6e6" android:layout_width="1.0dip" android:layout_height="16.0dip" />
+        <Button android:textAppearance="@style/TypoVolumeWarningWalletMiniButton" android:id="@id/positive_button" android:background="@color/transparent" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="1.0" />
+    </LinearLayout>
+    <TextView android:textAppearance="@style/TypoVolumeWarningWalletMiniText" android:gravity="center" android:id="@id/volume_warning_toast_text_view" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="@dimen/volume_warning_popup_height_wallet_mini" android:text="@string/volume_limiter_open_cover_toast" />
+</LinearLayout>

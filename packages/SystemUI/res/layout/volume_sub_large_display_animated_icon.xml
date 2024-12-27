@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:layout_gravity="center" android:id="@id/volume_animated_icon" android:layout_width="36.0dip" android:layout_height="36.0dip" android:layoutDirection="ltr"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView android:layout_gravity="center" android:id="@id/volume_normal_icon" android:layout_width="fill_parent" android:layout_height="fill_parent" android:tint="@color/sub_large_display_volume_icon_color" />
+    <ImageView android:layout_gravity="center" android:id="@id/volume_mute_icon" android:layout_width="fill_parent" android:layout_height="fill_parent" android:tint="@color/sub_large_display_volume_icon_color" />
+    <FrameLayout android:layout_gravity="center" android:id="@id/volume_splash_container" android:layout_width="fill_parent" android:layout_height="wrap_content" android:rotation="45.0">
+        <ImageView android:layout_gravity="center" android:id="@id/volume_icon_mute_splash" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/tw_ic_sub_large_screen_audio_mute_splash" />
+    </FrameLayout>
+    <ImageView android:layout_gravity="center" android:id="@id/volume_vibrate_icon" android:layout_width="fill_parent" android:layout_height="fill_parent" android:tint="@color/sub_large_display_volume_icon_color" />
+</FrameLayout>

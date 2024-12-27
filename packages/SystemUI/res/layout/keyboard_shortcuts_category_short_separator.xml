@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="utf-8"?>
+<View android:layout_marginTop="@dimen/ksh_category_separator_margin" android:layout_marginBottom="@dimen/ksh_category_separator_margin" style="@style/ShortcutHorizontalDivider"
+  xmlns:android="http://schemas.android.com/apk/res/android" />

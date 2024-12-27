@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set android:ordering="together"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:aapt="http://schemas.android.com/aapt">
+    <objectAnimator android:interpolator="@drawable/$$qs_battery_saver_icon_on__13__0" android:duration="667" android:startOffset="0" android:propertyName="translateXY" android:pathData="M 0,11.5C 0,9.729 0,13.271 0,11.5" android:propertyXName="translateX" android:propertyYName="translateY" />
+    <objectAnimator android:interpolator="@drawable/$$qs_battery_saver_icon_on__13__1" android:duration="667" android:startOffset="667" android:propertyName="translateXY" android:pathData="M 0,11.5C 0,9.729 0,2.646 0,0.875" android:propertyXName="translateX" android:propertyYName="translateY" />
+</set>
