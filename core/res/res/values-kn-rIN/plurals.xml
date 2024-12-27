@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="SDcardBlockUnmount_message">
+        <item quantity="other">ನಿಮ್ಮ ಫೋನ್ ಅಸ್ಥಿರವಾಗಿದೆ ಏಕೆಂದರೆ ಅದರಲ್ಲಿ ಸ್ಥಾಪಿಸಲಾದ ಅನ್ವಯಿಸುವಿಕೆಗಳ SD ಕಾರ್ಡ್ ತೆಗೆದುಹಾಕಲಾಗಿದೆ. ನಿಮ್ಮ ಫೋನ್ ಸಾಮಾನ್ಯಕ್ಕೆ ಹಿಂತಿರುಗಲು ನಿಮ್ಮ ಫೋನ್ %d ಸೆಕೆಂಡುಗಳಲ್ಲಿ ಮರುಪ್ರಾರಂಭವಾಗುತ್ತದೆ.ಫೋನ್ ಮರುಪ್ರಾರಂಭಿಸುವ ಮೊದಲು ಯಾವುದೇ ಉಳಿಸಿರದ ಡೇಟಾವನ್ನು ಉಳಿಸಿ.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">ನಿಮ್ಮ ಫೋನ್ ಅಸ್ಥಿರವಾಗಿದೆ ಏಕೆಂದರೆ ಅದರಲ್ಲಿ ಸ್ಥಾಪಿಸಲಾದ ಅನ್ವಯಿಸುವಿಕೆಗಳ SD ಕಾರ್ಡ್ ತೆಗೆದುಹಾಕಲಾಗಿದೆ. ನಿಮ್ಮ ಫೋನ್ ಸಾಮಾನ್ಯಕ್ಕೆ ಹಿಂತಿರುಗಲು ನಿಮ್ಮ ಫೋನ್ %d ಸೆಕೆಂಡ್‌ನಲ್ಲಿ ಮರುಪ್ರಾರಂಭವಾಗುತ್ತದೆ.ಫೋನ್ ಮರುಪ್ರಾರಂಭಿಸುವ ಮೊದಲು ಯಾವುದೇ ಉಳಿಸಿರದ ಡೇಟಾವನ್ನು ಉಳಿಸಿ.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="SDcardBlockUnmount_title">
+        <item quantity="other">ನಿಮ್ಮ ಫೋನ್ %d ಸೆಕೆಂಡುಗಳಲ್ಲಿ ಮರುಪ್ರಾರಂಭವಾಗುತ್ತದೆ</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">ನಿಮ್ಮ ಫೋನ್ %d ಸೆಕೆಂಡ್‌ನಲ್ಲಿ ಮರುಪ್ರಾರಂಭವಾಗುತ್ತದೆ</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_phone">
+        <item quantity="other">%d ಆ್ಯಪ್‌ಗಳನ್ನು ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಮುಚ್ಚಲಾಗಿದೆ, ಏಕೆಂದರೆ ಅವುಗಳು ನಿಮ್ಮ ಫೋನ್ ಅಧಿಕವಾಗಿ ಬಿಸಿಯಾಗಲು ಕಾರಣವಾಗಿವೆ. ನಿಮ್ಮ ಫೋನ್ ತಂಪಾದ ನಂತರ ನೀವು ಮತ್ತೊಮ್ಮೆ ಅವುಗಳನ್ನು ತೆರೆಯಬಹುದು.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d ಅನ್ವಯಿಸುವಿಕೆಯನ್ನು ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಮುಚ್ಚಲಾಗಿದೆ ಏಕೆಂದರೆ ಅದು ನಿಮ್ಮ ಫೋನ್ ಅಧಿಕವಾಗಿ ಬಿಸಿಯಾಗಲು ಕಾರಣವಾಗಿದೆ. ನಿಮ್ಮ ಫೋನ್ ತಂಪಾದ ನಂತರ ನೀವು ಮತ್ತೊಮ್ಮೆ ಅದನ್ನು ತೆರೆಯಬಹುದು.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_tablet">
+        <item quantity="other">%d ಆ್ಯಪ್‌ಗಳನ್ನು ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಮುಚ್ಚಲಾಗಿದೆ, ಏಕೆಂದರೆ ಅವುಗಳು ನಿಮ್ಮ ಟ್ಯಾಬ್ಲೆಟ್ ಅಧಿಕವಾಗಿ ಬಿಸಿಯಾಗಲು ಕಾರಣವಾಗುತ್ತಿವೆ. ನಿಮ್ಮ ಟ್ಯಾಬ್ಲೆಟ್ ತಂಪಾದ ನಂತರ ನೀವು ಮತ್ತೊಮ್ಮೆ ಅವುಗಳನ್ನು ತೆರೆಯಬಹುದು.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d ಅನ್ವಯಿಸುವಿಕೆಯನ್ನು ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಮುಚ್ಚಲಾಗಿದೆ, ಏಕೆಂದರೆ ಅದು ನಿಮ್ಮ ಟ್ಯಾಬ್ಲೆಟ್ ಹೆಚ್ಚು ಬಿಸಿಯಾಗಲು ಕಾರಣವಾಗಿದೆ. ನಿಮ್ಮ ಟ್ಯಾಬ್ಲೆಟ್ ತಂಪಾದ ನಂತರ ನೀವು ಮತ್ತೊಮ್ಮೆ ಅದನ್ನು ತೆರೆಯಬಹುದು.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_title_v2">
+        <item quantity="other">%d ಆ್ಯಪ್‌ಗಳನ್ನು ಮುಚ್ಚಲಾಗಿದೆ</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d ಅನ್ವಯಿಸುವಿಕೆ ಮುಚ್ಚಿದೆ</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="dex_max_count_text">
+        <item quantity="other">ಒಂದೇ ಸಲಕ್ಕೆ ಸ್ಕ್ರೀನ್ ಮೇಲೆ %dಕ್ಕೂ ಹೆಚ್ಚಿನ ಆ್ಯಪ್‌ಗಳನ್ನು ತೋರಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ. ಹಳೆಯ ಆ್ಯಪ್‌ ಕನಿಷ್ಠಗೊಳಿಸಲಾಗಿದೆ.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">ಒಂದೇ ಸಲಕ್ಕೆ ಸ್ಕ್ರೀನ್ ಮೇಲೆ %dಕ್ಕೂ ಹೆಚ್ಚಿನ ಅನ್ವಯಿಸುವಿಕೆಯನ್ನು ತೋರಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ. ಹಳೆಯ ಅನ್ವಯಿಸುವಿಕೆ ಕನಿಷ್ಠಗೊಳಿಸಲಾಗಿದೆ.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="hot_key_guide_message">
+        <item quantity="other">ನೀವು ನಿಯೋಜಿಸಲು ಬಯಸುವ ಆ್ಯಪ್ ತೆರೆಯಿರಿ, ನಂತರ %d ಸೆಕೆಂಡುಗಳ ಕಾಲ ಆ್ಯಪ್ ಕೀ ಅನ್ನು ಒತ್ತಿ ಹಿಡಿಯಿರಿ.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">ನೀವು ನಿಯೋಜಿಸಲು ಬಯಸುವ ಆ್ಯಪ್ ತೆರೆಯಿರಿ, ನಂತರ %d ಸೆಕೆಂಡಿನ ಕಾಲ ಆ್ಯಪ್ ಕೀ ಅನ್ನು ಒತ್ತಿ ಹಿಡಿಯಿರಿ.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_phone">
+        <item quantity="other">ನಿಮ್ಮ ಫೋನ್ ಅಧಿಕವಾಗಿ ಬಿಸಿಯಾಗುತ್ತಿರುವುದಕ್ಕೆ %1$s ಕಾರಣವಾಗುತ್ತಿದೆ. ಅದನ್ನು %2$d ಸೆಕೆಂಡುಗಳಲ್ಲಿ ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಮುಚ್ಚಲಾಗುತ್ತದೆ.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">ನಿಮ್ಮ ಫೋನ್ ಅಧಿಕವಾಗಿ ಬಿಸಿಯಾಗುತ್ತಿರುವುದಕ್ಕೆ %1$s ಕಾರಣವಾಗುತ್ತಿದೆ. ಅದನ್ನು %2$d ಸೆಕೆಂಡಿನಲ್ಲಿ ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಮುಚ್ಚಲಾಗುತ್ತದೆ.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_tablet">
+        <item quantity="other">ನಿಮ್ಮ ಟ್ಯಾಬ್ಲೆಟ್ ಅಧಿಕವಾಗಿ ಬಿಸಿಯಾಗುತ್ತಿರುವುದಕ್ಕೆ %1$s ಕಾರಣವಾಗುತ್ತಿದೆ. ಅದನ್ನು %2$d ಸೆಕೆಂಡುಗಳಲ್ಲಿ ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಮುಚ್ಚಲಾಗುತ್ತದೆ.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">ನಿಮ್ಮ ಟ್ಯಾಬ್ಲೆಟ್ ಅಧಿಕವಾಗಿ ಬಿಸಿಯಾಗುತ್ತಿರುವುದಕ್ಕೆ %1$s ಕಾರಣವಾಗುತ್ತಿದೆ. ಅದನ್ನು %2$d ಸೆಕೆಂಡಿನಲ್ಲಿ ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಮುಚ್ಚಲಾಗುತ್ತದೆ.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="maintenance_mode_backup_cloud_menu_sub_textview_message_default">
+        <item quantity="other">%d ದಿನಗಳ ತನಕ Samsung Cloudಗೆ ಅನಿಯಮಿತ ಡೇಟಾ ಬ್ಯಾಕಪ್ ಮಾಡಿ ಅಥವಾ ನೀವು ಬ್ಯಾಕಪ್ ಮಾಡಿರುವ ಡೇಟಾ ಪುನಃಸ್ಥಾಪಿಸಿ.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d ದಿನದ ತನಕ Samsung Cloudಗೆ ಅನಿಯಮಿತ ಡೇಟಾ ಬ್ಯಾಕಪ್ ಮಾಡಿ ಅಥವಾ ನೀವು ಬ್ಯಾಕಪ್ ಮಾಡಿರುವ ಡೇಟಾ ಪುನಃಸ್ಥಾಪಿಸಿ.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_phone">
+        <item quantity="other">ನಿಮ್ಮ ಫೋನ್ ಅಧಿಕವಾಗಿ ಬಿಸಿಯಾಗಲು %1$s ಕಾರಣವಾಗುತ್ತಿದೆ. ನೀವು ಅದನ್ನು ಸದ್ಯಕ್ಕೆ ಮುಚ್ಚಬಹುದು ಅಥವಾ ಅದು %2$d ಸೆಕೆಂಡುಗಳಲ್ಲಿ ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಮುಚ್ಚುತ್ತದೆ.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">ನಿಮ್ಮ ಫೋನ್ ಬಿಸಿಯಾಗಲು %1$s ಕಾರಣವಾಗುತ್ತಿದೆ. ನೀವು ಅದನ್ನು ಸದ್ಯಕ್ಕೆ ಮುಚ್ಚಬಹುದು ಅಥವಾ ಅದು %2$d ಸೆಕೆಂಡಿನಲ್ಲಿ ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಮುಚ್ಚುತ್ತದೆ.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_tablet">
+        <item quantity="other">ನಿಮ್ಮ ಟ್ಯಾಬ್ಲೆಟ್ ಅಧಿಕವಾಗಿ ಬಿಸಿಯಾಗಲು %1$s ಕಾರಣವಾಗುತ್ತಿದೆ. ನೀವು ಅದನ್ನು ಸದ್ಯಕ್ಕೆ ಮುಚ್ಚಬಹುದು ಅಥವಾ ಅದು %2$d ಸೆಕೆಂಡುಗಳಲ್ಲಿ ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಮುಚ್ಚುತ್ತದೆ.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">ನಿಮ್ಮ ಟ್ಯಾಬ್ಲೆಟ್ ಅಧಿಕವಾಗಿ ಬಿಸಿಯಾಗಲು %1$s ಕಾರಣವಾಗುತ್ತಿದೆ. ನೀವು ಅದನ್ನು ಸದ್ಯಕ್ಕೆ ಮುಚ್ಚಬಹುದು ಅಥವಾ ಅದು %2$d ಸೆಕೆಂಡಿನಲ್ಲಿ ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಮುಚ್ಚುತ್ತದೆ.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sem_chooser_preview_items">
+        <item quantity="other">%d ಐಟಮ್‌ಗಳು</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d ಐಟಮ್</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_hours">
+        <item quantity="other">%d ಗಂಟೆಗಳು</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d ಗಂಟೆ</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_minutes">
+        <item quantity="other">%d ನಿಮಿಷಗಳು</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d ನಿಮಿಷ</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

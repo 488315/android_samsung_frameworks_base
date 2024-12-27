@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="SDcardBlockUnmount_message">
+        <item quantity="other">Telefon barqaror ishlamayapti, chunki ilovalar o‘rnatilgan SD-karta olib tashlangan. Telefoningiz normal holatga qaytishi uchun %d soniyada qayta ishga tushiriladi. Telefon qayta ishga tushirilishidan oldin saqlanmagan ma’lumotlaringizni saqlang.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Telefon barqaror ishlamayapti, chunki ilovalar o‘rnatilgan SD-karta olib tashlangan. Telefoningiz normal holatga qaytishi uchun %d soniyada qayta ishga tushiriladi. Telefon qayta ishga tushirilishidan oldin saqlanmagan ma’lumotlaringizni saqlang.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="SDcardBlockUnmount_title">
+        <item quantity="other">Telefon %d soniyada qayta yuklanadi</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Telefon %d soniyada qayta yuklanadi</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_phone">
+        <item quantity="other">%d ta ilova avtomatik tarzda yopildi, chunki ular telefoningiz qizishiga sabab bo‘lmoqda. Telefoningiz sovigandan so‘ng, ularni keyinroq yana ochishingiz mumkin.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d ta ilova avtomatik tarzda yopildi, chunki u telefoningiz qizishiga sabab bo‘lmoqda. Telefoningiz sovigandan so‘ng, uni keyinroq yana ochishingiz mumkin.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_tablet">
+        <item quantity="other">%d ta ilova avtomatik tarzda yopildi, chunki ular planshetingiz qizishiga sabab bo‘layotgan edi. Planshetingiz sovigandan so‘ng, ularni keyinroq yana ochishingiz mumkin.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d ta ilova avtomatik tarzda yopildi, chunki u planshetingiz qizishiga sabab bo‘layotgan edi. Planshetingiz sovigandan so‘ng, uni keyinroq yana ochishingiz mumkin.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_title_v2">
+        <item quantity="other">%d ta ilova yopildi</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d ta ilova yopildi</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="dex_max_count_text">
+        <item quantity="other">Ekranda bir vaqtda %d tadan ortiq ilovani ko‘rsatib bo‘lmaydi. Eng eski ilova minimallashtirildi.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Ekranda bir vaqtda %d tadan ortiq ilovani ko‘rsatib bo‘lmaydi. Eng eski ilova minimallashtirildi.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="hot_key_guide_message">
+        <item quantity="other">Tayinlamoqchi bo‘lgan ilovani oching, so‘ngra ilova tugmasini %d soniya davomida bosib turing.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Tayinlamoqchi bo‘lgan ilovani oching, so‘ngra ilova tugmasini %d soniya davomida bosib turing.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_phone">
+        <item quantity="other">%1$s telefoningiz qizishiga sabab bo‘lmoqda. U %2$d soniyadan so‘ng avtomatik tarzda yopiladi.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s telefoningiz qizishiga sabab bo‘lmoqda. U %2$d soniyadan so‘ng avtomatik tarzda yopiladi.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_tablet">
+        <item quantity="other">%1$s planshetingiz qizishiga sabab bo‘lmoqda. U %2$d soniyadan so‘ng avtomatik tarzda yopiladi.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s planshetingiz qizishiga sabab bo‘lmoqda. U %2$d soniyadan so‘ng avtomatik tarzda yopiladi.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="maintenance_mode_backup_cloud_menu_sub_textview_message_default">
+        <item quantity="other">%d kungacha Samsung Cloud’ga cheklanmagan miqdorda ma’lumotlarni arxivlang yoki o‘zingiz arxivlagan ma’lumotlarni tiklang.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d kungacha Samsung Cloud’ga cheklanmagan miqdorda ma’lumotlarni arxivlang yoki o‘zingiz arxivlagan ma’lumotlarni tiklang.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_phone">
+        <item quantity="other">%1$s telefoningiz qizishiga sabab bo‘lmoqda. Uni hozir yopishingiz mumkin, yoki %2$d soniyadan so‘ng u avtomatik tarzda yopiladi.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s telefoningiz qizishiga sabab bo‘lmoqda. Uni hozir yopishingiz mumkin, yoki %2$d soniyadan so‘ng u avtomatik tarzda yopiladi.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_tablet">
+        <item quantity="other">%1$s planshetingiz qizishiga sabab bo‘lmoqda. Uni hozir yopishingiz mumkin, yoki %2$d soniyadan so‘ng u avtomatik tarzda yopiladi.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s planshetingiz qizishiga sabab bo‘lmoqda. Uni hozir yopishingiz mumkin, yoki %2$d soniyadan so‘ng u avtomatik tarzda yopiladi.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sem_chooser_preview_items">
+        <item quantity="other">%d ta element</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d ta element</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_hours">
+        <item quantity="other">%d soat</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d soat</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_minutes">
+        <item quantity="other">%d daqiqa</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d daqiqa</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

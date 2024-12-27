@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="global_action_emergency">Құтқару қызметін шақыру</string>
+    <string name="permgrouplab_sensors">Сенсорлар</string>
+    <string name="reboot_to_update_prepare">Жаңартуға дайындалып жатыр</string>
+    <string name="reboot_to_update_title">Wear OS жүйесін жаңарту</string>
+</resources>

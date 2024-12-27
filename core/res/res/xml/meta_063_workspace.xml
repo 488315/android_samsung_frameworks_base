@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ThemeMetaData FormatVersion="1.3" GuideVersion="1.4">
+    <AppMetaData Name="Workspace" TargetApi="26" TargetPackageName="com.samsung.android.knox.containeragent" VersionCode="1" VersionName="">
+        <Include RefName="SESL" />
+        <Property Comment="bg Color" DefaultValue="#fff2f2f2" DestAttribName="basic_window_bg" DestQualifiers="" UID="63-7-1" ValueRef="1-1-1" ValueType="BgColor" />
+        <Property Comment="App name text color" DefaultValue="#ff252525" DestAttribName="about_app_name_text_color" DestQualifiers="" UID="63-7-2" ValueRef="1-1-3" ValueType="TextColor" />
+        <Property Comment="License text color" DefaultValue="#ff909090" DestAttribName="advanced_edition_text_color" DestQualifiers="" UID="63-7-3" ValueRef="1-1-3" ValueType="TextColor" />
+        <Property Comment="Version info text color" DefaultValue="#ff252525" DestAttribName="version_color" DestQualifiers="" UID="63-7-4" ValueRef="1-1-3" ValueType="TextColor" />
+        <Property Comment="Latest version info text color" DefaultValue="#ff979797" DestAttribName="new_version_text_color" DestQualifiers="" UID="63-7-5" ValueRef="1-1-4" ValueType="TextColor" />
+        <Property Comment="Update button BG" DefaultValue="#ff0074d4" DestAttribName="app_update_text_primaryDark" DestQualifiers="" UID="63-7-6" ValueRef="1-8-1" ValueType="BgColor" />
+        <Property Comment="Update button text color" DefaultValue="#fffafafa" DestAttribName="app_update_text" DestQualifiers="" UID="63-7-7" ValueRef="1-8-3" ValueType="TextColor" />
+        <Property Comment="Button text color" DefaultValue="#ff252525" DestAttribName="about_link_color" DestQualifiers="" UID="63-7-8" ValueRef="1-7-2-D" ValueType="TextColor" />
+        <Property Comment="Button bg color" DefaultValue="#1a000000" DestAttribName="about_link_bg_color" DestQualifiers="" UID="63-7-9" ValueRef="1-7-1-D" ValueType="BgColor" />
+        <Property Comment="Info icon tint color" DefaultValue="#ff454545" DestAttribName="app_info_button_color" DestQualifiers="" UID="63-7-10" ValueRef="1-1-3" ValueType="Color" />
+        <Property Comment="Icon Color" DefaultValue="#ff000000" DestAttribName="sec_ws_ic_knox_premium" DestQualifiers="" UID="63-8-1" ValueRef="1-1-3" ValueType="Color" />
+    </AppMetaData>
+</ThemeMetaData>

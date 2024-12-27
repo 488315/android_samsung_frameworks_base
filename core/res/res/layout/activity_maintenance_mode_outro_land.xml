@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:layout_gravity="center_horizontal" android:orientation="vertical" android:id="@id/maintenance_mode_outro_body_container" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginStart="@dimen/maintenance_mode_container_common_margin">
+        <RelativeLayout android:layout_width="fill_parent" android:layout_height="fill_parent">
+            <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_above="@id/maintenance_mode_outro_exit_button_layout">
+                <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="fill_parent">
+                    <ImageView android:id="@id/maintenance_mode_outro_imageview" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_marginLeft="@dimen/maintenance_mode_common_margin" android:layout_marginTop="@dimen/maintenance_mode_image_common_margin" android:layout_marginRight="@dimen/maintenance_mode_common_margin" android:layout_marginBottom="@dimen/maintenance_mode_image_common_margin" android:src="@drawable/img_maintenance_mode_intro_illustration" android:adjustViewBounds="true" android:maxWidth="@dimen/maintenance_mode_image_max_width" android:layout_weight="1.0" />
+                    <ScrollView android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="1.0">
+                        <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginEnd="@dimen/maintenance_mode_container_common_margin">
+                            <TextView android:textSize="@dimen/maintenance_mode_common_text_size" android:id="@id/maintenance_mode_outro_textview" android:layout_marginLeft="@dimen/maintenance_mode_common_margin" android:layout_marginRight="@dimen/maintenance_mode_common_margin" android:text="@string/maintenance_mode_outro_textview_message_phone" style="@style/TextAppearance.MaintenanceMode.Body" />
+                        </LinearLayout>
+                    </ScrollView>
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout android:orientation="vertical" android:id="@id/maintenance_mode_outro_exit_button_layout" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_alignParentBottom="true">
+                <Button android:textAppearance="@style/TextAppearance.MaintenanceMode.Primary.Button" android:gravity="center" android:layout_gravity="center_horizontal" android:id="@id/maintenance_mode_outro_exit_button" android:background="@drawable/shape_maintenance_mode_button_blue" android:layout_width="@dimen/maintenance_mode_body_button_width" android:layout_height="@dimen/maintenance_mode_body_button_height" android:layout_marginTop="@dimen/maintenance_mode_body_button_margin_top_land" android:layout_marginBottom="@dimen/maintenance_mode_body_button_margin_bottom_land" android:text="@string/maintenance_mode_outro_exit_button_text" />
+            </LinearLayout>
+        </RelativeLayout>
+    </LinearLayout>
+</LinearLayout>

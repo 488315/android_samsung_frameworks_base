@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ThemeMetaData FormatVersion="1.3" GuideVersion="1.9">
+    <AppMetaData Name="Advanced Calling" TargetApi="28" TargetPackageName="com.samsung.advancedcalling" VersionCode="1" VersionName="">
+        <Include RefName="SESL" />
+        <Property Comment="Master ON background color." DefaultValue="#ff4297ff" DestAttribName="SubAppBar_background_on_state" UID="138-1-1" ValueRef="1-40-1" ValueType="BgColor" />
+        <Property Comment="Master OFF background color." DefaultValue="#fffafafa" DestAttribName="SubAppBar_background_off_state" UID="138-1-2" ValueRef="1-40-2" ValueType="BgColor" />
+        <Property Comment="Master On text color." DefaultValue="#fffafafa" DestAttribName="master_switch_on_color" UID="138-1-3" ValueRef="1-40-3" ValueType="TextColor" />
+        <Property Comment="Master Off text color." DefaultValue="#ff252525" DestAttribName="master_switch_off_color" UID="138-1-4" ValueRef="1-40-4" ValueType="TextColor" />
+        <Property Comment="Radio Button On color." DefaultValue="#ff252525" DestAttribName="radiobutton_background_on" UID="138-2-1" ValueRef="1-4-1" ValueType="BgColor" />
+        <Property Comment="Radio Button Off color." DefaultValue="#ff252525" DestAttribName="radiobutton_unchecked_color" UID="138-2-2" ValueRef="1-4-2" ValueType="BgColor" />
+        <Property Comment="Thumb: Common Switch Thumb On Bg Color" DefaultValue="#fffafafa" DestAttribName="bottom_bar_bg_color_on" UID="138-3-1-1" ValueRef="1-5-1-1" ValueType="BgColor" />
+        <Property Comment="Thumb: Common Switch Thumb On Stroke Color" DefaultValue="#ff0074d4" DestAttribName="switch_thumb_on_stroke" UID="138-3-1-1-1" ValueRef="1-5-1-1-1" ValueType="BgColor" />
+        <Property Comment="Track: Common Switch Track On Bg Color" DefaultValue="#ff4297ff" DestAttribName="switch_track_on_stroke" UID="138-3-1-2" ValueRef="1-5-1-2" ValueType="BgColor" />
+        <Property Comment="Thumb: Common Switch Thumb Off Bg Color" DefaultValue="#fffafafa" DestAttribName="bottom_bar_bg_color_off" UID="138-3-2-1" ValueRef="1-5-2-1" ValueType="BgColor" />
+        <Property Comment="Track: Common Switch Thumb Off Stroke Color" DefaultValue="#ffa1a1a1" DestAttribName="switch_thumb_off_stroke" UID="138-3-2-1-1" ValueRef="1-5-2-1-1" ValueType="BgColor" />
+        <Property Comment="Background color." DefaultValue="#fff2f2f2" DestAttribName="actionbar_background_light" UID="138-4-1" ValueRef="1-1-1" ValueType="BgColor" />
+        <Property Comment="Actionbar text color." DefaultValue="#ff252525" DestAttribName="font_regular_color" UID="138-4-2" ValueRef="1-1-3" ValueType="TextColor" />
+    </AppMetaData>
+</ThemeMetaData>

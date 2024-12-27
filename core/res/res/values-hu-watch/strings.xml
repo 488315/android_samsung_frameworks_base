@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="permgrouplab_sensors">Érzékelők</string>
+    <string name="reboot_to_update_title">Wear OS-rendszerfrissítés</string>
+    <string name="select_input_method">Bevitel kiválasztása</string>
+</resources>

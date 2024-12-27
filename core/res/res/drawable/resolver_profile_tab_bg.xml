@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple android:color="@color/resolver_accent_ripple"
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:androidprv="http://schemas.android.com/apk/prv/res/android">
+    <item android:id="@id/mask">
+        <shape android:shape="rectangle">
+            <corners android:radius="12.0dip" />
+            <solid android:color="@color/resolver_accent_ripple" />
+        </shape>
+    </item>
+    <item>
+        <selector android:enterFadeDuration="100">
+            <item android:state_selected="false">
+                <shape android:shape="rectangle">
+                    <corners android:radius="12.0dip" />
+                    <solid android:color="?^attr-private/colorSurface" />
+                </shape>
+            </item>
+            <item android:state_selected="true">
+                <shape android:shape="rectangle">
+                    <corners android:radius="12.0dip" />
+                    <solid android:color="@color/resolver_profile_tab_selected_bg" />
+                </shape>
+            </item>
+        </selector>
+    </item>
+</ripple>

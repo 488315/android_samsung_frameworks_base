@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="global_action_emergency">紧急求救</string>
+    <string name="permgrouplab_sensors">传感器</string>
+    <string name="reboot_to_update_prepare">正在准备更新</string>
+    <string name="reboot_to_update_title">Wear OS 系统更新</string>
+</resources>

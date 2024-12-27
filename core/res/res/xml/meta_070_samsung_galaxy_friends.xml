@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ThemeMetaData FormatVersion="1.3" GuideVersion="1.4">
+    <AppMetaData Name="Samsung Galaxy Friends" TargetApi="28" TargetPackageName="com.samsung.android.mateagent" VersionCode="1" VersionName="1.0">
+        <Include RefName="SESL" />
+        <Property Comment="action button tint color" DefaultValue="#ff252525" DestAttribName="friends_settings_action_button_color" UID="70-1-1" ValueRef="1-11-1" ValueType="TintColor" />
+        <Property Comment="Setting background color" DefaultValue="#fffcfcfc" DestAttribName="friends_settings_list_background_color" UID="70-2-1" ValueRef="1-19-1" ValueType="BgColor" />
+        <Property Comment="Setting list sub header text color" DefaultValue="#ff858585" DestAttribName="friends_settings_list_sub_header_text_color" UID="70-2-2" ValueRef="1-19-2" ValueType="TextColor" />
+        <Property Comment="Setting list main text color" DefaultValue="#ff252525" DestAttribName="friends_settings_list_main_text_color" UID="70-2-3" ValueRef="24-A" ValueType="TextColor" />
+        <Property Comment="Setting list secondary text color" DefaultValue="#ff909090" DestAttribName="friends_settings_list_secondary_text_color" UID="70-2-4" ValueRef="24-B" ValueType="TextColor" />
+        <Property Comment="Setting theme list secondary text color" DefaultValue="#ff3695dd" DestAttribName="friends_settings_theme_list_secondary_text_color" UID="70-2-5" ValueRef="24-E" ValueType="TextColor" />
+        <Property Comment="Icon tint color" DefaultValue="#ff8e8e8e" DestAttribName="settings_apply_theme_download_cancel" UID="70-2-6" ValueRef="24-A" ValueType="TintColor" />
+        <Property Comment="Icon tint color highlight" DefaultValue="#ff3695dd" DestAttribName="friends_settings_content_list_button_image_color" UID="70-2-7" ValueRef="24-E" ValueType="TintColor" />
+        <Property Comment="Button BG" DefaultValue="#0f000000" DestAttribName="friends_settings_content_list_button_background_color" UID="70-2-8" ValueRef="1-7-1" ValueType="BgColor" />
+        <Property Comment="Master On BG" DefaultValue="#bc4297ff" DestAttribName="friends_setting_widget_switch_bar_checked_background_color" UID="70-2-9" ValueRef="1-40-1" ValueType="BgColor" />
+        <Property Comment="Master Off BG" DefaultValue="#fffafafa" DestAttribName="friends_setting_widget_switch_bar_background_color" UID="70-2-10" ValueRef="1-40-2" ValueType="BgColor" />
+        <Property Comment="Master On Text Color" DefaultValue="#fffafafa" DestAttribName="friends_setting_widget_switch_bar_on_text_color" UID="70-2-11" ValueRef="1-40-3" ValueType="TextColor" />
+        <Property Comment="Master Off Text Color" DefaultValue="#ff252525" DestAttribName="friends_setting_widget_switch_bar_off_text_color" UID="70-2-12" ValueRef="1-40-4" ValueType="TextColor" />
+        <Property Comment="Description Text Color" DefaultValue="#ff505050" DestAttribName="friends_setting_description_text_color" UID="70-2-13" ValueRef="24-B" ValueType="TextColor" />
+        <Property Comment="Delete Icon tint color" DefaultValue="#ffff3d40" DestAttribName="friends_setting_delete_icon_tint_color" UID="70-2-14" ValueRef="1-17-3" ValueType="TintColor" />
+        <Property Comment="Delete Icon image" DefaultValue="" DestAttribName="friends_tw_list_icon_delete_mtrl" DestQualifiers="xxxhdpi" ImageSize="32X32" UID="70-2-15" ValueRef="1-17-4" ValueType="Image" />
+        <Property Comment="Icon tint color" DefaultValue="#ff454545" DestAttribName="about_app_info_icon_color" UID="70-3-1" ValueRef="1-1-3" ValueType="TintColor" />
+        <Property Comment="Background color" DefaultValue="#fffcfcfc" DestAttribName="about_friends_background_color" UID="70-3-2" ValueRef="1-1-1" ValueType="BgColor" />
+        <Property Comment="Main text color" DefaultValue="#ff252525" DestAttribName="about_friends_app_name_color" UID="70-3-3" ValueRef="1-1-3" ValueType="TextColor" />
+        <Property Comment="Subtext color" DefaultValue="#ff909090" DestAttribName="about_friends_sub_text_color" UID="70-3-4" ValueRef="1-1-4" ValueType="TextColor" />
+        <Property Comment="Update button bg color" DefaultValue="#ff5184f9" DestAttribName="settings_about_update_button_color" UID="70-3-5" ValueRef="1-8-1" ValueType="BgColor" />
+        <Property Comment="Update button text color" DefaultValue="#fffafafa" DestAttribName="about_friends_update_button_text_color" UID="70-3-6" ValueRef="1-8-3" ValueType="TextColor" />
+        <Property Comment="button bg color" DefaultValue="#ffebebeb" DestAttribName="about_tnc_pp_button_tint_color" UID="70-3-7" ValueRef="1-7-1-D" ValueType="BgColor" />
+        <Property Comment="button text color" DefaultValue="#ff252525" DestAttribName="about_tnc_pp_button_text_color" UID="70-3-8" ValueRef="1-7-2-D" ValueType="TextColor" />
+        <Property Comment="Status bar background color" DefaultValue="" DestAttribName="about_status_bar_color" UID="70-S-1" ValueRef="1-51" ValueType="BgColor" />
+        <Property Comment="Status bar icon color (light / dark)" DefaultValue="true" DestAttribName="about_window_light_status_bar" UID="70-S-2" ValueRef="1-51-1" ValueType="Bool" />
+    </AppMetaData>
+</ThemeMetaData>

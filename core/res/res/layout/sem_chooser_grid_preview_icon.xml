@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="center" android:layout_gravity="center" android:layout_width="wrap_content" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout android:id="@id/sem_chooser_preview_icon_container" android:layout_width="@dimen/sem_chooser_preview_icon_size" android:layout_height="@dimen/sem_chooser_preview_icon_size">
+        <ImageView android:layout_width="@dimen/sem_chooser_preview_icon_size" android:layout_height="@dimen/sem_chooser_preview_icon_size" android:src="@drawable/sem_chooser_ic_share_mask_img_mtrl" />
+        <view android:id="@id/sem_chooser_preview_icon" android:layout_width="@dimen/sem_chooser_preview_icon_size" android:layout_height="@dimen/sem_chooser_preview_icon_size" class="com.android.internal.app.ChooserActivity$SemPreviewIconView" />
+    </RelativeLayout>
+    <RelativeLayout android:id="@id/sem_chooser_preview_icon_container_multi" android:layout_width="@dimen/sem_chooser_preview_icon_size" android:layout_height="@dimen/sem_chooser_preview_icon_size">
+        <ImageView android:layout_width="@dimen/sem_chooser_preview_icon_size" android:layout_height="@dimen/sem_chooser_preview_icon_size" android:src="@drawable/sem_chooser_ic_share_mask_img_multi_mtrl" />
+        <view android:id="@id/sem_chooser_preview_icon_multi" android:layout_width="46.0dip" android:layout_height="46.0dip" android:layout_marginLeft="1.0dip" android:layout_marginBottom="1.0dip" android:layout_alignParentLeft="true" android:layout_alignParentBottom="true" class="com.android.internal.app.ChooserActivity$SemPreviewIconView" />
+    </RelativeLayout>
+</LinearLayout>

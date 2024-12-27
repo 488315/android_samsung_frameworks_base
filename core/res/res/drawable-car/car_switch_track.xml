@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:gravity="center" android:height="@dimen/car_touch_target_size_minus_one" android:width="@dimen/car_touch_target_size_minus_one">
+        <selector>
+            <item android:state_focused="true" android:state_pressed="true">
+                <shape android:shape="oval">
+                    <solid android:color="#8a94cbff" />
+                    <stroke android:width="4.0dip" android:color="#ff94cbff" />
+                </shape>
+            </item>
+            <item android:state_focused="true">
+                <shape android:shape="oval">
+                    <solid android:color="#3d94cbff" />
+                    <stroke android:width="8.0dip" android:color="#ff94cbff" />
+                </shape>
+            </item>
+        </selector>
+    </item>
+    <item android:gravity="fill_horizontal|center" android:left="@dimen/car_switch_track_margin_size" android:right="@dimen/car_switch_track_margin_size">
+        <shape android:tint="@color/car_switch_track" android:shape="rectangle">
+            <corners android:radius="7.0dip" />
+            <solid android:color="@color/white_disabled_material" />
+            <size android:height="14.0dip" />
+            <padding android:left="@dimen/car_switch_track_margin_size" android:right="@dimen/car_switch_track_margin_size" />
+        </shape>
+    </item>
+</layer-list>

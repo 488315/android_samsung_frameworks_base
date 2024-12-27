@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="global_action_emergency">ఎమర్జెన్సీ సహాయం</string>
+    <string name="permgrouplab_sensors">సెన్సార్‌లు</string>
+    <string name="reboot_to_update_prepare">అప్‌డేట్ చేయడానికి సిద్ధమవుతోంది</string>
+    <string name="reboot_to_update_title">Wear OS సిస్టమ్ అప్‌డేట్</string>
+    <string name="select_input_method">ఇన్‌పుట్‌ను ఎంచుకోండి</string>
+</resources>

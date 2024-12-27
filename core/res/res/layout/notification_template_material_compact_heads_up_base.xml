@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:theme="@style/Theme.DeviceDefault.Notification" android:gravity="center_vertical" android:id="@id/status_bar_latest_event_content" android:tag="compactHUN" android:clipChildren="false" android:layout_width="fill_parent" android:layout_height="@dimen/notification_header_height" android:importantForAccessibility="no"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.android.internal.widget.NotificationRowIconView android:layout_gravity="start|center" android:id="@id/icon" android:background="@drawable/notification_icon_circle" android:padding="@dimen/notification_icon_circle_padding" android:layout_width="@dimen/notification_icon_circle_size" android:layout_height="@dimen/notification_icon_circle_size" android:layout_marginStart="@dimen/notification_icon_circle_start" android:maxDrawableWidth="@dimen/notification_icon_circle_size" android:maxDrawableHeight="@dimen/notification_icon_circle_size" />
+    <FrameLayout android:layout_gravity="start" android:id="@id/alternate_expand_target" android:focusable="false" android:layout_width="@dimen/notification_content_margin_start" android:layout_height="fill_parent" android:importantForAccessibility="no" />
+    <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginStart="@dimen/notification_content_margin_start">
+        <NotificationTopLineView android:theme="@style/Theme.DeviceDefault.Notification" android:gravity="center_vertical" android:id="@id/notification_top_line" android:clipChildren="false" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="1.0" android:layout_centerVertical="true">
+            <TextView android:textAppearance="@style/TextAppearance.DeviceDefault.Notification.Title" android:ellipsize="end" android:id="@id/title" android:fadingEdge="horizontal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:singleLine="true" android:textAlignment="viewStart" android:layout_marginEnd="@dimen/notification_header_separating_margin" />
+            <include layout="@layout/notification_top_line_views" />
+        </NotificationTopLineView>
+        <FrameLayout android:id="@id/expand_button_touch_container" android:layout_width="wrap_content" android:layout_height="fill_parent" android:minWidth="@dimen/notification_content_margin_end">
+            <include android:layout_gravity="end|center" android:layout_width="wrap_content" android:layout_height="wrap_content" layout="@layout/notification_expand_button" />
+        </FrameLayout>
+    </LinearLayout>
+</FrameLayout>

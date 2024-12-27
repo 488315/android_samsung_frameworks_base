@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@id/progress">
+        <rotate android:fromDegrees="270.0" android:toDegrees="270.0">
+            <shape android:shape="ring" android:innerRadiusRatio="100.0" android:thicknessRatio="2.1" android:useLevel="true">
+                <solid android:color="@color/tap_duration_progress_gauge_color" />
+                <size android:height="@dimen/tap_duration_progress_size" android:width="@dimen/tap_duration_progress_size" />
+            </shape>
+        </rotate>
+    </item>
+</layer-list>

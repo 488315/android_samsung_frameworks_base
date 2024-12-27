@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="SDcardBlockUnmount_message">
+        <item quantity="other">Telefon je nestabilní, protože byla odebrána SD karta s nainstalovanými aplikacemi. Telefon se za %d sekund restartuje a vrátí se do normálního stavu. Před restartováním telefonu uložte veškerá neuložená data.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Telefon je nestabilní, protože byla odebrána SD karta s nainstalovanými aplikacemi. Telefon se za %d sekundu restartuje a vrátí se do normálního stavu. Před restartováním telefonu uložte veškerá neuložená data.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Telefon je nestabilní, protože byla odebrána SD karta s nainstalovanými aplikacemi. Telefon se za %d sekundy restartuje a vrátí se do normálního stavu. Před restartováním telefonu uložte veškerá neuložená data.</item>
+        <item quantity="many">Telefon je nestabilní, protože byla odebrána SD karta s nainstalovanými aplikacemi. Telefon se za %d sekund restartuje a vrátí se do normálního stavu. Před restartováním telefonu uložte veškerá neuložená data.</item>
+    </plurals>
+    <plurals name="SDcardBlockUnmount_title">
+        <item quantity="other">Telefon se restartuje za %d sekund</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Telefon se restartuje za %d sekundu</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Telefon se restartuje za %d sekundy</item>
+        <item quantity="many">Telefon se restartuje za %d sekund</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_phone">
+        <item quantity="other">%d aplikací bylo automaticky ukončeno, protože způsobovaly přehřívání telefonu. Můžete je znovu spustit později, až telefon vychladne.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d aplikace byla automaticky ukončena, protože způsobovala přehřívání telefonu. Můžete ji znovu spustit později, až telefon vychladne.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">%d aplikace byly automaticky ukončeny, protože způsobovaly přehřívání telefonu. Můžete je znovu spustit později, až telefon vychladne.</item>
+        <item quantity="many">%d aplikací bylo automaticky ukončeno, protože způsobovaly přehřívání telefonu. Můžete je znovu spustit později, až telefon vychladne.</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_tablet">
+        <item quantity="other">%d aplikací bylo automaticky ukončeno, protože způsobovaly přehřívání tabletu. Můžete je znovu spustit později, až tablet vychladne.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d aplikace byla automaticky ukončena, protože způsobovala přehřívání tabletu. Můžete ji znovu spustit později, až tablet vychladne.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">%d aplikace byly automaticky ukončeny, protože způsobovaly přehřívání tabletu. Můžete je znovu spustit později, až tablet vychladne.</item>
+        <item quantity="many">%d aplikací bylo automaticky ukončeno, protože způsobovaly přehřívání tabletu. Můžete je znovu spustit později, až tablet vychladne.</item>
+    </plurals>
+    <plurals name="app_kills_title_v2">
+        <item quantity="other">%d aplikací ukončeno</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d aplikace ukončena</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">%d aplikace ukončeny</item>
+        <item quantity="many">%d aplikací ukončeno</item>
+    </plurals>
+    <plurals name="dex_max_count_text">
+        <item quantity="other">Na obrazovce není možné současně zobrazit více než %d aplikací. Nejstarší aplikace byla minimalizována.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Na obrazovce není možné současně zobrazit více než %d aplikaci. Nejstarší aplikace byla minimalizována.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Na obrazovce není možné současně zobrazit více než %d aplikace. Nejstarší aplikace byla minimalizována.</item>
+        <item quantity="many">Na obrazovce není možné současně zobrazit více než %d aplikací. Nejstarší aplikace byla minimalizována.</item>
+    </plurals>
+    <plurals name="hot_key_guide_message">
+        <item quantity="other">Otevřete aplikaci, kterou chcete přiřadit, a potom na %d sekund stiskněte a podržte tlačítko aplikace.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Otevřete aplikaci, kterou chcete přiřadit, a potom na %d sekundu stiskněte a podržte tlačítko aplikace.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Otevřete aplikaci, kterou chcete přiřadit, a potom na %d sekundy stiskněte a podržte tlačítko aplikace.</item>
+        <item quantity="many">Otevřete aplikaci, kterou chcete přiřadit, a potom na %d sekund stiskněte a podržte tlačítko aplikace.</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_phone">
+        <item quantity="other">Aplikace %1$s způsobuje přehřívání telefonu. Bude automaticky ukončena za %2$d sekund.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Aplikace %1$s způsobuje přehřívání telefonu. Bude automaticky ukončena za %2$d sekundu.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Aplikace %1$s způsobuje přehřívání telefonu. Bude automaticky ukončena za %2$d sekundy.</item>
+        <item quantity="many">Aplikace %1$s způsobuje přehřívání telefonu. Bude automaticky ukončena za %2$d sekund.</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_tablet">
+        <item quantity="other">Aplikace %1$s způsobuje přehřívání tabletu. Bude automaticky ukončena za %2$d sekund.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Aplikace %1$s způsobuje přehřívání tabletu. Bude automaticky ukončena za %2$d sekundu.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Aplikace %1$s způsobuje přehřívání tabletu. Bude automaticky ukončena za %2$d sekundy.</item>
+        <item quantity="many">Aplikace %1$s způsobuje přehřívání tabletu. Bude automaticky ukončena za %2$d sekund.</item>
+    </plurals>
+    <plurals name="maintenance_mode_backup_cloud_menu_sub_textview_message_default">
+        <item quantity="other">Do Samsung Cloud můžete zálohovat neomezený objem dat až na %d dnů, nebo můžete obnovit zálohovaná data.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Do Samsung Cloud můžete zálohovat neomezený objem dat až na %d den, nebo můžete obnovit zálohovaná data.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Do Samsung Cloud můžete zálohovat neomezený objem dat až na %d dny, nebo můžete obnovit zálohovaná data.</item>
+        <item quantity="many">Do Samsung Cloud můžete zálohovat neomezený objem dat až na %d dnů, nebo můžete obnovit zálohovaná data.</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_phone">
+        <item quantity="other">Aplikace %1$s způsobuje přehřívání telefonu. Můžete ji ukončit, nebo bude ukončena automaticky za %2$d sekund.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Aplikace %1$s způsobuje přehřívání telefonu. Můžete ji ukončit, nebo bude ukončena automaticky za %2$d sekundu.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Aplikace %1$s způsobuje přehřívání telefonu. Můžete ji ukončit, nebo bude ukončena automaticky za %2$d sekundy.</item>
+        <item quantity="many">Aplikace %1$s způsobuje přehřívání telefonu. Můžete ji ukončit, nebo bude ukončena automaticky za %2$d sekund.</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_tablet">
+        <item quantity="other">Aplikace %1$s způsobuje přehřívání tabletu. Můžete ji ukončit, nebo bude ukončena automaticky za %2$d sekund.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Aplikace %1$s způsobuje přehřívání tabletu. Můžete ji ukončit, nebo bude ukončena automaticky za %2$d sekundu.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Aplikace %1$s způsobuje přehřívání tabletu. Můžete ji ukončit, nebo bude ukončena automaticky za %2$d sekundy.</item>
+        <item quantity="many">Aplikace %1$s způsobuje přehřívání tabletu. Můžete ji ukončit, nebo bude ukončena automaticky za %2$d sekund.</item>
+    </plurals>
+    <plurals name="pinpuk_attempts">
+        <item quantity="other">Máte ještě %d pokusů. Poté bude SIM karta uzamčena.</item>
+        <item quantity="one">Máte ještě %d pokus. Poté bude SIM karta uzamčena.</item>
+    </plurals>
+    <plurals name="sem_chooser_preview_items">
+        <item quantity="other">%d položek</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d položka</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">%d položky</item>
+        <item quantity="many">%d položek</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_hours">
+        <item quantity="other">%d hodin</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d hodina</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">%d hodiny</item>
+        <item quantity="many">%d hodin</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_minutes">
+        <item quantity="other">%d minut</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d minuta</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">%d minuty</item>
+        <item quantity="many">%d minut</item>
+    </plurals>
+</resources>

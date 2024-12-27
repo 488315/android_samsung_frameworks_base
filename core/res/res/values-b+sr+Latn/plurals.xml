@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="app_kills_content_v2_phone">
+        <item quantity="other">Aplikacije (%d) su automatski zatvorene zato što su uzrokovale pregrevanje telefona. Možete ponovo da ih otvorite kada se telefon ohladi.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Aplikacija (%d) je automatski zatvorena zato što je uzrokovala pregrevanje telefona. Možete ponovo da je otvorite kada se telefon ohladi.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Aplikacije (%d) su automatski zatvorene zato što su uzrokovale pregrevanje telefona. Možete ponovo da ih otvorite kada se telefon ohladi.</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_tablet">
+        <item quantity="other">Aplikacije (%d) su automatski zatvorene zato što su uzrokovale pregrevanje tableta. Možete ponovo da ih otvorite kada se tablet ohladi.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Aplikacija (%d) je automatski zatvorena zato što je uzrokovala pregrevanje tableta. Možete ponovo da je otvorite kada se tablet ohladi.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Aplikacije (%d) su automatski zatvorene zato što su uzrokovale pregrevanje tableta. Možete ponovo da ih otvorite kada se tablet ohladi.</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_title_v2">
+        <item quantity="other">%d aplikacija je zatvoreno</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d aplikacija je zatvorena</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">%d aplikacije su zatvorene</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="dex_max_count_text">
+        <item quantity="other">Istovremeno možete da prikazujete najviše %d aplikacija na ekranu. Najstarija aplikacija je umanjena.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Istovremeno možete da prikazujete najviše %d aplikaciju na ekranu. Najstarija aplikacija je umanjena.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Istovremeno možete da prikazujete najviše %d aplikacije na ekranu. Najstarija aplikacija je umanjena.</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="hot_key_guide_message">
+        <item quantity="other">Otvorite aplikaciju koju želite da dodelite, a zatim pritisnite i zadržite taster aplikacije na %d sekundi.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Otvorite aplikaciju koju želite da dodelite, a zatim pritisnite i zadržite taster aplikacije na %d sekundu.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Otvorite aplikaciju koju želite da dodelite, a zatim pritisnite i zadržite taster aplikacije na %d sekunde.</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_phone">
+        <item quantity="other">Telefon se pregreva zbog aplikacije %1$s. Ona će se automatski zatvoriti za %2$d sekundi.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Telefon se pregreva zbog aplikacije %1$s. Ona će se automatski zatvoriti za %2$d sekundu.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Telefon se pregreva zbog aplikacije %1$s. Ona će se automatski zatvoriti za %2$d sekunde.</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_tablet">
+        <item quantity="other">Tablet se pregreva zbog aplikacije %1$s. Ona će se automatski zatvoriti za %2$d sekundi.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Tablet se pregreva zbog aplikacije %1$s. Ona će se automatski zatvoriti za %2$d sekundu.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Tablet se pregreva zbog aplikacije %1$s. Ona će se automatski zatvoriti za %2$d sekunde.</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="maintenance_mode_backup_cloud_menu_sub_textview_message_default">
+        <item quantity="other">Bekapujte neograničenu količinu podataka na Samsung Cloud i čuvajte ih do %d dana ili vratite podatke koje ste bekapovali.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Bekapujte neograničenu količinu podataka na Samsung Cloud i čuvajte ih do %d dan ili vratite podatke koje ste bekapovali.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Bekapujte neograničenu količinu podataka na Samsung Cloud i čuvajte ih do %d dana ili vratite podatke koje ste bekapovali.</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_phone">
+        <item quantity="other">Aplikacija %1$s izaziva pregrevanje telefona. Možete sada da je zatvorite ili će se ona automatski zatvoriti za %2$d sekundi.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Aplikacija %1$s izaziva pregrevanje telefona. Možete sada da je zatvorite ili će se ona automatski zatvoriti za %2$d sekundu.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Aplikacija %1$s izaziva pregrevanje telefona. Možete sada da je zatvorite ili će se ona automatski zatvoriti za %2$d sekunde.</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_tablet">
+        <item quantity="other">Aplikacija %1$s izaziva pregrevanje tableta. Možete sada da je zatvorite ili će se ona automatski zatvoriti za %2$d sekundi.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Aplikacija %1$s izaziva pregrevanje tableta. Možete sada da je zatvorite ili će se ona automatski zatvoriti za %2$d sekundu.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Aplikacija %1$s izaziva pregrevanje tableta. Možete sada da je zatvorite ili će se ona automatski zatvoriti za %2$d sekunde.</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="pinpuk_attempts">
+        <item quantity="other">Imate još %d pokušaja pre nego što se SIM kartica zaključa.</item>
+        <item quantity="one">Imate još %d pokušaj pre nego što se SIM kartica zaključa.</item>
+    </plurals>
+    <plurals name="sem_chooser_preview_items">
+        <item quantity="other">%d stavki</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d stavka</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">%d stavke</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_hours">
+        <item quantity="other">%d sati</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d sat</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">%d sata</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_minutes">
+        <item quantity="other">%d minuta</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d minut</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">%d minuta</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

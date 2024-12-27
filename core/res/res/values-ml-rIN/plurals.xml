@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="SDcardBlockUnmount_message">
+        <item quantity="other">നിങ്ങളുടെ ഫോൺ അസ്ഥിരമായത് അതിൽ നിന്ന് ആപ്പുകളെ ഇൻസ്റ്റാൾ ചെയ്ത ഒരു SD കാർഡ് നീക്കംചെയ്തതുകൊണ്ടായിരുന്നു. %d സെക്കന്‍റ് കഴിഞ്ഞാൽ സാധാരണ നിലയിലേക്ക് മടങ്ങാനായി നിങ്ങളുടെ ഫോൺ പുനരാരംഭിക്കും. ഫോൺ പുനരാരംഭിക്കുന്നതിന് മുമ്പ് സംരക്ഷിക്കാത്ത ഡാറ്റ ഏതെങ്കിലുമുണ്ടെങ്കിൽ സംരക്ഷിക്കുക.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">നിങ്ങളുടെ ഫോൺ അസ്ഥിരമായത് അതിൽ നിന്ന് ആപ്പുകളെ ഇൻസ്റ്റാൾ ചെയ്ത ഒരു SD കാർഡ് നീക്കംചെയ്തതുകൊണ്ടായിരുന്നു. %d സെക്കന്‍റ് കഴിഞ്ഞാൽ സാധാരണ നിലയിലേക്ക് മടങ്ങാനായി നിങ്ങളുടെ ഫോൺ പുനരാരംഭിക്കും. ഫോൺ പുനരാരംഭിക്കുന്നതിന് മുമ്പ് സംരക്ഷിക്കാത്ത ഡാറ്റ ഏതെങ്കിലുമുണ്ടെങ്കിൽ സംരക്ഷിക്കുക.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="SDcardBlockUnmount_title">
+        <item quantity="other">%d സെക്കന്‍റ് കഴിഞ്ഞാൽ നിങ്ങളുടെ ഫോൺ പുനരാരംഭിക്കും</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d സെക്കന്‍റ് കഴിഞ്ഞാൽ നിങ്ങളുടെ ഫോൺ പുനരാരംഭിക്കും</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_phone">
+        <item quantity="other">നിങ്ങളുടെ ഫോൺ അമിതമായി ചൂടാകാൻ %d ആപ്പുകൾ കാരണമായതിനാൽ അവ ഓട്ടോമാറ്റിക്കായി അടച്ചു. ഫോൺ തണുത്തുകഴിഞ്ഞാൽ പിന്നീട് നിങ്ങൾക്കവ വീണ്ടും തുറക്കാവുന്നതാണ്.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">നിങ്ങളുടെ ഫോൺ അമിതമായി ചൂടാകാൻ %d ആപ്പ് കാരണമായതിനാൽ അത് ഓട്ടോമാറ്റിക്കായി അടച്ചു. ഫോൺ തണുത്തുകഴിഞ്ഞാൽ പിന്നീട് നിങ്ങൾക്കത് വീണ്ടും തുറക്കാവുന്നതാണ്.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_tablet">
+        <item quantity="other">നിങ്ങളുടെ ടാബ്‌ലറ്റ് അമിതമായി ചൂടാകാൻ %d ആപ്പുകൾ കാരണമായതിനാൽ അവ ഓട്ടോമാറ്റിക്കായി അടച്ചു. ടാബ്‌ലറ്റ് തണുത്തുകഴിഞ്ഞാൽ പിന്നീട് നിങ്ങൾക്കവ വീണ്ടും തുറക്കാവുന്നതാണ്.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">നിങ്ങളുടെ ടാബ്‌ലറ്റ് അമിതമായി ചൂടാകാൻ %d ആപ്പ് കാരണമായതിനാൽ അത് ഓട്ടോമാറ്റിക്കായി അടച്ചു. ടാബ്‌ലറ്റ് തണുത്തുകഴിഞ്ഞാൽ പിന്നീട് നിങ്ങൾക്കത് വീണ്ടും തുറക്കാവുന്നതാണ്.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_title_v2">
+        <item quantity="other">%d ആപ്പുകൾ അടച്ചു</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d ആപ്പ് അടച്ചു</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="dex_max_count_text">
+        <item quantity="other">ഒരേ സമയം %d-ൽ കൂടുതൽ ആപ്പുകളെ സ്ക്രീനിൽ കാണിക്കാനാവില്ല. പഴക്കംചെന്ന ആപ്പിനെ ചുരുക്കി.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">ഒരേ സമയം %d-ൽ കൂടുതൽ ആപ്പിനെ സ്ക്രീനിൽ കാണിക്കാനാവില്ല. പഴക്കംചെന്ന ആപ്പിനെ ചുരുക്കി.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="hot_key_guide_message">
+        <item quantity="other">നിങ്ങൾക്ക് നിയോഗിക്കേണ്ട ആപ്പ് തുറക്കുക, തുടർന്ന് ആപ്പ് കീ %d സെക്കന്‍റ് അമർത്തിപ്പിടിക്കുക.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">നിങ്ങൾക്ക് നിയോഗിക്കേണ്ട ആപ്പ് തുറക്കുക, തുടർന്ന് ആപ്പ് കീ %d സെക്കന്‍റ് അമർത്തിപ്പിടിക്കുക.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_phone">
+        <item quantity="other">നിങ്ങളുടെ ഫോൺ അമിതമായി ചൂടാകാൻ %1$s കാരണമാകുന്നു. %2$d സെക്കന്‍റ് കഴിഞ്ഞാൽ അത് ഓട്ടോമാറ്റിക്കായി അടയ്ക്കും.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">നിങ്ങളുടെ ഫോൺ അമിതമായി ചൂടാകാൻ %1$s കാരണമാകുന്നു. %2$d സെക്കന്‍റ് കഴിഞ്ഞാൽ അത് ഓട്ടോമാറ്റിക്കായി അടയ്ക്കും.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_tablet">
+        <item quantity="other">നിങ്ങളുടെ ടാബ്‌ലറ്റ് അമിതമായി ചൂടാകാൻ %1$s കാരണമാകുന്നു. %2$d സെക്കന്‍റ് കഴിഞ്ഞാൽ അത് ഓട്ടോമാറ്റിക്കായി അടയ്ക്കും.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">നിങ്ങളുടെ ടാബ്‌ലറ്റ് അമിതമായി ചൂടാകാൻ %1$s കാരണമാകുന്നു. %2$d സെക്കന്‍റ് കഴിഞ്ഞാൽ അത് ഓട്ടോമാറ്റിക്കായി അടയ്ക്കും.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="maintenance_mode_backup_cloud_menu_sub_textview_message_default">
+        <item quantity="other">%d ദിവസത്തേക്ക് വരെ Samsung Cloud-ലേക്ക് പരിധിയില്ലാതെ ഡാറ്റ ബാക്കപ്പ് ചെയ്യുക അല്ലെങ്കിൽ നിങ്ങൾ ബാക്കപ്പ് ചെയ്‌ത ഡാറ്റ പുനഃസ്ഥാപിക്കുക.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d ദിവസത്തേക്ക് വരെ Samsung Cloud-ലേക്ക് പരിധിയില്ലാതെ ഡാറ്റ ബാക്കപ്പ് ചെയ്യുക അല്ലെങ്കിൽ നിങ്ങൾ ബാക്കപ്പ് ചെയ്‌ത ഡാറ്റ പുനഃസ്ഥാപിക്കുക.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_phone">
+        <item quantity="other">നിങ്ങളുടെ ഫോൺ അമിതമായി ചൂടാകാൻ %1$s കാരണമാകുന്നു. ഇപ്പോൾ നിങ്ങൾക്കത് അടയ്ക്കാം, അല്ലെങ്കിൽ %2$d സെക്കന്‍റ് കഴിഞ്ഞാൽ അത് ഓട്ടോമാറ്റിക്കായി അടയ്ക്കും.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">നിങ്ങളുടെ ഫോൺ അമിതമായി ചൂടാകാൻ %1$s കാരണമാകുന്നു. ഇപ്പോൾ നിങ്ങൾക്കത് അടയ്ക്കാം, അല്ലെങ്കിൽ %2$d സെക്കന്‍റ് കഴിഞ്ഞാൽ അത് ഓട്ടോമാറ്റിക്കായി അടയ്ക്കും.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_tablet">
+        <item quantity="other">നിങ്ങളുടെ ടാബ്‌ലറ്റ് അമിതമായി ചൂടാകാൻ %1$s കാരണമാകുന്നു. ഇപ്പോൾ നിങ്ങൾക്കത് അടയ്ക്കാം, അല്ലെങ്കിൽ %2$d സെക്കന്‍റ് കഴിഞ്ഞാൽ അത് ഓട്ടോമാറ്റിക്കായി അടയ്ക്കും.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">നിങ്ങളുടെ ടാബ്‌ലറ്റ് അമിതമായി ചൂടാകാൻ %1$s കാരണമാകുന്നു. ഇപ്പോൾ നിങ്ങൾക്കത് അടയ്ക്കാം, അല്ലെങ്കിൽ %2$d സെക്കന്‍റ് കഴിഞ്ഞാൽ അത് ഓട്ടോമാറ്റിക്കായി അടയ്ക്കും.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sem_chooser_preview_items">
+        <item quantity="other">%d ഇനങ്ങൾ</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d ഇനം</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_hours">
+        <item quantity="other">%d മണിക്കൂർ</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d മണിക്കൂർ</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_minutes">
+        <item quantity="other">%d മിനിറ്റ്</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d മിനിറ്റ്</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ThemeMetaData FormatVersion="1.3" GuideVersion="1.4">
+    <AppMetaData Name="Uni-HAL Settings" TargetApi="19" TargetPackageName="com.samsung.android.vtcamerasettings" VersionCode="1" VersionName="">
+        <Include RefName="SESL" />
+        <Include RefName="Settings" />
+        <Property Comment="Settings Background color" DestAttribName="setting_background" UID="90-1-1" ValueRef="1-1-1" ValueType="BgColor" />
+        <Property Comment="Settings Title Text Color(Action bar)" DestAttribName="setting_title_text_color" UID="90-1-2" ValueRef="1-1-3" ValueType="TextColor" />
+        <Property Comment="Settings Button Text Color(Action Button)" DefaultValue="#ff505050" DestAttribName="setting_actionbar_button_text_color" UID="90-1-3" ValueRef="1-11-1" ValueType="TextColor" />
+        <Property Comment="Settings Back icon tint color(Action Button)" DestAttribName="setting_actionbar_back_icon_tint_color" UID="90-1-4" ValueRef="1-11-3" ValueType="TintColor" />
+        <Property Comment="Settings Back Icon Image(Action Button)" DestAttribName="ic_ab_back" UID="90-1-5" ValueRef="1-11-4" ValueType="Image" />
+        <Property Comment="Divider color" DefaultValue="#ffe6e6e6" DestAttribName="setting_divider_color" UID="90-2-1" ValueRef="1-2" ValueType="Color" />
+        <Property Comment="Main Text Color" DefaultValue="#ff252525" DestAttribName="setting_main_text_color" UID="90-3-1" ValueRef="1-3-1" ValueType="TextColor" />
+        <Property Comment="Sub Text Color" DefaultValue="#ff979797" DestAttribName="setting_sub_text_color" UID="90-3-2" ValueRef="1-3-2" ValueType="TextColor" />
+        <Property Comment="Description Text Color" DefaultValue="#ff6b6f72" DestAttribName="setting_description_text_color" UID="90-3-3" ValueRef="1-3-3-D" ValueType="TextColor" />
+        <Property Comment="Main On Background Color" DefaultValue="#bf4297ff" DestAttribName="setting_main_on_background_color" UID="90-4-1" ValueRef="1-40-1" ValueType="BgColor" />
+        <Property Comment="Main Off Background Color" DefaultValue="#fffafafa" DestAttribName="setting_main_off_background_color" UID="90-4-2" ValueRef="1-40-2" ValueType="BgColor" />
+        <Property Comment="Main On Text Color" DefaultValue="#fffafafa" DestAttribName="setting_main_on_text_color" UID="90-4-3" ValueRef="1-40-3" ValueType="BgColor" />
+        <Property Comment="Main Off Text Color" DefaultValue="#ff252525" DestAttribName="setting_main_off_text_color" UID="90-4-4" ValueRef="1-40-4" ValueType="BgColor" />
+        <Property Comment="Content Area Background Color" DefaultValue="#fffafafa" DestAttribName="setting_content_area_background_color" UID="90-6-1" ValueRef="1-18-1" ValueType="BgColor" />
+        <Property Comment="Content Area Background Image" DefaultValue="" DestAttribName="setting_content_area_background_image" DestQualifiers="xxxhdpi" ImageSize="760X760" UID="90-6-2" ValueRef="1-18-2" ValueType="BgImage" />
+        <Property Comment="Sub Header Background color" DefaultValue="#ff000000" DestAttribName="setting_sub_header_background_color" UID="90-7-1" ValueRef="1-19-1" ValueType="BgColor" />
+        <Property Comment="Sub Header Text color" DefaultValue="#ff858585" DestAttribName="setting_sub_header_text_color" UID="90-7-2" ValueRef="1-19-2" ValueType="TextColor" />
+        <Property Comment="No Item Sub Text color" DefaultValue="#b3252525" DestAttribName="setting_no_item_sub_text_color" UID="90-8-1" ValueRef="1-53-2" ValueType="Color" />
+        <Property Comment="Botton stroke color" DefaultValue="#1a000000" DestAttribName="settings_button_boarder_color" UID="90-9-1" ValueRef="1-7-1" ValueType="Color" />
+    </AppMetaData>
+</ThemeMetaData>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="sem_chooser_gallery_image_height">280.0dip</dimen>
+    <dimen name="sem_chooser_gallery_image_height_for_tab">230.0dip</dimen>
+    <item type="dimen" name="sem_chooser_gallery_image_top_padding">0.05</item>
+</resources>

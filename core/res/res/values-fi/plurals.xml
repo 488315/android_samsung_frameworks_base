@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="SDcardBlockUnmount_message">
+        <item quantity="other">Puhelimesi on epävakaa, sillä asennettuja sovelluksia sisältävä SD-kortti on poistettu. Puhelin käynnistyy %d sekunnin kuluttua uudelleen palatakseen normaalitilaan. Tallenna tallentamattomat tiedot, ennen kuin puhelin käynnistyy uudelleen.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Puhelimesi on epävakaa, sillä asennettuja sovelluksia sisältävä SD-kortti on poistettu. Puhelin käynnistyy %d sekunnin kuluttua uudelleen palatakseen normaalitilaan. Tallenna tallentamattomat tiedot, ennen kuin puhelin käynnistyy uudelleen.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="SDcardBlockUnmount_title">
+        <item quantity="other">Puhelin käynnistyy %d s kuluttua uud.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Puhelin käynnistyy %d s kuluttua uud.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_phone">
+        <item quantity="other">%d sovellusta suljettiin automaattisesti, sillä ne saivat puhelimen ylikuumenemaan. Voit avata ne uudelleen, kun puhelin on jäähtynyt.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d sovellus suljettiin automaattisesti, sillä se sai puhelimen ylikuumenemaan. Voit avata sen uudelleen, kun puhelin on jäähtynyt.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_tablet">
+        <item quantity="other">%d sovellusta suljettiin automaattisesti, sillä ne saivat tablet-laitteen ylikuumenemaan. Voit avata ne uudelleen, kun tablet-laite on jäähtynyt.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d sovellus suljettiin automaattisesti, sillä se sai tablet-laitteen ylikuumenemaan. Voit avata sen uudelleen, kun tablet-laite on jäähtynyt.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_title_v2">
+        <item quantity="other">%d sovellusta suljettu</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d sovellus suljettu</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="dex_max_count_text">
+        <item quantity="other">Näytössä voi näyttää kerrallaan enintään %d sovellusta. Vanhin sovellus pienennetään.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Näytössä voi näyttää kerrallaan enintään %d sovelluksen. Vanhin sovellus pienennetään.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="hot_key_guide_message">
+        <item quantity="other">Avaa sovellus, jonka haluat määrittää, ja paina sitten sovellusnäppäintä %d sekunnin ajan.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Avaa sovellus, jonka haluat määrittää, ja paina sitten sovellusnäppäintä %d sekunnin ajan.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_phone">
+        <item quantity="other">%1$s saa puhelimen ylikuumenemaan. Se suljetaan automaattisesti %2$d sekunnin kuluttua.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s saa puhelimen ylikuumenemaan. Se suljetaan automaattisesti %2$d sekunnin kuluttua.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_tablet">
+        <item quantity="other">%1$s saa tablet-laitteen ylikuumenemaan. Se suljetaan automaattisesti %2$d sekunnin kuluttua.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s saa tablet-laitteen ylikuumenemaan. Se suljetaan automaattisesti %2$d sekunnin kuluttua.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="maintenance_mode_backup_cloud_menu_sub_textview_message_default">
+        <item quantity="other">Varmuuskopioi rajoittamaton määrä tietoja Samsung Cloudiin enintään %d päiväksi tai palauta varmuuskopioimasi tiedot.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Varmuuskopioi rajoittamaton määrä tietoja Samsung Cloudiin enintään %d päiväksi tai palauta varmuuskopioimasi tiedot.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_phone">
+        <item quantity="other">%1$s saa puhelimen ylikuumenemaan. Voit sulkea sen nyt, tai se suljetaan automaattisesti %2$d sekunnin kuluttua.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s saa puhelimen ylikuumenemaan. Voit sulkea sen nyt, tai se suljetaan automaattisesti %2$d sekunnin kuluttua.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_tablet">
+        <item quantity="other">%1$s saa tablet-laitteen ylikuumenemaan. Voit sulkea sen nyt, tai se suljetaan automaattisesti %2$d sekunnin kuluttua.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s saa tablet-laitteen ylikuumenemaan. Voit sulkea sen nyt, tai se suljetaan automaattisesti %2$d sekunnin kuluttua.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="pinpuk_attempts">
+        <item quantity="other">Sinulla on %d yritystä jäljellä, ennen kuin SIM-kortti lukitaan.</item>
+        <item quantity="one">Sinulla on %d yritys jäljellä, ennen kuin SIM-kortti lukitaan.</item>
+    </plurals>
+    <plurals name="sem_chooser_preview_items">
+        <item quantity="other">%d kohdetta</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d kohde</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_hours">
+        <item quantity="other">%d tuntia</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d tunti</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_minutes">
+        <item quantity="other">%d minuuttia</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d minuutti</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

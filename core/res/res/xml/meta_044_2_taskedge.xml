@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ThemeMetaData FormatVersion="1.3" GuideVersion="6.1">
+    <AppMetaData Name="TaskEdge" TargetApi="21" TargetPackageName="com.samsung.android.app.taskedge" VersionCode="1" VersionName="">
+        <Property Comment="Status bar background color" DefaultValue="#fff2f2f2" DestAttribName="task_edge_settings_status_bar_color" DestQualifiers="" UID="44_2-S-1" ValueRef="1-51" ValueType="Color" />
+        <Property Comment="Status bar icon color" DefaultValue="true" DestAttribName="use_light_status_bar" UID="44_2-S-2" ValueRef="1-51-1" ValueType="Bool" />
+        <Property Comment="App label text color" DefaultValue="#ff252525" DestAttribName="setting_label_text_color" DestQualifiers="" UID="44_2-1-1" ValueRef="1-1-3" ValueType="Color" />
+        <Property Comment="About Page Title" DefaultValue="#ff252525" DestAttribName="settings_app_info_title" DestQualifiers="" POption="AlwaysOverriden" UID="44_2-1-3" ValueRef="1-1-3" ValueType="Color" />
+        <Property Comment="Settings Header Text Color" DefaultValue="#ff858585" DestAttribName="settings_header_text_color" DestQualifiers="" UID="44_2-2-3" ValueRef="1-19-2" ValueType="Color" />
+        <Property Comment="Selected item list background" DefaultValue="#ffeeeeee" DestAttribName="selected_item_list_background" DestQualifiers="" UID="44_2-3-1" ValueRef="1-18-1" ValueType="Color" />
+        <Property Comment="Settings dot line color" DefaultValue="#ff979797" DestAttribName="setting_app_pair_dot_color" DestQualifiers="" UID="44_2-2-4" ValueRef="1-19-2" ValueType="Color" />
+        <Property Comment="Selected item list drag outline color" DefaultValue="#ff949494" DestAttribName="selected_item_list_outline_color" DestQualifiers="" Opacity="50" UID="44_2-3-3" ValueRef="1-3-1" ValueType="Color" />
+        <Property Comment="Tasks Edge settings background color" DefaultValue="#fff0f0f0" DestAttribName="task_edge_settings_background_color" DestQualifiers="" UID="44_2-10-1" ValueRef="1-1-1" ValueType="Color" />
+        <Property Comment="Empty slot icon tint color" DefaultValue="#ff4a4a4a" DestAttribName="edge_panel_empty_slot_tint_color" DestQualifiers="" Opacity="50" POption="AlwaysOverriden" UID="44_2-11-1" ValueRef="1-3-1" ValueType="TintColor" />
+    </AppMetaData>
+</ThemeMetaData>

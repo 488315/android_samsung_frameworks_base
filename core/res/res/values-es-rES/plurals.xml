@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="SDcardBlockUnmount_message">
+        <item quantity="other">Tu teléfono es inestable debido a que se ha extraído una tarjeta SD en la que había aplicaciones instaladas. El teléfono se reiniciará dentro de %d segundos para restaurar su funcionamiento normal. Guarda los datos que no hayas guardado antes de que se reinicie el teléfono.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Tu teléfono es inestable debido a que se ha extraído una tarjeta SD en la que había aplicaciones instaladas. El teléfono se reiniciará dentro de %d segundo para restaurar su funcionamiento normal. Guarda los datos que no hayas guardado antes de que se reinicie el teléfono.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="SDcardBlockUnmount_title">
+        <item quantity="other">El teléfono se reiniciará en %d segundos</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">El teléfono se reiniciará en %d segundo</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_phone">
+        <item quantity="other">%d aplicaciones se han cerrado automáticamente porque estaban provocando el sobrecalentamiento del teléfono. Ábrelas más tarde cuando el teléfono se haya enfriado.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d aplicación se ha cerrado automáticamente porque estaba provocando el sobrecalentamiento del teléfono. Ábrela más tarde cuando el teléfono se haya enfriado.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_tablet">
+        <item quantity="other">%d aplicaciones se han cerrado automáticamente porque estaban provocando el sobrecalentamiento de la tableta. Ábrelas más tarde cuando la tableta se haya enfriado.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d aplicación se ha cerrado automáticamente porque estaba provocando el sobrecalentamiento de la tableta. Ábrela más tarde cuando la tableta se haya enfriado.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_title_v2">
+        <item quantity="other">%d aplicaciones cerradas</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d aplicación cerrada</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="dex_max_count_text">
+        <item quantity="other">No se pueden mostrar más de %d aplicaciones en la pantalla al mismo tiempo. Se minimizará la aplicación que se haya abierto antes.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">No se puede mostrar más de %d aplicación en la pantalla al mismo tiempo. Se minimizará la aplicación que se haya abierto antes.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="hot_key_guide_message">
+        <item quantity="other">Abre la aplicación que quieres asignar y luego mantén pulsada la tecla de aplicación durante %d segundos.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Abre la aplicación que quieres asignar y luego mantén pulsada la tecla de aplicación durante %d segundo.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_phone">
+        <item quantity="other">%1$s está provocando que el teléfono se sobrecaliente. Se cerrará automáticamente dentro de %2$d segundos.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s está provocando que el teléfono se sobrecaliente. Se cerrará automáticamente dentro de %2$d segundo.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_tablet">
+        <item quantity="other">%1$s está provocando que la tableta se sobrecaliente. Se cerrará automáticamente dentro de %2$d segundos.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s está provocando que la tableta se sobrecaliente. Se cerrará automáticamente dentro de %2$d segundo.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="maintenance_mode_backup_cloud_menu_sub_textview_message_default">
+        <item quantity="other">Haz una copia de seguridad de datos ilimitados en Samsung Cloud durante un máximo de %d días o restaura los datos de los que has hecho una copia de seguridad.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Haz una copia de seguridad de datos ilimitados en Samsung Cloud durante un máximo de %d día o restaura los datos de los que has hecho una copia de seguridad.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_phone">
+        <item quantity="other">%1$s está provocando que el teléfono se sobrecaliente. Cierra la aplicación ahora o se cerrará automáticamente dentro de %2$d segundos.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s está provocando que el teléfono se sobrecaliente. Cierra la aplicación ahora o se cerrará automáticamente dentro de %2$d segundo.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_tablet">
+        <item quantity="other">%1$s está provocando que la tableta se sobrecaliente. Cierra la aplicación ahora o se cerrará automáticamente dentro de %2$d segundos.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s está provocando que la tableta se sobrecaliente. Cierra la aplicación ahora o se cerrará automáticamente dentro de %2$d segundo.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sem_chooser_preview_items">
+        <item quantity="other">%d elementos</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d elemento</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_hours">
+        <item quantity="other">%d horas</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d hora</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_minutes">
+        <item quantity="other">%d minutos</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d minuto</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

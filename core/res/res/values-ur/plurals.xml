@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="pinpuk_attempts">
+        <item quantity="other">‏آپ کے پاس %d کوششیں بچی ہیں، اس کے بعد SIM مقفل ہو جائے گا۔</item>
+        <item quantity="one">‏آپ کے پاس %d کوشش بچی ہے، اس کے بعد SIM مقفل ہو جائے گا۔</item>
+    </plurals>
+</resources>

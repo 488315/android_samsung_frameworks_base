@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_weight="1.0">
+        <ScrollView android:layout_width="fill_parent" android:layout_height="fill_parent">
+            <LinearLayout android:layout_gravity="center_horizontal" android:orientation="vertical" android:id="@id/maintenance_mode_intro_body_container" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="@dimen/maintenance_mode_container_common_margin" android:layout_marginRight="@dimen/maintenance_mode_container_common_margin">
+                <LinearLayout android:layout_gravity="center" android:orientation="vertical" android:layout_width="wrap_content" android:layout_height="wrap_content">
+                    <ImageView android:id="@id/maintenance_mode_intro_imageview" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="@dimen/maintenance_mode_common_margin" android:layout_marginTop="@dimen/maintenance_mode_image_common_margin" android:layout_marginRight="@dimen/maintenance_mode_common_margin" android:layout_marginBottom="@dimen/maintenance_mode_image_common_margin" android:src="@drawable/img_maintenance_mode_intro_illustration" android:adjustViewBounds="true" android:maxWidth="@dimen/maintenance_mode_image_max_width" />
+                </LinearLayout>
+                <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="@dimen/maintenance_mode_focus_block_margin_top_bottom" android:layout_marginStart="@dimen/maintenance_mode_common_margin" android:layout_marginEnd="@dimen/maintenance_mode_common_margin">
+                    <TextView android:textSize="@dimen/maintenance_mode_common_text_size" android:id="@id/maintenance_mode_intro_summary_textview" android:text="@string/maintenance_mode_intro_summary_textview_message_phone" style="@style/TextAppearance.MaintenanceMode.Body" />
+                    <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                        <TextView android:layout_marginTop="@dimen/maintenance_mode_body_subtitle_margin_top" android:layout_marginBottom="@dimen/maintenance_mode_body_subtitle_margin_bottom" android:text="@string/maintenance_mode_intro_subtitle_how_to_keep_safe" style="@style/TextAppearance.MaintenanceMode.Body.Subtitle" />
+                        <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                            <TextView android:layout_marginStart="@dimen/maintenance_mode_body_dot_margin_left" style="@style/TextAppearance.MaintenanceMode.Body.Dot" />
+                            <TextView android:text="@string/maintenance_mode_intro_description_data_access" style="@style/TextAppearance.MaintenanceMode.Body.Description" />
+                        </LinearLayout>
+                        <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/maintenance_mode_common_text_line_spacing">
+                            <TextView android:layout_marginStart="@dimen/maintenance_mode_body_dot_margin_left" style="@style/TextAppearance.MaintenanceMode.Body.Dot" />
+                            <TextView android:id="@id/maintenance_mode_intro_description_need_to_unlock_textview" android:text="@string/maintenance_mode_intro_description_need_to_unlock_phone" style="@style/TextAppearance.MaintenanceMode.Body.Description" />
+                        </LinearLayout>
+                    </LinearLayout>
+                    <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                        <TextView android:layout_marginTop="@dimen/maintenance_mode_body_subtitle_margin_top" android:layout_marginBottom="@dimen/maintenance_mode_body_subtitle_margin_bottom" android:text="@string/maintenance_mode_intro_subtitle_when_turn_off" style="@style/TextAppearance.MaintenanceMode.Body.Subtitle" />
+                        <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                            <TextView android:layout_marginStart="@dimen/maintenance_mode_body_dot_margin_left" style="@style/TextAppearance.MaintenanceMode.Body.Dot" />
+                            <TextView android:text="@string/maintenance_mode_intro_description_everything_will_go_back" style="@style/TextAppearance.MaintenanceMode.Body.Description" />
+                        </LinearLayout>
+                        <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/maintenance_mode_common_text_line_spacing">
+                            <TextView android:layout_marginStart="@dimen/maintenance_mode_body_dot_margin_left" style="@style/TextAppearance.MaintenanceMode.Body.Dot" />
+                            <TextView android:text="@string/maintenance_mode_intro_description_nothing_will_be_saved" style="@style/TextAppearance.MaintenanceMode.Body.Description" />
+                        </LinearLayout>
+                    </LinearLayout>
+                    <TextView android:textSize="@dimen/maintenance_mode_common_text_size" android:id="@id/maintenance_mode_intro_recommendation_textview" android:layout_marginTop="@dimen/maintenance_mode_body_subtitle_margin_top" android:text="@string/maintenance_mode_intro_recommendation_textview_message_phone" style="@style/TextAppearance.MaintenanceMode.Body" />
+                </LinearLayout>
+                <LinearLayout android:gravity="center_vertical" android:orientation="vertical" android:id="@id/maintenance_mode_intro_backup_menu_cloud" android:paddingTop="@dimen/maintenance_mode_focus_block_padding_top_bottom_small" android:paddingBottom="@dimen/maintenance_mode_focus_block_padding_top_bottom_small" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:paddingStart="@dimen/maintenance_mode_common_margin" android:paddingEnd="@dimen/maintenance_mode_common_margin">
+                    <TextView android:textSize="@dimen/maintenance_mode_focus_block_main_text_size" android:id="@id/maintenance_mode_intro_backup_menu_cloud_main_textview" android:text="@string/maintenance_mode_backup_cloud_menu_main_textview_message" style="@style/TextAppearance.MaintenanceMode.Main" />
+                    <TextView android:textSize="@dimen/maintenance_mode_focus_block_sub_text_size" android:id="@id/maintenance_mode_intro_backup_menu_cloud_sub_textview" style="@style/TextAppearance.MaintenanceMode.Sub" />
+                </LinearLayout>
+                <LinearLayout android:id="@id/maintenance_mode_intro_backup_menu_divider_cloud" android:background="@color/maintenance_mode_focus_block" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                    <LinearLayout android:background="@color/maintenance_mode_divider" android:layout_width="fill_parent" android:layout_height="@dimen/maintenance_mode_divider_height" android:layout_marginStart="@dimen/maintenance_mode_divider_margin_left_right" android:layout_marginEnd="@dimen/maintenance_mode_divider_margin_left_right" />
+                </LinearLayout>
+                <LinearLayout android:gravity="center_vertical" android:orientation="vertical" android:id="@id/maintenance_mode_intro_backup_menu_external_storage" android:paddingTop="@dimen/maintenance_mode_focus_block_padding_top_bottom_small" android:paddingBottom="@dimen/maintenance_mode_focus_block_padding_top_bottom_small" android:layout_width="fill_parent" android:layout_height="wrap_content" android:paddingStart="@dimen/maintenance_mode_common_margin" android:paddingEnd="@dimen/maintenance_mode_common_margin">
+                    <TextView android:textSize="@dimen/maintenance_mode_focus_block_main_text_size" android:id="@id/maintenance_mode_intro_backup_menu_external_storage_main_textview" android:text="@string/maintenance_mode_backup_external_storage_menu_main_textview_message" style="@style/TextAppearance.MaintenanceMode.Main" />
+                    <TextView android:textSize="@dimen/maintenance_mode_focus_block_sub_text_size" android:id="@id/maintenance_mode_intro_backup_menu_external_storage_sub_textview" android:text="@string/maintenance_mode_backup_external_storage_menu_sub_textview_message" style="@style/TextAppearance.MaintenanceMode.Sub" />
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+    <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <Button android:textAppearance="@style/TextAppearance.MaintenanceMode.Primary.Button" android:gravity="center" android:layout_gravity="center_horizontal" android:id="@id/maintenance_mode_intro_turnon_button" android:background="@drawable/shape_maintenance_mode_button_blue" android:layout_width="@dimen/maintenance_mode_body_button_width" android:layout_height="@dimen/maintenance_mode_body_button_height" android:layout_marginTop="@dimen/maintenance_mode_body_button_margin_top" android:layout_marginBottom="@dimen/maintenance_mode_body_button_margin_bottom" android:text="@string/maintenance_mode_intro_turnon_button_text" />
+    </LinearLayout>
+</LinearLayout>

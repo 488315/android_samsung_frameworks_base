@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ThemeMetaData FormatVersion="1.3" GuideVersion="1.4">
+    <AppMetaData AppendTo="Common" IsFrameworkResource="true" Name="Common" PackageNameSuffix="common" TargetApi="19" TargetPackageName="android" VersionCode="1" VersionName="">
+        <Property Comment="Sticky key pressed color" DefaultValue="#5a737373" DestAttribName="sticky_keys_pressed_color" DestQualifiers="" UID="45-63-1" ValueRef="1-7-1" ValueType="Color" />
+        <Property Comment="Sticky key text color" DefaultValue="#fffafafa" DestAttribName="sticky_keys_text_color" DestQualifiers="" UID="45-63-2" ValueRef="1-7-2" ValueType="Color" />
+        <Property Comment="Sticky key locked color" DefaultValue="#5a0072de" DestAttribName="sticky_keys_locked_color" DestQualifiers="" UID="45-63-3" ValueRef="1-8-1" ValueType="Color" />
+        <Property Comment="Sticky key locked text color" DefaultValue="#fffafafa" DestAttribName="sticky_keys_locked_text_color" DestQualifiers="" UID="45-63-4" ValueRef="1-8-3" ValueType="Color" />
+    </AppMetaData>
+    <AppMetaData Name="Accessibility" TargetApi="21" TargetPackageName="com.samsung.accessibility" VersionCode="1" VersionName="1.0">
+        <Include RefName="SESL" />
+        <Property Comment="Text Description text color in list" DefaultValue="#ff505050" DestAttribName="description_text_color_in_chunking" DestQualifiers="" UID="45-32-3" ValueRef="1-3-3" ValueType="TextColor" />
+        <Property Comment="Text Description text color" DefaultValue="#ff505050" DestAttribName="description_text_color" DestQualifiers="" UID="45-32-4" ValueRef="1-3-3-D" ValueType="TextColor" />
+        <Property Comment="Dialog summary list text color" DefaultValue="#ff8c8c8c" DestAttribName="description_sub_list_text_color" DestQualifiers="" UID="45-38-8" ValueRef="1-9-9" ValueType="TextColor" />
+        <Property Comment="Grouping sub header divider color" DefaultValue="#ff979797" DestAttribName="grouping_sub_header_point_color" UID="45-38-9" ValueRef="1-19-4" ValueType="TintColor" />
+        <Property Comment="Screen flash notification color icon stroke color" DefaultValue="#ffd4d4d4" DestAttribName="screen_flash_color_button_inner_circle_stroke_color" UID="45-38-10" ValueRef="1-7-1" ValueType="TintColor" />
+        <Property Comment="functional green color" DefaultValue="#ff14a866" DestAttribName="base_functional_green_color" DestQualifiers="" UID="45-41-1" ValueRef="1-17-1" ValueType="TintColor" />
+        <Property Comment="Add icon image" DefaultValue="" DestAttribName="drawable_tw_list_icon_add" DestQualifiers="" ImageSize="32X32" UID="45-41-2" ValueRef="1-17-2" ValueType="Image" />
+        <Property Comment="functional red color" DefaultValue="#ffdb332a" DestAttribName="base_functional_red_color" DestQualifiers="" UID="45-41-3" ValueRef="1-17-3" ValueType="TintColor" />
+        <Property Comment="delete icon image" DefaultValue="" DestAttribName="drawable_tw_list_icon_delete" DestQualifiers="" ImageSize="32X32" UID="45-41-4" ValueRef="1-17-4" ValueType="Image" />
+        <Property Comment="Level slider label text color" DefaultValue="#ff4d4d4d" DestAttribName="slider_dialog_label_text_color" DestQualifiers="" UID="45-43-4" ValueRef="1-3-3" ValueType="TextColor" />
+        <Property Comment="Level bar mark color" DefaultValue="#ff9c9c9c" DestAttribName="center_marker_seekbar_circle_marker_color" DestQualifiers="" UID="45-43-7" ValueRef="24-B" ValueType="BgColor" />
+        <Property Comment="Sound balance activated Level mark color" DefaultValue="#ff9ad2ff" DestAttribName="sound_balance_seek_bar_tick_mark_color" DestQualifiers="" UID="45-43-9" ValueRef="1-D" ValueType="BgColor" />
+        <Property Comment="Accessibility icon color" DefaultValue="#ff32965a" DestAttribName="dashboard_accessibility_color" DestQualifiers="" UID="45-46-10" ValueRef="9-3-2-4" ValueType="Color" />
+        <Property Comment="Select all checkbox on color" DefaultValue="#ff0074d4" DestAttribName="select_all_checkbox_color_selected" DestQualifiers="" UID="45-49-7" ValueRef="1-49-7" ValueType="TintColor" />
+        <Property Comment="Select all checkbox on image" DefaultValue="" DestAttribName="drawable_select_all_checkbox_selected" DestQualifiers="" ImageSize="32X32" UID="45-49-7-1" ValueRef="1-49-7-1" ValueType="Image" />
+        <Property Comment="Select all checkbox off color" DefaultValue="#ff979797" DestAttribName="select_all_checkbox_color_normal" DestQualifiers="" UID="45-49-8" ValueRef="1-49-8" ValueType="TintColor" />
+        <Property Comment="Select all checkbox off image" DefaultValue="" DestAttribName="drawable_select_all_checkbox_normal" DestQualifiers="" ImageSize="32X32" UID="45-49-8-1" ValueRef="1-49-8-1" ValueType="Image" />
+        <Property Comment="Panel background color" DefaultValue="#14000000" DestAttribName="assistant_menu_edit_lower_bg" DestQualifiers="" Opacity="10" UID="45-50-1" ValueRef="1-3-1" ValueType="BgColor" />
+        <Property Comment="Handle background color" DefaultValue="#26000000" DestAttribName="assistant_menu_edit_handle_normal" DestQualifiers="" Opacity="20" UID="45-50-2" ValueRef="1-3-1" ValueType="TintColor" />
+        <Property Comment="Handle icon color" DefaultValue="#fffafafa" DestAttribName="assistant_menu_edit_handle_icon" DestQualifiers="" UID="45-50-3" ValueRef="1-C" ValueType="TintColor" />
+        <Property Comment="Grid color" DefaultValue="#ffb0b0b0" DestAttribName="action_menu_grid_image_color" DestQualifiers="" UID="45-50-4" ValueRef="1-C" ValueType="TintColor" />
+        <Property Comment="Action menu background" DefaultValue="#fff7f7f7" DestAttribName="action_menu_background" DestQualifiers="" UID="45-53-1" ValueRef="1-9-1" ValueType="BgColor" />
+        <Property Comment="Action menu background stroke color" DefaultValue="#ffcccccc" DestAttribName="action_menu_background_stroke_color" DestQualifiers="" UID="45-53-1-2" ValueRef="1-10-2" ValueType="BgColor" />
+        <Property Comment="Action menu icon" DefaultValue="#ff454545" DestAttribName="action_menu_icon_color" DestQualifiers="" UID="45-53-2" ValueRef="1-9-3" ValueType="TintColor" />
+        <Property Comment="Action menu text" DefaultValue="#ff636363" DestAttribName="action_menu_text_color" DestQualifiers="" UID="45-53-3" ValueRef="1-9-4" ValueType="TextColor" />
+        <Property Comment="Action menu icon not select" DefaultValue="#ff505050" DestAttribName="assistant_icon_normal_color" DestQualifiers="" UID="45-53-7" ValueRef="1-9-4" ValueType="TintColor" />
+        <Property Comment="delete_btn_inner_color" DefaultValue="#fffafafa" DestAttribName="delete_btn_inner_color" DestQualifiers="" UID="45-54-6" ValueRef="1-18-1" ValueType="TintColor" />
+        <Property Comment="capture_image_stroke_color" DefaultValue="#33000000" DestAttribName="capture_image_stroke_color" DestQualifiers="" UID="45-54-7" ValueRef="1-7-2" ValueType="TintColor" />
+        <Property Comment="Sound detectors Title text color" DefaultValue="#cc000000" DestAttribName="detecting_main_text_color" DestQualifiers="" Opacity="80" UID="45-60-1" ValueRef="1-3-1" ValueType="TextColor" />
+        <Property Comment="Sound detectors recording Title text color" DefaultValue="#e6252525" DestAttribName="recording_main_text_color" DestQualifiers="" Opacity="80" UID="45-60-2" ValueRef="1-3-1" ValueType="TextColor" />
+        <Property Comment="Sound detectors recording_sub_text_color" DefaultValue="#ad252525" DestAttribName="recording_sub_text_color" DestQualifiers="" Opacity="60" UID="45-60-3" ValueRef="1-3-1" ValueType="TextColor" />
+        <Property Comment="Baby crying tint button background" DefaultValue="#ffe46c3c" DestAttribName="baby_crying_tinted_button_bg_color" DestQualifiers="" UID="45-60-5-1" ValueRef="1-7-1" ValueType="BgColor" />
+        <Property Comment="Sound detector button text color" DefaultValue="#fffafafa" DestAttribName="tinted_button_text_color" DestQualifiers="" UID="45-60-5-2" ValueRef="1-7-2" ValueType="TextColor" />
+        <Property Comment="Baby crying listening anim color" DefaultValue="#ffe46c3c" DestAttribName="listening_babycrying_anim_color" DestQualifiers="" UID="45-60-5-3" ValueRef="1-3-1" ValueType="BgColor" />
+        <Property Comment="Doorbell tint button background" DefaultValue="#ff4089ca" DestAttribName="doorbell_tinted_button_bg_color" DestQualifiers="" UID="45-60-6-1" ValueRef="1-7-1" ValueType="BgColor" />
+        <Property Comment="Doorbell listening anim color" DefaultValue="#ff0074d4" DestAttribName="listening_doorbell_anim_color" DestQualifiers="" UID="45-60-6-3" ValueRef="1-3-1" ValueType="BgColor" />
+        <Property Comment="Record tint button background" DefaultValue="#ff0074d4" DestAttribName="record_tinted_button_bg_color" DestQualifiers="" UID="45-60-7-1" ValueRef="1-7-1" ValueType="BgColor" />
+        <Property Comment="Navigation Bar Is Light/Dark" DefaultValue="true" DestAttribName="accessibility_settings_light_theme" UID="45-61-8" ValueRef="1-69-2" ValueType="Bool" />
+        <Property Comment="About page app name color" DefaultValue="#ff252525" DestAttribName="about_page_app_name_text_color" DestQualifiers="" UID="45-62-1" ValueRef="1-1-3" ValueType="TintColor" />
+        <Property Comment="About page sub text color" DefaultValue="#ff909090" DestAttribName="about_page_sub_text_color" DestQualifiers="" UID="45-62-2" ValueRef="1-1-4" ValueType="TintColor" />
+        <Property Comment="About page bg color" DefaultValue="#fffcfcfc" DestAttribName="about_page_bg_color" DestQualifiers="" UID="45-62-4" ValueRef="1-1-1" ValueType="TintColor" />
+        <Property Comment="Setting Icon" DefaultValue="" DestAttribName="ic_launcher_settings" DestQualifiers="" ImageSize="32X32" UID="45-64-1" ValueRef="8-4-1-11" ValueType="Image" />
+        <Property Comment="Inline cue text color" DefaultValue="#ff505050" DestAttribName="tip_card_text_color" DestQualifiers="" UID="45-65-4" ValueRef="1-48-4" ValueType="TintColor" />
+        <Property Comment="Functional orange color" DefaultValue="#ffef5216" DestAttribName="base_functional_orange_color" UID="45-66-1" ValueRef="1-33-1" ValueType="TintColor" />
+        <Property Comment="Badge: Icon image" DestAttribName="tw_noti_badge_mtrl" DestQualifiers="xxxhdpi" POption="NinePatch" UID="45-66-2" ValueRef="1-33-2" ValueType="BgImage" />
+        <Property Comment="Badge: Text Color" DefaultValue="#fffafafa" DestAttribName="badge_for_notification_text_color" UID="45-66-3" ValueRef="1-33-3" ValueType="TextColor" />
+        <Property Comment="Recommended for you icon bg color" DefaultValue="#ff32965a" DestAttribName="settings_list_ic_features_color" UID="45-67-4" ValueRef="9-3-2-20" ValueType="TintColor" />
+        <Property Comment="Screen reader icon bg color" DefaultValue="#ff078d9b" DestAttribName="settings_list_ic_screen_color" UID="45-67-5" ValueRef="9-3-2-4" ValueType="TintColor" />
+        <Property Comment="Visibility enhancements icon bg color" DefaultValue="#ff32965a" DestAttribName="setting_list_ic_visibility_color" UID="45-67-6" ValueRef="9-3-2-3" ValueType="TintColor" />
+        <Property Comment="Hearing enhancements icon bg color" DefaultValue="#ff6e6ed2" DestAttribName="setting_list_ic_hearing_color" UID="45-67-7" ValueRef="9-3-2-2" ValueType="TintColor" />
+        <Property Comment="Interaction icon bg color" DefaultValue="#ff2eaa9b" DestAttribName="setting_list_ic_interaction_color" UID="45-67-8" ValueRef="9-3-2-4" ValueType="TintColor" />
+        <Property Comment="Advanced icon bg color" DefaultValue="#fffb8e0e" DestAttribName="setting_list_ic_advanced_color" UID="45-67-9" ValueRef="9-3-2-3" ValueType="TintColor" />
+        <Property Comment="Installed services icon bg color" DefaultValue="#ffe17282" DestAttribName="setting_list_ic_installed_color" UID="45-67-10" ValueRef="9-3-2-2" ValueType="TintColor" />
+        <Property Comment="About accessibility icon bg color" DefaultValue="#ff7e7e7e" DestAttribName="setting_list_ic_about_color" UID="45-67-11" ValueRef="9-3-2-23" ValueType="TintColor" />
+        <Property Comment="Contact us icon bg color" DefaultValue="#ff5d7e95" DestAttribName="setting_list_ic_contact_color" UID="45-67-12" ValueRef="9-3-2-29" ValueType="TintColor" />
+        <Property Comment="Relative link layout background color" DefaultValue="#0f0381fe" DestAttribName="relative_link_layout_background_color" UID="45-68-1" ValueRef="1-18-1" ValueType="TintColor" />
+        <Property Comment="No item text color" DefaultValue="#ff252525" DestAttribName="no_item_title_text_color" UID="45-68-3" ValueRef="1-1-3" ValueType="TextColor" />
+        <Property Comment="No item sub text color" DefaultValue="#ff252525" DestAttribName="no_item_sub_text_color" UID="45-68-4" ValueRef="1-1-4" ValueType="TextColor" />
+        <Property Comment="List setting icon tint color" DefaultValue="#ff9c9c9c" DestAttribName="base_app_list_setting_icon_color" UID="45-68-5" ValueRef="1-C" ValueType="TintColor" />
+        <Property Comment="Colored button text color" DefaultValue="#fffafafa" DestAttribName="colored_button_text_color" UID="45-68-6" ValueRef="1-E" ValueType="TextColor" />
+    </AppMetaData>
+    <AppMetaData Name="Talkback" TargetApi="30" TargetPackageName="com.samsung.android.accessibility.talkback" VersionCode="1" VersionName="1.0">
+        <Include RefName="SESL" />
+    </AppMetaData>
+</ThemeMetaData>

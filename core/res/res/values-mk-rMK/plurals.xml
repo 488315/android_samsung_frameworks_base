@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="SDcardBlockUnmount_message">
+        <item quantity="other">Вашиот телефон е нестабилен затоа што е отстранета SD-картичка на којашто имало инсталирани апликации. Вашиот телефон ќе се рестартира за %d секунди за да се врати во нормала. Зачувајте ги сите незачувани податоци пред да се рестартира телефонот.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Вашиот телефон е нестабилен затоа што е отстранета SD-картичка на којашто имало инсталирани апликации. Вашиот телефон ќе се рестартира за %d секунда за да се врати во нормала. Зачувајте ги сите незачувани податоци пред да се рестартира телефонот.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="SDcardBlockUnmount_title">
+        <item quantity="other">Вашиот тел. ќе се рест. за %d секунди</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Вашиот тел. ќе се рест. за %d секунда</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_phone">
+        <item quantity="other">%d апликации се затворија автоматски затоа што предизвикуваа Вашиот телефон да се прегрее. Можете да ги отворите повторно подоцна откако телефонот ќе се изладат.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d апликација се затвори автоматски затоа што предизвикуваше Вашиот телефон да се прегрее. Можете да ја отворите повторно подоцна откако телефонот ќе се излади.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_tablet">
+        <item quantity="other">%d апликации се затворија автоматски затоа што предизвикуваа Вашиот таблет да се прегрее. Можете да ги отворите повторно подоцна откако таблетот ќе се излади.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d апликација се затвори автоматски затоа што предизвикуваше Вашиот таблет да се прегрее. Можете да ги отворите повторно подоцна откако таблетот ќе се излади.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_title_v2">
+        <item quantity="other">%d апликации се затворени</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d апликација е затворена</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="dex_max_count_text">
+        <item quantity="other">Не може да се прикажат повеќе од %d апликации на екранот истовремено. Најстарата апликација е минимизирана.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Не може да се прикаже повеќе од %d апликација на екранот истовремено. Најстарата апликација е минимизирана.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="hot_key_guide_message">
+        <item quantity="other">Отворете ја апликацијата што сакате да ја назначите, а потоа притиснете и држете го копчето за апликација %d секунди.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Отворете ја апликацијата што сакате да ја назначите, а потоа притиснете и држете го копчето за апликација %d секунда.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_phone">
+        <item quantity="other">%1$s предизвикува прегревање на телефонот. Автоматски ќе се затвори за %2$d секунди.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s предизвикува прегревање на телефонот. Автоматски ќе се затвори за %2$d секунда.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_tablet">
+        <item quantity="other">%1$s предизвикува прегревање на таблетот. Автоматски ќе се затвори за %2$d секунди.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s предизвикува прегревање на таблетот. Автоматски ќе се затвори за %2$d секунда.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="maintenance_mode_backup_cloud_menu_sub_textview_message_default">
+        <item quantity="other">Архивирајте неограничени податоци на Samsung Cloud до %d дена или вратете ги податоците што сте ги архивирале.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Архивирајте неограничени податоци на Samsung Cloud до %d ден или вратете ги податоците што сте ги архивирале.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_phone">
+        <item quantity="other">%1$s предизвикува Вашиот телефон да се прегрее. Можете да го затворите сега или ќе се затвори автоматски за %2$d секунди.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s предизвикува Вашиот телефон да се прегрее. Можете да го затворите сега или ќе се затвори автоматски за %2$d секунда.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_tablet">
+        <item quantity="other">%1$s предизвикува Вашиот таблет да се прегрее. Можете да го затворите сега или ќе се затвори автоматски за %2$d секунди.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s предизвикува Вашиот таблет да се прегрее. Можете да го затворите сега или ќе се затвори автоматски за %2$d секунда.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sem_chooser_preview_items">
+        <item quantity="other">%d ставки</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d ставка</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_hours">
+        <item quantity="other">%d часа</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d час</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_minutes">
+        <item quantity="other">%d минути</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d минута</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

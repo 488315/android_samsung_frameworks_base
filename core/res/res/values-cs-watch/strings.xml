@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="global_action_emergency">Tísňové volání</string>
+    <string name="permgrouplab_sensors">Senzory</string>
+    <string name="reboot_to_update_prepare">Příprava na aktualizaci</string>
+    <string name="reboot_to_update_title">Aktualizace systému Wear OS</string>
+    <string name="select_input_method">Vyberte metodu zadávání</string>
+</resources>

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="SDcardBlockUnmount_message">
+        <item quantity="other">Teie telefon on ebastabiilne, kuna rakendustega SD-kaart eemaldati. Telefon taaskäivitub %d sekundi pärast, et taastada tavaseisund. Salvestage kõik salvestamata andmed enne, kui telefon taaskäivitub.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Teie telefon on ebastabiilne, kuna rakendustega SD-kaart eemaldati. Telefon taaskäivitub %d sekundi pärast, et taastada tavaseisund. Salvestage kõik salvestamata andmed enne, kui telefon taaskäivitub.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="SDcardBlockUnmount_title">
+        <item quantity="other">Telefon taaskäivitub %d s pärast</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Telefon taaskäivitub %d s pärast</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_phone">
+        <item quantity="other">%d rakendust suleti automaatselt, kuna need põhjustasid telefonis ülekuumenemist. Te saate need hiljem taas avada, kui telefon on jahtunud.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d rakendus suleti automaatselt, kuna see põhjustas telefonis ülekuumenemist. Te saate selle hiljem taas avada, kui telefon on jahtunud.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_tablet">
+        <item quantity="other">%d rakendust suleti automaatselt, kuna need põhjustasid tahvelseadme ülekuumenemist. Te saate need hiljem taas avada, kui tahvelseade on jahtunud.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d rakendus suleti automaatselt, kuna see põhjustas tahvelseadme ülekuumenemist. Te saate selle hiljem taas avada, kui tahvelseade on jahtunud.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_title_v2">
+        <item quantity="other">%d rakendust on suletud</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d rakendus on suletud</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="dex_max_count_text">
+        <item quantity="other">Ekraanil ei saa kuvada korraga rohkem kui %d rakendust. Vanim rakendus on minimeeritud.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Ekraanil ei saa kuvada korraga rohkem kui %d rakendust. Vanim rakendus on minimeeritud.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="hot_key_guide_message">
+        <item quantity="other">Avage rakendus, mida soovite määrata, seejärel vajutage ja hoidke rakenduse klahvi %d sekundit.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Avage rakendus, mida soovite määrata, seejärel vajutage ja hoidke rakenduse klahvi %d sekund.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_phone">
+        <item quantity="other">%1$s põhjustab telefoni ülekuumenemist. See suletakse automaatselt %2$d sekundi pärast.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s põhjustab telefoni ülekuumenemist. See suletakse automaatselt %2$d sekundi pärast.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_tablet">
+        <item quantity="other">%1$s põhjustab tahvelseadme ülekuumenemist. See suletakse automaatselt %2$d sekundi pärast.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s põhjustab tahvelseadme ülekuumenemist. See suletakse automaatselt %2$d sekundi pärast.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="maintenance_mode_backup_cloud_menu_sub_textview_message_default">
+        <item quantity="other">Varundage piiramatult andmeid Samsung Cloudi kuni %d päevaks või taastage varundatud andmed.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Varundage piiramatult andmeid Samsung Cloudi kuni %d päevaks või taastage varundatud andmed.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_phone">
+        <item quantity="other">%1$s põhjustab telefoni ülekuumenemist. Te saate selle praegu sulgeda või see suletakse automaatselt %2$d sekundi pärast.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s põhjustab telefoni ülekuumenemist. Te saate selle praegu sulgeda või see suletakse automaatselt %2$d sekundi pärast.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_tablet">
+        <item quantity="other">%1$s põhjustab tahvelseadme ülekuumenemist. Te saate selle praegu sulgeda või see suletakse automaatselt %2$d sekundi pärast.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s põhjustab tahvelseadme ülekuumenemist. Te saate selle praegu sulgeda või see suletakse automaatselt %2$d sekundi pärast.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sem_chooser_preview_items">
+        <item quantity="other">%d üksust</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d üksus</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_hours">
+        <item quantity="other">%d tundi</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d tund</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_minutes">
+        <item quantity="other">%d minutit</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d minut</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

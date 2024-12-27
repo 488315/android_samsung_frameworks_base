@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="SDcardBlockUnmount_message">
+        <item quantity="other">Telefon działa niestabilnie, ponieważ karta pamięci, na której zainstalowano aplikacje, została usunięta. Telefon uruchomi się ponownie ze %d sekund, aby powrócić do normalnego stanu. Zapisz niezapisane dane przed ponownym uruchomieniem telefonu.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Telefon działa niestabilnie, ponieważ karta pamięci, na której zainstalowano aplikacje, została usunięta. Telefon uruchomi się ponownie ze %d sekundę, aby powrócić do normalnego stanu. Zapisz niezapisane dane przed ponownym uruchomieniem telefonu.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Telefon działa niestabilnie, ponieważ karta pamięci, na której zainstalowano aplikacje, została usunięta. Telefon uruchomi się ponownie ze %d sekundy, aby powrócić do normalnego stanu. Zapisz niezapisane dane przed ponownym uruchomieniem telefonu.</item>
+        <item quantity="many">Telefon działa niestabilnie, ponieważ karta pamięci, na której zainstalowano aplikacje, została usunięta. Telefon uruchomi się ponownie ze %d sekund, aby powrócić do normalnego stanu. Zapisz niezapisane dane przed ponownym uruchomieniem telefonu.</item>
+    </plurals>
+    <plurals name="SDcardBlockUnmount_title">
+        <item quantity="other">Telefon uruchomi się ponownie za %d s</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Telefon uruchomi się ponownie za %d s</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Telefon uruchomi się ponownie za %d s</item>
+        <item quantity="many">Telefon uruchomi się ponownie za %d s</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_phone">
+        <item quantity="other">%d aplikacji zostało zamkniętych automatycznie, ponieważ powodowały przegrzewanie telefonu. Możesz ponownie otworzyć je później po ostygnięciu telefonu.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d aplikacja została zamknięta automatycznie, ponieważ powodowała przegrzewanie telefonu. Możesz ponownie otworzyć ją później po ostygnięciu telefonu.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">%d aplikacje zostały zamknięte automatycznie, ponieważ powodowały przegrzewanie telefonu. Możesz ponownie otworzyć je później po ostygnięciu telefonu.</item>
+        <item quantity="many">%d aplikacji zostało zamkniętych automatycznie, ponieważ powodowały przegrzewanie telefonu. Możesz ponownie otworzyć je później po ostygnięciu telefonu.</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_tablet">
+        <item quantity="other">%d aplikacji zostało zamkniętych automatycznie, ponieważ powodowały przegrzewanie się tabletu. Możesz ponownie otworzyć je później po ostygnięciu tabletu.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d aplikacja została zamknięta automatycznie, ponieważ powodowała przegrzewanie się tabletu. Możesz ponownie otworzyć ją później po ostygnięciu tabletu.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">%d aplikacje zostały zamknięte automatycznie, ponieważ powodowały przegrzewanie się tabletu. Możesz ponownie otworzyć je później po ostygnięciu tabletu.</item>
+        <item quantity="many">%d aplikacji zostało zamkniętych automatycznie, ponieważ powodowały przegrzewanie się tabletu. Możesz ponownie otworzyć je później po ostygnięciu tabletu.</item>
+    </plurals>
+    <plurals name="app_kills_title_v2">
+        <item quantity="other">Zamknięto %d aplikacji</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Zamknięto %d aplikację</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Zamknięto %d aplikacje</item>
+        <item quantity="many">Zamknięto %d aplikacji</item>
+    </plurals>
+    <plurals name="dex_max_count_text">
+        <item quantity="other">Nie można wyświetlić więcej niż %d aplikacji na ekranie jednocześnie. Zminimalizowano najstarszą aplikację.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Nie można wyświetlić więcej niż %d aplikacji na ekranie jednocześnie. Zminimalizowano najstarszą aplikację.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Nie można wyświetlić więcej niż %d aplikacji na ekranie jednocześnie. Zminimalizowano najstarszą aplikację.</item>
+        <item quantity="many">Nie można wyświetlić więcej niż %d aplikacji na ekranie jednocześnie. Zminimalizowano najstarszą aplikację.</item>
+    </plurals>
+    <plurals name="hot_key_guide_message">
+        <item quantity="other">Otwórz aplikację, którą chcesz przypisać, a następnie naciśnij klawisz aplikacji i przytrzymaj go przez %d sekundy.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Otwórz aplikację, którą chcesz przypisać, a następnie naciśnij klawisz aplikacji i przytrzymaj go przez %d sekundę.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Otwórz aplikację, którą chcesz przypisać, a następnie naciśnij klawisz aplikacji i przytrzymaj go przez %d sekundy.</item>
+        <item quantity="many">Otwórz aplikację, którą chcesz przypisać, a następnie naciśnij klawisz aplikacji i przytrzymaj go przez %d sekund.</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_phone">
+        <item quantity="other">Aplikacja %1$s powoduje przegrzewanie się telefonu. Zostanie automatycznie zamknięta za %2$d sekundy.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Aplikacja %1$s powoduje przegrzewanie się telefonu. Zostanie automatycznie zamknięta za %2$d sekundę.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Aplikacja %1$s powoduje przegrzewanie się telefonu. Zostanie automatycznie zamknięta za %2$d sekundy.</item>
+        <item quantity="many">Aplikacja %1$s powoduje przegrzewanie się telefonu. Zostanie automatycznie zamknięta za %2$d sekund.</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_tablet">
+        <item quantity="other">Aplikacja %1$s powoduje przegrzewanie się tabletu. Zostanie automatycznie zamknięta za %2$d sekundy.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Aplikacja %1$s powoduje przegrzewanie się tabletu. Zostanie automatycznie zamknięta za %2$d sekundę.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Aplikacja %1$s powoduje przegrzewanie się tabletu. Zostanie automatycznie zamknięta za %2$d sekundy.</item>
+        <item quantity="many">Aplikacja %1$s powoduje przegrzewanie się tabletu. Zostanie automatycznie zamknięta za %2$d sekund.</item>
+    </plurals>
+    <plurals name="maintenance_mode_backup_cloud_menu_sub_textview_message_default">
+        <item quantity="other">Twórz nieograniczone kopie zapasowe danych w Samsung Cloud do %d dnia lub przywracaj dane, których kopie zapasowe zostały utworzone.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Twórz nieograniczone kopie zapasowe danych w Samsung Cloud do %d dnia lub przywracaj dane, których kopie zapasowe zostały utworzone.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Twórz nieograniczone kopie zapasowe danych w Samsung Cloud do %d dni lub przywracaj dane, których kopie zapasowe zostały utworzone.</item>
+        <item quantity="many">Twórz nieograniczone kopie zapasowe danych w Samsung Cloud do %d dni lub przywracaj dane, których kopie zapasowe zostały utworzone.</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_phone">
+        <item quantity="other">Aplikacja %1$s powoduje przegrzewanie się telefonu. Możesz zamknąć ją teraz lub zostanie zamknięta automatycznie za %2$d sekund.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Aplikacja %1$s powoduje przegrzewanie się telefonu. Możesz zamknąć ją teraz lub zostanie zamknięta automatycznie za %2$d sekundę.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Aplikacja %1$s powoduje przegrzewanie się telefonu. Możesz zamknąć ją teraz lub zostanie zamknięta automatycznie za %2$d sekundy.</item>
+        <item quantity="many">Aplikacja %1$s powoduje przegrzewanie się telefonu. Możesz zamknąć ją teraz lub zostanie zamknięta automatycznie za %2$d sekund.</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_tablet">
+        <item quantity="other">Aplikacja %1$s powoduje przegrzewanie się tabletu. Możesz zamknąć ją teraz lub zostanie zamknięta automatycznie za %2$d sekund.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Aplikacja %1$s powoduje przegrzewanie się tabletu. Możesz zamknąć ją teraz lub zostanie zamknięta automatycznie za %2$d sekundę.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Aplikacja %1$s powoduje przegrzewanie się tabletu. Możesz zamknąć ją teraz lub zostanie zamknięta automatycznie za %2$d sekundy.</item>
+        <item quantity="many">Aplikacja %1$s powoduje przegrzewanie się tabletu. Możesz zamknąć ją teraz lub zostanie zamknięta automatycznie za %2$d sekund.</item>
+    </plurals>
+    <plurals name="pinpuk_attempts">
+        <item quantity="other">Masz jeszcze %d próby, zanim karta SIM zostanie zablokowana.</item>
+        <item quantity="one">Masz jeszcze %d próbę, zanim karta SIM zostanie zablokowana.</item>
+    </plurals>
+    <plurals name="sem_chooser_preview_items">
+        <item quantity="other">%d elementów</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d element</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">%d elementy</item>
+        <item quantity="many">%d elementów</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_hours">
+        <item quantity="other">%d godziny</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d godzina</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">%d godziny</item>
+        <item quantity="many">%d godzin</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_minutes">
+        <item quantity="other">%d minut</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d minuta</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">%d minuty</item>
+        <item quantity="many">%d minut</item>
+    </plurals>
+</resources>

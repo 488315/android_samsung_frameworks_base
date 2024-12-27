@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="global_action_emergency">Thirrja e urgjencës</string>
+    <string name="permgrouplab_sensors">Sensorët</string>
+    <string name="reboot_to_update_prepare">Po përgatitet për përditësimin</string>
+    <string name="reboot_to_update_title">Përditësimi i sistemit Wear OS</string>
+    <string name="select_input_method">Zgjidh hyrjen</string>
+</resources>

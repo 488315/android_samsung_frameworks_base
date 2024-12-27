@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.internal.widget.MessagingLayout android:id="@id/status_bar_latest_event_content" android:tag="messaging" android:clipChildren="false" android:clipToPadding="false" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <include layout="@layout/notification_template_group_header_expanded" />
+    <com.android.internal.widget.RemeasuringLinearLayout android:layout_gravity="top" android:orientation="vertical" android:id="@id/notification_action_list_margin_target" android:clipChildren="false" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <com.android.internal.widget.RemeasuringLinearLayout android:layout_gravity="top" android:orientation="vertical" android:id="@id/notification_main_column" android:clipChildren="false" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/notification_content_margin_top" android:layout_weight="1.0" android:layout_marginEnd="@dimen/notification_content_margin_end">
+            <com.android.internal.widget.MessagingLinearLayout android:id="@id/notification_messaging" android:clipChildren="false" android:layout_width="fill_parent" android:layout_height="wrap_content" android:spacing="@dimen/notification_messaging_spacing" />
+        </com.android.internal.widget.RemeasuringLinearLayout>
+        <include android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/notification_smart_reply_container_margin_top" android:layout_marginStart="@dimen/notification_content_margin_start" android:layout_marginEnd="@dimen/notification_content_margin_end" layout="@layout/notification_template_smart_reply_container" />
+        <include layout="@layout/notification_material_action_list" />
+    </com.android.internal.widget.RemeasuringLinearLayout>
+    <include layout="@layout/notification_template_right_icon" />
+</com.android.internal.widget.MessagingLayout>

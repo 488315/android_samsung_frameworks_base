@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Switch android:layout_gravity="center" android:id="@id/switch_widget" android:background="@null" android:focusable="false" android:clickable="false" android:layout_width="40.0dip" android:layout_height="40.0dip" android:thumb="@drawable/switch_thumb_watch_default_dark_anim" android:track="@drawable/watch_switch_track_mtrl" android:switchMinWidth="40.0dip" android:thumbTint="@color/switch_thumb_watch_default_dark" android:thumbTintMode="multiply" android:trackTint="@color/switch_track_watch_default_dark"
+  xmlns:android="http://schemas.android.com/apk/res/android" />

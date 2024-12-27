@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item type="dimen" name="config_alertDialogSelectionScrollOffset">@dimen/screen_percentage_15</item>
+    <item type="dimen" name="dialog_list_padding_bottom_no_buttons">@dimen/screen_percentage_15</item>
+    <item type="dimen" name="dialog_list_padding_top_no_title">@dimen/screen_percentage_15</item>
+    <item type="dimen" name="dialog_padding_material">@dimen/screen_percentage_15</item>
+    <item type="dimen" name="list_item_padding_end_material">@dimen/screen_percentage_10</item>
+    <item type="dimen" name="list_item_padding_horizontal_material">@dimen/screen_percentage_15</item>
+    <item type="dimen" name="list_item_padding_start_material">@dimen/screen_percentage_15</item>
+    <item type="dimen" name="preference_fragment_padding_vertical_material">@dimen/screen_percentage_15</item>
+    <dimen name="select_dialog_drawable_padding_start_material">8.0dip</dimen>
+    <item type="dimen" name="select_dialog_padding_start_material">@dimen/screen_percentage_15</item>
+    <dimen name="input_extract_action_button_height">32.0dip</dimen>
+    <dimen name="input_extract_action_button_width">32.0dip</dimen>
+    <dimen name="input_extract_action_icon_padding">5.0dip</dimen>
+    <item type="dimen" name="indeterminate_progress_alpha_01">0.0</item>
+    <item type="dimen" name="indeterminate_progress_alpha_02">0.0</item>
+    <item type="dimen" name="indeterminate_progress_alpha_03">0.0</item>
+    <item type="dimen" name="indeterminate_progress_alpha_04">0.0</item>
+    <item type="dimen" name="indeterminate_progress_alpha_05">0.0</item>
+    <item type="dimen" name="indeterminate_progress_alpha_06">0.0</item>
+    <item type="dimen" name="indeterminate_progress_alpha_07">0.05856</item>
+    <item type="dimen" name="indeterminate_progress_alpha_08">0.11584</item>
+    <item type="dimen" name="indeterminate_progress_alpha_09">0.1718</item>
+    <item type="dimen" name="indeterminate_progress_alpha_10">0.22639</item>
+    <item type="dimen" name="indeterminate_progress_alpha_11">0.2796</item>
+    <item type="dimen" name="indeterminate_progress_alpha_12">0.33137</item>
+    <item type="dimen" name="indeterminate_progress_alpha_13">0.38167</item>
+    <item type="dimen" name="indeterminate_progress_alpha_14">0.43045</item>
+    <item type="dimen" name="indeterminate_progress_alpha_15">0.47768</item>
+    <item type="dimen" name="indeterminate_progress_alpha_16">0.52329</item>
+    <item type="dimen" name="indeterminate_progress_alpha_17">0.56726</item>
+    <item type="dimen" name="indeterminate_progress_alpha_18">0.60952</item>
+    <item type="dimen" name="indeterminate_progress_alpha_19">0.65002</item>
+    <item type="dimen" name="indeterminate_progress_alpha_20">0.68871</item>
+    <item type="dimen" name="indeterminate_progress_alpha_21">0.72551</item>
+    <item type="dimen" name="indeterminate_progress_alpha_22">0.76038</item>
+    <item type="dimen" name="indeterminate_progress_alpha_23">0.79324</item>
+    <item type="dimen" name="indeterminate_progress_alpha_24">0.82403</item>
+    <item type="dimen" name="indeterminate_progress_alpha_25">0.85266</item>
+    <item type="dimen" name="indeterminate_progress_alpha_26">0.87906</item>
+    <item type="dimen" name="indeterminate_progress_alpha_27">0.90313</item>
+    <item type="dimen" name="indeterminate_progress_alpha_28">0.9248</item>
+    <item type="dimen" name="indeterminate_progress_alpha_29">0.94397</item>
+    <item type="dimen" name="indeterminate_progress_alpha_30">0.96053</item>
+    <item type="dimen" name="indeterminate_progress_alpha_31">0.97436</item>
+    <item type="dimen" name="indeterminate_progress_alpha_32">0.98536</item>
+    <item type="dimen" name="indeterminate_progress_alpha_33">0.99339</item>
+    <item type="dimen" name="indeterminate_progress_alpha_34">0.99832</item>
+    <item type="dimen" name="indeterminate_progress_alpha_35">1.0</item>
+    <item type="dimen" name="indeterminate_progress_alpha_36">1.0</item>
+    <item type="dimen" name="indeterminate_progress_alpha_37">0.83128</item>
+    <item type="dimen" name="indeterminate_progress_alpha_38">0.70436</item>
+    <item type="dimen" name="indeterminate_progress_alpha_39">0.60258</item>
+    <item type="dimen" name="indeterminate_progress_alpha_40">0.51807</item>
+    <item type="dimen" name="indeterminate_progress_alpha_41">0.44637</item>
+    <item type="dimen" name="indeterminate_progress_alpha_42">0.38467</item>
+    <item type="dimen" name="indeterminate_progress_alpha_43">0.33105</item>
+    <item type="dimen" name="indeterminate_progress_alpha_44">0.28413</item>
+    <item type="dimen" name="indeterminate_progress_alpha_45">0.24289</item>
+    <item type="dimen" name="indeterminate_progress_alpha_46">0.20656</item>
+    <item type="dimen" name="indeterminate_progress_alpha_47">0.1745</item>
+    <item type="dimen" name="indeterminate_progress_alpha_48">0.14622</item>
+    <item type="dimen" name="indeterminate_progress_alpha_49">0.1213</item>
+    <item type="dimen" name="indeterminate_progress_alpha_50">0.09942</item>
+    <item type="dimen" name="indeterminate_progress_alpha_51">0.08027</item>
+    <item type="dimen" name="indeterminate_progress_alpha_52">0.06363</item>
+    <item type="dimen" name="indeterminate_progress_alpha_53">0.04927</item>
+    <item type="dimen" name="indeterminate_progress_alpha_54">0.03702</item>
+    <item type="dimen" name="indeterminate_progress_alpha_55">0.02671</item>
+    <item type="dimen" name="indeterminate_progress_alpha_56">0.01822</item>
+    <item type="dimen" name="indeterminate_progress_alpha_57">0.0114</item>
+    <item type="dimen" name="indeterminate_progress_alpha_58">0.00616</item>
+    <item type="dimen" name="indeterminate_progress_alpha_59">0.00239</item>
+    <item type="dimen" name="indeterminate_progress_alpha_60">0.0</item>
+</resources>

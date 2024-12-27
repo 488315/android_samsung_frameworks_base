@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="SDcardBlockUnmount_message">
+        <item quantity="other">ទូរសព្ទ​របស់​អ្នក​អស្ថិរភាព ដោយសារ​កាត SD ដែល​បាន​ដំឡើង​កម្មវិធី​លើ​នោះ ត្រូវ​បាន​ដោះ​ចេញ។ ទូរសព្ទ​របស់​អ្នក​នឹង​ចាប់ផ្ដើម​ឡើងវិញ​ក្នុង​ពេល %d វិនាទី ដើម្បី​ត្រឡប់​ទៅ​ធម្មតា​វិញ។ រក្សាទុក​ទិន្នន័យ​ដែល​មិន​បាន​រក្សាទុក​នានា មុនពេល​ទូរសព្ទ​ចាប់ផ្ដើម​ឡើងវិញ។</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="SDcardBlockUnmount_title">
+        <item quantity="other">ទូរសព្ទ​របស់​អ្នក​នឹង​ចាប់ផ្ដើម​ឡើងវិញ​ក្នុង​ពេល %d វិនាទី​ទៀត</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_phone">
+        <item quantity="other">កម្មវិធី %d ត្រូវ​បាន​បិទ​ដោយ​ស្វ័យប្រវត្តិ ដោយសារ​ពួកវា​កំពុង​ធ្វើ​ឲ្យ​ទូរសព្ទ​របស់​អ្នក​ឡើង​កម្ដៅ​ជ្រុល។ អ្នក​អាច​បើក​ពួកវា​ម្ដងទៀត​ពេលក្រោយ បន្ទាប់​ពី​ទូរសព្ទ​របស់​អ្នក​ចុះ​ត្រជាក់។</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_tablet">
+        <item quantity="other">កម្មវិធី %d ត្រូវ​បាន​បិទ​ដោយ​ស្វ័យប្រវត្តិ ដោយសារ​ពួកវា​កំពុង​ធ្វើ​ឲ្យ​ថេប្លិត​របស់​អ្នក​ឡើង​កម្ដៅ​ជ្រុល។ អ្នក​អាច​បើក​ពួកវា​ម្ដងទៀត​ពេលក្រោយ បន្ទាប់​ពី​ថេប្លិត​របស់​អ្នក​ចុះ​ត្រជាក់។</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_title_v2">
+        <item quantity="other">បាន​បិទ​កម្មវិធី %d</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="dex_max_count_text">
+        <item quantity="other">មិន​អាច​បង្ហាញ​កម្មវិធី​លើសពី %d លើ​អេក្រង់ ក្នុង​ពេល​តែមួយ។ បាន​បង្រួម​កម្មវិធី​ចាស់​បំផុត។</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="hot_key_guide_message">
+        <item quantity="other">បើក​កម្មវិធី​ដែល​អ្នក​ចង់​ចាត់តាំង រួច​ចុច​ឲ្យ​ជាប់​លើ​គ្រាប់ចុច​កម្មវិធី​នោះ %d វិនាទី។</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_phone">
+        <item quantity="other">%1$s កំពុង​ធ្វើ​ឲ្យ​ទូរសព្ទ​អ្នក​ឡើង​កម្ដៅ​ជ្រុល។ វា​នឹង​ត្រូវ​បាន​បិទ​ដោយ​ស្វ័យប្រវត្តិ %2$d វិនាទី​ទៀត។</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_tablet">
+        <item quantity="other">%1$s កំពុង​ធ្វើ​ឲ្យ​ថេប្លិត​អ្នក​ឡើង​កម្ដៅ​ជ្រុល។ វា​នឹង​ត្រូវ​បាន​បិទ​ដោយ​ស្វ័យប្រវត្តិ %2$d វិនាទី​ទៀត។</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="maintenance_mode_backup_cloud_menu_sub_textview_message_default">
+        <item quantity="other">ចម្លងទុក​ទិន្នន័យ​គ្មាន​ដែនកំណត់​ទៅ Samsung Cloud ដល់ទៅ %dថ្ងៃ ឬ​ស្ដារ​ទិន្នន័យ​ដែល​អ្នក​បាន​ចម្លងទុក។</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_phone">
+        <item quantity="other">%1$s កំពុង​ធ្វើ​ឲ្យ​ទូរសព្ទ​របស់​អ្នក​ឡើង​កម្ដៅ​ជ្រុល។ អ្នក​អាច​បិទ​វា​ឥឡូវ ឬ​ក៏​វា​នឹង​ត្រូវ​បាន​បិទ​ដោយ​ស្វ័យប្រវត្តិ​ក្នុង​ពេល %2$d វិនាទី​ទៀត។</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_tablet">
+        <item quantity="other">%1$s កំពុង​ធ្វើ​ឲ្យ​ថេប្លិត​របស់​អ្នក​ឡើង​កម្ដៅ​ជ្រុល។ អ្នក​អាច​បិទ​វា​ឥឡូវ ឬ​ក៏​វា​នឹង​ត្រូវ​បាន​បិទ​ដោយ​ស្វ័យប្រវត្តិ​ក្នុង​ពេល %2$d វិនាទី​ទៀត។</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sem_chooser_preview_items">
+        <item quantity="other">ធាតុ %d</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_hours">
+        <item quantity="other">%d ម៉ោង</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_minutes">
+        <item quantity="other">%d នាទី</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

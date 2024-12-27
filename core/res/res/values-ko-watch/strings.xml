@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="global_action_emergency">긴급 SOS</string>
+    <string name="permgrouplab_sensors">센서</string>
+    <string name="reboot_to_update_prepare">업데이트 준비 중</string>
+    <string name="reboot_to_update_title">Wear OS 시스템 업데이트</string>
+    <string name="select_input_method">입력 선택</string>
+</resources>

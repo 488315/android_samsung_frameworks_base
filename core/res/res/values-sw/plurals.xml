@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="hot_key_guide_message">
+        <item quantity="other">Open the app you want to assign, then press and hold the app key for %d seconds.</item>
+        <item quantity="zero">Open the app you want to assign, then press and hold the app key for %d seconds.</item>
+        <item quantity="one">Open the app you want to assign, then press and hold the app key for %d second.</item>
+        <item quantity="two">Open the app you want to assign, then press and hold the app key for %d seconds.</item>
+        <item quantity="few">Open the app you want to assign, then press and hold the app key for %d seconds.</item>
+        <item quantity="many">Open the app you want to assign, then press and hold the app key for %d seconds.</item>
+    </plurals>
+    <plurals name="pinpuk_attempts">
+        <item quantity="other">Umebakisha majaribio %d kabla SIM haijafungwa.</item>
+        <item quantity="one">Umebakisha majaribio %d kabla SIM haijafungwa.</item>
+    </plurals>
+</resources>

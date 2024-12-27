@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="center" android:orientation="vertical" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="120.0dip"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView android:textColor="@color/sem_resolver_top_panel_text_color" android:gravity="center" android:id="@id/chooser_row_text_option" android:layout_width="fill_parent" android:layout_height="wrap_content" android:fontFamily="sec-roboto-light" android:paddingStart="20.0dip" android:paddingEnd="20.0dip" />
+</LinearLayout>

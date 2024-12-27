@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="SDcardBlockUnmount_message">
+        <item quantity="other">Η λειτουργία του τηλεφώνου σας είναι ασταθής επειδή αφαιρέθηκε μια κάρτα SD που περιείχε εγκατεστημένες εφαρμογές. Το τηλέφωνο θα επανεκκινηθεί σε %d δευτερόλεπτα για να επιστρέψει στην κανονική λειτουργία. Αποθηκεύστε τυχόν μη αποθηκευμένα δεδομένα πριν από την επανεκκίνηση του τηλεφώνου.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Η λειτουργία του τηλεφώνου σας είναι ασταθής επειδή αφαιρέθηκε μια κάρτα SD που περιείχε εγκατεστημένες εφαρμογές. Το τηλέφωνο θα επανεκκινηθεί σε %d δευτερόλεπτο για να επιστρέψει στην κανονική λειτουργία. Αποθηκεύστε τυχόν μη αποθηκευμένα δεδομένα πριν από την επανεκκίνηση του τηλεφώνου.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="SDcardBlockUnmount_title">
+        <item quantity="other">Επανεκκίν. τηλεφ. σε %d δευτερόλεπτα</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Επανεκκίν. τηλεφ. σε %d δευτερόλεπτο</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_phone">
+        <item quantity="other">%d εφαρμογές έκλεισαν αυτόματα επειδή προκαλούσαν υπερθέρμανση του τηλεφώνου. Μπορείτε να τις ανοίξετε ξανά αργότερα, μόλις μειωθεί η θερμοκρασία του τηλεφώνου.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d εφαρμογή έκλεισε αυτόματα επειδή προκαλούσε υπερθέρμανση του τηλεφώνου. Μπορείτε να την ανοίξετε ξανά αργότερα, μόλις μειωθεί η θερμοκρασία του τηλεφώνου.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_tablet">
+        <item quantity="other">%d εφαρμογές έκλεισαν αυτόματα επειδή προκαλούσαν υπερθέρμανση του tablet. Μπορείτε να τις ανοίξετε ξανά αργότερα, μόλις μειωθεί η θερμοκρασία του tablet.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d εφαρμογή έκλεισε αυτόματα επειδή προκαλούσε υπερθέρμανση του tablet. Μπορείτε να την ανοίξετε ξανά αργότερα, μόλις μειωθεί η θερμοκρασία του tablet.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_title_v2">
+        <item quantity="other">Έκλεισαν %d εφαρμογές</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Έκλεισε %d εφαρμογή</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="dex_max_count_text">
+        <item quantity="other">Δεν είναι δυνατή η ταυτόχρονη εμφάνιση πάνω από %d εφαρμογών στην οθόνη. Η παλαιότερη εφαρμογή ελαχιστοποιήθηκε.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Δεν είναι δυνατή η ταυτόχρονη εμφάνιση πάνω από %d εφαρμογής στην οθόνη. Η παλαιότερη εφαρμογή ελαχιστοποιήθηκε.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="hot_key_guide_message">
+        <item quantity="other">Ανοίξτε την εφαρμογή που θέλετε να αναθέσετε και, στη συνέχεια, πιέστε παρατεταμένα το πλήκτρο εφαρμογής για %d δευτερόλεπτα.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Ανοίξτε την εφαρμογή που θέλετε να αναθέσετε και, στη συνέχεια, πιέστε παρατεταμένα το πλήκτρο εφαρμογής για %d δευτερόλεπτο.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_phone">
+        <item quantity="other">Η εφαρμογή %1$s προκαλεί υπερθέρμανση του τηλεφώνου. Θα κλείσει αυτόματα σε %2$d δευτερόλεπτα.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Η εφαρμογή %1$s προκαλεί υπερθέρμανση του τηλεφώνου. Θα κλείσει αυτόματα σε %2$d δευτερόλεπτο.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_tablet">
+        <item quantity="other">Η εφαρμογή %1$s προκαλεί υπερθέρμανση του tablet. Θα κλείσει αυτόματα σε %2$d δευτερόλεπτα.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Η εφαρμογή %1$s προκαλεί υπερθέρμανση του tablet. Θα κλείσει αυτόματα σε %2$d δευτερόλεπτο.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="maintenance_mode_backup_cloud_menu_sub_textview_message_default">
+        <item quantity="other">Δημιουργήστε αντίγραφο ασφαλείας για απεριόριστα δεδομένα στο Samsung Cloud για έως και %d ημέρες και επαναφέρετε τα δεδομένα για τα οποία είχατε δημιουργήσει αντίγραφο ασφαλείας.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Δημιουργήστε αντίγραφο ασφαλείας για απεριόριστα δεδομένα στο Samsung Cloud για έως και %d ημέρα και επαναφέρετε τα δεδομένα για τα οποία είχατε δημιουργήσει αντίγραφο ασφαλείας.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_phone">
+        <item quantity="other">Η εφαρμογή %1$s προκαλεί υπερθέρμανση του τηλεφώνου. Μπορείτε να την κλείσετε τώρα ή θα κλείσει αυτόματα σε %2$d δευτερόλεπτα.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Η εφαρμογή %1$s προκαλεί υπερθέρμανση του τηλεφώνου. Μπορείτε να την κλείσετε τώρα ή θα κλείσει αυτόματα σε %2$d δευτερόλεπτο.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_tablet">
+        <item quantity="other">Η εφαρμογή %1$s προκαλεί υπερθέρμανση του tablet. Μπορείτε να την κλείσετε τώρα ή θα κλείσει αυτόματα σε %2$d δευτερόλεπτα.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Η εφαρμογή %1$s προκαλεί υπερθέρμανση του tablet. Μπορείτε να την κλείσετε τώρα ή θα κλείσει αυτόματα σε %2$d δευτερόλεπτο.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="pinpuk_attempts">
+        <item quantity="other">Απομένουν άλλες %d προσπάθειες προτού κλειδωθεί η κάρτα SIM.</item>
+        <item quantity="one">Απομένει άλλη %d προσπάθεια προτού κλειδωθεί η κάρτα SIM.</item>
+    </plurals>
+    <plurals name="sem_chooser_preview_items">
+        <item quantity="other">%d στοιχεία</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d στοιχείο</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_hours">
+        <item quantity="other">%d ώρες</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d ώρα</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_minutes">
+        <item quantity="other">%d λεπτά</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d λεπτό</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

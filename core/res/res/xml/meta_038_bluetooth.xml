@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ThemeMetaData FormatVersion="1.3" GuideVersion="2.9">
+    <AppMetaData AppendTo="Settings" Name="Bluetooth" TargetApi="19" TargetPackageName="com.android.settings" VersionCode="1" VersionName="">
+        <Include RefName="SESL" />
+        <Property Comment="Bluetooth Setting No Item Text Color: Change color of Bluetooth Setting No Item Text" DefaultValue="#7f252525" DestAttribName="bluetooth_no_nearby_text_color" UID="38-2-4" ValueRef="24-B" ValueType="TextColor" />
+        <Property Comment="Bluetooth Setting Connected Text Color" DefaultValue="#ff008cff" DestAttribName="bluetooth_highlight_text_color" UID="38-2-9" ValueRef="24-E" ValueType="TextColor" />
+        <Property Comment="Bluetooth Device Preference icon color : Change color of Bluetooth Device Preference icon" DefaultValue="#ff000000" DestAttribName="bt_device_icon_tint_color" UID="38-4-1" ValueRef="24-A" ValueType="TintColor" />
+        <Property Comment="Bluetooth Device Preference config icon color : Change color of Bluetooth Device Preference config icon" DefaultValue="#ff000000" DestAttribName="bt_device_config_icon_tint_color" UID="38-4-2" ValueRef="24-A" ValueType="TintColor" />
+        <Property Comment="Bluetooth Scan Dialog Sub Header Text Color: Change color of Bluetooth Scan Dialog Sub Header Text" DefaultValue="#ff858585" DestAttribName="bluetooth_progress_category_text_color_scandialog" UID="38-6-9" ValueRef="1-9-7" ValueType="Color" />
+        <Property Comment="Bluetooth Dialog Body Text Color: Change color of Bluetooth Dialog Body Text" DefaultValue="#ff505050" DestAttribName="bt_pairing_dialog_body_text_color" UID="38-6-10" ValueRef="1-9-3" ValueType="Color" />
+        <Property Comment="Bluetooth Dialog Label Text Color: Change color of Bluetooth Dialog Label Text" DefaultValue="#ff505050" DestAttribName="bt_pairing_dialog_edittext_title_color" UID="38-6-11" ValueRef="24-E" ValueType="Color" />
+        <Property Comment="Bluetooth Scan Dialog No item Text Color: Change color of Bluetooth Scan Dialog No item Text" DefaultValue="#ff000000" DestAttribName="bluetooth_no_nearby_dialog_text_color" UID="38-6-13" ValueRef="1-9-9" ValueType="Color" />
+        <Property Comment="Bluetooth Scandialog Device icon color for M OS: Change color of Bluetooth Scan Dialog Device icon" DefaultValue="#ff919799" DestAttribName="bt_dialog_device_icon_tint_color" UID="38-6-15-M" ValueRef="24-A" ValueType="TintColor" />
+    </AppMetaData>
+</ThemeMetaData>

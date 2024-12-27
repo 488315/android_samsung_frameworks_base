@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape android:shape="rectangle"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <corners android:radius="@dimen/tw_searchview_background_radius_size" />
+    <solid android:color="@color/tw_searchview_textfiled_normal_material" />
+</shape>

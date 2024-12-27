@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ThemeMetaData FormatVersion="1.3" GuideVersion="1.8">
+    <AppMetaData Name="Blocked calls/msgs" TargetApi="28" TargetPackageName="com.sec.android.app.firewall" VersionCode="1" VersionName="1.0">
+        <Include RefName="SESL" />
+        <Property Comment="Switch bar ON background color" DefaultValue="#bd4297ff" DestAttribName="sec_widget_switchbar_checked_background_color" DestQualifiers="" UID="127-1-1" ValueRef="1-3-1" ValueType="BgColor" />
+        <Property Comment="Switch bar OFF background color" DefaultValue="#fffafafa" DestAttribName="sec_widget_switchbar_background_color" DestQualifiers="" UID="127-1-2" ValueRef="1-3-2" ValueType="BgColor" />
+        <Property Comment="Switch bar ON text color" DefaultValue="" DestAttribName="switchbar_on_text_color" DestQualifiers="" UID="127-1-3" ValueRef="1-1-3" ValueType="TextColor" />
+        <Property Comment="Switch bar OFF text color" DefaultValue="" DestAttribName="switchbar_off_text_color" DestQualifiers="" UID="127-1-4" ValueRef="1-1-4" ValueType="TextColor" />
+        <Property Comment="Dialogue text color" DefaultValue="" DestAttribName="dialogue_text_color" DestQualifiers="" UID="127-1-5" ValueRef="1-9-6" ValueType="TextColor" />
+        <Property Comment="Tab select text color" DefaultValue="" DestAttribName="navigation_bar_select_text_color" DestQualifiers="" UID="127-1-6" ValueRef="1-1-3" ValueType="TextColor" />
+        <Property Comment="Tab select dot line color" DefaultValue="" DestAttribName="navigation_bar_dot_select_color" DestQualifiers="" UID="127-1-7" ValueRef="1-12-4" ValueType="BgColor" />
+        <Property Comment="Tab unselect text color" DefaultValue="" DestAttribName="navigation_bar_unselect_text_color" DestQualifiers="" UID="127-1-8" ValueRef="1-12-3" ValueType="TextColor" />
+        <Property Comment="List Main text color" DefaultValue="" DestAttribName="list_main_text_color" DestQualifiers="" UID="127-2-1" ValueRef="1-11-1" ValueType="TextColor" />
+        <Property Comment="List Sub text color" DefaultValue="" DestAttribName="list_sub_text_color" DestQualifiers="" UID="127-2-2" ValueRef="1-2" ValueType="TextColor" />
+        <Property Comment="Action bar Icon tint color" DefaultValue="" DestAttribName="actionbar_icon_tint_color" DestQualifiers="" UID="127-3-1" ValueRef="1-1-1" ValueType="TintColor" />
+        <Property Comment="Action bar Title text color" DefaultValue="" DestAttribName="actionbar_title_text_color" DestQualifiers="" UID="127-3-2" ValueRef="1-18-1" ValueType="TextColor" />
+        <Property Comment="Search bar background color" DefaultValue="" DestAttribName="searchbar_background_color" DestQualifiers="" UID="127-3-3" ValueRef="1-39-1" ValueType="BgColor" />
+        <Property Comment="Dialog background color" DefaultValue="" DestAttribName="dialog_background_color" DestQualifiers="" UID="127-3-4" ValueRef="1-9-1" ValueType="BgColor" />
+        <Property Comment="Tab background color" DefaultValue="" DestAttribName="navigation_tab_menu_background_color" DestQualifiers="" UID="127-3-5" ValueRef="1-1-1" ValueType="BgColor" />
+        <Property Comment="Subhead text color" DefaultValue="" DestAttribName="default_area_bg_color" DestQualifiers="" UID="127-4-1" ValueRef="1-1-4" ValueType="TextColor" />
+        <Property Comment="Index text color" DefaultValue="" DestAttribName="area_index_text_color" DestQualifiers="" UID="127-4-2" ValueRef="1-50-3" ValueType="TextColor" />
+        <Property Comment="Scroll bar background hint color" DefaultValue="" DestAttribName="scroll_index_background_hint_color" DestQualifiers="" UID="127-4-3" ValueRef="1-50-7" ValueType="BgColor" />
+        <Property Comment="Select on color" DefaultValue="" DestAttribName="area_city_select_on_color" DestQualifiers="" UID="127-5-1" ValueRef="1-12-4" ValueType="BgColor" />
+        <Property Comment="Unselect off color" DefaultValue="" DestAttribName="area_city_unselect_off_color" DestQualifiers="" UID="127-5-2" ValueRef="1-1-3" ValueType="BgColor" />
+    </AppMetaData>
+</ThemeMetaData>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ThemeMetaData FormatVersion="1.4" GuideVersion="6.1">
+    <AppMetaData Name="AirCommandService" TargetApi="21" TargetPackageName="com.samsung.android.service.aircommand" VersionCode="1" VersionName="">
+        <Include RefName="SESL" />
+        <Property Comment="Primary color" DefaultValue="#ff0381fe" DestAttribName="aircommand_default_color_primary" POption="AlwaysOverriden" UID="50-A" ValueRef="1-A" ValueType="Color" />
+        <Property Comment="Color control activated" DefaultValue="#ff0381fe" DestAttribName="aircommand_color_control_activated" UID="50-B" ValueRef="1-D" ValueType="Color" />
+        <Property Comment="text" DefaultValue="#ff0381fe" DestAttribName="aircommand_color_control_activated_temp0" UID="50-1-1" ValueRef="24-E" ValueType="Color" />
+        <Property Comment="Primary dark color" DefaultValue="#ff0072de" DestAttribName="aircommand_default_color_primary_dark" UID="50-2-1" ValueRef="24-E" ValueType="Color" />
+        <Property Comment="Selected mark icon image" DefaultValue="#ff0381fe" DestAttribName="aircommand_color_control_activated_temp2" UID="50-2-2" ValueRef="24-E" ValueType="Color" />
+        <Property Comment="Sub header text color" DefaultValue="#ff0072de" DestAttribName="aircommand_color_control_activated_temp3" UID="50-3-1" ValueRef="24-E" ValueType="TextColor" />
+        <Property Comment="Description" DefaultValue="#ffe5e5e5" DestAttribName="remotespen_settings_global_gesture_description_text_color" UID="50-3-2" ValueRef="1-3-3" ValueType="TextColor" />
+        <Property Comment="Indicator selected" DefaultValue="#ff7d7d7d" DestAttribName="view_pager_indicator_selected_dream" UID="50-3-3" ValueRef="1-3-1" ValueType="Color" />
+        <Property Comment="Indicator unselected" DefaultValue="#80000000" DestAttribName="view_pager_indicator_deselected_dream" UID="50-3-4" ValueRef="1-3-2" ValueType="Color" />
+        <Property Comment="Sub header" DefaultValue="#ff858585" DestAttribName="sec_subheader_text_color" UID="50-6-3" ValueRef="1-19-2" ValueType="TextColor" />
+        <Property Comment="Update button text color" DefaultValue="#fffafafa" DestAttribName="about_page_update_button_text_color" UID="50-8-2" ValueRef="1-E" ValueType="TextColor" />
+        <Property Comment="Maginify Update button BG" DefaultValue="#ff545eb5" DestAttribName="about_page_update_button_background_color_magnify" UID="50-8-3" ValueRef="1-A" ValueType="BgColor" />
+        <Property Comment="Samsung Capture Update button BG" DefaultValue="#ff5f4bfe" DestAttribName="about_page_update_button_background_color_smart_select" UID="50-8-4" ValueRef="1-A" ValueType="BgColor" />
+        <Property Comment="Live message Update button BG" DefaultValue="#ff7882ff" DestAttribName="about_page_update_button_background_color_live_drawing" UID="50-8-5" ValueRef="1-A" ValueType="BgColor" />
+        <Property Comment="Glance Update button BG" DefaultValue="#ff32965a" DestAttribName="about_page_update_button_background_color_glance" UID="50-8-6" ValueRef="1-A" ValueType="BgColor" />
+        <Property Comment="Aircommand Update button BG" DefaultValue="#ff7078f9" DestAttribName="about_page_update_button_background_color_aircommand" UID="50-8-7" ValueRef="1-A" ValueType="BgColor" />
+        <Property Comment="Translate Update button BG" DefaultValue="#ff3f8ba4" DestAttribName="about_page_update_button_background_color_translate" UID="50-8-8" ValueRef="1-A" ValueType="BgColor" />
+        <Property Comment="About page BG color" DefaultValue="#fff2f2f2" DestAttribName="about_page_background_color" UID="50-8-9" ValueRef="1-1-1" ValueType="BgColor" />
+        <Property Comment="Info icon tint color" DefaultValue="#ff252525" DestAttribName="about_page_app_info_tint_color" UID="50-8-10" ValueRef="1-1-3" ValueType="BgColor" />
+        <Property Comment="Button bg color" DefaultValue="#ffebebeb" DestAttribName="about_page_open_source_button_color" UID="50-8-11" ValueRef="1-7-1-D" ValueType="BgColor" />
+        <Property Comment="Button text color" DefaultValue="#ff252525" DestAttribName="about_page_open_source_button_text_color" UID="50-8-12" ValueRef="1-7-2-D" ValueType="TextColor" />
+        <Property Comment="Main text color" DefaultValue="#ff252525" DestAttribName="about_page_app_name_text_color" UID="50-8-13" ValueRef="1-1-3" ValueType="TextColor" />
+        <Property Comment="Sub text color" DefaultValue="#ff999999" DestAttribName="about_page_app_version_text_color" UID="50-8-14" ValueRef="1-1-4" ValueType="BgColor" />
+        <Property Comment="Contents text color" DefaultValue="#ff909090" DestAttribName="remotespen_settings_spen_battery_capacity_text_color" UID="50-9-4" ValueRef="1-3-2" ValueType="TextColor" />
+        <Property Comment="Icon tint color" DefaultValue="#ff909090" DestAttribName="remotespen_settings_spen_battery_icon_tint_color" UID="50-9-5" ValueRef="1-3-2" ValueType="BgColor" />
+        <Property Comment="List divider" DefaultValue="#ffe6e6e6" DestAttribName="sec_list_divider_color" UID="50-11-6" ValueRef="1-2" ValueType="BgColor" />
+        <Property Comment="Sub header divider" DefaultValue="#ff979797" DestAttribName="sec_subheader_divider_color" UID="50-11-7" ValueRef="1-19-4" ValueType="BgColor" />
+        <Property Comment="Charging bg color" DefaultValue="#ff979797" DestAttribName="remotespen_settings_spen_battery_loss_circle_color" UID="50-11-10" ValueRef="1-14-2" ValueType="Color" />
+        <Property Comment="Charging color" DefaultValue="#ff1ce63d" DestAttribName="remotespen_settings_spen_battery_circle_color" UID="50-11-11" ValueRef="1-A" ValueType="Color" />
+        <Property Comment="Charging low status color" DefaultValue="#ff979797" DestAttribName="remotespen_settings_spen_battery_circle_color_low" UID="50-11-12" ValueRef="14-11-4" ValueType="Color" />
+        <Property Comment="Charging text" DefaultValue="#ff252525" DestAttribName="remotespen_settings_spen_status_color" UID="50-11-13" ValueRef="1-1-3" ValueType="Color" />
+        <Property Comment="Battery icon tint" DefaultValue="#ff4b4b4b" DestAttribName="remotespen_settings_spen_charging_imageview_tint" UID="50-11-14" ValueRef="1-1-4" ValueType="BgColor" />
+        <Property Comment="Charging sub text" DefaultValue="#ff777777" DestAttribName="remotespen_settings_spen_status_description" UID="50-11-15" ValueRef="1-1-3" ValueType="Color" />
+        <Property Comment="Air actions selected text" DefaultValue="#ff0381fe" DestAttribName="remotespen_settings_spen_status_description0" UID="50-11-16" ValueRef="24-E" ValueType="TextColor" />
+        <Property Comment="Description text color" DefaultValue="#ff505050" DestAttribName="motions_description_card_summary_text_color" UID="50-12-1" ValueRef="1-9-9" ValueType="TextColor" />
+        <Property Comment="Dialog bottom menu" DefaultValue="#ff505050" DestAttribName="aircommand_color_control_activated_temp4" UID="50-12-2" ValueRef="1-9-15" ValueType="TextColor" />
+        <Property Comment="Master On background color" DefaultValue="#ff4297ff" DestAttribName="sec_switchbar_background_color_checked" UID="50-13-1" ValueRef="1-40-1" ValueType="BgColor" />
+        <Property Comment="Master Off background color" DefaultValue="#fffafafa" DestAttribName="sec_switchbar_background_color_unchecked" UID="50-13-2" ValueRef="1-40-2" ValueType="BgColor" />
+        <Property Comment="Master On text color" DefaultValue="#fffafafa" DestAttribName="sec_switchbar_on_text_color" UID="50-13-3" ValueRef="1-40-3" ValueType="TextColor" />
+        <Property Comment="Master Off text color" DefaultValue="#ff252525" DestAttribName="sec_switchbar_off_text_color" UID="50-13-4" ValueRef="1-40-4" ValueType="TextColor" />
+    </AppMetaData>
+</ThemeMetaData>

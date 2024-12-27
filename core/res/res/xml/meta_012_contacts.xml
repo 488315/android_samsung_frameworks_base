@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ThemeMetaData FormatVersion="1.3" GuideVersion="1.4">
+    <AppMetaData Name="SecContacts" TargetApi="21" TargetPackageName="com.samsung.android.app.contacts" VersionCode="1" VersionName="">
+        <Include RefName="SESL" />
+        <Property Comment="Primary color" DefaultValue="#ffeb6f31" DestAttribName="contact_color_primary" DestQualifiers="" UID="12-A" ValueRef="1-A" ValueType="Color" />
+        <Property Comment="Common component color" DefaultValue="#cc8f8f8f" DestAttribName="contact_color_common_component" DestQualifiers="" UID="12-C" ValueRef="1-C" ValueType="TintColor" />
+        <Property Comment="control color" DefaultValue="#ffef8e5e" DestAttribName="contact_color_control_activated" DestQualifiers="" UID="12-D" ValueRef="1-D" ValueType="Color" />
+        <Property Comment="Point text color (=Primary dark color)" DefaultValue="#ffd36630" DestAttribName="contact_primary_dark" DestQualifiers="" UID="12-E" ValueRef="24-E" ValueType="Color" />
+        <Property Comment="statusBarColor" DefaultValue="#fff2f2f2" DestAttribName="contacts_status_bar_color" DestQualifiers="" UID="12-S-1" ValueRef="1-51" ValueType="BgColor" />
+        <Property Comment="Indicator: Icon color (Light/Dark)" DefaultValue="true" DestAttribName="sem_window_light_status_bar" UID="12-S-2" ValueRef="1-51-1" ValueType="Bool" />
+        <Property Comment="Background Color" DefaultValue="#fff2f2f2" DestAttribName="dialtacts_background_color" DestQualifiers="" UID="12-1-1" ValueRef="1-1-1" ValueType="BgColor" />
+        <Property Comment="Title text color" DefaultValue="#fffafafa" DestAttribName="action_bar_title_text_color" DestQualifiers="" UID="12-1-3" ValueRef="1-1-3" ValueType="TextColor" />
+        <Property Comment="Title text color" DefaultValue="#ff252525" DestAttribName="action_bar_sub_text_color" DestQualifiers="" UID="12-1-10" ValueRef="1-49-6" ValueType="TextColor" />
+        <Property Comment="Title 2nd text color" DefaultValue="#fffafafa" DestAttribName="contact_title_text_color" DestQualifiers="" UID="12-1-3-1" ValueRef="1-1-3-1" ValueType="TextColor" />
+        <Property Comment="" DefaultValue="#ff252525" DestAttribName="action_bar_action_button_color" DestQualifiers="" UID="12-1-4" ValueRef="1-11-1" ValueType="TextColor" />
+        <Property Comment="sub Text color" DefaultValue="#ff636363" DestAttribName="contact_title_2nd_text_color" DestQualifiers="" UID="12-1-4-1" ValueRef="1-1-4-1" ValueType="TextColor" />
+        <Property Comment="Bottom button color" DefaultValue="#ff454545" DestAttribName="bottom_bar_button_icon_color , bottom_bar_button_text_icon_color" DestQualifiers="" UID="12-49-1" ValueRef="1-14-3" ValueType="Color" />
+        <Property Comment="Bottom button icon tint color (Favorite On)" DefaultValue="#fff7a515" DestAttribName="detail_favorite_on_icon_tint_color" DestQualifiers="" UID="12-49-1-1" ValueRef="24-E" ValueType="TintColor" />
+        <Property Comment="Text Color for button have only text" DefaultValue="#ffd36630" DestAttribName="bottom_bar_only_text_button_text" DestQualifiers="" UID="12-29-2" ValueRef="1-14-2" ValueType="TextColor" />
+        <Property Comment="" DefaultValue="#ff252525" DestAttribName="contact_home_as_up_indicator_color" DestQualifiers="" UID="12-1-6" ValueRef="1-11-3" ValueType="Color" />
+        <Property Comment="" DefaultValue="" DestAttribName="contacts_home_as_up_indicator" DestQualifiers="xxxhdpi" UID="12-1-7" ValueRef="1-11-4" ValueType="Image" />
+        <Property Comment="Contact detail back button icon" DefaultValue="" DestAttribName="detail_back_button_mrtl" DestQualifiers="xxxhdpi" UID="12-13-17" ValueRef="1-11-4" ValueType="Image" />
+        <Property Comment="Contact detail back button icon (rtl)" DefaultValue="" DestAttribName="detail_back_button_rtl_mrtl" DestQualifiers="xxxhdpi" UID="12-13-18" ValueRef="1-11-4" ValueType="Image" />
+        <Property Comment="Tray shape: Select Tray Shape Of Photo ID" DefaultValue="0" DestAttribName="photo_id_masking_value" DestQualifiers="" UID="12-2-1" ValueRef="1-32-1" ValueType="Integer" />
+        <Property Comment="Icon: Change Default Image 1 Of Photo ID" DefaultValue="" DestAttribName="contacts_default_caller_id_list" DestQualifiers="xxxhdpi" UID="12-2-2-1" ValueRef="1-32-2-1" ValueType="Image" />
+        <Property Comment="Icon: Change Default Image 2 Of Photo ID" DefaultValue="" DestAttribName="contacts_default_caller_id_list_1" DestQualifiers="xxxhdpi" UID="12-2-2-2" ValueRef="1-32-2-2" ValueType="Image" />
+        <Property Comment="Icon: Change Default Image 3 Of Photo ID" DefaultValue="" DestAttribName="contacts_default_caller_id_list_2" DestQualifiers="xxxhdpi" UID="12-2-2-3" ValueRef="1-32-2-3" ValueType="Image" />
+        <Property Comment="Icon: Change Default Image 4 Of Photo ID" DefaultValue="" DestAttribName="contacts_default_caller_id_list_3" DestQualifiers="xxxhdpi" UID="12-2-2-4" ValueRef="1-32-2-4" ValueType="Image" />
+        <Property Comment="Tray color: Change Background tint Color 1 Of Photo ID" DefaultValue="#ffdbd4c7" DestAttribName="default_caller_id_bg_color" UID="12-2-3-1" ValueRef="1-32-3-1" ValueType="BgColor" />
+        <Property Comment="Tray color: Change Tray Background tint Color 2 Of Photo ID" DefaultValue="#ffdbd4c7" DestAttribName="default_caller_id_bg_color_1" UID="12-2-3-2" ValueRef="1-32-3-2" ValueType="BgColor" />
+        <Property Comment="Tray color: Change Tray Background tint Color 3 Of Photo ID" DefaultValue="#ffdbd4c7" DestAttribName="default_caller_id_bg_color_2" UID="12-2-3-3" ValueRef="1-32-3-3" ValueType="BgColor" />
+        <Property Comment="Tray color: Change Tray Background tint Color 4 Of Photo ID" DefaultValue="#ffdbd4c7" DestAttribName="default_caller_id_bg_color_3" UID="12-2-3-4" ValueRef="1-32-3-4" ValueType="BgColor" />
+        <Property Comment="Icon: Change Group default image Of Photo ID" DefaultValue="" DestAttribName="contacts_default_caller_id_no_resitored_image" DestQualifiers="xxxhdpi" UID="12-2-8" ValueRef="1-32-4" ValueType="Image" />
+        <Property Comment="Alphabet color" DefaultValue="#ff929292" DestAttribName="theme_12_2_9" DestQualifiers="" UID="12-2-9" ValueRef="1-32-6" ValueType="TintColor" />
+        <Property Comment="Stoke" DefaultValue="#ff929292" DestAttribName="theme_12_2_10" DestQualifiers="" UID="12-2-10" ValueRef="1-32-5" ValueType="TintColor" />
+        <Property Comment="Card background color" DefaultValue="#fffcfcfc" DestAttribName="easy_signup_card_view_background_color" UID="12-2-23" ValueRef="1-48-2" ValueType="BgColor" />
+        <Property Comment="Card vew text color" DefaultValue="#ff505050" DestAttribName="easy_signup_guide_text_color" UID="12-2-26" ValueRef="1-48-4" ValueType="Color" />
+        <Property Comment="Card vew closing button color" DefaultValue="#ff505050" DestAttribName="easy_signup_guide_close_color" UID="12-2-27" ValueRef="1-48-4" ValueType="Color" />
+        <Property Comment="Card vew button color" DefaultValue="#ff252525" DestAttribName="easy_signup_guide_button_color" UID="12-2-29" ValueRef="1-48-5" ValueType="Color" />
+        <Property Comment="Detail / Icon foreground tint color" DefaultValue="#fffafafa" DestAttribName="detail_circle_icon_foreground_color" UID="12-4-5" ValueRef="1-18-1" ValueType="Color" />
+        <Property Comment="Detail / Call background color" DefaultValue="#ff15b76d" DestAttribName="ims_voice_call_icon_color" UID="12-4-6-1" ValueRef="24-E" ValueType="Color" />
+        <Property Comment="Detail / Message background color" DefaultValue="#ff36bae3" DestAttribName="ims_new_message_icon_color" UID="12-4-6-2" ValueRef="24-E" ValueType="Color" />
+        <Property Comment="Detail / VideoCall background color" DefaultValue="#ff15b76d" DestAttribName="ims_video_call_detail_icon_color" UID="12-4-6-3" ValueRef="24-E" ValueType="Color" />
+        <Property Comment="Detail / Email background color" DefaultValue="#ff909090" DestAttribName="detail_mail_icon_tint_color" UID="12-4-6-4" ValueRef="24-E" ValueType="Color" />
+        <Property Comment="Detail / RCS Message background color" DefaultValue="#ff599bf7" DestAttribName="ims_message_rcs_chat_icon_color" UID="12-4-6-5" ValueRef="24-E" ValueType="Color" />
+        <Property Comment="Detail / RCS chatting plus background color" DefaultValue="#ff3b7cf3" DestAttribName="ims_message_rcs_chatting_plus_icon_color" UID="12-4-6-6" ValueRef="13-46-3" ValueType="Color" />
+        <Property Comment="Detail view : DSDS Button Background color" DefaultValue="#0f000000" DestAttribName="detail_button_background_color" DestQualifiers="" POption="AlwaysOverriden" UID="12-4-9" ValueRef="1-7-1" ValueType="BgColor" />
+        <Property Comment="Detail view : DSDS Button Background color (Dark)" DefaultValue="#2bfafafa" DestAttribName="detail_button_background_color_dark" DestQualifiers="" UID="12-4-9-D" ValueRef="1-7-1-D" ValueType="BgColor" />
+        <Property Comment="Detail view : DSDS Button Text color" DefaultValue="#ff252525" DestAttribName="detail_button_text_color" DestQualifiers="" POption="AlwaysOverriden" UID="12-4-10" ValueRef="1-7-2" ValueType="TextColor" />
+        <Property Comment="Detail view : DSDS Button Text color (Dark)" DefaultValue="#fffafafa" DestAttribName="detail_button_text_color_dark" DestQualifiers="" UID="12-4-10-D" ValueRef="1-7-2-D" ValueType="TextColor" />
+        <Property Comment="Detail view : DSDS Button Arrow icon tint color" DefaultValue="#ff454545" DestAttribName="detail_button_arrow_icon_color" DestQualifiers="" UID="12-4-11" ValueRef="1-7-2" ValueType="TintColor" />
+        <Property Comment="Video call selection dialog : Default phone app" DefaultValue="#ff15b76d" DestAttribName="ims_video_call_selection_icon_color" DestQualifiers="" UID="12-4-12" ValueRef="24-E" ValueType="TintColor" />
+        <Property Comment="Button Background color" DefaultValue="#ffafb1b3" DestAttribName="detail_arrow_button_bg_color" DestQualifiers="" POption="AlwaysOverriden" UID="12-4-14" ValueRef="24-E" ValueType="BgColor" />
+        <Property Comment="Selected text color" DefaultValue="#ffeb6f31" DestAttribName="manage_contacts_selected_text_color" UID="12-5-3" ValueRef="24-E" ValueType="Color" />
+        <Property Comment="Unselected text color" DefaultValue="#ff797979" DestAttribName="import_disabled_text_color" Opacity="40" UID="12-5-5" ValueRef="12-30-3" ValueType="Color" />
+        <Property Comment="Arrow icon tint color" DefaultValue="#ffafafaf" DestAttribName="arrow_icon_tint" Opacity="40" UID="12-5-6" ValueRef="12-30-3" ValueType="Color" />
+        <Property Comment="Arrow icon tint color selected" DefaultValue="#ffef8e5e" DestAttribName="arrow_icon_tint_selected" UID="12-5-6-1" ValueRef="24-A" ValueType="Color" />
+        <Property Comment="Progress bar progress color" DefaultValue="#ffef8e5e" DestAttribName="manage_contacts_progress_bar_progress_color" UID="12-5-12" ValueRef="1-20-2" ValueType="Color" />
+        <Property Comment="Done button text color" DefaultValue="#fffafafa" DestAttribName="manage_contacts_done_button_text_color" DestQualifiers="" UID="12-5-13" ValueRef="1-E" ValueType="TextColor" />
+        <Property Comment="Done button background color" DefaultValue="#ffef8e5e" DestAttribName="manage_contacts_done_button_bg_color" DestQualifiers="" UID="12-5-14" ValueRef="1-A" ValueType="BgColor" />
+        <Property Comment="Card view background color" DefaultValue="#ffe6e6e6" DestAttribName="card_view_background_color,open_source_licenses_background_color,third_party_screen_card_view_background_color" UID="12-13-7" ValueRef="1-18-1" ValueType="BgColor" />
+        <Property Comment="Card view background stroke color" DefaultValue="#00000000" DestAttribName="detail_card_background_stroke" UID="12-13-7-1" ValueRef="" ValueType="Color" />
+        <Property Comment="Detail view : Card background color" DefaultValue="#fffafafa" DestAttribName="detail_view_card_background_color" DestQualifiers="" UID="12-13-6" ValueRef="1-18-1" ValueType="BgColor" />
+        <Property Comment="Detail view : add circle icon backgound color" DefaultValue="#ffededed" DestAttribName="detail_circle_icon_background_color" DestQualifiers="" UID="12-32-2-1" ValueRef="24-B" ValueType="BgColor" />
+        <Property Comment="Detail view : emergency icon background color" DefaultValue="#ffededed" DestAttribName="detail_emergency_icon_background_color" DestQualifiers="" UID="12-13-13" ValueRef="24-B" ValueType="BgColor" />
+        <Property Comment="Detail view : detail circle icon tint color" DefaultValue="#00000000" DestAttribName="detail_circle_icon_tint_color" DestQualifiers="" UID="12-13-3" ValueRef="1-18-1" ValueType="TintColor" />
+        <Property Comment="Detail view : Default sim icon color" DefaultValue="#ff909090" DestAttribName="detail_sim_only_icon_color" DestQualifiers="" UID="12-13-4" ValueRef="24-E" ValueType="Color" />
+        <Property Comment="Detail view : detail emergency icon tint color" DefaultValue="#00000000" DestAttribName="detail_emergency_icon_tint_color" DestQualifiers="" UID="12-13-14" ValueRef="24-G" ValueType="TintColor" />
+        <Property Comment="Detail view : detail app bar icon tint color" DefaultValue="#ff000000" DestAttribName="detail_app_bar_icon_tint_color" DestQualifiers="" UID="12-13-15" ValueRef="12-1-4" ValueType="TintColor" />
+        <Property Comment="Detail view : detail app bar stroke tint color" DefaultValue="#ffffffff" DestAttribName="detail_app_bar_stroke_tint_color" DestQualifiers="" UID="12-13-16" ValueRef="12-1-4" ValueType="TintColor" opacity="50" />
+        <Property Comment="Detail view : detail check icon tint color" DefaultValue="#00000000" DestAttribName="detail_check_icon_tint_color" DestQualifiers="" UID="12-13-5" ValueRef="24-E" ValueType="TintColor" />
+        <Property Comment="Detail view : detail 2d icon tint color" DefaultValue="#00000000" DestAttribName="detail_2d_icon_tint_color" DestQualifiers="" UID="12-13-19" ValueRef="24-B" ValueType="TintColor" />
+        <Property Comment="index scroll : text color" DefaultValue="#ff848484" DestAttribName="index_scroll_text_color" DestQualifiers="" Name="Index text color" UID="12-16-5" ValueRef="1-50-3" ValueType="Color" />
+        <Property Comment="index scroll : background color" DefaultValue="#ffe6e6e6" DestAttribName="index_scroll_background_color" DestQualifiers="" Name="Index background color" UID="12-16-10" ValueRef="1-50-7" ValueType="Color" />
+        <Property Comment="Main text color: change primary text color of list item" DefaultValue="#ff000000" DestAttribName="primary_text_color" DestQualifiers="" UID="12-17-1" ValueRef="1-3-1" ValueType="TextColor" />
+        <Property Comment="Sub text color: change secondary text color of list item" DefaultValue="#ff86898b" DestAttribName="secondary_text_color,recent_search_list_item_update_time_text_color" DestQualifiers="" UID="12-17-2" ValueRef="1-3-2" ValueType="TextColor" />
+        <Property Comment="Sub text color: change secondary text color of list item (Primary dark color)" DefaultValue="#ffd36630" DestAttribName="secondary_primary_dark_text_color" DestQualifiers="" UID="12-17-3" ValueRef="12-E" ValueType="TextColor" />
+        <Property Comment="Searching text color" DefaultValue="#7f252525" DestAttribName="searching_text_color" DestQualifiers="" UID="12-17-8" ValueRef="1-3-3-D" ValueType="TextColor" />
+        <Property Comment="Main text color delta: change primary text color of list item" DefaultValue="#ff000000" DestAttribName="contact_list_main_text_color_delta" DestQualifiers="" UID="12-17-9" ValueRef="1-1-3-1" ValueType="TextColor" />
+        <Property Comment="Sub text color delta: change secondary text color of list itme" DefaultValue="#ff86898b" DestAttribName="contact_list_sub_text_color_delta" DestQualifiers="" UID="12-17-10" ValueRef="1-1-4-1" ValueType="TextColor" />
+        <Property Comment="Multi-pane layout > No item BG color" DefaultValue="#fffcfcfc" DestAttribName="no_contacts_selected_bg_color" DestQualifiers="" UID="12-17-11" ValueRef="1-18-1" ValueType="Color" />
+        <Property Comment="Multi-pane layout > No item BG image" DefaultValue="" DestAttribName="no_contacts_selected_bg_color_image" DestQualifiers="xxxhdpi" UID="12-17-12" ValueRef="1-18-2" ValueType="Image" />
+        <Property Comment="No contacts selected text color" DefaultValue="#ff252525" DestAttribName="no_contacts_selected_text_color" DestQualifiers="" UID="12-17-13" ValueRef="1-3-1" ValueType="TextColor" />
+        <Property Comment="P190621-05163, created by hyojin.bae" DefaultValue="#ff252525" DestAttribName="editor_sticker_description_text_color" DestQualifiers="" UID="12-32-6" ValueRef="1-1-3" ValueType="TextColor" />
+        <Property Comment="Linked color : Common > Add Icon tint color" DefaultValue="" DestAttribName="editor_plus_icon_tint" DestQualifiers="" UID="12-21-1" ValueRef="1-17-1" ValueType="Color" />
+        <Property Comment="Linked color : Common > Add Icon image" DefaultValue="thumbnail_add_button" DestAttribName="editor_add_btn" DestQualifiers="" UID="12-21-2" ValueRef="1-17-2" ValueType="Image" />
+        <Property Comment="Linked color : Common > Delete Icon tint color" DefaultValue="" DestAttribName="delete_button_color" DestQualifiers="" UID="12-21-3" ValueRef="1-17-3" ValueType="Color" />
+        <Property Comment="Linked color : Common > Delete Icon image" DefaultValue="thumbnail_delete_button" DestAttribName="contact_list_icon_minus" DestQualifiers="xxxhdpi" UID="12-21-4" ValueRef="1-17-4" ValueType="Image" />
+        <Property DefaultValue="#ffdb332a" DestAttribName="dialog_red_button_color" DestQualifiers="" UID="12-27-3" ValueRef="24-G" ValueType="TextColor" />
+        <Property DefaultValue="#ff86898b" DestAttribName="alert_dialog_secondary_text_color" DestQualifiers="" UID="12-27-7" ValueRef="1-9-7" ValueType="Color" />
+        <Property DefaultValue="#ff252525" DestAttribName="date_picker_text_color" DestQualifiers="" UID="12-27-8" ValueRef="1-9-6" ValueType="Color" />
+        <Property DefaultValue="#ff545454" DestAttribName="dialog_count_text_color" DestQualifiers="" UID="12-27-9" ValueRef="24-B" ValueType="TextColor" />
+        <Property DefaultValue="#fffafafa" DestAttribName="date_picker_dialog_background" DestQualifiers="" UID="12-27-12" ValueRef="1-41-1" ValueType="BgColor" />
+        <Property DefaultValue="#ffd36630" DestAttribName="Main text_color_Primary dark" DestQualifiers="" UID="12-28-1" ValueRef="12-E" ValueType="Color" />
+        <Property DefaultValue="" DestAttribName="editor_dropdown_primary_text_color" DestQualifiers="" UID="12-28-2" ValueRef="1-9-6" ValueType="Color" />
+        <Property DefaultValue="#ffd36630" DestAttribName="contact_color_primary_dark,selected_text_color" DestQualifiers="" UID="12-28-3" ValueRef="12-E" ValueType="TextColor" />
+        <Property DefaultValue="#ff8c8c8c" DestAttribName="account_secondary_text_color" DestQualifiers="" UID="12-28-4" ValueRef="1-9-7" ValueType="TextColor" />
+        <Property Comment="Selected mark icon image_Primary dark" DefaultValue="#ffeb6f31" DestAttribName="detail_selected_mark_icon_color,selected_text_tint_color" DestQualifiers="" UID="12-28-5" ValueRef="12-E" ValueType="Color" />
+        <Property Comment="Selected mark icon image" DefaultValue="" DestAttribName="tw_dropdown_ic_check_modified" DestQualifiers="" UID="12-28-5-1" ValueRef="1-10-10" ValueType="Image" />
+        <Property DefaultValue="#ff909090" DestAttribName="editor_view_more_color" DestQualifiers="" UID="12-28-6" ValueRef="1-1-4-1" ValueType="Color" />
+        <Property Comment="Drop down list Title text color" DefaultValue="#ff000000" DestAttribName="detail_drop_down_list_title_text_color" DestQualifiers="" UID="12-28-7" ValueRef="1-10-3" ValueType="TextColor" />
+        <Property Comment="Drop down list Expandable Icon tint color" DefaultValue="#fffafafa" DestAttribName="detail_drop_down_list_expandable_icon_tint_color" DestQualifiers="" UID="12-28-8" ValueRef="1-C" ValueType="TintColor" />
+        <Property Comment="Drop down list Expandable text color" DefaultValue="#ff666666" DestAttribName="detail_drop_down_list_expandable_text_color" DestQualifiers="" UID="12-28-9" ValueRef="1-9-7" ValueType="TextColor" />
+        <Property Comment="Bottom bar Background color" DefaultValue="#fffafafa" DestAttribName="bottom_bar_background_color" DestQualifiers="" UID="12-29-1" ValueRef="1-14-1" ValueType="Color" />
+        <Property Comment="Description text color" DefaultValue="#ff505050" DestAttribName="tw_description_text_color" DestQualifiers="" UID="12-30-1" ValueRef="24-B" ValueType="TextColor" />
+        <Property Comment="Description Disabled text color" DefaultValue="#64505050" DestAttribName="tw_description_disabled_text_color" DestQualifiers="" Opacity="40" UID="12-30-2" ValueRef="12-30-1" ValueType="TextColor" />
+        <Property Comment="List footer" DefaultValue="#ff737373" DestAttribName="counter_text_color" DestQualifiers="" UID="12-31-1" ValueRef="1-1-4" ValueType="Color" />
+        <Property Comment="Change Hint text color" DefaultValue="#ff656565" Description="" DestAttribName="no_item_no_results_found_text_color,trash_no_contacts_text_color" Name="Hint text color" UID="12-32-1" ValueRef="1-1-3" ValueType="Color" />
+        <Property Comment="Contact no item sub text color" DefaultValue="#a3333333" DestAttribName="no_item_no_results_found_sub_text_color" UID="12-32-2" ValueRef="1-1-4" ValueType="TextColor" />
+        <Property Comment="Contact Create Button background color" DefaultValue="#ffef8e5e" DestAttribName="picker_create_contact_button_bg" DestQualifiers="" UID="12-32-3" ValueRef="1-A" ValueType="BgColor" />
+        <Property Comment="create button icon tint color" DefaultValue="#fffafafa" DestAttribName="create_button_icon_tint_color" UID="12-32-4" ValueRef="1-E" ValueType="Color" />
+        <Property Comment="create button text color" DefaultValue="#fffafafa" DestAttribName="create_button_text_color" UID="12-32-5" ValueRef="1-E" ValueType="Color" />
+        <Property Comment="Manage contacts icon color" DefaultValue="#ff888888" Description="" DestAttribName="manage_contact_icon_color" Name="Manage contacts icon color" UID="12-33-2" ValueRef="1-3-2" ValueType="Color" />
+        <Property Comment="Sub app bar spinner text color: Change spinner text color" DefaultValue="#ff000000" DestAttribName="editor_spinner_text_color" UID="12-34-1" ValueRef="1-1-3" ValueType="TextColor" />
+        <Property Comment="Sub app bar spinner icon tint color: Change spinner icon color" DefaultValue="#ff666666" DestAttribName="account_spinner_icon_tint_color" UID="12-34-2" ValueRef="1-24-1" ValueType="Color" />
+        <Property Comment="Sub app bar spinner secondary text color" DefaultValue="" DestAttribName="editor_spinner_text_second" UID="12-34-3" ValueRef="1-1-4" ValueType="Color" />
+        <Property Comment="Error icon tint color" DefaultValue="#ffe87e65" DestAttribName="error_icon_tint_color" UID="12-34-4" ValueRef="24-G" ValueType="Color" />
+        <Property Comment="Expandable button Icon tint color: Change Expandable button Icon tint color" DefaultValue="#ff8e8e8e" DestAttribName="tw_expander_tint_color" UID="12-35-1" ValueRef="1-16-1" ValueType="Color" />
+        <Property Comment="Update button text color" DefaultValue="#fffafafa" DestAttribName="about_page_update_button_text_color" DestQualifiers="" UID="12-39-2" ValueRef="1-E" ValueType="TextColor" />
+        <Property Comment="Update button bg color" DefaultValue="#ffd36630" DestAttribName="about_page_update_button_bg_color" DestQualifiers="" UID="12-39-3" ValueRef="1-A" ValueType="Color" />
+        <Property Comment="Sticker Selected item BG color" DefaultValue="#ffef8e5e" DestAttribName="sticker_selected_item_bg_color" DestQualifiers="" Opacity="80" UID="12-40-1" ValueRef="12-A" ValueType="BgColor" />
+        <Property Comment="Selected tab icon + bar color" DefaultValue="#ffef8e5e" DestAttribName="sticker_selected_tab_color" DestQualifiers="" UID="12-40-2" ValueRef="75-4-3" ValueType="Color" />
+        <Property Comment="Unselected tab icon" DefaultValue="#ff6a6a6a" DestAttribName="sticker_unselected_tab_color" DestQualifiers="" UID="12-40-2-1" ValueRef="75-3-2" ValueType="Color" />
+        <Property Comment="Tray Tab divider color" DefaultValue="#ff979797" DestAttribName="sticker_tab_divider_color" DestQualifiers="" UID="12-40-2-2" ValueRef="75-3-2" ValueType="Color" />
+        <Property Comment="Sticker sub text color" DefaultValue="#ffef8e5e" DestAttribName="sticker_price_text_color" DestQualifiers="" UID="12-40-3" ValueRef="1-53-1" ValueType="TextColor" />
+        <Property Comment="Sticker Button BG color" DefaultValue="#ffa6a6a6" DestAttribName="sticker_network_setting_button_bg_color" DestQualifiers="" UID="12-40-4" ValueRef="1-7-1" ValueType="BgColor" />
+        <Property Comment="Sticker Button text color" DefaultValue="#ffa6a6a6" DestAttribName="sticker_network_setting_button_text_color" DestQualifiers="" UID="12-40-5" ValueRef="1-7-2" ValueType="TextColor" />
+        <Property Comment="Content sticker title color" DefaultValue="#ff252525" DestAttribName="content_sticker_title_color" DestQualifiers="" UID="12-40-6" ValueRef="1-1-3" ValueType="TextColor" />
+        <Property Comment="Sticker Reorder icon tint color" DefaultValue="#ff808080" DestAttribName="sticker_reorder_icon_tint_color" DestQualifiers="" UID="12-40-8" ValueRef="1-16-2" ValueType="Color" />
+        <Property Comment="Category BG color" DefaultValue="#00000000" DestAttribName="sticker_tab_background_color" DestQualifiers="" UID="12-40-9" ValueRef="75-11-1" ValueType="Color" />
+        <Property Comment="Sticker Tray BG color" DefaultValue="#fff9f9f9" DestAttribName="sticker_tray_background_color" DestQualifiers="" UID="12-40-10" ValueRef="75-1-1" ValueType="Color" />
+        <Property Comment="Linked color : Common > Primary color  > Primary color . Search bar background color" DefaultValue="#fff5f5f5" DestAttribName="w_searchview_textfiled_normal_material" DestQualifiers="" UID="12-41-1" ValueRef="1-59-1" ValueType="BgColor" />
+        <Property Comment="Search list prefix highlight color" DefaultValue="#ffd36630" DestAttribName="list_item_prefix_highlight_color" DestQualifiers="" UID="12-41-2" ValueRef="1-59-9" ValueType="TextColor" />
+        <Property Comment="Search cancel icon tint color" DefaultValue="#ff404040" DestAttribName="recent_search_list_item_search_delete_icon_tint_color" DestQualifiers="" UID="12-41-6" ValueRef="1-59-6-1" ValueType="Color" />
+        <Property Comment="Clear text color" DefaultValue="#ff010101" DestAttribName="clear_search_history_text_color" UID="12-41-9" ValueRef="1-3-1" ValueType="TextColor" />
+        <Property Comment="searchbar more button color" DefaultValue="#88252525" DestAttribName="actionbar_more_button_color" DestQualifiers="" UID="12-41-5" ValueRef="1-11-1" ValueType="Color" />
+        <Property Comment="Linked color : Common > Primary color  > Primary color . Search cancel icon color" DefaultValue="#ff575757" DestAttribName="searchview_close_icon_color" DestQualifiers="" UID="12-41-6-1" ValueRef="1-59-11" ValueType="Color" />
+        <Property Comment="Icon tint color" DefaultValue="#fffafafa" DestAttribName="select_photo_id_button_icon_color" DestQualifiers="" UID="12-42-1" ValueRef="1-18-1" ValueType="Color" />
+        <Property Comment="Button background color" DefaultValue="#fffe769a" DestAttribName="gallery_button_color,camera_button_color,ar_emoji_button_color,stickers_button_color" DestQualifiers="" UID="12-42-2" ValueRef="1-A" ValueType="Color" />
+        <Property Comment="Content Subtitle color" DefaultValue="#ff252525" DestAttribName="select_photo_id_button_text_color" DestQualifiers="" UID="12-42-3" ValueRef="1-1-3" ValueType="Color" />
+        <Property Comment="Expand my profile - camera thumbnail stroke color" DefaultValue="" DestAttribName="camera_thumbnail_stroke_color" DestQualifiers="" UID="12-18-1" ValueRef="1-18-1" ValueType="Color" />
+        <Property Comment="favorite star" DefaultValue="#ff858585" DestAttribName="favorite_star_color" DestQualifiers="" UID="12-2-12" ValueRef="1-19-2" ValueType="Color" />
+        <Property Comment="chip text color" DefaultValue="#ff252525" DestAttribName="chip_text_color" DestQualifiers="" UID="12-47-2" ValueRef="1-59-3" ValueType="TextColor" />
+        <Property Comment="chip bg color" DefaultValue="#ffe5e5e5" DestAttribName="sub_contact_picker_bubble_item_background_color" DestQualifiers="" UID="12-47-1" ValueRef="1-59-1" ValueType="Color" />
+        <Property Comment="rcs_chip text color" DefaultValue="#ff4292e3" DestAttribName="theme_rcs_indicator_bg_color" DestQualifiers="" UID="12-47-3" ValueRef="13-46-1" ValueType="Color" />
+        <Property Comment="Date text color" DefaultValue="" DestAttribName="editor_datepicker_title_text" DestQualifiers="" UID="12-27-10" ValueRef="1-41-3" ValueType="Color" />
+        <Property Comment="Field category icon tint color" DefaultValue="" DestAttribName="editor_item_icon_tint" DestQualifiers="" UID="12-21-5" ValueRef="24-D" ValueType="Color" />
+        <Property Comment="Field category text color" DefaultValue="" DestAttribName="editor_item_title_text" DestQualifiers="" UID="12-21-6" ValueRef="24-D" ValueType="Color" />
+        <Property Comment="Field Category icon tint color_Activated" DefaultValue="#ffafb1b3" DestAttribName="field_category_icon_tint_color_activated" DestQualifiers="" UID="12-21-7" ValueRef="12-E" ValueType="Color" />
+        <Property Comment="Field Category text color_Activated" DefaultValue="#ffeb6f31" DestAttribName="field_category_text_color_activated" DestQualifiers="" UID="12-21-8" ValueRef="12-E" ValueType="Color" />
+        <Property Comment="Dot badge tint color" DefaultValue="#fff65a0c" DestAttribName="dot_badge_tint_color" DestQualifiers="" UID="12-21-9" ValueRef="1-33-4" ValueType="Color" />
+        <Property Comment="Field Category Add Icon tint color" DefaultValue="#ffafb1b3" DestAttribName="field_category_add_icon_tint_color" DestQualifiers="" UID="12-21-10" ValueRef="24-D" ValueType="Color" />
+        <Property Comment="Field Category Add Icon image" DefaultValue="thumbnail_add_button" DestAttribName="field_category_add_icon" DestQualifiers="" UID="12-21-11" ValueRef="1-17-2" ValueType="Image" />
+        <Property Comment="Editor account dialog list main text" DefaultValue="" DestAttribName="editor_account_list_main_text" DestQualifiers="" UID="12-27-4" ValueRef="1-9-3" ValueType="Color" />
+        <Property Comment="Merge Contacts Tab background color" DefaultValue="#fff6f6f6" DestAttribName="sub_tab_background_color" DestQualifiers="" UID="12-12-1" ValueRef="1-13-1" ValueType="BgColor" />
+        <Property Comment="sub_tab_unselected text color" DefaultValue="#66858585" DestAttribName="sub_tab_unselected_text_color" DestQualifiers="" UID="12-12-3" ValueRef="1-13-2" ValueType="TextColor" />
+        <Property Comment="sub_tab_selected text color" DefaultValue="#ff252525" DestAttribName="sub_tab_selected_text_color" DestQualifiers="" UID="12-12-4" ValueRef="1-13-3" ValueType="TextColor" />
+        <Property Comment="sub_tab_selected mark tint color" DefaultValue="#0d252525" DestAttribName="sub_tab_selected_mark_tint_color" DestQualifiers="" UID="12-12-5" ValueRef="1-13-4" ValueType="TintColor" />
+        <Property Comment="Selected merge tab background image (ninepatch only)" DefaultValue="" DestAttribName="contacts_sub_tab_indicator_selected" DestQualifiers="xxxhdpi" UID="12-12-6" ValueRef="1-13-5" ValueType="BgImage" />
+        <Property Comment="contact list divider color" DefaultValue="#ffe6e6e6" DestAttribName="contact_list_divider_color" DestQualifiers="" UID="12-2-28" ValueRef="1-2" ValueType="Color" />
+        <Property Comment="appinfo icon color" DefaultValue="#ff454545" DestAttribName="about_page_appinfo_icon_color" DestQualifiers="" UID="12-39-1" ValueRef="1-3-1" ValueType="Color" />
+        <Property Comment="about page title text color" DefaultValue="#ff010101" DestAttribName="about_page_title_text_color" DestQualifiers="" UID="12-39-4" ValueRef="1-1-3" ValueType="TextColor" />
+        <Property Comment="about page subtext color" DefaultValue="#ff8c8c8c" DestAttribName="about_page_subtext_color" DestQualifiers="" UID="12-39-5" ValueRef="1-1-4" ValueType="TextColor" />
+        <Property Comment="about page open source licences button bg color" DefaultValue="#ffebebeb" DestAttribName="about_page_open_source_button_bg_color" DestQualifiers="" UID="12-39-6" ValueRef="1-7-1-D" ValueType="BgColor" />
+        <Property Comment="about page open source licences button text color" DefaultValue="#ff252525" DestAttribName="about_page_open_source_button_text_color" DestQualifiers="" UID="12-39-7" ValueRef="1-7-2-D" ValueType="TextColor" />
+        <Property Comment="about page background color" DefaultValue="#fffcfcfc" DestAttribName="about_page_bg_color" DestQualifiers="" UID="12-39-8" ValueRef="1-1-1" ValueType="BgColor" />
+        <Property Comment="Sub header text color" DefaultValue="#ff858585" DestAttribName="header_text_color,recent_search_list_header_text_color" DestQualifiers="" UID="12-48-2" ValueRef="1-19-2" ValueType="TextColor" />
+        <Property Comment="navigationBarColor" DefaultValue="#fff2f2f2" DestAttribName="contacts_navigation_bar_color" DestQualifiers="" UID="12-51-1" ValueRef="1-69-1" ValueType="BgColor" />
+        <Property Comment="Navigation Icon color (Light/Dark)" DefaultValue="false" DestAttribName="isLightNavigationBar" DestQualifiers="" UID="12-51-2" ValueRef="1-69-2" ValueType="Bool" />
+        <Property Comment="Line color unselected" DefaultValue="#ff8c8c8c" DestAttribName="text_field_unselected_line_color" DestQualifiers="" UID="12-50-1" ValueRef="1-23-1" ValueType="Color" />
+        <Property Comment="Line color disabled" DefaultValue="#ffbebebe" DestAttribName="text_field_disabled_line_color" DestQualifiers="" UID="12-50-1-1" ValueRef="1-23-1-1" ValueType="Color" />
+        <Property Comment="Line color selected" DefaultValue="#ffef8e5e" DestAttribName="text_field_selected_line_color" DestQualifiers="" UID="12-50-2" ValueRef="12-A" ValueType="Color" />
+        <Property Comment="Cursor color" DefaultValue="#ffef8e5e" DestAttribName="text_field_cursor_color" DestQualifiers="" UID="12-50-3" ValueRef="12-A" ValueType="Color" />
+        <Property Comment="Hint text color" DefaultValue="#ff8c8c8c" DestAttribName="text_field_hint_text_color" DestQualifiers="" UID="12-50-4" ValueRef="1-23-4" ValueType="TextColor" />
+        <Property Comment="Hint text disabled text color" DefaultValue="#ffbebebe" DestAttribName="text_field_disabled_hint_text_color" DestQualifiers="" UID="12-50-4-1" ValueRef="1-23-4-1" ValueType="TextColor" />
+        <Property Comment="Input text color" DefaultValue="#ff252525" DestAttribName="text_field_input_text_color" DestQualifiers="" UID="12-50-5" ValueRef="1-23-5" ValueType="TextColor" />
+        <Property Comment="Error message" DefaultValue="#ffb00020" DestAttribName="text_field_error_message_color" DestQualifiers="" UID="12-50-6" ValueRef="1-23-8" ValueType="TextColor" />
+        <Property Comment="Primary Dark color" DefaultValue="#ff252525" DestAttribName="group_editor_edit_text_main_color" DestQualifiers="" UID="12-50-7" ValueRef="12-E" ValueType="TextColor" />
+        <Property Comment="splash bg" DefaultValue="#fff2f2f2" DestAttribName="dummy_contact_splash_bg" DestQualifiers="" UID="12-52-1" ValueRef="1-1-1-1" ValueType="BgColor" />
+        <Property Comment="splash_icon_text" DefaultValue="#ff000000" DestAttribName="dummy_splash_icon_text" DestQualifiers="" UID="12-52-2" ValueRef="1-1-3-1" ValueType="TextColor" />
+        <Property Comment="splash icon" DefaultValue="" DestAttribName="contacts_splash" DestQualifiers="" UID="12-52-3" ValueRef="8-4-1-2" ValueType="BgImage" />
+        <Property Comment="drawer list icon tint color" DefaultValue="#ff86898b" DestAttribName="contact_list_drawer_list_icon_tint_color" DestQualifiers="" UID="12-46-2" ValueRef="1-3-2" ValueType="TintColor" />
+        <Property Comment="drawer_main_text_color" DefaultValue="#ff000000" DestAttribName="contact_list_drawer_main_text_color" DestQualifiers="" UID="12-46-3" ValueRef="1-3-1" ValueType="TextColor" />
+        <Property Comment="drawer_sub_text_color" DefaultValue="#ff86898b" DestAttribName="dummy_drawer_sub_text_color" DestQualifiers="" UID="12-46-4" ValueRef="1-3-2" ValueType="TextColor" />
+        <Property Comment="drawer list open tint color" DefaultValue="#ff86898b" DestAttribName="contact_list_drawer_list_open_shrink_icon_tint_color" DestQualifiers="" UID="12-46-6" ValueRef="1-3-2" ValueType="TintColor" />
+        <Property Comment="Drawer divider color" DefaultValue="#34252525" DestAttribName="dot_divider_dot_color,setting_divider_color" DestQualifiers="" UID="12-46-7" ValueRef="1-2" ValueType="Color" />
+        <Property Comment="Drawer divider color navi rail" DefaultValue="#34252525" DestAttribName="drawer_navigation_rail_dividor_tint_color" DestQualifiers="" UID="12-46-7-1" ValueRef="1-3-2" ValueType="Color" />
+        <Property Comment="drawer_setting_icon_tint_color" DefaultValue="#ff86898b" DestAttribName="contact_list_drawer_setting_tint_color" DestQualifiers="" UID="12-46-8" ValueRef="1-3-2" ValueType="TintColor" />
+        <Property Comment="drawer_number_text_color" DefaultValue="#ff86898b" DestAttribName="contact_list_drawer_count_color" DestQualifiers="" UID="12-46-9" ValueRef="1-3-2" ValueType="TextColor" />
+        <Property Comment="Navigation rail background color" DefaultValue="#ffeaeaea" DestAttribName="drawer_navigation_rail_bg_color" DestQualifiers="" UID="12-46-10" ValueRef="1-7-1" ValueType="BgColor" />
+        <Property Comment="Detail view circle BG color" DefaultValue="" DestAttribName="common_circle_bg_color" DestQualifiers="" UID="12-18-2" ValueRef="1-3-2" ValueType="Color" />
+        <Property Comment="open source licenses text color" DefaultValue="#ff252525" DestAttribName="open_source_licenses_text_color" DestQualifiers="" UID="12-53-1" ValueRef="1-3-1" ValueType="TextColor" />
+        <Property Comment="delete duplicate contacts count text color" DefaultValue="#ff505050" DestAttribName="status_text_color,import_export_step_index_text_color" DestQualifiers="" UID="12-30-3" ValueRef="1-1-3-1" ValueType="TextColor" />
+        <Property Comment="Duplicate contact circle tint color" DefaultValue="" DestAttribName="duplicate_contact_circle_tint_color" DestQualifiers="" UID="12-36-1" ValueRef="12-A" ValueType="Color" />
+        <Property Comment="Duplicate contact check tint color" DefaultValue="" DestAttribName="duplicate_contact_check_tint_color" DestQualifiers="" UID="12-36-2" ValueRef="12-A" ValueType="Color" />
+        <Property Comment="Duplicate contact text color" DefaultValue="" DestAttribName="duplicate_contact_text_color" DestQualifiers="" UID="12-36-3" ValueRef="1-3-3-D" ValueType="TextColor" />
+        <Property Comment="ON Background color" DefaultValue="#0d000000" DestAttribName="third_party_card_switch_layout_on_color" DestQualifiers="" UID="12-37-1" ValueRef="1-40-1" ValueType="BgColor" />
+        <Property Comment="OFF Background color" DefaultValue="#fffcfcfc" DestAttribName="third_party_card_switch_layout_off_color" DestQualifiers="" UID="12-37-2" ValueRef="1-40-2" ValueType="BgColor" />
+        <Property Comment="ON Text color" DefaultValue="#ffd36630" DestAttribName="third_party_switch_layout_text_on" DestQualifiers="" UID="12-37-3" ValueRef="1-40-3" ValueType="TextColor" />
+        <Property Comment="OFF Text color" DefaultValue="#ff252525" DestAttribName="third_party_switch_layout_text_off" DestQualifiers="" UID="12-37-4" ValueRef="1-40-4" ValueType="TextColor" />
+        <Property Comment="Group list icon color" DefaultValue="" DestAttribName="group_list_icon_color" DestQualifiers="" UID="12-2-30" ValueRef="1-3-2" ValueType="Color" />
+        <Property Comment="Background color of Favorite contacts" DefaultValue="" DestAttribName="contact_list_favorite_icon_bg_color" DestQualifiers="" UID="12-2-31" ValueRef="1-32-3-1" ValueType="BgColor" />
+        <Property Comment="Icon color of Favorite contacts" DefaultValue="" DestAttribName="contact_list_favorite_icon_tint_color" DestQualifiers="" UID="12-2-32" ValueRef="1-32-4" ValueType="Image" />
+        <Property Comment="Control area ripple color" DefaultValue="#14000000" DestAttribName="dialtacts_ripple_button_color" DestQualifiers="" POption="AlwaysOverriden" UID="12-60-1" ValueRef="1-52-1" ValueType="Color" />
+        <Property Comment="Content area ripple color" DefaultValue="#19000000" DestAttribName="dialtacts_ripple_list_color" DestQualifiers="" POption="AlwaysOverriden" UID="12-60-2" ValueRef="1-52-2" ValueType="Color" />
+        <Property Comment="Account Sync Tips Background color" DefaultValue="#33ef8e5e" DestAttribName="account_sync_tips_background_color" DestQualifiers="" UID="12-62-1" ValueRef="1-40-1" ValueType="BgColor" />
+        <Property Comment="Account Sync Tips Text_Icon_tint color" DefaultValue="#ffef8e5e" DestAttribName="account_sync_tips_text_icon_tint_color" DestQualifiers="" UID="12-62-2" ValueRef="1-40-3" ValueType="TextColor" />
+        <Property Comment="Notification bg color" DefaultValue="#0f000000" DestAttribName="notification_bg_color" DestQualifiers="" UID="12-63-1" ValueRef="4-4-1" ValueType="BgColor" />
+        <Property Comment="Notification body text color" DefaultValue="#ff252525" DestAttribName="notification_body_text_color" DestQualifiers="" UID="12-63-2" ValueRef="4-22-2" ValueType="TextColor" />
+        <Property Comment="Notification sub text color" DefaultValue="#ff252525" DestAttribName="notification_sub_text_color" DestQualifiers="" UID="12-63-3" ValueRef="4-22-3" ValueType="TextColor" />
+        <Property Comment="Notification action button color" DefaultValue="#ffeb6f31" DestAttribName="notification_action_button_color" DestQualifiers="" UID="12-63-11" ValueRef="4-22-11" ValueType="TextColor" />
+        <Property Comment="Notification header color" DefaultValue="#ffeb6f31" DestAttribName="notification_header_color" DestQualifiers="" UID="12-63-20" ValueRef="4-22-20" ValueType="TextColor" />
+        <Property Comment="Notification Progress bar bg color" DefaultValue="#ffd2d2d2" DestAttribName="progress_bar_bg_color" DestQualifiers="" UID="12-63-21" ValueRef="1-20-1" ValueType="TintColor" />
+        <Property Comment="Notification Progress bar progress color" DefaultValue="#ffef8e5e" DestAttribName="progress_bar_progress_color" DestQualifiers="" UID="12-63-22" ValueRef="1-20-2" ValueType="TintColor" />
+    </AppMetaData>
+</ThemeMetaData>

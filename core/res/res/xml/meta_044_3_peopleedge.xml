@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ThemeMetaData FormatVersion="1.3" GuideVersion="6.1">
+    <AppMetaData Name="PeopleStripe" TargetApi="26" TargetPackageName="com.samsung.android.service.peoplestripe" VersionCode="1" VersionName="">
+        <Include RefName="SESL" />
+        <Property Comment="Background color" DefaultValue="#fffcfcfc" DestAttribName="sub_app_bar_divider_color,setting_suggestion_background" DestQualifiers="" UID="44_3-1-1" ValueRef="1-18-1" ValueType="BgColor" />
+        <Property Comment="Empty slot icon tint color" DefaultValue="#ff929292" DestAttribName="settings_empty_slot_color" DestQualifiers="" POption="AlwaysOverriden" UID="44_3-11-1" ValueRef="1-32-5" ValueType="TintColor" />
+        <Property Comment="Setting suggestion text" DefaultValue="#ff909090" DestAttribName="settings_suggestion_color,settings_contact_dialog_main_text" DestQualifiers="" UID="44_3-13-1" ValueRef="24-A" ValueType="TextColor" />
+        <Property Comment="Setting suggestion description text" DefaultValue="#ff909090" DestAttribName="settings_suggestion_description_color,settings_contact_dialog_sub_text" DestQualifiers="" UID="44_3-13-2" ValueRef="24-B" ValueType="TextColor" />
+        <Property Comment="Action Bar Title Text Color" DefaultValue="#ff252525" DestAttribName="settings_app_info_title" DestQualifiers="" POption="FixedOpacity|AlwaysOverriden" UID="44_3-13-3" ValueRef="1-1-3" ValueType="TextColor" />
+        <Property Comment="Suggestions List Item text color" DefaultValue="#ff252525" DestAttribName="suggestions_list_item_text_color" DestQualifiers="" UID="44_3-13-4" ValueRef="1-1-3" ValueType="TextColor" />
+        <Property Comment="Status Bar Color" DefaultValue="#fff2f2f2" DestAttribName="people_edge_settings_status_bar_color" DestQualifiers="" UID="44_3-S-1" ValueRef="1-51" ValueType="Color" />
+        <Property Comment="Status bar icon color" DefaultValue="true" DestAttribName="use_light_status_bar" UID="44_3-S-2" ValueRef="1-51-1" ValueType="Bool" />
+        <Property Comment="Suggested Contacts Sub header text color" DefaultValue="#ff909090" DestAttribName="sub_header_text_color" DestQualifiers="" UID="44_3-2-3" ValueRef="1-19-2" ValueType="TextColor" />
+        <Property Comment="Suggested Contacts sub header divider color" DefaultValue="#ff979797" DestAttribName="sub_header_divider_color" DestQualifiers="" UID="44_3-2-4" ValueRef="1-19-2" ValueType="Color" />
+        <Property Comment="Background Color" DefaultValue="#fff2f2f2" DestAttribName="people_edge_settings_background_color" DestQualifiers="" UID="44_3-10-1" ValueRef="1-1-1" ValueType="BgColor" />
+        <Property Comment="Button Background Color" DefaultValue="#0f000000" DestAttribName="settings_select_contacts_button_background" DestQualifiers="" UID="44_3-17-1" ValueRef="1-7-1-D" ValueType="BgColor" />
+        <Property Comment="Button Text Color" DefaultValue="#ff252525" DestAttribName="select_contacts_text_color" DestQualifiers="" UID="44_3-17-2" ValueRef="1-7-2-D" ValueType="TextColor" />
+    </AppMetaData>
+</ThemeMetaData>

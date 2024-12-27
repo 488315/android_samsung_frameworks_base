@@ -1,0 +1,120 @@
+package com.android.internal.util;
+
+/* loaded from: classes5.dex */
+public final class GrowingArrayUtils {
+    static final /* synthetic */ boolean $assertionsDisabled = false;
+
+    /* JADX WARN: Multi-variable type inference failed */
+    /* JADX WARN: Type inference failed for: r0v3, types: [java.lang.Object, java.lang.Object[]] */
+    public static <T> T[] append(T[] array, int currentSize, T element) {
+        if (currentSize + 1 > array.length) {
+            ?? newUnpaddedArray = ArrayUtils.newUnpaddedArray(array.getClass().getComponentType(), growSize(currentSize));
+            System.arraycopy(array, 0, newUnpaddedArray, 0, currentSize);
+            array = newUnpaddedArray;
+        }
+        array[currentSize] = element;
+        return array;
+    }
+
+    public static int[] append(int[] array, int currentSize, int element) {
+        if (currentSize + 1 > array.length) {
+            int[] newArray = ArrayUtils.newUnpaddedIntArray(growSize(currentSize));
+            System.arraycopy(array, 0, newArray, 0, currentSize);
+            array = newArray;
+        }
+        array[currentSize] = element;
+        return array;
+    }
+
+    public static long[] append(long[] array, int currentSize, long element) {
+        if (currentSize + 1 > array.length) {
+            long[] newArray = ArrayUtils.newUnpaddedLongArray(growSize(currentSize));
+            System.arraycopy(array, 0, newArray, 0, currentSize);
+            array = newArray;
+        }
+        array[currentSize] = element;
+        return array;
+    }
+
+    public static boolean[] append(boolean[] array, int currentSize, boolean element) {
+        if (currentSize + 1 > array.length) {
+            boolean[] newArray = ArrayUtils.newUnpaddedBooleanArray(growSize(currentSize));
+            System.arraycopy(array, 0, newArray, 0, currentSize);
+            array = newArray;
+        }
+        array[currentSize] = element;
+        return array;
+    }
+
+    public static float[] append(float[] array, int currentSize, float element) {
+        if (currentSize + 1 > array.length) {
+            float[] newArray = ArrayUtils.newUnpaddedFloatArray(growSize(currentSize));
+            System.arraycopy(array, 0, newArray, 0, currentSize);
+            array = newArray;
+        }
+        array[currentSize] = element;
+        return array;
+    }
+
+    public static <T> T[] insert(T[] tArr, int i, int i2, T t) {
+        if (i + 1 <= tArr.length) {
+            System.arraycopy(tArr, i2, tArr, i2 + 1, i - i2);
+            tArr[i2] = t;
+            return tArr;
+        }
+        T[] tArr2 = (T[]) ArrayUtils.newUnpaddedArray(tArr.getClass().getComponentType(), growSize(i));
+        System.arraycopy(tArr, 0, tArr2, 0, i2);
+        tArr2[i2] = t;
+        System.arraycopy(tArr, i2, tArr2, i2 + 1, tArr.length - i2);
+        return tArr2;
+    }
+
+    public static int[] insert(int[] array, int currentSize, int index, int element) {
+        if (currentSize + 1 <= array.length) {
+            System.arraycopy(array, index, array, index + 1, currentSize - index);
+            array[index] = element;
+            return array;
+        }
+        int[] newArray = ArrayUtils.newUnpaddedIntArray(growSize(currentSize));
+        System.arraycopy(array, 0, newArray, 0, index);
+        newArray[index] = element;
+        System.arraycopy(array, index, newArray, index + 1, array.length - index);
+        return newArray;
+    }
+
+    public static long[] insert(long[] array, int currentSize, int index, long element) {
+        if (currentSize + 1 <= array.length) {
+            System.arraycopy(array, index, array, index + 1, currentSize - index);
+            array[index] = element;
+            return array;
+        }
+        long[] newArray = ArrayUtils.newUnpaddedLongArray(growSize(currentSize));
+        System.arraycopy(array, 0, newArray, 0, index);
+        newArray[index] = element;
+        System.arraycopy(array, index, newArray, index + 1, array.length - index);
+        return newArray;
+    }
+
+    public static boolean[] insert(boolean[] array, int currentSize, int index, boolean element) {
+        if (currentSize + 1 <= array.length) {
+            System.arraycopy(array, index, array, index + 1, currentSize - index);
+            array[index] = element;
+            return array;
+        }
+        boolean[] newArray = ArrayUtils.newUnpaddedBooleanArray(growSize(currentSize));
+        System.arraycopy(array, 0, newArray, 0, index);
+        newArray[index] = element;
+        System.arraycopy(array, index, newArray, index + 1, array.length - index);
+        return newArray;
+    }
+
+    public static int growSize(int currentSize) {
+        if (currentSize <= 4) {
+            return 8;
+        }
+        return currentSize * 2;
+    }
+
+    private GrowingArrayUtils() {
+    }
+}

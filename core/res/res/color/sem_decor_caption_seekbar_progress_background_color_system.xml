@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_enabled="false" android:color="@color/sem_decor_caption_progress_normal_color_system" android:alpha="@dimen/sem_decor_caption_button_disabled_alpha" />
+    <item android:color="@color/sem_decor_caption_progress_normal_color_system" />
+</selector>

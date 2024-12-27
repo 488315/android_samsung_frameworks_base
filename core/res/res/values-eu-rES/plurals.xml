@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="SDcardBlockUnmount_message">
+        <item quantity="other">Telefonoa ez da egonkorra aplikazioak instalatuta zeuzkan SD txartel bat kendu delako. Telefonoa %d segundo barru berrabiaraziko da ohi bezala funtzionatzeko. Telefonoa berrabiarazi aurretik, gorde datu guztiak.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Telefonoa ez da egonkorra aplikazioak instalatuta zeuzkan SD txartel bat kendu delako. Telefonoa %d segundo barru berrabiaraziko da ohi bezala funtzionatzeko. Telefonoa berrabiarazi aurretik, gorde datu guztiak.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="SDcardBlockUnmount_title">
+        <item quantity="other">Tel. %d segundo barru berrabiaraziko da</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Tel. %d segundo barru berrabiaraziko da</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_phone">
+        <item quantity="other">%d aplikazio automatikoki itxi dira telefonoa gehiegi berotzea eragiten ari zirelako. Telefonoa hozten denean, berriz ireki ahal izango dituzu.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d aplikazio automatikoki itxi da telefonoa gehiegi berotzea eragiten ari zelako. Telefonoa hozten denean, berriz ireki ahal izango duzu.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_tablet">
+        <item quantity="other">%d aplikazio automatikoki itxi dira tableta gehiegi berotzea eragiten ari zirelako. Tableta hozten denean, berriz ireki ahal izango dituzu.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d aplikazio automatikoki itxi da tableta gehiegi berotzea eragiten ari zelako. Tableta hozten denean, berriz ireki ahal izango duzu.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_title_v2">
+        <item quantity="other">%d aplikazio itxi dira</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d aplikazio itxi da</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="dex_max_count_text">
+        <item quantity="other">Gehienez ere %d aplikazio erakuts daitezke pantailan aldi berean. Aplikazio zaharrena minimizatu da.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Gehienez ere %d aplikazio erakuts daiteke pantailan aldi berean. Aplikazio zaharrena minimizatu da.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="hot_key_guide_message">
+        <item quantity="other">Ireki esleitu nahi duzun aplikazioa, eta sakatu eta eutsi aplikazioaren teklari %d segundoz.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Ireki esleitu nahi duzun aplikazioa, eta sakatu eta eutsi aplikazioaren teklari %d segundoz.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_phone">
+        <item quantity="other">%1$s telefonoa gehiegi berotzea eragiten ari da. %2$d segundo barru itxiko da automatikoki.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s telefonoa gehiegi berotzea eragiten ari da. %2$d segundo barru itxiko da automatikoki.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_tablet">
+        <item quantity="other">%1$s tableta gehiegi berotzea eragiten ari da. %2$d segundo barru itxiko da automatikoki.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s tableta gehiegi berotzea eragiten ari da. %2$d segundo barru itxiko da automatikoki.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="maintenance_mode_backup_cloud_menu_sub_textview_message_default">
+        <item quantity="other">Egin babeskopia mugagabeak Samsung Cloud-en %d egunez edo leheneratu babeskopiak dituzten datuak.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Egin babeskopia mugagabeak Samsung Cloud-en %d egunez edo leheneratu babeskopiak dituzten datuak.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_phone">
+        <item quantity="other">%1$s telefonoa gehiegi berotzea eragiten ari da. Orain itxi dezakezu; bestela, %2$d segundo barru itxiko da automatikoki.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s telefonoa gehiegi berotzea eragiten ari da. Orain itxi dezakezu; bestela, %2$d segundo barru itxiko da automatikoki.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_tablet">
+        <item quantity="other">%1$s tableta gehiegi berotzea eragiten ari da. Orain itxi dezakezu; bestela, %2$d segundo barru itxiko da automatikoki.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s tableta gehiegi berotzea eragiten ari da. Orain itxi dezakezu; bestela, %2$d segundo barru itxiko da automatikoki.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sem_chooser_preview_items">
+        <item quantity="other">%d elementu</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d elementu</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_hours">
+        <item quantity="other">%d ordu</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d ordu</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_minutes">
+        <item quantity="other">%d minutu</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d minutu</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

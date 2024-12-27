@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="SDcardBlockUnmount_message">
+        <item quantity="other">आपला फोन अस्थिर आहे कारण ज्या SD कार्ड वर अनुप्रयोग इन्स्टॉल केले होते त्यावरून ते काढले आहेत. सामान्या वर परत येण्या साठी आपल्या फोनचा %d सेकंदांत पुनरारंभ होईल. फोनचा पुनरारंभ करण्या पूर्वी कोणताही जतन न केलेला डेटा जतन करा.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">आपला फोन अस्थिर आहे कारण ज्या SD कार्ड वर अनुप्रयोग इन्स्टॉल केले होते त्यावरून ते काढले आहेत. सामान्या वर परत येण्या साठी आपल्या फोनचा %d सेकंदात पुनरारंभ होईल. फोनचा पुनरारंभ करण्या पूर्वी कोणताही जतन न केलेला डेटा जतन करा.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="SDcardBlockUnmount_title">
+        <item quantity="other">%d सेकंदां मध्ये आपल्या फोनचा पुनरारंभ होईल</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d सेकंदा मध्ये आपल्या फोनचा पुनरारंभ होईल</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_phone">
+        <item quantity="other">%d ऍप्स ऑटोमॅटिक पणे बंद झाले कारण ते आपला फोन अतितापवत होते. आपला फोन थंड झाल्या नंतर आपण ते नंतर पुन्हा उघडू शकता.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d अनुप्रयोग ऑटोमॅटिकली बंद झाला कारण तो आपल्या फोनला अतितापवत होता. आपला फोन थंड झाल्या नंतर आपण तो नंतर पुन्हा उघडू शकता.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_tablet">
+        <item quantity="other">%d ऍप्स ऑटोमॅटिक पणे बंद झाले कारण ते आपला टॅबलेट अतितापवत होते. आपला टॅबलेट थंड झाल्या नंतर आपण ते नंतर पुन्हा उघडू शकता.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d अनुप्रयोग ऑटोमॅटिकली बंद झाला कारण तो आपल्या टॅबलेटला अतितापवत होता. आपला टॅबलेट थंड झाल्या नंतर आपण तो नंतर पुन्हा उघडू शकता.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_title_v2">
+        <item quantity="other">%d ऍप्स बंद केले</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d अनुप्रयोग बंद केला</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="dex_max_count_text">
+        <item quantity="other">एकाच वेळी स्क्रीन वर %d पेक्षा अधिक ऍप्स दर्शवू शकत नाहीत. सर्वात जुना ऍप्स कमी केला.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">एकाच वेळी स्क्रीन वर %d पेक्षा अधिक अनुप्रयोग दर्शवू शकत नाही. सर्वात जुना अनुप्रयोग कमी केला.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="hot_key_guide_message">
+        <item quantity="other">आपल्याला नियुक्त करायचे असलेले ऍप उघडा, त्यानंतर %d सेकंदांसाठी ऍप की दाबा आणि धरून ठेवा.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">आपल्याला नियुक्त करायचे असलेले ऍप उघडा, त्यानंतर %d सेकंदासाठी ऍप की दाबा आणि धरून ठेवा.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_phone">
+        <item quantity="other">%1$s मुळे आपला फोन जास्त गरम होत आहे. तो %2$d सेकंदांत ऑटोमॅटिकपणे बंद होईल.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s मुळे आपला फोन जास्त गरम होत आहे. तो %2$d सेकंदात ऑटोमॅटिकपणे बंद होईल.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_tablet">
+        <item quantity="other">%1$s मुळे आपला टॅबलेट जास्त गरम होत आहे. तो %2$d सेकंदांत ऑटोमॅटिकपणे बंद होईल.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s मुळे आपला टॅबलेट जास्त गरम होत आहे. तो %2$d सेकंदात ऑटोमॅटिकपणे बंद होईल.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="maintenance_mode_backup_cloud_menu_sub_textview_message_default">
+        <item quantity="other">Samsung Cloud वर %d दिवसांपर्यंत अमर्यादित डेटाचा बॅकअप घ्या किंवा आपण बॅकअप घेतलेला डेटा रिस्टोर करा.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Samsung Cloud वर %d दिवसापर्यंत अमर्यादित डेटाचा बॅकअप घ्या किंवा आपण बॅकअप घेतलेला डेटा रिस्टोर करा.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_phone">
+        <item quantity="other">%1$s आपल्या फोनला अतितापवत आहे. आपण आता ते बंद करू शकता किंवा ते %2$d सेकंदांत ऑटोमॅटिकली बंद होईल.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s आपल्या फोनला अतितापवत आहे. आपण आता ते बंद करू शकता किंवा ते %2$d सेकंदात ऑटोमॅटिकली बंद होईल.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_tablet">
+        <item quantity="other">%1$s आपल्या टॅबलेटला अतितापवत आहे. आपण आता ते बंद करू शकता किंवा ते %2$d सेकंदांत ऑटोमॅटिकली बंद होईल.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s आपल्या टॅबलेटला अतितापवत आहे. आपण आता ते बंद करू शकता किंवा ते %2$d सेकंदात ऑटोमॅटिकली बंद होईल.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sem_chooser_preview_items">
+        <item quantity="other">%d आयटम</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d आयटम</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_hours">
+        <item quantity="other">%d तास</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d तास</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_minutes">
+        <item quantity="other">%d मिनिटे</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d मिनिट</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

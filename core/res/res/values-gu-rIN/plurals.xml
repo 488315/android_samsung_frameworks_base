@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="SDcardBlockUnmount_message">
+        <item quantity="other">જે SD કાર્ડ પર ઍપ્સ ઇન્સ્ટૉલ કરેલી હતી તે દૂર કરવામાં આવ્યું હોવાથી, તમારો ફોન અસ્થિર બન્યો છે. ફરી સામાન્ય સ્થિતિએ પહોંચવા માટે, %d સેકંડમાં તમારા ફોનનો પુનઃપ્રારંભ થશે. કોઈ ન સાચવેલો ડેટા હોય, તો ફોનનો પુનઃપ્રારંભ થાય તે પહેલાં તેને સાચવી લો.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">જે SD કાર્ડ પર ઍપ્સ ઇન્સ્ટૉલ કરેલી હતી તે દૂર કરવામાં આવ્યું હોવાથી, તમારો ફોન અસ્થિર બન્યો છે. ફરી સામાન્ય સ્થિતિએ પહોંચવા માટે, %d સેકંડમાં તમારા ફોનનો પુનઃપ્રારંભ થશે. કોઈ ન સાચવેલો ડેટા હોય, તો ફોનનો પુનઃપ્રારંભ થાય તે પહેલાં તેને સાચવી લો.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="SDcardBlockUnmount_title">
+        <item quantity="other">%d સેકંડમાં તમારા ફોનનો પુનઃપ્રારંભ થશે</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d સેકંડમાં તમારા ફોનનો પુનઃપ્રારંભ થશે</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_phone">
+        <item quantity="other">%d ઍપ્સ સ્વચાલિત રીતે બંધ થઈ હતી કારણ કે તેને લીધે તમારો ફોન વધુ પડતો ગરમ થઈ રહ્યો હતો. તમારો ફોન ઠંડો પડે, ત્યાર બાદ તમે તેને ફરીથી ખોલી શકો છો.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d ઍપ સ્વચાલિત રીતે બંધ થઈ હતી કારણ કે તેને લીધે તમારો ફોન વધુ પડતો ગરમ થઈ રહ્યો હતો. તમારો ફોન ઠંડો પડે, ત્યાર બાદ તમે તેને ફરીથી ખોલી શકો છો.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_tablet">
+        <item quantity="other">%d ઍપ્સ સ્વચાલિત રીતે બંધ થઈ હતી કારણ કે તેને લીધે તમારું ટૅબ્લેટ વધુ પડતું ગરમ થઈ રહ્યું હતું. તમારું ટૅબ્લેટ ઠંડું પડે, ત્યાર બાદ તમે તેને ફરીથી ખોલી શકો છો.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d ઍપ સ્વચાલિત રીતે બંધ થઈ હતી કારણ કે તેને લીધે તમારું ટૅબ્લેટ વધુ પડતું ગરમ થઈ રહ્યું હતું. તમારું ટૅબ્લેટ ઠંડું પડે, ત્યાર બાદ તમે તેને ફરીથી ખોલી શકો છો.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_title_v2">
+        <item quantity="other">%d ઍપ્સ બંધ કરી</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d એપ બંધ કરી</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="dex_max_count_text">
+        <item quantity="other">એક જ સમયે સ્ક્રીન પર %d થી વધુ ઍપ્સ બતાવી શકાતી નથી. સૌથી જૂની ઍપને નાની કરી.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">એક જ સમયે સ્ક્રીન પર %d થી વધુ ઍપ બતાવી શકાતી નથી. સૌથી જૂની ઍપને નાની કરી.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="hot_key_guide_message">
+        <item quantity="other">તમારે નિયુક્ત કરવી હોય તે ઍપ પસંદ કરો, પછી %d સેકન્‍ડ માટે ઍપ કી દબાવો અને હોલ્ડ કરો.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">તમારે નિયુક્ત કરવી હોય તે ઍપ પસંદ કરો, પછી %d સેકન્‍ડ માટે ઍપ કી દબાવો અને હોલ્ડ કરો.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_phone">
+        <item quantity="other">%1$sને કારણે તમારો ફોન વધુ પડતો ગરમ થઈ રહ્યો છે. %2$d સેકંડમાં તે આપમેળે બંધ થઈ જશે.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$sને કારણે તમારો ફોન વધુ પડતો ગરમ થઈ રહ્યો છે. %2$d સેકંડમાં તે આપમેળે બંધ થઈ જશે.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_tablet">
+        <item quantity="other">%1$sને કારણે તમારું ટૅબ્લેટ વધુ પડતું ગરમ થઈ રહ્યું છે. %2$d સેકંડમાં તે આપમેળે બંધ થઈ જશે.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$sને કારણે તમારું ટૅબ્લેટ વધુ પડતું ગરમ થઈ રહ્યું છે. %2$d સેકંડમાં તે આપમેળે બંધ થઈ જશે.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="maintenance_mode_backup_cloud_menu_sub_textview_message_default">
+        <item quantity="other">વધુમાં વધુ %d દિવસ સુધી Samsung Cloud પર અસીમિત ડેટાનો બૅકઅપ લો અથવા તમે બૅકઅપ લીધેલો ડેટા પાછો મેળવો.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">વધુમાં વધુ %d દિવસ સુધી Samsung Cloud પર અસીમિત ડેટાનો બૅકઅપ લો અથવા તમે બૅકઅપ લીધેલો ડેટા પાછો મેળવો.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_phone">
+        <item quantity="other">%1$sને કારણે તમારો ફોન વધુ પડતો ગરમ થઈ રહ્યો છે. તમે તેને હમણાં બંધ કરી શકો છો અથવા તે %2$d સેકંડમાં સ્વચાલિત રીતે બંધ થઈ જશે.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$sને કારણે તમારો ફોન વધુ પડતો ગરમ થઈ રહ્યો છે. તમે તેને હમણાં બંધ કરી શકો છો અથવા તે %2$d સેકંડમાં સ્વચાલિત રીતે બંધ થઈ જશે.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_tablet">
+        <item quantity="other">%1$sને કારણે તમારું ટૅબ્લેટ વધુ પડતું ગરમ થઈ રહ્યું છે. તમે તેને હમણાં બંધ કરી શકો છો અથવા તે %2$d સેકંડમાં સ્વચાલિત રીતે બંધ થઈ જશે.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$sને કારણે તમારું ટૅબ્લેટ વધુ પડતું ગરમ થઈ રહ્યું છે. તમે તેને હમણાં બંધ કરી શકો છો અથવા તે %2$d સેકંડમાં સ્વચાલિત રીતે બંધ થઈ જશે.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sem_chooser_preview_items">
+        <item quantity="other">%d વસ્તુઓ</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d વસ્તુ</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_hours">
+        <item quantity="other">%d કલાક</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d કલાક</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_minutes">
+        <item quantity="other">%d મિનિટ્સ</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d મિનિટ</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

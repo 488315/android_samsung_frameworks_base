@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ThemeMetaData FormatVersion="1.3" GuideVersion="1.4">
+    <AppMetaData Name="Physical Keyboard" TargetApi="28" TargetPackageName="com.sec.android.desktopmode.uiservice" VersionCode="1" VersionName="1.0">
+        <Include RefName="SESL" />
+        <Property Comment="dialog_indicator_activation_color" DefaultValue="#ffff6c39" DestAttribName="opentheme_physical_keyboard_dialog_indicator_activation_color" UID="86-1-6" ValueRef="1-A" ValueType="Color" />
+        <Property Comment="dialog_indicator_deactivation_color" DefaultValue="#4dff6c39" DestAttribName="opentheme_physical_keyboard_dialog_indicator_deactivation_color" Opacity="25" UID="86-1-7" ValueRef="86-1-6" ValueType="Color" />
+    </AppMetaData>
+</ThemeMetaData>

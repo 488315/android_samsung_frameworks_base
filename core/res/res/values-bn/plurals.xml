@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="pinpuk_attempts">
+        <item quantity="other">আপনার কাছে আর %dটি প্রচেষ্টা বাকি রয়েছে এটির পরেই আপনার সিম লক হয়ে যাবে৷</item>
+        <item quantity="one">আপনার কাছে আর %dটি প্রচেষ্টা বাকি রয়েছে এটির পরেই আপনার সিম লক হয়ে যাবে৷</item>
+    </plurals>
+</resources>

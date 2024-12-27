@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ThemeMetaData FormatVersion="1.3" GuideVersion="1.4">
+    <AppMetaData BuildType="HomeAppIcons" IsStandAlone="true" Name="Home_screen_icon" PackageNameSuffix="appicon" TargetApi="19" TargetPackageName="com.sec.android.app.appicon" VersionCode="1" VersionName="1.0">
+        <Property Comment="Phone" DefaultValue="phone" DestAttribName="ic_phone" DestQualifiers="xxxhdpi" ImageSize="48x48" UID="8-4-1-1" ValueType="Image" />
+        <Property Comment="Contacts" DefaultValue="contacts" DestAttribName="ic_contact" DestQualifiers="xxxhdpi" ImageSize="48x48" UID="8-4-1-2" ValueType="Image" />
+        <Property Comment="Messages" DefaultValue="message" DestAttribName="ic_message" DestQualifiers="xxxhdpi" ImageSize="48x48" UID="8-4-1-3" ValueType="Image" />
+        <Property Comment="Internet" DefaultValue="internet" DestAttribName="ic_internet" DestQualifiers="xxxhdpi" ImageSize="48x48" UID="8-4-1-4" ValueType="Image" />
+        <Property Comment="Email" DefaultValue="email" DestAttribName="ic_email" DestQualifiers="xxxhdpi" ImageSize="48x48" UID="8-4-1-5" ValueType="Image" />
+        <Property Comment="Camera" DefaultValue="camera" DestAttribName="ic_camera" DestQualifiers="xxxhdpi" ImageSize="48x48" UID="8-4-1-6" ValueType="Image" />
+        <Property Comment="Gallery" DefaultValue="gallery" DestAttribName="ic_gallery" DestQualifiers="xxxhdpi" ImageSize="48x48" UID="8-4-1-7" ValueType="Image" />
+        <Property Comment="Music" DefaultValue="samsung_music" DestAttribName="ic_music" DestQualifiers="xxxhdpi" ImageSize="48x48" UID="8-4-1-8" ValueType="Image" />
+        <Property Comment="S Planner" DefaultValue="Calendar" DestAttribName="ic_s_planner" DestQualifiers="xxxhdpi" ImageSize="48x48" UID="8-4-1-9" ValueType="Image" />
+        <Property DefaultValue="" UID="8-4-1-9-4" ValueType="Text" />
+        <Property DestQualifiers="xxxhdpi" ImageSize="48x48" UID="8-4-1-9-5" ValueType="Image" />
+        <Property Comment="Clock" DefaultValue="clock" DestAttribName="ic_clock" DestQualifiers="xxxhdpi" ImageSize="48x48" UID="8-4-1-10" ValueType="Image" />
+        <Property DefaultValue="135|0|150" UID="8-4-1-10-5" ValueType="Text" />
+        <Property DestQualifiers="xxxhdpi" ImageSize="48x48" UID="8-4-1-10-6" ValueType="Image" />
+        <Property Comment="Settings" DefaultValue="settings" DestAttribName="ic_settings" DestQualifiers="xxxhdpi" ImageSize="48x48" UID="8-4-1-11" ValueType="Image" />
+        <Property Comment="My Files" DefaultValue="my_files" DestAttribName="ic_myfiles" DestQualifiers="xxxhdpi" ImageSize="48x48" UID="8-4-1-14" ValueType="Image" />
+        <Property Comment="Samsung Health" DefaultValue="samsung_health" DestAttribName="ic_shealth" DestQualifiers="xxxhdpi" ImageSize="48x48" UID="8-4-1-15" ValueType="Image" />
+        <Property Comment="Video" DefaultValue="video_player" DestAttribName="ic_video" DestQualifiers="xxxhdpi" ImageSize="48x48" UID="8-4-1-16" ValueType="Image" />
+        <Property Comment="Calculator" DefaultValue="calculator" DestAttribName="ic_calculator" DestQualifiers="xxxhdpi" ImageSize="48x48" UID="8-4-1-17" ValueType="Image" />
+        <Property Comment="Device Care" DefaultValue="device_care" DestAttribName="ic_smartmanager" DestQualifiers="xxxhdpi" ImageSize="48x48" UID="8-4-1-18" ValueType="Image" />
+        <Property Comment="Apps" DefaultValue="thumbnail_home_allappsicon" DestAttribName="ic_allapps" DestQualifiers="xxxhdpi" ImageSize="48x48" UID="8-4-1-29" ValueType="Image" />
+        <Property Comment="Voice Recorder" DefaultValue="voice_recorder" DestAttribName="ic_voicerecorder" DestQualifiers="xxxhdpi" ImageSize="48x48" UID="8-4-1-31" ValueType="Image" />
+        <Property Comment="DMB" DefaultValue="dmb" DestAttribName="ic_dmb" DestQualifiers="xxxhdpi" ImageSize="48x48" UID="8-4-1-32" ValueType="Image" />
+        <Property Comment="Radio" DefaultValue="fm_radio" DestAttribName="ic_radio" DestQualifiers="xxxhdpi" ImageSize="48x48" UID="8-4-1-33" ValueType="Image" />
+        <Property Comment="Samsung Notes" DefaultValue="notes" DestAttribName="ic_notes" DestQualifiers="xxxhdpi" ImageSize="48x48" UID="8-4-1-34" ValueType="Image" />
+        <Property Comment="Side Sync" DefaultValue="sync" DestAttribName="ic_side_sync" DestQualifiers="xxxhdpi" ImageSize="48x48" UID="8-4-1-36" ValueType="Image" />
+        <Property Comment="Galaxy Wearable" DefaultValue="galaxy_wearable" DestAttribName="ic_gear" DestQualifiers="xxxhdpi" ImageSize="48x48" UID="8-4-1-37" ValueType="Image" />
+        <Property Comment="Samsung Pay" DefaultValue="samsung_pay" DestAttribName="ic_samsungpay" DestQualifiers="xxxhdpi" ImageSize="48x48" UID="8-4-1-38" ValueType="Image" />
+        <Property Comment="Galaxy Themes" DefaultValue="theme_store" DestAttribName="ic_themestore" DestQualifiers="xxxhdpi" ImageSize="48x48" UID="8-4-1-41" ValueType="Image" />
+        <Property Comment="Samsung Members" DefaultValue="samsung_members" DestAttribName="ic_galaxycare" DestQualifiers="xxxhdpi" ImageSize="48x48" UID="8-4-1-43" ValueType="Image" />
+        <Property Comment="PEN.Up" DefaultValue="pen_up" DestAttribName="ic_penup" DestQualifiers="xxxhdpi" ImageSize="48x48" UID="8-4-1-45" ValueType="Image" />
+        <Property Comment="Smart Things" DefaultValue="smart_things" DestAttribName="ic_samsung_connect" DestQualifiers="xxxhdpi" ImageSize="48x48" UID="8-4-1-47" ValueType="Image" />
+        <Property Comment="Tips" DefaultValue="Tips" DestAttribName="ic_tips" DestQualifiers="xxxhdpi" ImageSize="48x48" UID="8-4-1-49" ValueType="Image" />
+        <Property Comment="AR Zone" DefaultValue="AR-zone" DestAttribName="ic_ar_zone" DestQualifiers="xxxhdpi" ImageSize="48x48" UID="8-4-1-50" ValueType="Image" />
+        <Property Comment="Icon-Preview-Cover image backgroud" DefaultValue="#ff000000" DestQualifiers="sw360dp-xxxhdpi" POption="FixedOpacity" UID="8-4-p-1" ValueType="BgColor" />
+        <Property Comment="Icon-Preview-Cover image backgroud" DestQualifiers="sw360dp-xxxhdpi" ImageSize="480X480" POption="Compress|FIXEDSIZE" UID="8-4-p-2" ValueType="BgImage" />
+        <Property Comment="Icon-Preview-Alternative cover image" ImageSize="480X480" POption="FIXEDSIZE" UID="8-4-p-3" ValueType="BgImage" />
+        <Property DefaultValue="#ff000000" DestQualifiers="sw360dp-xxxhdpi" POption="FixedOpacity" UID="8-4-p-4" ValueType="BgColor" />
+        <Property DestQualifiers="sw360dp-xxxhdpi" ImageSize="480X480" POption="Compress" UID="8-4-p-5" ValueType="BgImage" />
+        <Property Comment="Icon Tray" DefaultValue="" DestAttribName="ic_icon_bg" DestQualifiers="xxxhdpi" ImageSize="48x48" POption="FIXEDSIZE" UID="8-4-2" ValueType="BgImage" />
+        <Property Comment="Shadow On: Shadow on/off of App/Folder Icon" DefaultValue="false" DestAttribName="enable_icon_shadow" DestQualifiers="" UID="8-4-3" ValueType="Bool" />
+        <Property Comment="Icon size with backgroud tray. App Icon Size" DefaultValue="70" DestAttribName="icon_scale_size" DestQualifiers="" POption="Slide:60:100:10" UID="8-4-4" ValueType="Integer" />
+        <Property Comment="Icon Background Range: Icon Background Range" DefaultValue="2" DestAttribName="icon_bg_range" DestQualifiers="" UID="8-4-5" ValueType="Integer">
+            <Range Max="2" Min="0" />
+        </Property>
+        <Property Comment="Representative_icons" DefaultValue="thumbnail_default_img_icon_pack_before" DestAttribName="" DestQualifiers="" POption="Representative_icons" UID="8-4-r-1" ValueType="BgImage" />
+        <Property Comment="Representative_icons" DefaultValue="Phone:8-4-1-1|Contacts:8-4-1-2|Messages:8-4-1-3|Calendar:8-4-1-9|Clock:8-4-1-10|Email:8-4-1-5|Calculator:8-4-1-17|Gallery:8-4-1-7|Settings:8-4-1-11|Internet:8-4-1-4|Camera:8-4-1-6|Music:8-4-1-8|My Files:8-4-1-14|Samsung Health:8-4-1-15|Video:8-4-1-16|Device Care:8-4-1-18|PEN.UP:8-4-1-45|Voice Recorder:8-4-1-31|DMB:8-4-1-32|Radio:8-4-1-33|Samsung Notes:8-4-1-34|Smart Things:8-4-1-47|Side Sync:8-4-1-36|Galaxy Wearable:8-4-1-37|Samsung Pay:8-4-1-38|Apps:8-4-1-29|Galaxy Themes:8-4-1-41|Samsung Members:8-4-1-43|Tips:8-4-1-49|AR Zone:8-4-1-50" DestAttribName="" DestQualifiers="" UID="8-4-r-2" ValueType="Text" />
+        <Property Comment="Representative_string" UID="8-4-r-3" ValueType="Text" />
+        <Property DefaultValue="phone" DestAttribName="" DestQualifiers="" ImageSize="48x48" UID="8-4-r-4-1" ValueRef="8-4-1-1" ValueType="Image" />
+        <Property DefaultValue="contacts" DestAttribName="" DestQualifiers="" ImageSize="48x48" UID="8-4-r-4-2" ValueRef="8-4-1-2" ValueType="Image" />
+        <Property DefaultValue="message" DestAttribName="" DestQualifiers="" ImageSize="48x48" UID="8-4-r-4-3" ValueRef="8-4-1-3" ValueType="Image" />
+        <Property DefaultValue="Calendar" DestAttribName="" DestQualifiers="" ImageSize="48x48" UID="8-4-r-4-4" ValueRef="8-4-1-9" ValueType="Image" />
+        <Property DefaultValue="clock" DestAttribName="" DestQualifiers="" ImageSize="48x48" UID="8-4-r-4-5" ValueRef="8-4-1-10" ValueType="Image" />
+        <Property DefaultValue="email" DestAttribName="" DestQualifiers="" ImageSize="48x48" UID="8-4-r-4-6" ValueRef="8-4-1-5" ValueType="Image" />
+        <Property DefaultValue="calculator" DestAttribName="" DestQualifiers="" ImageSize="48x48" UID="8-4-r-4-7" ValueRef="8-4-1-17" ValueType="Image" />
+        <Property DefaultValue="gallery" DestAttribName="" DestQualifiers="" ImageSize="48x48" UID="8-4-r-4-8" ValueRef="8-4-1-7" ValueType="Image" />
+        <Property DefaultValue="settings" DestAttribName="" DestQualifiers="" ImageSize="48x48" UID="8-4-r-4-9" ValueRef="8-4-1-11" ValueType="Image" />
+    </AppMetaData>
+</ThemeMetaData>

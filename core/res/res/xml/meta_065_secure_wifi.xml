@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ThemeMetaData FormatVersion="1.3" GuideVersion="2.1">
+    <AppMetaData Name="Fast" TargetApi="28" TargetPackageName="com.samsung.android.fast" VersionCode="1" VersionName="1.0">
+        <Include RefName="SESL" />
+        <Property Comment="Title text color" DefaultValue="#ff0074d4" DestAttribName="welcome_page_title_text_color" DestQualifiers="" UID="65-1-1" ValueRef="24-E" ValueType="TextColor" />
+        <Property Comment="Description text color" DefaultValue="#ff505050" DestAttribName="welcome_page_description_text_color" DestQualifiers="" UID="65-1-2" ValueRef="1-3-3" ValueType="TextColor" />
+        <Property Comment="Terms and Conditions text color" DefaultValue="#ff505050" DestAttribName="welcome_page_pp_tos_guide_text_color" DestQualifiers="" UID="65-1-3" ValueRef="1-3-3" ValueType="TextColor" />
+        <Property Comment="Web link text color" DefaultValue="#ff3b3b3b" DestAttribName="weblink_color" DestQualifiers="" UID="65-1-4" ValueRef="1-3-4" ValueType="TextColor" />
+        <Property Comment="Create button BG color" DefaultValue="#ff0074d4" DestAttribName="colorPrimaryDark" DestQualifiers="" UID="65-1-5" ValueRef="1-53-3" ValueType="BgColor" />
+        <Property Comment="Button text color" DefaultValue="#ff252525" DestAttribName="winset_buttons_raised_button_primary_text_color" DestQualifiers="" UID="65-1-6" ValueRef="1-53-5" ValueType="TextColor" />
+        <Property Comment="Bg color" DefaultValue="#fff2f2f2" DestAttribName="welcome_page_background_color" DestQualifiers="" UID="65-1-7" ValueRef="1-14-1" ValueType="BgColor" />
+        <Property Comment="Bg color" DefaultValue="#660072de" DestAttribName="protect_button_unprotected_disabled_bg_color,colorPrimaryDark_dim" DestQualifiers="" UID="65-1-8" ValueRef="1-20-1" ValueType="BgColor" />
+        <Property Comment="Description text color" DefaultValue="#ff252525" DestAttribName="wifi_condition_detail_text_color,no_wifi_connection_detail_text_color,no_wifi_connection_text_color" DestQualifiers="" UID="65-2-1" ValueRef="1-3-3" ValueType="TextColor" />
+        <Property Comment="Your plan text color" DefaultValue="#ff505050" DestAttribName="your_plan_text_color,widget_settings_header_text_color" DestQualifiers="" UID="65-2-2" ValueRef="1-1-4" ValueType="TextColor" />
+        <Property Comment="Used network text color" DefaultValue="#ff4297ff" DestAttribName="your_plan_remaining_text_color" DestQualifiers="" UID="65-2-4" ValueRef="24-E" ValueType="TextColor" />
+        <Property Comment="plan total text color" DefaultValue="#99ffffff" DestAttribName="plan_summary_text_color" DestQualifiers="" UID="65-2-5" ValueRef="1-1-4" ValueType="TextColor" />
+        <Property Comment="List Text Color" DefaultValue="#ff252525" DestAttribName="winset_list_item_1_line_text_color_enabled,wifi_condition_ap_name_text_color,winset_card_type_1_button_text_color" DestQualifiers="" UID="65-2-6" ValueRef="24-A" ValueType="TextColor" />
+        <Property Comment="List Bg color" DefaultValue="#fffafafa" DestAttribName="winset_list_background_color" DestQualifiers="" UID="65-2-7" ValueRef="1-18-1" ValueType="BgColor" />
+        <Property Comment="Bg color" DefaultValue="#fff2f2f2" DestAttribName="winset_actionbar_background_color" DestQualifiers="" UID="65-2-8" ValueRef="1-14-1" ValueType="BgColor" />
+        <Property Comment="Actionbar text color" DefaultValue="#ff252525" DestAttribName="winset_actionbar_title_text_color,winset_buttons_bottom_button_text_color,wifi_condition_header_stopped_text_color" DestQualifiers="" UID="65-2-9" ValueRef="1-1-3" ValueType="Color" />
+        <Property Comment="Bar background color" DefaultValue="#ffdcdcdc" DestAttribName="winset_progress_bar_background_color" DestQualifiers="" UID="65-2-10" ValueRef="1-20-2" ValueType="Color" />
+        <Property Comment="Bar progress color" DefaultValue="#ff4297ff" DestAttribName="winset_progress_bar_progress_color" DestQualifiers="" UID="65-2-11" ValueRef="1-A" ValueType="Color" />
+        <Property Comment="protect button bg" DefaultValue="#ff4297ff" DestAttribName="protect_button_unprotected_enabled_bg_color" DestQualifiers="" UID="65-2-12" ValueRef="1-53-3" ValueType="Color" />
+        <Property Comment="protect button text" DefaultValue="#fffafafa" DestAttribName="protect_button_text_color_enabled" DestQualifiers="" UID="65-2-13" ValueRef="1-53-5" ValueType="Color" />
+        <Property Comment="Spinner Item Text Color" DefaultValue="#ff909090" DestAttribName="plan_name_text_color,dialog_content_text_color" DestQualifiers="" UID="65-2-15" ValueRef="1-9-4" ValueType="TextColor" />
+        <Property Comment="Dialog body text color" DefaultValue="#ff505050" DestAttribName="winset_dialog_body_text_color" DestQualifiers="" UID="65-2-16" ValueRef="1-A" ValueType="TextColor" />
+        <Property Comment="Icons Tint Color" DefaultValue="#ff8b8b8b" DestAttribName="icons_tint_color,winset_permission_dialog_icon_tint_color" DestQualifiers="" UID="65-2-17" ValueRef="1-C" ValueType="Color" />
+        <Property Comment="Erase Personal data text color" DefaultValue="#ff0074d4" DestAttribName="colorPrimary" DestQualifiers="" UID="65-2-18" ValueRef="24-E" ValueType="TextColor" />
+        <Property Comment="key screen Bg color" DefaultValue="#fff2f2f2" DestAttribName="tw_screen_background_color" DestQualifiers="" UID="65-2-19" ValueRef="1-14-1" ValueType="BgColor" />
+        <Property Comment="Background color on stop btn" DefaultValue="#0f000000" DestAttribName="protect_button_protected_enabled_bg_color" DestQualifiers="" UID="65-2-20" ValueRef="1-7-1-D" ValueType="BgColor" />
+        <Property Comment="Text color on stop btn" DefaultValue="#ff252525" DestAttribName="stop_button_text_color_enabled" DestQualifiers="" UID="65-2-21" ValueRef="1-7-2-D" ValueType="TextColor" />
+        <Property Comment="Settings Sub Text color" DefaultValue="#ff909090" DestAttribName="winset_list_item_2_line_text_color_enabled" DestQualifiers="" UID="65-3-2" ValueRef="1-3-2" ValueType="TextColor" />
+        <Property Comment="app history discription text" DefaultValue="#ff505050" DestAttribName="winset_description_text_color" DestQualifiers="" UID="65-3-4" ValueRef="1-3-3" ValueType="TextColor" />
+        <Property Comment="subscription page 2nd description" DefaultValue="#ff505050" DestAttribName="subscription_item_current_2nd_line_text_color" DestQualifiers="" UID="65-3-5" ValueRef="1-3-2" ValueType="TextColor" />
+        <Property Comment="Webview Hyperlink" DefaultValue="#ff252525" DestAttribName="webview_hyperlink_color" DestQualifiers="" UID="65-3-6" ValueRef="1-3-4" ValueType="TextColor" />
+        <Property Comment="winset_divider_color" DefaultValue="#ffe6e6e6" DestAttribName="winset_divider_color" DestQualifiers="" UID="65-3-7" ValueRef="1-2" ValueType="BgColor" />
+        <Property Comment="Action bar icon" DefaultValue="#ff252525" DestAttribName="search_icon_color,trusted_wifis_list_delete_icon_tint" DestQualifiers="" UID="65-3-8" ValueRef="1-1-3" ValueType="BgColor" />
+        <Property Comment="Update button BG color" DefaultValue="#ff466edc" DestAttribName="plan_day_button_color_enabled,plan_month_button_color_enabled" DestQualifiers="" UID="65-4-1" ValueRef="1-53-3" ValueType="BgColor" />
+        <Property Comment="App name text color" DefaultValue="#ff252525" DestAttribName="winset_about_page_app_name_text_color" DestQualifiers="" UID="65-5-1" ValueRef="1-1-3" ValueType="TextColor" /> - <Property Comment="Version info text color" DefaultValue="#ff252525" DestAttribName="winset_about_page_app_version_text_color" DestQualifiers="" UID="65-5-2" ValueRef="1-1-4" ValueType="TextColor" />
+        <Property Comment="Button bg color" DefaultValue="#0f000000" DestAttribName="winset_buttons_raised_button_bg_color" DestQualifiers="" UID="65-5-3" ValueRef="1-7-1-D" ValueType="BgColor" />
+        <Property Comment="Button text color" DefaultValue="#ff252525" DestAttribName="winset_about_page_link_text_color" DestQualifiers="" UID="65-5-4" ValueRef="1-7-2-D" ValueType="TextColor" />
+        <Property Comment="Update button BG" DefaultValue="#ff0074d4" DestAttribName="update_text_primaryDark" DestQualifiers="" UID="65-5-5" ValueRef="1-A" ValueType="BgColor" />
+        <Property Comment="Update button text color" DefaultValue="#fffafafa" DestAttribName="tw_white" DestQualifiers="" UID="65-5-6" ValueRef="1-E" ValueType="TextColor" />
+        <Property Comment="Info icon tint color" DefaultValue="#ff454545" DestAttribName="winset_about_page_app_info_actionbar_button_tint_color" DestQualifiers="" UID="65-5-7" ValueRef="1-1-3" ValueType="Color" />
+        <Property Comment="tint color of badge" DefaultValue="#fff56a0d" DestAttribName="winset_notification_badge_bg_color" DestQualifiers="" UID="65-6-1" ValueRef="1-33-1" ValueType="BgColor" />
+        <Property Comment="background image of badge. should be 9 patch image" DefaultValue="" DestAttribName="tw_noti_badge_mtrl" POption="NinePatch" UID="65-6-2" ValueRef="1-33-2" ValueType="BgImage" />
+        <Property Comment="text color of badge" DefaultValue="#fffafafa" DestAttribName="winset_notification_badge_text_color" DestQualifiers="" UID="65-6-3" ValueRef="1-33-3" ValueType="TextColor" />
+        <Property Comment="Master ON background color" DefaultValue="#ff4297ff" DestAttribName="winset_controller_master_switch_on_bg_color" DestQualifiers="" UID="65-7-1" ValueRef="1-40-1" ValueType="BgColor" />
+        <Property Comment="Master OFF background color" DefaultValue="#fffafafa" DestAttribName="winset_controller_master_switch_off_bg_color" DestQualifiers="" UID="65-7-2" ValueRef="1-40-2" ValueType="BgColor" />
+        <Property Comment="Main On Text Color" DefaultValue="#fffafafa" DestAttribName="winset_controller_master_switch_on_text_color" DestQualifiers="" UID="65-7-3" ValueRef="1-40-3" ValueType="TextColor" />
+        <Property Comment="Main Off Text Color" DefaultValue="#ff252525" DestAttribName="winset_controller_master_switch_off_text_color" DestQualifiers="" UID="65-7-4" ValueRef="1-40-4" ValueType="TextColor" />
+        <Property Comment="Tip Card Background color" DefaultValue="#99008cff" DestAttribName="winset_card_type_1_card_background" DestQualifiers="" UID="65-8-1" ValueRef="1-48-2" ValueType="BgColor" />
+        <Property Comment="Open source licenses text color" DefaultValue="#ff505050" DestAttribName="terms_and_conditions_text_color,winset_card_type_1_text_description_text_color" DestQualifiers="" UID="65-9-1" ValueRef="1-3-1" ValueType="TextColor" />
+        <Property Comment="Erase personal data description text color" DefaultValue="#ff505050" DestAttribName="erase_personal_data_confirm_check_box_text_color" DestQualifiers="" UID="65-10-1" ValueRef="1-3-3-D" ValueType="TextColor" />
+        <Property Comment="Erase personal data note text color" DefaultValue="#ffb00020" DestAttribName="erase_personal_data_description_note_text_color" DestQualifiers="" UID="65-10-2" ValueRef="24-G" ValueType="TextColor" />
+        <Property Comment="Unselected text color" DefaultValue="#ff858585" DestAttribName="winset_buttons_raised_button_text_color_inactivated" DestQualifiers="" UID="65-11-1" ValueRef="1-1-4" ValueType="TextColor" />
+        <Property Comment="Selected text color" DefaultValue="#ff505050" DestAttribName="winset_buttons_raised_button_text_color" DestQualifiers="" UID="65-11-2" ValueRef="1-1-3" ValueType="TextColor" />
+        <Property Comment="Edge color" DefaultValue="#ff717171" DestAttribName="winset_buttons_raised_button_stroke_color_activated" DestQualifiers="" UID="65-11-3" ValueRef="1-13-4" ValueType="BgColor" />
+        <Property Comment="Chart Title Text" DefaultValue="#5e252525" DestAttribName="protection_history_title_text_color,winset_list_item_1_line_text_color_disabled" DestQualifiers="" UID="65-11-5" ValueRef="1-3-1" ValueType="TextColor" />
+        <Property Comment="Axis label text color" DefaultValue="#ff909090" DestAttribName="protection_history_chart_axis_label_text_color" DestQualifiers="" UID="65-11-6" ValueRef="1-3-2" ValueType="TextColor" />
+        <Property Comment="Wifi Month/date text color" DefaultValue="#ff454545" DestAttribName="protection_history_app_date_range_picker_text_color" DestQualifiers="" UID="65-11-7" ValueRef="1-3-2" ValueType="TextColor" />
+        <Property Comment="divider color" DefaultValue="#42252525" DestAttribName="divider_dot_color" DestQualifiers="" UID="65-11-8" ValueRef="1-3-2" ValueType="BgColor" />
+        <Property Comment="No item text color" DefaultValue="#80252525" DestAttribName="winset_no_item_title_text_color" DestQualifiers="" UID="65-11-9" ValueRef="1-1-3" ValueType="TextColor" />
+        <Property Comment="No item description color" DefaultValue="#80505050" DestAttribName="winset_no_item_description_text_color" DestQualifiers="" UID="65-11-10" ValueRef="1-1-4" ValueType="TextColor" />
+        <Property Comment="Seperator text color in app protection history" DefaultValue="#ff909090" DestAttribName="protection_history_separator_text_color" DestQualifiers="" UID="65-11-11" ValueRef="1-3-2" ValueType="TextColor" />
+        <Property Comment="Seperator text color in app protection history" DefaultValue="#ff909090" DestAttribName="protection_history_wifi_chart_annotate_text_color" DestQualifiers="" UID="65-11-12" ValueRef="1-3-2" ValueType="TextColor" />
+        <Property Comment="Indicator bg color" DefaultValue="#fff2f2f2" DestAttribName="tw_screen_statusbar_color," DestQualifiers="" UID="65-12-1" ValueRef="1-51" ValueType="BgColor" />
+        <Property Comment="Indicator Icon color" DefaultValue="true" DestAttribName="window_light_statusbar" DestQualifiers="" UID="65-12-2" ValueRef="1-51-1" ValueType="Bool" />
+        <Property Comment="Thumb normal color" DefaultValue="#ff3e91ff" DestAttribName="widget_settings_seek_bar_thumb_color" DestQualifiers="" UID="65-12-3" ValueRef="1-A" ValueType="BgColor" />
+    </AppMetaData>
+</ThemeMetaData>

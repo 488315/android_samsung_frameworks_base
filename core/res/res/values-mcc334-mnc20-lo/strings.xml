@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="config_pdp_reject_dialog_title" />
+    <string name="config_pdp_reject_multi_conn_to_same_pdn_not_allowed">ບໍ່ອະນຸຍາດການເຊື່ອມຕໍ່ PDN ຫຼາຍອັນສຳລັບ APN ທີ່ລະບຸ -55-</string>
+    <string name="config_pdp_reject_service_not_subscribed">ບໍ່ໄດ້ສະໝັກໃຊ້ບໍລິການ -33-</string>
+    <string name="config_pdp_reject_user_authentication_failed">ການພິສູດຢືນຢັນບໍ່ສຳເລັດ -29-</string>
+</resources>

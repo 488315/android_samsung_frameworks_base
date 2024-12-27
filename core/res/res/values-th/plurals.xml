@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="SDcardBlockUnmount_message">
+        <item quantity="other">โทรศัพท์ของคุณทำงานได้ไม่เสถียรเนื่องจาก SD การ์ดที่มีแอพติดตั้งอยู่ในนั้นถูกถอดออกแล้ว โทรศัพท์ของคุณจะรีสตาร์ทใน %d วินาทีเพื่อให้กลับมาทำงานได้ตามปกติ บันทึกข้อมูลที่ยังไม่ได้บันทึกก่อนที่โทรศัพท์จะรีสตาร์ท</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="SDcardBlockUnmount_title">
+        <item quantity="other">โทรศัพท์จะรีสตาร์ทใน %d วินาที</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_phone">
+        <item quantity="other">ปิด %d แอปโดยอัตโนมัติแล้วเนื่องจากแอปเหล่านั้นเป็นสาเหตุให้โทรศัพท์ของคุณร้อนเกินไป คุณสามารถเปิดได้อีกครั้งในภายหลังเมื่อโทรศัพท์เย็นลงแล้ว</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_tablet">
+        <item quantity="other">ปิด %d แอปโดยอัตโนมัติแล้วเนื่องจากแอปเหล่านั้นเป็นสาเหตุให้แท็บเล็ตของคุณร้อนเกินไป คุณสามารถเปิดได้อีกครั้งเมื่อแท็บเล็ตเย็นลงแล้ว</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_title_v2">
+        <item quantity="other">ปิด %d แอปแล้ว</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="dex_max_count_text">
+        <item quantity="other">ไม่สามารถแสดงได้มากกว่า %d แอปบนหน้าจอในเวลาเดียวกัน ย่อแอปที่เก่าที่สุดแล้ว</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="hot_key_guide_message">
+        <item quantity="other">เปิดแอพที่คุณต้องการกำหนด จากนั้นกดปุ่มแอพค้างไว้ %d วินาที</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_phone">
+        <item quantity="other">%1$s เป็นสาเหตุที่ทำให้โทรศัพท์ของคุณร้อนเกินไป เครื่องจะปิดโดยอัตโนมัติใน %2$d วินาที</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_tablet">
+        <item quantity="other">%1$s เป็นสาเหตุที่ทำให้แท็บเล็ตของคุณร้อนเกินไป เครื่องจะปิดโดยอัตโนมัติใน %2$d วินาที</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="maintenance_mode_backup_cloud_menu_sub_textview_message_default">
+        <item quantity="other">แบ็คอัพข้อมูลไม่จำกัดไปยัง Samsung Cloud สูงสุด %d วัน หรือคืนค่าข้อมูลที่คุณแบ็คอัพไว้</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_phone">
+        <item quantity="other">%1$s เป็นสาเหตุที่ทำให้โทรศัพท์ของคุณร้อนเกินไป คุณสามารถปิดแอพหรือรอให้แอพปิดทำงานอัตโนมัติในอีก %2$d วินาทีได้</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_tablet">
+        <item quantity="other">%1$s เป็นสาเหตุที่ทำให้แท็บเล็ตของคุณร้อนเกินไป คุณสามารถปิดแอพหรือรอให้แอพปิดทำงานอัตโนมัติในอีก %2$d วินาทีได้</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="pinpuk_attempts">
+        <item quantity="other">คุณพยายามได้อีก %d ครั้งก่อนที่ซิมจะล็อก</item>
+        <item quantity="one">คุณพยายามได้อีก %d ครั้งก่อนที่ซิมจะล็อก</item>
+    </plurals>
+    <plurals name="sem_chooser_preview_items">
+        <item quantity="other">%d รายการ</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_hours">
+        <item quantity="other">%d ชั่วโมง</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_minutes">
+        <item quantity="other">%d นาที</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

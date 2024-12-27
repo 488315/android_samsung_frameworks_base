@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ThemeMetaData FormatVersion="1.3" GuideVersion="1.4">
+    <AppMetaData Name="CocktailBarService" TargetApi="19" TargetPackageName="com.samsung.android.app.cocktailbarservice" VersionCode="1" VersionName="">
+        <Include RefName="SESL" />
+        <Property Comment="Description text color 04" DefaultValue="#ff505050" DestAttribName="settings_text_desc_color" DestQualifiers="" UID="44-1-4" ValueRef="1-3-3" ValueType="Color" />
+        <Property Comment="Reorder icon tint color" DefaultValue="#6e000000" Description="Icon color" DestAttribName="settings_panel_reorder_icon_tint_color" UID="44-5-8" ValueRef="24-A" ValueType="Color" />
+        <Property Comment="Search icon" DefaultValue="#ff252525" Description="Icon color" DestAttribName="menu_icon_color" UID="44-5-9" ValueRef="1-11-1" ValueType="Color" />
+        <Property Comment="Button text color" DefaultValue="#ff4297ff" DestAttribName="settings_edit_btn_color" DestQualifiers="" UID="44-8-1" ValueRef="24-E" ValueType="Color" />
+        <Property Comment="Disabled button text color" DefaultValue="#ffb5b5b5" DestAttribName="settings_edit_btn_color_deactivated" DestQualifiers="" UID="44-8-2" ValueRef="24-D" ValueType="Color" />
+        <Property Comment="Panel title text color" DefaultValue="#ff505050" DestAttribName="settings_panel_title_color" DestQualifiers="" UID="44-8-3" ValueRef="24-A" ValueType="Color" />
+        <Property Comment="Panel button bg color" DefaultValue="#0f000000" DestAttribName="settings_round_button_bg" DestQualifiers="" UID="44-8-4" ValueRef="1-7-1" ValueType="Color" />
+        <Property Comment="Panel button text color" DefaultValue="#ff252525" DestAttribName="settings_round_button_text_color" DestQualifiers="" UID="44-8-5" ValueRef="1-7-2" ValueType="Color" />
+        <Property Comment="Panel preivew image background color" DefaultValue="#ccfcfcfc" DestAttribName="panel_preview_img_bg_color" DestQualifiers="" UID="44-8-6" ValueType="Color" />
+        <Property Comment="Update button text color" DefaultValue="#fffafafa" DestAttribName="version_update_color" DestQualifiers="" UID="44-9-2" ValueRef="1-53-5" ValueType="Color" />
+        <Property Comment="Update button bg image" DefaultValue="#fffafafa" DestAttribName="version_update_bg_color" DestQualifiers="" UID="44-9-3" ValueRef="1-53-3" ValueType="Color" />
+        <Property Comment="Appinfo button bg image" DefaultValue="#fffafafa" DestAttribName="app_info_btn_bg_color" DestQualifiers="" UID="44-9-4" ValueRef="1-11-1" ValueType="Color" />
+        <Property Comment="Relative link bg color" DefaultValue="#0f0381fe" DestAttribName="relative_link_background_color" DestQualifiers="" UID="44-18-1" ValueRef="1-A" ValueType="Color" />
+        <Property Comment="Relative link title text color" DefaultValue="#ff252525" DestAttribName="relative_link_title_text_color" DestQualifiers="" UID="44-18-2" ValueRef="24-A" ValueType="Color" />
+        <Property Comment="Relative link text color" DefaultValue="#ff0072de" DestAttribName="relative_link_text_color" DestQualifiers="" UID="44-18-3" ValueRef="24-E" ValueType="Color" />
+        <Property Comment="Master ON background color" DefaultValue="#333e91ff" DestAttribName="switch_bar_enabled_background" DestQualifiers="" UID="44-19-1" ValueRef="1-40-1" ValueType="Color" />
+        <Property Comment="Master OFF background color" DefaultValue="#fffafafa" DestAttribName="switch_bar_disabled_background" DestQualifiers="" UID="44-19-2" ValueRef="1-40-2" ValueType="Color" />
+        <Property Comment="Master On text color" DefaultValue="#ff0072de" DestAttribName="actionbar_title_text_color_on" DestQualifiers="" UID="44-19-3" ValueRef="1-40-3" ValueType="Color" />
+        <Property Comment="Master Off text color" DefaultValue="#ff252525" DestAttribName="actionbar_title_text_color_off" DestQualifiers="" UID="44-19-4" ValueRef="1-40-4" ValueType="Color" />
+        <Property Comment="Round stroke color" DefaultValue="#ffd6d6d6" DestAttribName="round_stroke_color" DestQualifiers="" UID="44-21-1" ValueRef="1-1-1" ValueType="Color" />
+        <Property Comment="About Page Title" DefaultValue="#ff252525" DestAttribName="settings_app_info_title" DestQualifiers="" UID="44-22-1" ValueRef="1-1-3" ValueType="Color" />
+        <Property Comment="About Page des text" DefaultValue="#ff979797" DestAttribName="settings_app_info_description" DestQualifiers="" UID="44-22-2" ValueRef="1-1-4" ValueType="Color" />
+        <Property Comment="About Page button open source bg color" DefaultValue="#ffebebeb" DestAttribName="settings_opensource_bg" DestQualifiers="" UID="44-22-3" ValueRef="1-7-1-D" ValueType="Color" />
+        <Property Comment="About Page button open source text color" DefaultValue="#ff252525" DestAttribName="settings_app_info_license_text_color" DestQualifiers="" UID="44-22-4" ValueRef="1-7-2-D" ValueType="Color" />
+        <Property Comment="About Page background color" DefaultValue="#fffcfcfc" DestAttribName="sec_background_color" DestQualifiers="" UID="44-22-5" ValueRef="1-1-1" ValueType="Color" />
+        <Property Comment="Level text color" DefaultValue="#ff545454" DestAttribName="settings_secondary_text_color" DestQualifiers="" UID="44-23-2" ValueRef="24-B" ValueType="Color" />
+        <Property Comment="Separator text color" DefaultValue="#ff858585" DestAttribName="settings_separator_text_color" DestQualifiers="" UID="44-23-3" ValueRef="1-3-1" ValueType="Color" />
+        <Property Comment="Separator divider color" DefaultValue="#ff979797" DestAttribName="settings_separator_divider_color" DestQualifiers="" UID="44-23-4" ValueRef="1-19-4" ValueType="Color" />
+        <Property Comment="Thumb disabled color" DefaultValue="#ff9c9c9c" DestAttribName="settings_level_seekbar_tick_mark_color" DestQualifiers="" UID="44-23-5" ValueRef="24-D" ValueType="Color" />
+        <Property Comment="Bar background disable color" DefaultValue="#66cacaca" DestAttribName="settings_level_seekbar_progress_tint_color" DestQualifiers="" UID="44-23-6" ValueRef="24-D" ValueType="Color" />
+        <Property Comment="Status bar background color" DefaultValue="#fff2f2f2" DestAttribName="status_bar_background_color" DestQualifiers="" UID="44-S-1" ValueRef="1-51" ValueType="Color" />
+        <Property Comment="Status bar icon color boolean" DefaultValue="true" DestAttribName="window_light_status_bar_light_theme" DestQualifiers="\@" UID="44-S-2" ValueRef="1-51-1" ValueType="Bool" />
+    </AppMetaData>
+</ThemeMetaData>

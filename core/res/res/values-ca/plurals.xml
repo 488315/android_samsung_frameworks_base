@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="SDcardBlockUnmount_message">
+        <item quantity="other">"El telèfon és inestable perquè s'ha eliminat una targeta SD que tenia aplicacions instal·lades. El telèfon es reiniciarà d'aquí a %d segons per tornar a l'estat normal. Desa les dades no desades abans de reiniciar el telèfon."</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">"El telèfon és inestable perquè s'ha eliminat una targeta SD que tenia aplicacions instal·lades. El telèfon es reiniciarà d'aquí a %d segon per tornar a l'estat normal. Desa les dades no desades abans de reiniciar el telèfon."</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="SDcardBlockUnmount_title">
+        <item quantity="other">"Telèfon es reiniciarà d'aquí a %d segons"</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">"Telèfon es reiniciarà d'aquí a %d segon"</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_phone">
+        <item quantity="other">"%d aplicacions s'han tancat automàticament perquè estaven fent que el telèfon se sobreescalfés. Si us plau, torna-les a obrir més tard quan el telèfon s'hagi refredat."</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">"%d aplicació s'ha tancat automàticament perquè estava fent que el telèfon se sobreescalfés. Torna-la a obrir més tard quan el telèfon s'hagi refredat."</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_tablet">
+        <item quantity="other">"%d aplicacions s'han tancat automàticament perquè estaven fent que la tablet se sobreescalfés. Si us plau, torna-les a obrir més tard quan la tablet s'hagi refredat."</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">"%d aplicació s'ha tancat automàticament perquè estava fent que la tablet se sobreescalfés. Si us plau, torna-la a obrir més tard quan la tablet s'hagi refredat."</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_title_v2">
+        <item quantity="other">"%d aplicacions s'han tancat"</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">"%d aplicació s'ha tancat"</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="dex_max_count_text">
+        <item quantity="other">"No es poden mostrar més de %d aplicacions a la pantalla simultàniament. Es minimitzarà l'aplicació més antiga."</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">"No es pot mostrar més d'%d aplicació a la pantalla simultàniament. Es minimitzarà l'aplicació més antiga."</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="hot_key_guide_message">
+        <item quantity="other">"Obre l'aplicació que vulguis assignar i, a continuació, mantén premuda la tecla de l'aplicació durant %d segons."</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">"Obre l'aplicació que vulguis assignar i, a continuació, mantén premuda la tecla de l'aplicació durant %d segon."</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_phone">
+        <item quantity="other">"%1$s està fent que el telèfon se sobreescalfi. Es tancarà automàticament d'aquí a %2$d segons."</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">"%1$s està fent que el telèfon se sobreescalfi. Es tancarà automàticament d'aquí a %2$d segon."</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_tablet">
+        <item quantity="other">"%1$s està fent que la tablet se sobreescalfi. Es tancarà automàticament d'aquí a %2$d segons."</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">"%1$s està fent que la tablet se sobreescalfi. Es tancarà automàticament d'aquí a %2$d segon."</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="maintenance_mode_backup_cloud_menu_sub_textview_message_default">
+        <item quantity="other">Fes una còpia de seguretat de dades il·limitades a Samsung Cloud durant un màxim de %d dies o restaura les dades de les quals hagis fet una còpia de seguretat.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">"Fes una còpia de seguretat de dades il·limitades a Samsung Cloud durant un màxim d'%d dia o restaura les dades de les quals hagis fet una còpia de seguretat."</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_phone">
+        <item quantity="other">"%1$s està fent que el telèfon se sobreescalfi. Tanca-la ara o es tancarà automàticament d'aquí a %2$d segons."</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">"%1$s està fent que el telèfon se sobreescalfi. Tanca-la ara o es tancarà automàticament d'aquí a %2$d segon."</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_tablet">
+        <item quantity="other">"%1$s està fent que la tablet se sobreescalfi. Tanca-la ara o es tancarà automàticament d'aquí a %2$d segons."</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">"%1$s està fent que la tablet se sobreescalfi. Tanca-la ara o es tancarà automàticament d'aquí a %2$d segon."</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="pinpuk_attempts">
+        <item quantity="other">"Et queden %d intents; si no l'encertes, la SIM es bloquejarà."</item>
+        <item quantity="one">"Et queda %d intent; si no l'encertes, la SIM es bloquejarà."</item>
+    </plurals>
+    <plurals name="sem_chooser_preview_items">
+        <item quantity="other">%d elements</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d element</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_hours">
+        <item quantity="other">%d hores</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d hora</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_minutes">
+        <item quantity="other">%d minuts</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d minut</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

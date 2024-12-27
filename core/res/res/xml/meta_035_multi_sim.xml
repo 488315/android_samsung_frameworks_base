@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ThemeMetaData FormatVersion="1.3" GuideVersion="1.4">
+    <AppMetaData Name="SimCardManager" TargetApi="21" TargetPackageName="com.samsung.android.app.telephonyui" VersionCode="1" VersionName="1.0">
+        <Include RefName="SESL" />
+        <Property Comment="Action bar: Background color" DefaultValue="#fff2f2f2" DestAttribName="scm_actionbar_color" POption="AlwaysOverriden" UID="35-1-1" ValueRef="1-1-1" ValueType="BgColor" />
+        <Property Comment="Action bar: Title text color" DefaultValue="#ff252525" DestAttribName="scm_actionbar_text_color" POption="AlwaysOverriden" UID="35-1-3" ValueRef="1-1-3" ValueType="TextColor" />
+        <Property Comment="Action button: Back icon tint color" DefaultValue="#ff252525" DestAttribName="scm_action_button_back_icon_tint_color" UID="35-2-1" ValueRef="1-11-3" ValueType="TintColor" />
+        <Property Comment="Action button: Back icon image" DefaultValue="" DestAttribName="scm_action_button_back_icon_image" DestQualifiers="xxxhdpi" ImageSize="24X24" UID="35-2-2" ValueRef="1-11-4" ValueType="Image" />
+        <Property Comment="Action button: Button / text color" DefaultValue="" DestAttribName="scm_action_button_text_color" UID="35-2-3" ValueRef="1-11-1" ValueType="TextColor" />
+        <Property Comment="Add button: Add icon tint color" DefaultValue="#ff252525" DestAttribName="scm_add_button_tint_color" POption="AlwaysOverriden" UID="35-4-1" ValueRef="1-17-1" ValueType="TintColor" />
+        <Property Comment="Add button: Add icon image" DefaultValue="" DestAttribName="scm_add_button_icon_image" DestQualifiers="xxxhdpi" ImageSize="32X32" UID="35-4-2" ValueRef="1-17-2" ValueType="Image" />
+        <Property Comment="Divider: Divider color" DefaultValue="#ff252525" DestAttribName="scm_divider_color" POption="AlwaysOverriden" UID="35-5-1" ValueRef="1-2" ValueType="TintColor" />
+        <Property Comment="Text: Main text color" DefaultValue="#ff252525" DestAttribName="scm_main_text_color" UID="35-9-1" ValueRef="1-3-1" ValueType="TextColor" />
+        <Property Comment="Text: Sub text color" DefaultValue="#ff909090" DestAttribName="scm_sub_text_color" UID="35-9-2" ValueRef="1-3-2" ValueType="TextColor" />
+        <Property Comment="Bottom bar: Bottom bar bg color" DefaultValue="#fff2f2f2" DestAttribName="scm_bottom_bar_bg_color" UID="35-15-1" ValueRef="1-14-1" ValueType="BgColor" />
+        <Property Comment="Bottom bar: Bottom bar text color" DefaultValue="#ff0074d4" DestAttribName="scm_bottom_bar_text_color" UID="35-15-2" ValueRef="1-14-2" ValueType="TextColor" />
+        <Property Comment="Button: Background color" DefaultValue="#0f000000" DestAttribName="scm_button_bg_color" UID="35-6-1" ValueRef="1-7-1" ValueType="Color" />
+        <Property Comment="Button: Text color" DefaultValue="#ff252525" DestAttribName="scm_button_text_color" UID="35-6-2" ValueRef="1-7-2" ValueType="Color" />
+        <Property Comment="Button: Color button background color" DefaultValue="" DestAttribName="raised_button_background_color" UID="35-6-3" ValueRef="1-53-3" ValueType="Color" />
+        <Property Comment="Button: Button text color" DefaultValue="#fffafafa" DestAttribName="raised_button_text_color" UID="35-6-4" ValueRef="1-53-5" ValueType="Color" />
+        <Property Comment="Check box: On Color" DefaultValue="#ff4297ff" DestAttribName="scm_check_box_on_color" UID="35-7-1" ValueRef="1-6-1" ValueType="BgColor" />
+        <Property Comment="Check box: On Image" DefaultValue="" DestAttribName="scm_check_box_on_image" ImageSize="32X32" UID="35-7-1-1" ValueRef="1-6-1-1" ValueType="BgImage" />
+        <Property Comment="Check box: Off Color" DefaultValue="#cc8f8f8f" DestAttribName="scm_check_box_off_color" UID="35-7-2" ValueRef="1-6-2" ValueType="BgColor" />
+        <Property Comment="Check box: Off Image" DefaultValue="" DestAttribName="scm_check_box_off_image" ImageSize="32X32" UID="35-7-2-1" ValueRef="1-6-2-1" ValueType="BgImage" />
+        <Property Comment="Progress circle: Progress circle color 1" DefaultValue="#ff3fc51e" DestAttribName="scm_progress_circle_color_1" UID="35-8-1" ValueRef="1-55-1" ValueType="Color" />
+        <Property Comment="Progress circle: Progress circle color 2" DefaultValue="#ff01adcd" DestAttribName="scm_progress_circle_color_2" Opacity="60" UID="35-8-2" ValueRef="1-55-2" ValueType="Color" />
+        <Property Comment="Dialog: Background color" DefaultValue="#fffafafa" DestAttribName="scm_dialog_bg_color" UID="35-12-1" ValueRef="1-9-1" ValueType="BgColor" />
+        <Property Comment="Dialog: Background image" DefaultValue="" DestAttribName="scm_dialog_bg_image" DestQualifiers="xxxhdpi" UID="35-12-2" ValueRef="1-9-2" ValueType="BgImage" />
+        <Property Comment="Dialog: Title text color" DefaultValue="#ff252525" DestAttribName="scm_dialog_title_text_color" DestQualifiers="" UID="35-12-3" ValueRef="1-9-3" ValueType="TextColor" />
+        <Property Comment="Dialog: Main text color" DefaultValue="#ff252525" DestAttribName="scm_dialog_main_text_color" DestQualifiers="" UID="35-12-4" ValueRef="1-9-6" ValueType="TextColor" />
+        <Property Comment="Dialog: sub text color" DefaultValue="#ff6b6f72" DestAttribName="scm_dialog_sub_text_color" DestQualifiers="" UID="35-12-6" ValueRef="1-9-7" ValueType="TextColor" />
+        <Property Comment="Dialog: Body text color" DefaultValue="#ff505050" DestAttribName="scm_dialog_body_text_color" UID="35-12-7" ValueRef="1-9-4" ValueType="TextColor" />
+        <Property Comment="Dialog: Icon color" DefaultValue="#ffcccccc" DestAttribName="scm_dialog_icon_color" UID="35-12-8" ValueRef="1-C" ValueType="BgColor" />
+        <Property Comment="Dialog: Dialog action button" DefaultValue="#ff0074d4" DestAttribName="scm_dialog_action_button_text_color" UID="35-12-9" ValueRef="1-14-2" ValueType="TextColor" />
+        <Property Comment="Terms and condition: Main text color" DefaultValue="#ff252525" DestAttribName="scm_terms_and_condition_main_text_color" DestQualifiers="" UID="35-14-1" ValueRef="1-3-4-D" ValueType="TextColor" />
+        <Property Comment="Terms and condition: Description text color" DefaultValue="#ff505050" DestAttribName="scm_terms_and_condition_sub_text_color" DestQualifiers="" UID="35-14-2" ValueRef="1-3-3-D" ValueType="TextColor" />
+        <Property Comment="About SIM: Main text color" DefaultValue="#ff252525" DestAttribName="scm_about_sim_main_text_color" UID="35-16-1" ValueRef="1-1-3" ValueType="TextColor" />
+        <Property Comment="About SIM: Body text color" DefaultValue="#b3252525" DestAttribName="scm_about_sim_body_text_color" UID="35-16-2" ValueRef="1-1-4" ValueType="TextColor" />
+        <Property Comment="Master ON background color" DefaultValue="#bf4297ff" DestAttribName="scm_switch_on_bg_color" UID="35-17-1" ValueRef="1-40-1" ValueType="BgColor" />
+        <Property Comment="Master OFF background color" DefaultValue="#fffafafa" DestAttribName="scm_switch_off_bg_color" UID="35-17-2" ValueRef="1-40-2" ValueType="BgColor" />
+        <Property Comment="Master ON text color" DefaultValue="#fffafafa" DestAttribName="scm_switch_on_text_color" DestQualifiers="" UID="35-17-3" ValueRef="1-40-3" ValueType="TextColor" />
+        <Property Comment="Master OFF text color" DefaultValue="#ff252525" DestAttribName="scm_switch_off_text_color" DestQualifiers="" UID="35-17-4" ValueRef="1-40-4" ValueType="TextColor" />
+        <Property Comment="Text field: Cursor color" DefaultValue="#ff0074d4" DestAttribName="scm_text_field_cursor_color" UID="35-18-1" ValueRef="1-23-3" ValueType="Color" />
+        <Property Comment="Text field: Input text color" DefaultValue="#ff252525" DestAttribName="scm_text_field_text_color" DestQualifiers="" UID="35-18-2" ValueRef="1-23-5" ValueType="TextColor" />
+        <Property Comment="Text field: Line color selected" DefaultValue="#ff0074d4" DestAttribName="scm_text_field_line_selected_color" DestQualifiers="" UID="35-18-3" ValueRef="1-23-2" ValueType="Color" />
+        <Property Comment="Text field: Line color unselected" DefaultValue="#ff8c8c8c" DestAttribName="scm_text_field_line_unselected_color" DestQualifiers="" UID="35-18-4" ValueRef="1-23-1" ValueType="Color" />
+        <Property Comment="Text field: Line color disabled" DefaultValue="#47000000" DestAttribName="scm_text_field_line_disabled_color" UID="35-18-5" ValueRef="1-23-1-1" ValueType="Color" />
+        <Property Comment="Text field: Label color" DefaultValue="#ffc95151" DestAttribName="scm_text_field_label_color" UID="35-18-6" ValueRef="1-23-9" ValueType="TextColor" />
+        <Property Comment="Text field: Label color disabled" DefaultValue="#ff8c8c8c" DestAttribName="scm_text_field_label_disabled_color" UID="35-18-7" ValueRef="1-23-4-1" ValueType="Color" />
+        <Property Comment="Radio button: On color" DefaultValue="#ff4297ff" DestAttribName="scm_radio_button_on_color" UID="35-19-1" ValueRef="1-4-1" ValueType="BgColor" />
+        <Property Comment="Radio button: On image" DefaultValue="" DestAttribName="scm_radio_button_on_image" UID="35-19-1-1" ValueRef="1-4-1-1" ValueType="BgImage" />
+        <Property Comment="Radio button: Off color" DefaultValue="#cc8f8f8f" DestAttribName="scm_radio_button_off_color" UID="35-19-2" ValueRef="1-4-2" ValueType="BgColor" />
+        <Property Comment="Radio button: Off image" DefaultValue="" DestAttribName="scm_radio_button_off_image" UID="35-19-2-1" ValueRef="1-4-2-1" ValueType="BgImage" />
+        <Property Comment="Radio button: Disabled off image" DefaultValue="" DestAttribName="scm_radio_disabled_off_image" UID="35-19-3" ValueRef="1-4-4" ValueType="BgImage" />
+        <Property Comment="More option list / Drop down list: Background color" DefaultValue="" DestAttribName="scm_drop_down_list_bg_color" UID="35-20-1" ValueRef="1-10-1" ValueType="BgColor" />
+        <Property Comment="More option list / Drop down list: Background image" DefaultValue="" DestAttribName="scm_drop_down_list_bg_image" UID="35-20-1-1" ValueRef="1-10-1-1" ValueType="BgImage" />
+        <Property Comment="More option list / Drop down list: Background stroke color" DefaultValue="" DestAttribName="scm_drop_down_list_bg_stroke_color" UID="35-20-2" ValueRef="1-10-2" ValueType="BgColor" />
+        <Property Comment="More option list / Drop down list: Text color" DefaultValue="" DestAttribName="scm_drop_down_list_text_color" UID="35-20-3" ValueRef="1-10-3" ValueType="TextColor" />
+        <Property Comment="More option list / Drop down list: Selected mark icon image" DefaultValue="" DestAttribName="scm_drop_down_list_selected_mark_icon_image" UID="35-20-10" ValueRef="1-10-10" ValueType="BgImage" />
+        <Property Comment="More option list / Drop down list: Primary dark color" DefaultValue="" DestAttribName="scm_drop_down_list_primary_dark_color" UID="35-20-11" ValueRef="1-10-11" ValueType="TextColor" />
+    </AppMetaData>
+</ThemeMetaData>

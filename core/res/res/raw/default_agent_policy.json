@@ -1,0 +1,9 @@
+{
+    "policy_version": "20240930",
+    "cross_app_agent_trusted_list": [],
+    "cross_app_agent_list": [
+        "Y29tLnNhbXN1bmcuYW5kcm9pZC5hcHAucm91dGluZXM=",
+        "Y29tLmdvb2dsZS5hbmRyb2lkLmdvb2dsZXF1aWNrc2VhcmNoYm94",
+        "Y29tLnNhbXN1bmcuYW5kcm9pZC5iaXhieS5hZ2VudA=="
+    ]
+}

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent" android:paddingHorizontal="@dimen/screen_percentage_05"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView android:textAppearance="@style/TextAppearance.Toast" android:gravity="center" android:id="@id/message" android:background="?^attr-private/toastFrameBackground" android:layout_width="wrap_content" android:layout_height="wrap_content" android:minHeight="48.0dip" android:layout_weight="1.0" android:paddingHorizontal="16.0dip" android:paddingVertical="8.0dip" />
+</LinearLayout>

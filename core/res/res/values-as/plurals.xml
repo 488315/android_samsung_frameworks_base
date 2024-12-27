@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="SDcardBlockUnmount_message">
+        <item quantity="other">"আপোনাৰ ফোনটো অস্থিৰ হয় কাৰণ এপ্প্‌সমূহ ইনষ্টল থকা SD কাৰ্ডখন আঁতৰোৱা হৈছিল। আপোনাৰ ফোনটো সাধাৰণলৈ ঘূৰি আহিবলৈ %d ছেকেণ্ডত পুনৰাৰম্ভ হ'ব। ফোনটো পুনৰাৰম্ভ হোৱাৰ পূৰ্বে কোনো অসংৰক্ষিত ডাটা সংৰক্ষণ কৰক।"</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">"আপোনাৰ ফোনটো অস্থিৰ হয় কাৰণ এপ্প্‌সমূহ ইনষ্টল থকা SD কাৰ্ডখন আঁতৰোৱা হৈছিল। আপোনাৰ ফোনটো সাধাৰণলৈ ঘূৰি আহিবলৈ %d ছেকেণ্ডত পুনৰাৰম্ভ হ'ব। ফোনটো পুনৰাৰম্ভ হোৱাৰ পূৰ্বে কোনো অসংৰক্ষিত ডাটা সংৰক্ষণ কৰক।"</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="SDcardBlockUnmount_title">
+        <item quantity="other">"আপোনাৰ ফোন %d ছেকেণ্ডত পুনৰাৰম্ভ হ'ব"</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">"আপোনাৰ ফোন %d ছেকেণ্ডত পুনৰাৰম্ভ হ'ব"</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_phone">
+        <item quantity="other">%d টা এপ্প্‌ স্বয়ংক্ৰিয়ভাৱে বন্ধ হৈছিল কাৰণ সেইবোৰৰ ফলত আপোনাৰ ফোন অধিক গৰম হৈছিল। আপুনি আপোনাৰ ফোন ঠাণ্ডা হোৱাৰ পিছত সেইবোৰ পুনৰ খুলিব পাৰে।</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d টা এপ্প্‌ স্বয়ংক্ৰিয়ভাৱে বন্ধ হৈছিল কাৰণ ইয়াৰ ফলত আপোনাৰ ফোন অধিক গৰম হৈছিল। আপুনি আপোনাৰ ফোন ঠাণ্ডা হোৱাৰ পিছত ইয়াক পুনৰ খুলিব পাৰে।</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_tablet">
+        <item quantity="other">%d টা এপ্প্‌ স্বয়ংক্ৰিয়ভাৱে বন্ধ হৈছিল কাৰণ সেইবোৰৰ ফলত আপোনাৰ টেবলেট অধিক গৰম হৈছিল। আপুনি আপোনাৰ টেবলেট ঠাণ্ডা হোৱাৰ পিছত সেইবোৰ পুনৰ খুলিব পাৰে।</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d টা এপ্প্‌ স্বয়ংক্ৰিয়ভাৱে বন্ধ হৈছিল কাৰণ ইয়াৰ ফলত আপোনাৰ টেবলেট অধিক গৰম হৈছিল। আপুনি আপোনাৰ টেবলেট ঠাণ্ডা হোৱাৰ পিছত ইয়াক পিছত পুনৰ খুলিব পাৰে।</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_title_v2">
+        <item quantity="other">%d টা এপ্প্‌ বন্ধ হৈছে</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d টা এপ্প্‌ বন্ধ হৈছে</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="dex_max_count_text">
+        <item quantity="other">স্ক্ৰীণত একে সময়ত %d টাতকৈ অধিক এপ্প্‌ দেখুৱাব নোৱাৰে। একেবাৰে পুৰণি এপ্প্‌ মিনিমাইজ কৰা হৈছে।​</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">স্ক্ৰীণত একে সময়ত %d টাতকৈ অধিক এপ্প্‌ দেখুৱাব নোৱাৰে। একেবাৰে পুৰণি এপ্প্‌ মিনিমাইজ কৰা হৈছে।</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="hot_key_guide_message">
+        <item quantity="other">আপুনি নিয়োগ কৰিবলৈ বিচৰা এপ্প্‌টো খোলক, তাৰপিছত %d ছেকেণ্ডৰ বাবে এপ্প্‌ কীটো দবাওক আৰু ধৰি ৰাখক।</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">আপুনি নিয়োগ কৰিবলৈ বিচৰা এপ্প্‌টো খোলক, তাৰপিছত %d ছেকেণ্ডৰ বাবে এপ্প্‌ কীটো দবাওক আৰু ধৰি ৰাখক।</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_phone">
+        <item quantity="other">"%1$s-ৰ কাৰণেই আপোনাৰ ফোন অত্যন্ত গৰম হয়। ইয়াক %2$d ছেকেণ্ডত স্বয়ংক্ৰিয়ভাৱে বন্ধ কৰা হ'ব।"</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">"%1$s-ৰ কাৰণেই আপোনাৰ ফোন অত্যন্ত গৰম হয়। ইয়াক %2$d ছেকেণ্ডত স্বয়ংক্ৰিয়ভাৱে বন্ধ কৰা হ'ব।"</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_tablet">
+        <item quantity="other">"%1$s-ৰ কাৰণেই আপোনাৰ টেবলেট অত্যন্ত গৰম হয়। ইয়াক %2$d ছেকেণ্ডত স্বয়ংক্ৰিয়ভাৱে বন্ধ কৰা হ'ব।"</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">"%1$s-ৰ কাৰণেই আপোনাৰ টেবলেট অত্যন্ত গৰম হয়। ইয়াক %2$d ছেকেণ্ডত ছেকেণ্ডত স্বয়ংক্ৰিয়ভাৱে বন্ধ কৰা হ'ব।"</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="maintenance_mode_backup_cloud_menu_sub_textview_message_default">
+        <item quantity="other">%d দিনলৈকে Samsung Cloud-ত অসীমিত ডাটাৰ বেক আপ লওক বা আপুনি বেক আপ লোৱা ডাটা পুনঃসংৰক্ষণ কৰক।</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d দিনলৈকে Samsung Cloud-ত অসীমিত ডাটাৰ বেক আপ লওক বা আপুনি বেক আপ লোৱা ডাটা পুনঃসংৰক্ষণ কৰক।</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_phone">
+        <item quantity="other">"%1$sৰ ফলত আপোনাৰ ফোন অধিক গৰম হৈছে। আপুনি ইয়াক এতিয়া চয়ন কৰিব পাৰে বা এইটো %2$d ছেকেণ্ডত স্বয়ংক্ৰিয়ভাৱে বন্ধ কৰা হ'ব।"</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">"%1$sৰ ফলত আপোনাৰ ফোন অধিক গৰম হৈছে। আপুনি ইয়াক এতিয়া চয়ন কৰিব পাৰে বা এইটো %2$d ছেকেণ্ডত স্বয়ংক্ৰিয়ভাৱে বন্ধ কৰা হ'ব।"</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_tablet">
+        <item quantity="other">"%1$sৰ ফলত আপোনাৰ টেবলেট অধিক গৰম হৈছে। আপুনি ইয়াক এতিয়া চয়ন কৰিব পাৰে বা এইটো %2$d ছেকেণ্ডত স্বয়ংক্ৰিয়ভাৱে বন্ধ কৰা হ'ব।"</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">"%1$sৰ ফলত আপোনাৰ টেবলেট অধিক গৰম হৈছে। আপুনি ইয়াক এতিয়া চয়ন কৰিব পাৰে বা এইটো %2$d ছেকেণ্ডত স্বয়ংক্ৰিয়ভাৱে বন্ধ কৰা হ'ব।"</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="pinpuk_attempts">
+        <item quantity="other">ছিম লক হোৱাৰ পূৰ্বে আপোনাৰ %dটা প্ৰয়াস বাকী আছে।</item>
+        <item quantity="one">ছিম লক হোৱাৰ পূৰ্বে আপোনাৰ %dটা প্ৰয়াস বাকী আছে।</item>
+    </plurals>
+    <plurals name="sem_chooser_preview_items">
+        <item quantity="other">%d টা আইটেম</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d টা আইটেম</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_hours">
+        <item quantity="other">%d ঘণ্টা</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d ঘণ্টা</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_minutes">
+        <item quantity="other">%d মিনিট</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d মিনিট</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

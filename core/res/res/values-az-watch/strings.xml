@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="global_action_emergency">Fövqəladə halda SOS</string>
+    <string name="permgrouplab_sensors">Sensorlar</string>
+    <string name="reboot_to_update_prepare">Güncəllənməyə hazırlanır</string>
+    <string name="reboot_to_update_title">Wear OS sistem güncəlləməsi</string>
+    <string name="select_input_method">Daxiletmə seçin</string>
+</resources>

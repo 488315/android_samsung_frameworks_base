@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:id="@id/sem_chooser_more_apps_parent" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <Toolbar android:theme="@style/Theme.DeviceDefault.Resolver" android:layout_gravity="top" android:id="@id/sem_chooser_more_apps_toolbar" android:background="@color/sem_resolver_bg_color" android:layout_width="fill_parent" android:layout_height="?actionBarSize" />
+    <com.android.internal.widget.RecyclerView android:id="@id/sem_chooser_recycler_more_apps" android:background="@color/sem_resolver_bg_color" android:paddingTop="10.0dip" android:paddingBottom="10.0dip" android:scrollbars="none" android:clipToPadding="false" android:layout_width="fill_parent" android:layout_height="fill_parent" android:paddingStart="4.0dip" android:paddingEnd="4.0dip" />
+    <TextView android:gravity="center" android:id="@id/empty" android:background="@color/sem_resolver_bg_color" android:padding="@dimen/chooser_edge_margin_normal" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="fill_parent" android:text="@string/sem_chooser_more_apps_no_application" />
+</LinearLayout>

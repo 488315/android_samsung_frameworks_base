@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="global_action_emergency">Hädaabikõne</string>
+    <string name="permgrouplab_sensors">Andurid</string>
+    <string name="reboot_to_update_prepare">Värskendamiseks ettevalmistamine</string>
+    <string name="reboot_to_update_title">Wear OS-i süsteemivärskendus</string>
+    <string name="select_input_method">Valige sisend</string>
+</resources>

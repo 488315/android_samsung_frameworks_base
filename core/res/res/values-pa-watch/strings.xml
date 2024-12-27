@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="global_action_emergency">ਐਮਰਜੈਂਸੀ ਸਹਾਇਤਾ</string>
+    <string name="permgrouplab_sensors">ਸੰੰਵੇਦਕ</string>
+    <string name="reboot_to_update_prepare">ਅੱਪਡੇਟ ਦੀ ਤਿਆਰੀ ਕੀਤੀ ਜਾ ਰਹੀ ਹੈ</string>
+    <string name="reboot_to_update_title">Wear OS ਸਿਸਟਮ ਅੱਪਡੇਟ</string>
+    <string name="select_input_method">ਇਨਪੁੱਟ ਚੁਣੋ</string>
+</resources>

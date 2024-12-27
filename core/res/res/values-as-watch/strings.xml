@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="global_action_emergency">জৰুৰীকালীন SOS</string>
+    <string name="permgrouplab_sensors">ছেন্সৰসমূহ</string>
+    <string name="reboot_to_update_prepare">আপডে’ট কৰিবলৈ সাজু কৰি থকা হৈছে</string>
+    <string name="reboot_to_update_title">Wear OSৰ ছিষ্টেম আপডে’ট</string>
+    <string name="select_input_method">ইনপুট বাছনি কৰক</string>
+</resources>

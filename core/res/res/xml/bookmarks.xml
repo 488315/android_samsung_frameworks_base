@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bookmarks>
+    <bookmark role="android.app.role.BROWSER" shortcut="b" />
+    <bookmark category="android.intent.category.APP_CONTACTS" shortcut="c" />
+    <bookmark category="android.intent.category.APP_EMAIL" shortcut="e" />
+    <bookmark category="android.intent.category.APP_CALENDAR" shortcut="k" />
+    <bookmark category="android.intent.category.APP_MAPS" shortcut="m" />
+    <bookmark category="android.intent.category.APP_MUSIC" shortcut="p" />
+    <bookmark role="android.app.role.SMS" shortcut="s" />
+    <bookmark category="android.intent.category.APP_CALCULATOR" shortcut="u" />
+</bookmarks>

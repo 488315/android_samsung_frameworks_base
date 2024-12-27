@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector android:height="64.0dip" android:width="64.0dip" android:viewportWidth="64.0" android:viewportHeight="64.0"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <path android:fillColor="#ff10c252" android:pathData="M32,32m-31,0a31,31 0,1 1,62 0a31,31 0,1 1,-62 0" android:strokeColor="#00000000" android:strokeWidth="1.0" android:fillType="evenOdd" />
+    <path android:fillColor="#00000000" android:pathData="M32,48.164C40.837,48.164 48,41.191 48,32.589C48,27.293 45.285,22.614 41.136,19.8" android:strokeColor="#ffffffff" android:strokeWidth="4.0" android:strokeLineCap="round" android:fillType="nonZero" />
+    <path android:fillColor="#00000000" android:pathData="M32,16L32,28.846" android:strokeColor="#ffffffff" android:strokeWidth="4.0" android:strokeLineCap="round" android:fillType="evenOdd" />
+    <path android:fillColor="#00000000" android:pathData="M22.846,19.812C21.339,20.838 20.021,22.109 18.955,23.567" android:strokeColor="#ffffffff" android:strokeWidth="4.0" android:strokeLineCap="round" android:fillType="nonZero" />
+    <path android:fillColor="#00000000" android:pathData="M16.224,29.975C16.077,30.825 16,31.698 16,32.589C16,33.453 16.072,34.3 16.211,35.126" android:strokeColor="#ffffffff" android:strokeWidth="4.0" android:strokeLineCap="round" android:fillType="nonZero" />
+    <path android:fillColor="#00000000" android:pathData="M18.951,41.605C20.015,43.06 21.329,44.331 22.832,45.356" android:strokeColor="#ffffffff" android:strokeWidth="4.0" android:strokeLineCap="round" android:fillType="nonZero" />
+    <path android:fillColor="#ffffffff" android:pathData="M27.699,47.176L32.933,43.577C33.389,43.264 34.011,43.379 34.324,43.834C34.439,44.001 34.5,44.199 34.5,44.401L34.5,51.599C34.5,52.151 34.052,52.599 33.5,52.599C33.298,52.599 33.1,52.538 32.933,52.423L27.699,48.824C27.243,48.511 27.128,47.889 27.441,47.433C27.51,47.333 27.598,47.245 27.699,47.176Z" android:strokeColor="#00000000" android:strokeWidth="1.0" android:fillType="evenOdd" />
+</vector>

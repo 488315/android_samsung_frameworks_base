@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="global_action_emergency">کمک اضطراری</string>
+    <string name="permgrouplab_sensors">حسگرها</string>
+    <string name="reboot_to_update_prepare">درحال آماده‌سازی برای به‌روزرسانی</string>
+    <string name="reboot_to_update_title">‏به‌روزرسانی سیستم Wear OS</string>
+    <string name="select_input_method">انتخاب ورودی</string>
+</resources>

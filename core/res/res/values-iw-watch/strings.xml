@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="global_action_emergency">מצב חירום</string>
+    <string name="permgrouplab_sensors">חיישנים</string>
+    <string name="reboot_to_update_prepare">בהכנה לתהליך העדכון</string>
+    <string name="reboot_to_update_title">‏עדכון מערכת של Wear OS</string>
+    <string name="select_input_method">בחירת קלט</string>
+</resources>

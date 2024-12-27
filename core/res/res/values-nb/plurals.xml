@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="SDcardBlockUnmount_message">
+        <item quantity="other">Telefonen er ustabil fordi et SD-kort som hadde apper installert, ble fjernet. Telefonen starter på nytt om %d sekunder for å gå tilbake til normalt. Lagre eventuelle ulagrede data før telefonen starter på nytt.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Telefonen er ustabil fordi et SD-kort som hadde apper installert, ble fjernet. Telefonen starter på nytt om %d sekund for å gå tilbake til normalt. Lagre eventuelle ulagrede data før telefonen starter på nytt.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="SDcardBlockUnmount_title">
+        <item quantity="other">Telefon starter på nytt om %d sek</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Telefon starter på nytt om %d sekund</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_phone">
+        <item quantity="other">%d apper ble lukket automatisk fordi de gjorde telefonen for varm. Du kan åpne dem igjen etter at telefonen har kjølt seg ned.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d app ble lukket automatisk fordi den gjorde telefonen for varm. Du kan åpne den igjen etter at telefonen har kjølt seg ned.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_tablet">
+        <item quantity="other">%d apper ble lukket automatisk fordi de gjorde nettbrettet for varmt. Du kan åpne dem igjen etter at nettbrettet har kjølt seg ned.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d app ble lukket automatisk fordi den gjorde nettbrettet for varmt. Du kan åpne den igjen etter at nettbrettet har kjølt seg ned.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_title_v2">
+        <item quantity="other">%d apper ble lukket</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d app ble lukket</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="dex_max_count_text">
+        <item quantity="other">Kan ikke vise mer enn %d apper på skjermen samtidig. Den eldste appen er minimert.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Kan ikke vise mer enn %d app på skjermen samtidig. Den eldste appen er minimert.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="hot_key_guide_message">
+        <item quantity="other">Åpne appen du vil tildele, og trykk på og hold apptasten i %d sekunder.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Åpne appen du vil tildele, og trykk på og hold apptasten i %d sekund.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_phone">
+        <item quantity="other">%1$s gjør at telefonen blir overopphetet. Den lukkes automatisk om %2$d sekunder.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s gjør at telefonen blir overopphetet. Den lukkes automatisk om %2$d sekund.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_tablet">
+        <item quantity="other">%1$s gjør at nettbrettet blir overopphetet. Den lukkes automatisk om %2$d sekunder.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s gjør at nettbrettet blir overopphetet. Den lukkes automatisk om %2$d sekund.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="maintenance_mode_backup_cloud_menu_sub_textview_message_default">
+        <item quantity="other">Sikkerhetskopier ubegrensede data til Samsung Cloud i opptil %d dager, eller gjenopprett data du har sikkerhetskopiert.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Sikkerhetskopier ubegrensede data til Samsung Cloud i opptil %d dag, eller gjenopprett data du har sikkerhetskopiert.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_phone">
+        <item quantity="other">%1$s gjør at telefonen blir overopphetet. Du kan lukke den nå eller vente til den lukkes automatisk om %2$d sekunder.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s gjør at telefonen blir overopphetet. Du kan lukke den nå eller vente til den lukkes automatisk om %2$d sekund.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_tablet">
+        <item quantity="other">%1$s gjør at nettbrettet blir overopphetet. Du kan lukke den nå eller vente til den lukkes automatisk om %2$d sekunder.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s gjør at nettbrettet blir overopphetet. Du kan lukke den nå eller vente til den lukkes automatisk om %2$d sekund.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="pinpuk_attempts">
+        <item quantity="other">Du har %d forsøk igjen før SIM-kortet låses.</item>
+        <item quantity="one">Du har %d forsøk igjen før SIM-kortet låses.</item>
+    </plurals>
+    <plurals name="sem_chooser_preview_items">
+        <item quantity="other">%d elementer</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d element</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_hours">
+        <item quantity="other">%d timer</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d time</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_minutes">
+        <item quantity="other">%d minutter</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d minutt</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

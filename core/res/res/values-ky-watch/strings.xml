@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="global_action_emergency">Кырсыктаганда чалуу</string>
+    <string name="permgrouplab_sensors">Сенсорлор</string>
+    <string name="reboot_to_update_prepare">Жаңырганы жатат</string>
+    <string name="reboot_to_update_title">Wear OS системасын жаңыртуу</string>
+    <string name="select_input_method">Киргизүү жолун тандоо</string>
+</resources>

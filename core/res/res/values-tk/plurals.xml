@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="SDcardBlockUnmount_message">
+        <item quantity="other">Içinde gurnalan goýmalar bilen SD kart aýrylan sebäpli, telefonyňyz durnuksyz. Adaty tertibine dolanmak üçin, telefonyňyz %d sekuntdan ýapyp açylar. Telefon ýapyp açylandan öň, her ýazdyrylmadyk maglumaty ýazdyryň.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Içinde gurnalan goýmalar bilen SD kart aýrylan sebäpli, telefonyňyz durnuksyz. Adaty tertibine dolanmak üçin, telefonyňyz %d sekuntdan ýapyp açylar. Telefon ýapyp açylandan öň, her ýazdyrylmadyk maglumaty ýazdyryň.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="SDcardBlockUnmount_title">
+        <item quantity="other">Telefonyňyz %d sekuntdan ýapyp açylar</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Telefonyňyz %d sekuntdan ýapyp açylar</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_phone">
+        <item quantity="other">%d programma awtomatik ýapyldy, sebäbi olar telefonyňyzyň gaty gyzmagyna eltýärdi. Olary telefonyňyz sowansoň täzeden açyp bilersiňiz.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d programma awtomatik ýapyldy, sebäbi ol telefonyňyzyň gaty gyzmagyna sebäp boldy. Ony telefonyňyz sowansoň täzeden açyp bilersiňiz.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_tablet">
+        <item quantity="other">%d programma awtomatik ýapyldy, sebäbi olar planşetiňiziň gaty gyzmagyna eltýärdi. Olary planşetiňiz sowansoň täzeden açyp bilersiňiz.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d programma awtomatik ýapyldy, sebäbi ol planşetiňiziň gaty gyzmagyna sebäp boldy. Ony planşetiňiz sowansoň täzeden açyp bilersiňiz.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_title_v2">
+        <item quantity="other">%d programma ýapyldy</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d programma ýapyldy</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="dex_max_count_text">
+        <item quantity="other">Ekranda birlikde %d programmadan köp görkezip bolmaýar. Iň köne programma minimizlendi.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Ekranda birlikde %d programmadan köp görkezip bolmaýar. Iň köne programma minimizlendi.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="hot_key_guide_message">
+        <item quantity="other">Bellemek isleýän programmaňyzy açyp, programma klawişini %d sekunt basyp saklaň.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Bellemek isleýän programmaňyzy açyp, programma klawişini %d sekunt basyp saklaň.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_phone">
+        <item quantity="other">%1$s telefonyňyzy gaty gyzdyrýar. Ol %2$d sekuntdan awtomatik ýapylar.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s telefonyňyzy gaty gyzdyrýar. Ol %2$d sekuntdan awtomatik ýapylar.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_tablet">
+        <item quantity="other">%1$s planşetiňizi gaty gyzdyrýar. Ol %2$d sekuntdan awtomatik ýapylar.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s planşetiňizi gaty gyzdyrýar. Ol %2$d sekuntdan awtomatik ýapylar.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="maintenance_mode_backup_cloud_menu_sub_textview_message_default">
+        <item quantity="other">Çäksiz maglumaty Samsung Cloud-a %d güne çenli ätiýaçlaň ýa-da ätiýaçlan maglumatyňyzy dikeldiň.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Çäksiz maglumaty Samsung Cloud-a %d güne çenli ätiýaçlaň ýa-da ätiýaçlan maglumatyňyzy dikeldiň.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_phone">
+        <item quantity="other">%1$s telefonyňyzy gaty gyzdyrýar. Ony häzir ýapyp bilersiňiz ýa-da ol %2$d sekuntdan awtomatik ýapylar.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s telefonyňyzy gaty gyzdyrýar. Ony häzir ýapyp bilersiňiz ýa-da ol %2$d sekuntdan awtomatik ýapylar.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_tablet">
+        <item quantity="other">%1$s planşetiňizi gaty gyzdyrýar. Ony häzir ýapyp bilersiňiz ýa-da ol %2$d sekuntdan awtomatik ýapylar.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s planşetiňizi gaty gyzdyrýar. Ony häzir ýapyp bilersiňiz ýa-da ol %2$d sekuntdan awtomatik ýapylar.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sem_chooser_preview_items">
+        <item quantity="other">%d element</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d element</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_hours">
+        <item quantity="other">%d sagat</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d sagat</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_minutes">
+        <item quantity="other">%d minut</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d minut</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

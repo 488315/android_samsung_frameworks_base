@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="global_action_emergency">SOS ສຸກເສີນ</string>
+    <string name="permgrouplab_sensors">ເຊັນເຊີ</string>
+    <string name="reboot_to_update_prepare">ກຳລັງກະກຽມເພື່ອອັບເດດ</string>
+    <string name="reboot_to_update_title">ອັບເດດລະບົບ Wear OS</string>
+    <string name="select_input_method">ເລືອກການປ້ອນຂໍ້ມູນ</string>
+</resources>

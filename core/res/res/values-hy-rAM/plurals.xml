@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="SDcardBlockUnmount_message">
+        <item quantity="other">Ձեր հեռախոսն անկայուն է գործում SD քարտի հեռացման պատճառով, որում ծրագրեր էին տեղադրված: Ձեր հեռախոսը կվերագործարկվի %d վայրկյանից՝ նորմալ վիճակին վերադառնալու համար: Նախքան հեռախոսի վերագործարկումը պահպանեք բոլոր չպահպանված տվյալները:</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Ձեր հեռախոսն անկայուն է գործում SD քարտի հեռացման պատճառով, որում ծրագրեր էին տեղադրված: Ձեր հեռախոսը կվերագործարկվի %d վայրկյանից՝ նորմալ վիճակին վերադառնալու համար: Նախքան հեռախոսի վերագործարկումը պահպանեք բոլոր չպահպանված տվյալները:</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="SDcardBlockUnmount_title">
+        <item quantity="other">Հեռախոսը կվերագործարկվի %d վայրկյանից</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Հեռախոսը կվերագործարկվի %d վայրկյանից</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_phone">
+        <item quantity="other">%d ծրագիր փակվեց ինքնաբերաբար, որովհետև դրանք առաջացնում էին հեռախոսի գերտաքացում: Կարող եք դրանք բացել ավելի ուշ՝ հեռախոսի հովացումից հետո:</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d ծրագիր փակվեց ինքնաբերաբար, որովհետև այն առաջացնում էր հեռախոսի գերտաքացում: Կարող եք այն բացել ավելի ուշ՝ հեռախոսի հովացումից հետո:</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_tablet">
+        <item quantity="other">%d ծրագիր փակվեց ինքնաբերաբար, որովհետև դրանք առաջացնում էին պլանշետի գերտաքացում: Կարող եք դրանք բացել ավելի ուշ՝ պլանշետի հովացումից հետո:</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d ծրագիր փակվեց ինքնաբերաբար, որովհետև այն առաջացնում էր պլանշետի գերտաքացում: Կարող եք այն բացել ավելի ուշ՝ պլանշետի հովացումից հետո:</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_title_v2">
+        <item quantity="other">%d ծրագիր փակվեց</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d ծրագիր փակվեց</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="dex_max_count_text">
+        <item quantity="other">Հնարավոր չէ էկրանի վրա միաժամանակ ցույց տալ %d-ից ավելի ծրագրեր: Ամենահին ծրագիրը ծալվեց:</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Հնարավոր չէ էկրանի վրա միաժամանակ ցույց տալ %d-ից ավելի ծրագիր: Ամենահին ծրագիրը ծալվեց:</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="hot_key_guide_message">
+        <item quantity="other">Բացեք այն ծրագիրը, որն ուզում եք նշանակել, հետո սեղմեք ծրագրի ստեղնը և պահեք %d վայրկյան:</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Բացեք այն ծրագիրը, որն ուզում եք նշանակել, հետո սեղմեք ծրագրի ստեղնը և պահեք %d վայրկյան:</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_phone">
+        <item quantity="other">%1$s-ն առաջացնում է հեռախոսի գերտաքացում: Այն ինքնաբերաբար կփակվի %2$d վայրկյանից:</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s-ն առաջացնում է հեռախոսի գերտաքացում: Այն ինքնաբերաբար կփակվի %2$d վայրկյանից:</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_tablet">
+        <item quantity="other">%1$s-ն առաջացնում է պլանշետի գերտաքացում: Այն ինքնաբերաբար կփակվի %2$d վայրկյանից:</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s-ն առաջացնում է պլանշետի գերտաքացում: Այն ինքնաբերաբար կփակվի %2$d վայրկյանից:</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="maintenance_mode_backup_cloud_menu_sub_textview_message_default">
+        <item quantity="other">Անսահմանափակ տվյալներ կրկնօրինակեք Samsung Cloud-ում մինչև %d օր ժամկետով կամ վերականգնեք կրկնօրինակված տվյալները:</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Անսահմանափակ տվյալներ կրկնօրինակեք Samsung Cloud-ում մինչև %d օր ժամկետով կամ վերականգնեք կրկնօրինակված տվյալները:</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_phone">
+        <item quantity="other">%1$s-ն առաջացնում է հեռախոսի գերտաքացում: Կարող եք այն փակել հիմա, կամ այն ինքնաբերաբար կփակվի %2$d վայրկյանից:</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s-ն առաջացնում է հեռախոսի գերտաքացում: Կարող եք այն փակել հիմա, կամ այն ինքնաբերաբար կփակվի %2$d վայրկյանից:</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_tablet">
+        <item quantity="other">%1$s-ն առաջացնում է պլանշետի գերտաքացում: Կարող եք այն փակել հիմա, կամ այն ինքնաբերաբար կփակվի %2$d վայրկյանից:</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s-ն առաջացնում է պլանշետի գերտաքացում: Կարող եք այն փակել հիմա, կամ այն ինքնաբերաբար կփակվի %2$d վայրկյանից:</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sem_chooser_preview_items">
+        <item quantity="other">%d տարր</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d տարր</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_hours">
+        <item quantity="other">%d ժամ</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d ժամ</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_minutes">
+        <item quantity="other">%d րոպե</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d րոպե</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

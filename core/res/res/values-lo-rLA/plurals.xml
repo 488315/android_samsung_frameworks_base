@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="SDcardBlockUnmount_message">
+        <item quantity="other">ໂທລະສັບຂອງທ່ານບໍ່ສະຖຽນ ເພາະວ່າແຜ່ນ SD ທີ່ຕິດຕັ້ງແອັບໃສ່ມັນຖືກເອົາອອກໄປແລ້ວ. ໂທລະສັບຂອງທ່ານຈະປິດເປີດຄືນໃໝ່ໃນ %d ວິນາທີເພື່ອກັບຄືນສູ່ປົກກະຕິ. ບັນທຶກຂໍ້ມູນທີ່ບໍ່ໄດ້ບັນທຶກກ່ອນທີ່ໂທລະສັບຈະປິດເປີດຄືນໃໝ່.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="SDcardBlockUnmount_title">
+        <item quantity="other">ໂທລະສັບຂອງທ່ານຈະປິດເປີດຄືນໃໝ່ໃນ %d ວິນາທີ</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_phone">
+        <item quantity="other">%d ແອັບຖືກປິດໂດຍອັດຕະໂນມັດ ເນື່ອງຈາກພວກມັນໄດ້ເຮັດໃຫ້ໂທລະສັບຂອງທ່ານຮ້ອນເກີນໄປ. ທ່ານສາມາດເປີດພວກມັນອີກຄັ້ງໃນພາຍຫຼັງ ຫຼັງຈາກໂທລະສັບຂອງທ່ານເຢັນລົງແລ້ວ.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_tablet">
+        <item quantity="other">%d ແອັບຖືກປິດໂດຍອັດຕະໂນມັດ ເນື່ອງຈາກພວກມັນໄດ້ເຮັດໃຫ້ແທັບເລັດຂອງທ່ານຮ້ອນເກີນໄປ. ທ່ານສາມາດເປີດພວກມັນອີກຄັ້ງໃນພາຍຫຼັງ ຫຼັງຈາກແທັບເລັດຂອງທ່ານເຢັນລົງແລ້ວ.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_title_v2">
+        <item quantity="other">ປິດ %d ແອັບແລ້ວ</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="dex_max_count_text">
+        <item quantity="other">ບໍ່ສາມາດສະແດງໄດ້ຫຼາຍກວ່າ %d ແອັບໃນໜ້າຈໍໃນເວລາດຽວກັນ. ແອັບທີ່ເກົ່າສຸດຖືກຫຍໍ້ລົງແລ້ວ.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="hot_key_guide_message">
+        <item quantity="other">ເປີດແອັບທີ່ທ່ານຕ້ອງການກຳນົດ, ຈາກນັ້ນກົດປຸ່ມແອັບຄ້າງໄວ້ເປັນເວລາ %d ວິນາທີ.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_phone">
+        <item quantity="other">%1$s ກຳລັງເຮັດໃຫ້ໂທລະສັບຂອງທ່ານຮ້ອນເກີນໄປ. ມັນຈະຖືກປິດໂດຍອັດຕະໂນມັດໃນ %2$d ວິນາທີ.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_tablet">
+        <item quantity="other">%1$s ກຳລັງເຮັດໃຫ້ແທັບເລັດຂອງທ່ານຮ້ອນເກີນໄປ. ມັນຈະຖືກປິດໂດຍອັດຕະໂນມັດໃນ %2$d ວິນາທີ.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="maintenance_mode_backup_cloud_menu_sub_textview_message_default">
+        <item quantity="other">ແບັກອັບຂໍ້ມູນແບບບໍ່ມີຂີດຈຳກັດໄປຍັງ Samsung Cloud ເປັນເວລາສູງສຸດ %d ວັນ ຫຼື ກູ້ຄືນຂໍ້ມູນທີ່ທ່ານໄດ້ແບັກອັບແລ້ວ.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_phone">
+        <item quantity="other">%1$s ກຳລັງເຮັດໃຫ້ໂທລະສັບຂອງທ່ານຮ້ອນເກີນໄປ. ທ່ານສາມາດປິດມັນດຽວນີ້, ຫຼື ມັນຈະຖືກປິດໂດຍອັດຕະໂນມັດໃນ %2$d ວິນາທີ.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_tablet">
+        <item quantity="other">%1$s ກຳລັງເຮັດໃຫ້ແທັບເລັດຂອງທ່ານຮ້ອນເກີນໄປ. ທ່ານສາມາດປິດມັນດຽວນີ້, ຫຼື ມັນຈະຖືກປິດໂດຍອັດຕະໂນມັດໃນ %2$d ວິນາທີ.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sem_chooser_preview_items">
+        <item quantity="other">%d ລາຍການ</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_hours">
+        <item quantity="other">%d ຊົ່ວໂມງ</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_minutes">
+        <item quantity="other">%d ນາທີ</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

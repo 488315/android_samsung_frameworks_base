@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ThemeMetaData FormatVersion="1.3" GuideVersion="1.4">
+    <AppMetaData Name="Call settings" TargetApi="21" TargetPackageName="com.samsung.android.app.telephonyui" VersionCode="1" VersionName="1.0">
+        <Include RefName="SESL" />
+        <Property Comment="Primary color " DefaultValue="#ff15b76d" DestAttribName="color_primary" DestQualifiers="" UID="36-A" ValueRef="1-A" ValueType="BgColor" />
+        <Property Comment="Primary dark color " DefaultValue="#ff109e5d" DestAttribName="color_primary_dark" DestQualifiers="" UID="36-B" ValueRef="24-E" ValueType="BgColor" />
+        <Property Comment="Common component color" DefaultValue="#ff8f8f8f" DestAttribName="color_control_normal" DestQualifiers="" UID="36-C" ValueRef="1-C" ValueType="Color" />
+        <Property Comment="Color control activated" DefaultValue="#ff0bc26e" DestAttribName="color_control_activate" DestQualifiers="" UID="36-D" ValueRef="1-D" ValueType="TintColor" />
+        <Property Comment="Status bar background color" DefaultValue="#fff2f2f2" DestAttribName="status_bar_bg_color" DestQualifiers="" UID="36-S-1" ValueRef="1-51" ValueType="BgColor" />
+        <Property Comment="Status bar icon color (true - dark / false - light)" DefaultValue="true" DestAttribName="light_status_bar_mode" DestQualifiers="" UID="36-S-2" ValueRef="1-51-1" ValueType="Bool" />
+        <Property Comment="Add Icon tint color" DefaultValue="#ff00b149" DestAttribName="basic_tw_list_icon_create_tint_color" DestQualifiers="" UID="36-11-1" ValueRef="1-17-1" ValueType="Color" />
+        <Property Comment="Add Icon image" DefaultValue="" DestAttribName="basic_tw_list_icon_create" DestQualifiers="xxxhdpi" UID="36-11-2" ValueRef="1-17-2" ValueType="Image" />
+        <Property Comment="Delete Icon tint color" DefaultValue="#ffff3d00" DestAttribName="basic_tw_list_icon_minus_tint_color" DestQualifiers="" UID="36-11-3" ValueRef="1-17-3" ValueType="Color" />
+        <Property Comment="Delete Icon image" DefaultValue="" DestAttribName="basic_tw_list_icon_delete" DestQualifiers="xxxhdpi" UID="36-11-4" ValueRef="1-17-4" ValueType="Image" />
+        <Property Comment="Background Color" DefaultValue="" DestAttribName="tw_ab_bottom_transparent_mtrl" DestQualifiers="" UID="36-12-1" ValueRef="1-14-1" ValueType="BgColor" />
+        <Property Comment="Text color" DefaultValue="#ff13a462" DestAttribName="basic_bottom_bar_text_color" DestQualifiers="" UID="36-12-2" ValueRef="1-14-2" ValueType="TextColor" />
+        <Property Comment="No item text color" DefaultValue="#80252525" DestAttribName="basic_no_item_main_text_color" DestQualifiers="" UID="36-13-1" ValueRef="1-1-3" ValueType="TextColor" />
+        <Property Comment="Sub text color" DefaultValue="#80505050" DestAttribName="basic_no_item_sub_text_color" DestQualifiers="" UID="36-13-2" ValueRef="1-1-4" ValueType="TextColor" />
+        <Property Comment="Icon tint color" DefaultValue="#ff404040" DestAttribName="edit_dialog_editText_dialog_icon_tint_color" DestQualifiers="" UID="36-16-1" ValueRef="1-9-3" ValueType="Color" />
+        <Property Comment="Main text color" DefaultValue="#ff252525" DestAttribName="basic_title_text_color" DestQualifiers="" UID="36-16-4" ValueRef="1-9-6" ValueType="Color" />
+        <Property Comment="Sub text color" DefaultValue="#ff252525" DestAttribName="basic_secondary_text_color" DestQualifiers="" UID="36-16-5" ValueRef="1-9-7" ValueType="TextColor" />
+        <Property Comment="Body text color" DefaultValue="#ff505050" DestAttribName="basic_dialog_body_text_color" DestQualifiers="" UID="36-16-7" ValueRef="1-9-4" ValueType="TextColor" />
+        <Property Comment="Hyperlink text color" DefaultValue="#ff3b3b3b" DestAttribName="basic_description_text_hyperlink_color" DestQualifiers="" UID="36-19-1" ValueRef="1-3-4" ValueType="TextColor" />
+        <Property Comment="Update button bg" DefaultValue="#ff15b76d" DestAttribName="basic_about_phone_available_update_button_color" DestQualifiers="" UID="36-20-2" ValueRef="1-A" ValueType="BgColor" />
+        <Property Comment="Update button text color" DefaultValue="#fffafafa" DestAttribName="basic_about_phone_available_update_button_text_color" DestQualifiers="" UID="36-20-3" ValueRef="1-E" ValueType="TextColor" />
+        <Property Comment="Main text color" DefaultValue="#ff252525" DestAttribName="basic_about_phone_available_update_app_info_name_text_color" DestQualifiers="" UID="36-20-4" ValueRef="1-1-3" ValueType="TextColor" />
+        <Property Comment="Sub text color" DefaultValue="#ffa6a6a6" DestAttribName="basic_about_phone_available_update_app_info_version_text_color" DestQualifiers="" UID="36-20-5" ValueRef="1-1-4" ValueType="TextColor" />
+        <Property Comment="Button BG color" DefaultValue="#ffebebeb" DestAttribName="basic_raised_button_background_color" DestQualifiers="" UID="36-20-6" ValueRef="1-7-1" ValueType="BgColor" />
+        <Property Comment="Button text color" DefaultValue="#ff252525" DestAttribName="basic_about_phone_available_update_app_info_open_source_text_color" DestQualifiers="" UID="36-20-7" ValueRef="1-7-2" ValueType="TextColor" />
+        <Property Comment="Background color" DestAttribName="basic_about_phone_available_update_app_info_background_color" DestQualifiers="" UID="36-20-8" ValueRef="1-1-1" ValueType="BgColor" />
+        <Property Comment="Icon tint color " DefaultValue="#ff454545" DestAttribName="basic_about_phone_more_options_button_color" DestQualifiers="" UID="36-20-9" ValueRef="1-1-3" ValueType="TintColor" />
+        <Property Comment="Background color " DefaultValue="#ffebebeb" DestAttribName="basic_show_button_background_ripple_color" DestQualifiers="" POption="AlwaysOverriden" UID="36-21-1" ValueRef="1-7-1" ValueType="BgColor" />
+        <Property Comment="Text color " DefaultValue="#ff252525" DestAttribName="basic_raised_button_text_color" DestQualifiers="" POption="AlwaysOverriden" UID="36-21-2" ValueRef="1-7-2" ValueType="TextColor" />
+        <Property Comment="Main ON background color" DefaultValue="#ff0bc26e" DestAttribName="basic_master_on_switch_background_color" DestQualifiers="" UID="36-22-1" ValueRef="1-40-1" ValueType="BgColor" />
+        <Property Comment="Main Off background color" DefaultValue="#ffffffff" DestAttribName="basic_master_off_switch_background_color" DestQualifiers="" UID="36-22-2" ValueRef="1-40-2" ValueType="BgColor" />
+        <Property Comment="Main On text color" DefaultValue="#fffafafa" DestAttribName="basic_master_on_switch_text_color" DestQualifiers="" UID="36-22-3" ValueRef="1-40-3" ValueType="TextColor" />
+        <Property Comment="Main Off text color" DefaultValue="#ff252525" DestAttribName="basic_master_off_switch_text_color" DestQualifiers="" UID="36-22-4" ValueRef="1-40-4" ValueType="TextColor" />
+        <Property Comment="Background color" DefaultValue="#ff979797" DestAttribName="basic_sub_header_background_color" DestQualifiers="" UID="36-23-1" ValueRef="1-1-1" ValueType="BgColor" />
+        <Property Comment="Text color" DefaultValue="#ff858585" DestAttribName="basic_sub_header_text_color" DestQualifiers="" UID="36-23-2" ValueRef="1-1-4" ValueType="TextColor" />
+        <Property Comment="Thumb On color" DefaultValue="#fffafafa" DestAttribName="basic_switch_button_thumb_on_color" DestQualifiers="" UID="36-24-1-1" ValueRef="1-18-1" ValueType="Color" />
+        <Property Comment="Thumb On stroke" DefaultValue="#ff0bc26e" DestAttribName="basic_switch_button_thumb_on_stroke" DestQualifiers="" UID="36-24-1-1-1" ValueRef="1-A" ValueType="Color" />
+        <Property Comment="Track On color" DefaultValue="#ff15b76d" DestAttribName="basic_switch_button_track_on_color" DestQualifiers="" UID="36-24-1-2" ValueRef="1-D" ValueType="Color" />
+        <Property Comment="Track On stroke" DefaultValue="#ff15b76d" DestAttribName="basic_switch_button_track_on_stroke" DestQualifiers="" Opacity="40" UID="36-24-1-2-1" ValueRef="1-5-1-1" ValueType="Color" />
+        <Property Comment="Thumb Off color" DefaultValue="#fffafafa" DestAttribName="basic_switch_button_thumb_off_color" DestQualifiers="" UID="36-24-2-1" ValueRef="1-5-1-1" ValueType="Color" />
+        <Property Comment="Thumb Off stroke" DefaultValue="#ffa1a1a1" DestAttribName="basic_switch_button_thumb_off_stroke" DestQualifiers="" UID="36-24-2-1-1" ValueRef="1-C" ValueType="Color" />
+        <Property Comment="Track Off color" DefaultValue="#00000000" DestAttribName="basic_switch_button_track_off_color" DestQualifiers="" POption="AlwaysOverriden" UID="36-24-2-2" ValueRef="1-C" ValueType="Color" />
+        <Property Comment="Thumb Disable On color" DefaultValue="#fffafafa" DestAttribName="basic_switch_button_thumb_disable_on_color" DestQualifiers="" UID="36-24-3-1" ValueRef="1-5-1-1" ValueType="Color" />
+        <Property Comment="Track Disable On color" DefaultValue="#ff8f8f8f" DestAttribName="basic_switch_button_track_disable_on_color" DestQualifiers="" Opacity="40" UID="36-24-3-2" ValueRef="1-5-2-1-1" ValueType="Color" />
+        <Property Comment="Button Disable Off bg color" DefaultValue="#fffafafa" DestAttribName="basic_switch_button_button_disable_off_bg_color" DestQualifiers="" UID="36-24-7-1" ValueRef="1-5-2-1" ValueType="Color" />
+        <Property Comment="Button Disable Off stroke color" DefaultValue="#ffcbcbcb" DestAttribName="basic_switch_button_button_disable_off_stroke_color" DestQualifiers="" UID="36-24-7-1-1" ValueRef="1-5-3-1-1" ValueType="Color" />
+        <Property Comment="Track Disable off stroke color" DefaultValue="#ff8f8f8f" DestAttribName="basic_switch_button_track_disable_off_stroke_color" DestQualifiers="" UID="36-24-7-2" ValueRef="1-5-3-1-1" ValueType="Color" />
+        <Property Comment="Thumb On image" DefaultValue="" DestAttribName="thumb_on_image_temp" DestQualifiers="xxxhdpi" POption="NinePatch" UID="36-24-4-1" ValueRef="1-5-4-1" ValueType="Image" />
+        <Property Comment="Track On image" DefaultValue="" DestAttribName="track_on_image_temp" DestQualifiers="xxxhdpi" POption="NinePatch" UID="36-24-4-2" ValueRef="1-5-4-2" ValueType="Image" />
+        <Property Comment="Thumb Off image" DefaultValue="" DestAttribName="thumb_off_image_temp" DestQualifiers="xxxhdpi" POption="NinePatch" UID="36-24-5-1" ValueRef="1-5-5-1" ValueType="Image" />
+        <Property Comment="Track Off image" DefaultValue="" DestAttribName="track_off_image_temp" DestQualifiers="xxxhdpi" POption="NinePatch" UID="36-24-5-2" ValueRef="1-5-5-2" ValueType="Image" />
+        <Property Comment="Thumb Disable On image" DefaultValue="" DestAttribName="thumb_disable_on_image_temp" DestQualifiers="xxxhdpi" POption="NinePatch" UID="36-24-6-1" ValueRef="1-5-6-1" ValueType="Image" />
+        <Property Comment="Track Disable On image" DefaultValue="" DestAttribName="track_disable_on_image_temp" DestQualifiers="xxxhdpi" POption="NinePatch" UID="36-24-6-2" ValueRef="1-5-6-2" ValueType="Image" />
+        <Property Comment="Thumb Disable On image " DefaultValue="" DestAttribName="thumb_disable_off_image_temp" DestQualifiers="xxxhdpi" POption="NinePatch" UID="36-24-8-1" ValueRef="1-5-8-1" ValueType="Image" />
+        <Property Comment="Track Disable On image" DefaultValue="" DestAttribName="thumb_disalbe_off_image_temp" DestQualifiers="xxxhdpi" POption="NinePatch" UID="36-24-8-2" ValueRef="1-5-8-2" ValueType="Image" />
+        <Property Comment="On color " DefaultValue="#ff15b76d" DestAttribName="basic_radio_button_on_color" DestQualifiers="" POption="AlwaysOverriden;FixedOpacity" UID="36-25-1" ValueRef="1-4-1" ValueType="Color" />
+        <Property Comment="On image" DefaultValue="" DestAttribName="sem_btn_radio_to_on_mtrl_026" DestQualifiers="" UID="36-25-1-1" ValueRef="1-4-1-1" ValueType="Image" />
+        <Property Comment="Off color" DefaultValue="#ff8f8f8f" DestAttribName="basic_radio_button_off_color" DestQualifiers="" POption="AlwaysOverriden;FixedOpacity" UID="36-25-2" ValueRef="1-4-2" ValueType="Color" />
+        <Property Comment="Off image" DefaultValue="" DestAttribName="sem_btn_radio_to_on_mtrl_000" DestQualifiers="xxxhdpi" UID="36-25-2-1" ValueRef="1-4-2-1" ValueType="Image" />
+        <Property Comment="Main text color" DefaultValue="#ff252525" DestAttribName="basic_lists_item_text_color" DestQualifiers="" UID="36-26-1" ValueRef="1-3-1" ValueType="TextColor" />
+        <Property Comment="Sub text color" DefaultValue="#ff8f8f8f" DestAttribName="basic_description_sub_text_color" DestQualifiers="" UID="36-26-2" ValueRef="1-3-2" ValueType="TextColor" />
+        <Property Comment="Description text color" DefaultValue="#ff505050" DestAttribName="basic_description_text_color" DestQualifiers="" UID="36-26-3" ValueRef="1-3-3" ValueType="TextColor" />
+        <Property Comment="Background color" DefaultValue="#fff2f2f2" DestAttribName="basic_background_color" DestQualifiers="" UID="36-27-1" ValueRef="1-1-1" ValueType="BgColor" />
+        <Property Comment="Between boxes space color" DefaultValue="#fff2f2f2" DestAttribName="basic_action_bar_between_boxes_space_color" DestQualifiers="" UID="36-27-1-2" ValueRef="1-1-1" ValueType="Color" />
+        <Property Comment="Round corner" DefaultValue="#fff2f2f2" DestAttribName="basic_action_bar_round_corner" DestQualifiers="" UID="36-27-1-3" ValueRef="1-62" ValueType="Color" />
+        <Property Comment="Title/version text color" DefaultValue="#ff252525" DestAttribName="basic_action_bar_title_text_color" DestQualifiers="" UID="36-27-3" ValueRef="1-1-3" ValueType="TextColor" />
+        <Property Comment="More Button color" DefaultValue="#ffffffff" DestAttribName="actionbar_icon_color" DestQualifiers="" UID="36-27-4" ValueRef="1-11-1" ValueType="Color" />
+        <Property Comment="Back icon tint color" DefaultValue="#fffafafa" DestAttribName="basic_navigate_up_button_tint_color" DestQualifiers="" UID="36-27-5" ValueRef="13-1-4" ValueType="Color" />
+        <Property Comment="Back icon image" DefaultValue="" DestAttribName="tw_ic_ab_back" DestQualifiers="" UID="36-27-6" ValueRef="1-11-4" ValueType="BgImage" />
+        <Property Comment="Background color" DefaultValue="#fffcfcfc" DestAttribName="basic_light_background_color" DestQualifiers="" UID="36-28-1" ValueRef="1-18-1" ValueType="BgColor" />
+        <Property Comment="Background image (세로)" DefaultValue="" DestAttribName="basic_background_image" DestQualifiers="xxxhdpi" UID="36-28-2" ValueRef="1-18-2" ValueType="Image" />
+        <Property Comment="List Divider " DefaultValue="#1a252525" DestAttribName="basic_setting_divider_background_color" UID="36-28-3" ValueRef="1-2" ValueType="Color" />
+        <Property Comment="Background color " DefaultValue="#fff2f2f2" DestAttribName="basic_navigation_bar_background_color" DestQualifiers="" UID="36-29-1" ValueRef="1-69-1" ValueType="BgColor" />
+        <Property Comment="Icon image theme(Dark/Light)" DefaultValue="true" DestAttribName="light_navigation_bar_mode" DestQualifiers="" UID="36-29-2" ValueRef="1-69-2" ValueType="Bool" />
+        <Property Comment="Background tint color" DefaultValue="#fff56a0d" DestAttribName="basic_notifications_badge_background_color" DestQualifiers="" POption="AlwaysOverriden;FixedOpacity" UID="36-30-1" ValueRef="1-33-1" ValueType="Color" />
+        <Property Comment="Background image" DefaultValue="" DestAttribName="tw_noti_badge_mtrl" DestQualifiers="xxhdpi" POption="AlwaysOverridenNinePatch" UID="36-30-2" ValueRef="1-33-2" ValueType="Image" />
+        <Property Comment="Text color " DefaultValue="#fffafafa" DestAttribName="basic_notifications_badge_text_color" DestQualifiers="" POption="AlwaysOverriden" UID="36-30-3" ValueRef="1-33-3" ValueType="TextColor" />
+        <Property Comment="Icon color" DefaultValue="#ff454545" DestAttribName="basic_bottom_bar_icon_text_icon_color" DestQualifiers="" UID="36-31-1" ValueRef="1-1-3" ValueType="Color" />
+        <Property Comment="Text color" DefaultValue="#ff636363" DestAttribName="basic_bottom_bar_icon_text_text_color" DestQualifiers="" UID="36-31-2" ValueRef="1-1-3" ValueType="TextColor" />
+        <Property Comment="Background color" DefaultValue="#fff2f2f2" DestAttribName="basic_bottom_bar_icon_text_background_color" DestQualifiers="" UID="36-31-3" ValueRef="1-12-1" ValueType="Color" />
+    </AppMetaData>
+</ThemeMetaData>

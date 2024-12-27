@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="config_pdp_reject_multi_conn_to_same_pdn_not_allowed">"Vous n'êtes pas autorisée à avoir plusieurs connexions PDN pour un APN donné -55-"</string>
+</resources>

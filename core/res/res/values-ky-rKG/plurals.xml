@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="SDcardBlockUnmount_message">
+        <item quantity="other">Колдонмолор орнотулган SD карта алып салынгандыктан, телефонуңуз туруксуз. Телефонуңуз кадимки абалына кайтуу үчүн %d секундадан кийин кайра күйгүзүлөт. Телефон кайрадан иштетилгенге чейин бардык сакталбаган маалыматтарды сактаңыз.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Колдонмолор орнотулган SD карта алып салынгандыктан, телефонуңуз туруксуз. Телефонуңуз кадимки абалына кайтуу үчүн %d секундадан кийин кайра күйгүзүлөт. Телефон кайрадан иштетилгенге чейин бардык сакталбаган маалыматтарды сактаңыз.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="SDcardBlockUnmount_title">
+        <item quantity="other">Тел. %d секунд кийин кайра күйгүзүлөт</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Тел. %d секунд кийин кайра күйгүзүлөт</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_phone">
+        <item quantity="other">%d колдонмо телефонуңуздун ысып кетүүсүнө алып келгендиктен, автоматтык түрдө жабылды. Сиз аларды телефонуңуз муздаганда кайра ачсаңыз болот.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d колдонмо телефонуңуздун ысып кетүүсүнө алып келгендиктен, автоматтык түрдө жабылды. Сиз аны телефонуңуз муздаганда кайра ачсаңыз болот.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_tablet">
+        <item quantity="other">%d колдонмо планшетиңиздин ысып кеткенине алып келгендигинен, автоматтык түрдө жабылды. Сиз аларды кайра планшет муздагандан кийин ача аласыз.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d колдонмосу планшетиңиздин ысып кетишине алып келгендиктен, автоматтык түрдө жабылды. Сиз муну кийинчерээк планшетиңиз муздаганда ача аласыз.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_title_v2">
+        <item quantity="other">%d колдонмо жабылды</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d колдонмо жабылды</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="dex_max_count_text">
+        <item quantity="other">Бир убакта %d көп колдонмо көрсөтүлбөйт. Эскирээк колдонмо кичирейтилди.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Бир убакта %d көп колдонмо көрсөтүлбөйт. Эскирээк колдонмо кичирейтилди.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="hot_key_guide_message">
+        <item quantity="other">Дайындоону каалаган колдонмону ачып, андан соң колдонмо баскычын %d секунда басып туруңуз.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Дайындаш үчүн каалаган колдонмону ачып, андан соң колдонмо баскычын %d секунда басып туруңуз.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_phone">
+        <item quantity="other">Телефонуңуздун ысып кетишине %1$s себеп болууда. Ал %2$d секундадан кийин автоматтык түрдө жабылат.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Телефонуңуздун ысып кетишине %1$s себеп болууда. Ал %2$d секундадан кийин автоматтык түрдө жабылат.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_tablet">
+        <item quantity="other">Планшетиңиздин ысып кетишине %1$s себеп болууда. Ал %2$d секундадан кийин автоматтык түрдө жабылат.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Планшетиңиздин ысып кетишине %1$s себеп болууда. Ал %2$d секундадан кийин автоматтык түрдө жабылат.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="maintenance_mode_backup_cloud_menu_sub_textview_message_default">
+        <item quantity="other">"Samsung Cloud'ка чексиз дайындардын камдык сактоосун %d күнгө чейин сактаңыз же камдык сакталган дайындарды калыбына келтириңиз."</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">"Samsung Cloud'ка чексиз дайындардын камдык сактоосун %d күнгө чейин сактаңыз же камдык сакталган дайындарды калыбына келтириңиз."</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_phone">
+        <item quantity="other">%1$s телефонуңуздун ысып кетишине алып келип жатат. Сиз аны азыр жапсаңыз болот же болбосо ал %2$d секундадан кийин автоматтык түрдө жабылат.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s телефонуңуздун ысып кетишине алып келип жатат. Сиз аны азыр жапсаңыз болот же болбосо ал %2$d секундадан кийин автоматтык түрдө жабылат.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_tablet">
+        <item quantity="other">%1$s планшетиңиздин ысып кетишине алып келип жатат. Сиз аны азыр жапсаңыз болот же болбосо ал %2$d секундадан кийин автоматтык түрдө жабылат.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s планшетиңиздин ысып кетишине алып келип жатат. Сиз аны азыр жапсаңыз болот же болбосо ал %2$d секундадан кийин автоматтык түрдө жабылат.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sem_chooser_preview_items">
+        <item quantity="other">%d нерсе</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d нерсе</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_hours">
+        <item quantity="other">%d саат</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d саат</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_minutes">
+        <item quantity="other">%d мүнөт</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d мүнөт</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout android:id="@id/recycler_view_item" android:clickable="false" android:layout_width="wrap_content" android:layout_height="wrap_content" android:importantForAccessibility="yes" android:paddingStart="4.0dip" android:paddingEnd="4.0dip">
+        <FrameLayout android:layout_gravity="center_horizontal" android:id="@id/sem_chooser_image_container" android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <view android:id="@id/sem_chooser_gallery_image" android:layout_width="wrap_content" android:layout_height="@dimen/sem_chooser_gallery_image_height" android:scaleType="centerCrop" android:adjustViewBounds="true" android:maxWidth="320.0dip" android:layout_centerHorizontal="true" class="com.android.internal.app.ChooserActivity$RoundRectCornerImageView" />
+            <view android:id="@id/sem_chooser_invisible_rect" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="@dimen/sem_chooser_gallery_image_height" android:adjustViewBounds="true" android:maxWidth="320.0dip" android:layout_centerHorizontal="true" class="com.android.internal.app.ChooserActivity$InvisibleRectView" />
+            <FrameLayout android:id="@id/sem_chooser_gallery_dummy" android:visibility="gone" android:layout_width="320.0dip" android:layout_height="@dimen/sem_chooser_gallery_image_height">
+                <View android:background="#ffd3d3d3" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+                <ImageView android:layout_gravity="center" android:id="@id/sem_chooser_gallery_image" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/ic_gallery_ic_error_img" android:adjustViewBounds="true" />
+            </FrameLayout>
+            <CheckBox android:layout_gravity="start|center|top" android:id="@id/sem_chooser_multiselect_checkbox" android:background="@drawable/sem_chooser_multiselect_selector_checkbox" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="4.0dip" android:importantForAccessibility="no" android:layout_marginStart="4.0dip" />
+            <ImageView android:layout_gravity="end|center|top" android:id="@id/sem_chooser_favorite_image" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="4.0dip" android:layout_marginEnd="4.0dip" />
+            <ProgressBar android:layout_gravity="center" android:id="@id/sem_chooser_progress" android:visibility="gone" android:layout_width="@dimen/sem_chooser_progress_size" android:layout_height="@dimen/sem_chooser_progress_size" android:indeterminate="true" />
+            <LinearLayout android:layout_gravity="start|bottom|center" android:orientation="horizontal" android:id="@id/sem_chooser_galleryImage_type_background" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="22.0dip" android:layout_marginBottom="11.0dip" android:layout_marginStart="10.0dip">
+                <ImageView android:layout_gravity="center_vertical" android:id="@id/sem_chooser_galleryImage_type" android:clickable="true" android:layout_width="wrap_content" android:layout_height="wrap_content" android:scaleType="fitXY" android:importantForAccessibility="no" android:layout_marginStart="4.0dip" android:layout_marginEnd="4.0dip" />
+                <TextView android:textSize="10.0dip" android:ellipsize="end" android:layout_gravity="center_vertical" android:id="@id/sem_chooser_galleryImage_type_count" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:maxLines="1" android:layout_marginEnd="4.0dip" />
+            </LinearLayout>
+        </FrameLayout>
+        <RelativeLayout android:gravity="center" android:id="@id/sem_chooser_enhance_layout_placeholder" android:visibility="invisible" android:layout_width="fill_parent" android:layout_height="@dimen/sem_chooser_optimizer_btn_layout_size" android:layout_marginTop="@dimen/sem_chooser_enhance_margin" android:layout_below="@id/sem_chooser_image_container" android:layout_alignEnd="@id/sem_chooser_image_container" />
+        <RelativeLayout android:id="@id/sem_chooser_enhance_layout" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="@dimen/sem_chooser_optimizer_btn_layout_size" android:layout_marginTop="@dimen/sem_chooser_enhance_margin" android:layout_below="@id/sem_chooser_image_container" android:layout_alignEnd="@id/sem_chooser_image_container">
+            <include android:id="@id/sem_chooser_enhance_btn_layout" android:visibility="invisible" layout="@layout/sem_chooser_enhance_icon_layout" />
+            <RelativeLayout android:gravity="center" android:id="@id/sem_chooser_optimizer_btn_layout" android:background="@drawable/sem_chooser_optimizer_bg_white" android:visibility="invisible" android:layout_width="@dimen/sem_chooser_enhance_button_icon_size" android:layout_height="@dimen/sem_chooser_enhance_button_icon_size" android:layout_alignEnd="@id/sem_chooser_enhance_btn_layout">
+                <ImageButton android:id="@id/sem_chooser_optimizer_btn" android:background="@null" android:layout_width="@dimen/sem_chooser_optimizer_btn_size" android:layout_height="@dimen/sem_chooser_optimizer_btn_size" android:src="@drawable/sem_share_img_suggested_intelligence" android:scaleType="centerInside" android:adjustViewBounds="true" />
+            </RelativeLayout>
+        </RelativeLayout>
+    </RelativeLayout>
+</RelativeLayout>

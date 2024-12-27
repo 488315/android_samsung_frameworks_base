@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:orientation="horizontal" android:id="@id/autofill_save" android:background="?colorBackground" android:paddingTop="40.0dip" android:paddingBottom="40.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="32.0dip" android:paddingStart="40.0dip" android:paddingEnd="40.0dip">
+        <LinearLayout android:orientation="vertical" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0" android:layout_marginEnd="32.0dip">
+            <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="6.0dip">
+                <ImageView android:layout_gravity="center_vertical" android:id="@id/autofill_save_icon" android:layout_width="48.0dip" android:layout_height="48.0dip" android:scaleType="fitStart" android:layout_marginEnd="10.0dip" />
+                <TextView android:textSize="24.0sp" android:layout_gravity="center_vertical" android:id="@id/autofill_save_title" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/autofill_save_title" />
+            </LinearLayout>
+            <LinearLayout android:orientation="vertical" android:id="@id/autofill_save_custom_subtitle" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="4.0dip" />
+        </LinearLayout>
+        <LinearLayout android:orientation="vertical" android:layout_width="304.0dip" android:layout_height="wrap_content">
+            <Button android:id="@id/autofill_save_no" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/autofill_save_no" android:textAlignment="viewStart" style="?borderlessButtonStyle" />
+            <Button android:id="@id/autofill_save_yes" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/autofill_save_yes" android:textAlignment="viewStart" style="?borderlessButtonStyle" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="global_action_emergency">အရေးပေါ် SOS</string>
+    <string name="permgrouplab_sensors">အာရုံခံကိရိယာများ</string>
+    <string name="reboot_to_update_prepare">အပ်ဒိတ်လုပ်ရန် ပြင်ဆင်နေသည်</string>
+    <string name="reboot_to_update_title">Wear OS စနစ် အပ်ဒိတ်လုပ်ခြင်း</string>
+    <string name="select_input_method">လက်ကွက် ရွေးပါ</string>
+</resources>

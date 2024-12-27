@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ThemeMetaData FormatVersion="1.3" GuideVersion="1.4">
+    <AppMetaData Name="SSM" TargetApi="21" TargetPackageName="com.sec.android.app.safetyassurance" VersionCode="1" VersionName="1.0">
+        <Include RefName="SESL" />
+        <Property Comment="Master On background color" DefaultValue="#ff46b9f3" DestAttribName="theme_sub_app_bar_bg_color_on" DestQualifiers="" UID="39-1-1" ValueRef="1-40-1" ValueType="BgColor" />
+        <Property Comment="Master On Text color" DefaultValue="#fffafafa" DestAttribName="theme_sub_app_bar_text_color_on" DestQualifiers="" UID="39-1-2" ValueRef="1-40-3" ValueType="BgColor" />
+        <Property Comment="Master Off background color" DefaultValue="#fffafafa" DestAttribName="theme_sub_app_bar_bg_color_off" DestQualifiers="" UID="39-1-4" ValueRef="1-40-2" ValueType="BgColor" />
+        <Property Comment="Master Off Text color" DefaultValue="#ff252525" DestAttribName="theme_sub_app_bar_text_color_off" DestQualifiers="" UID="39-1-5" ValueRef="1-40-4" ValueType="BgColor" />
+        <Property Comment="Description text" DefaultValue="#ff313131" DestAttribName="body_text_color" DestQualifiers="" UID="39-2-1" ValueRef="24-B" ValueType="TintColor" />
+        <Property Comment="Highlight text color" DefaultValue="#ff00a0ce" DestAttribName="highlight_text_color" DestQualifiers="" UID="39-2-2" ValueRef="24-E" ValueType="TintColor" />
+        <Property Comment="Main text color" DefaultValue="#ff000000" DestAttribName="main_text_color" DestQualifiers="" UID="39-2-3" ValueRef="24-A" ValueType="TintColor" />
+        <Property Comment="Bottom bar bg" DefaultValue="" DestAttribName="tw_ab_bottom_transparent_mtrl" DestQualifiers="xxxhdpi" POption="NinePatch" UID="39-3-1" ValueRef="1-14-1" ValueType="BgColor" />
+        <Property Comment="bottom bar text color" DefaultValue="#ff000000" DestAttribName="bottom_bar_text_color" DestQualifiers="" UID="39-3-2" ValueRef="1-14-2" ValueType="TextColor" />
+        <Property Comment="Background Color" DefaultValue="#fff0f0f0" DestAttribName="theme_toolbar_background_color" DestQualifiers="" UID="39-4-1" ValueRef="1-1-1" ValueType="BgColor" />
+        <Property Comment="Extended Action bar color" DefaultValue="#fff0f0f0" DestAttribName="theme_extended_actionbar_background_color" DestQualifiers="" UID="39-4-1-1" ValueRef="1-1-1-1" ValueType="BgColor" />
+        <Property Comment="Title text color" DefaultValue="#fff0f0f0" DestAttribName="theme_app_title_text_color" DestQualifiers="" UID="39-4-2" ValueRef="1-1-3" ValueType="BgColor" />
+        <Property Comment="Extended Action bar title text color" DefaultValue="#fff0f0f0" DestAttribName="theme_extended_action_bar_title_text_color" DestQualifiers="" UID="39-4-2-1" ValueRef="1-1-3-1" ValueType="BgColor" />
+        <Property Comment="More option button" DefaultValue="#fff0f0f0" DestAttribName="theme_more_option_color" DestQualifiers="" UID="39-4-3" ValueRef="1-1-3" ValueType="BgColor" />
+        <Property Comment="Back icon tint color" DefaultValue="#fff0f0f0" DestAttribName="theme_back_icon_tint_color" DestQualifiers="" UID="39-4-4" ValueRef="1-11-1" ValueType="BgColor" />
+        <Property Comment="Back icon image" DefaultValue="" DestAttribName="theme_back_icon_image_color" DestQualifiers="" UID="39-4-5" ValueRef="1-11-4" ValueType="BgImage" />
+        <Property Comment="Background Color" DefaultValue="#fff0f0f0" DestAttribName="app_background_color" DestQualifiers="" UID="39-5-1" ValueRef="1-1-1" ValueType="BgColor" />
+        <Property Comment="List Background Color" DefaultValue="#fffafafa" DestAttribName="list_background_color" DestQualifiers="" UID="39-5-2" ValueRef="1-18-1" ValueType="BgColor" />
+        <Property Comment="Thread List Divider color" DefaultValue="#ffe6e6e6" DestAttribName="theme_list_divider_color" DestQualifiers="" UID="39-5-7" ValueRef="1-2" ValueType="Color" />
+        <Property Comment="List Background Image" DefaultValue="" DestAttribName="list_bg_drawable" DestQualifiers="" UID="39-5-8" ValueRef="1-18-2" ValueType="BgImage" />
+        <Property Comment="Primary color" DefaultValue="#ff36bae3" DestAttribName="color_primary" DestQualifiers="" UID="39-5-9" ValueRef="1-A" ValueType="Color" />
+        <Property Comment="Primary dark color" DefaultValue="#ff30a7d2" DestAttribName="color_primary_dark" DestQualifiers="" UID="39-5-10" ValueRef="1-1-5" ValueType="Color" />
+        <Property Comment="About message button text color" DefaultValue="#fffafafa" DestAttribName="theme_about_update_button_text_color" DestQualifiers="" UID="39-6-2" ValueRef="1-8-3" ValueType="TextColor" />
+        <Property Comment="About message button bg color" DefaultValue="#ff30a7d2" DestAttribName="theme_about_update_button_bg_color" DestQualifiers="" UID="39-6-3" ValueRef="1-8-1" ValueType="BgColor" />
+        <Property Comment="About page : Raised button - bg color" DefaultValue="#ffebebeb" DestAttribName="theme_about_raised_button_bg_color" DestQualifiers="" UID="39-6-4" ValueRef="1-7-1-D" ValueType="BgColor" />
+        <Property Comment="About page : Raised button - text color" DefaultValue="#ff252525" DestAttribName="theme_about_raised_button_text_color" DestQualifiers="" UID="39-6-5" ValueRef="1-7-2-D" ValueType="TextColor" />
+        <Property Comment="About page : App info button text color" DefaultValue="#ff909090" DestAttribName="theme_about_description_text_color" UID="39-6-6" ValueRef="1-1-4" ValueType="TextColor" />
+        <Property Comment="About page : toolbar / content / statusbar" DefaultValue="#fffcfcfc" DestAttribName="theme_about_background_color" UID="39-6-9" ValueRef="1-1-1" ValueType="BgColor" />
+        <Property Comment="About page : info icon color" DefaultValue="#ff454545" DestAttribName="theme_about_info_icon_color" DestQualifiers="" UID="39-6-14" ValueRef="1-1-3" ValueType="TintColor" />
+        <Property Comment="About page : Navigation Background color" DefaultValue="#fffcfcfc" DestAttribName="theme_about_navigation_bar_bg_color" DestQualifiers="" UID="39-6-15" ValueRef="1-1-1" ValueType="BgColor" />
+        <Property Comment="About page : Navigation Icon color (Light/Dark)" DefaultValue="true" DestAttribName="theme_about_navigation_bar_icon_color" DestQualifiers="" UID="39-6-16" ValueRef="1-69-2" ValueType="Bool" />
+        <Property Comment="About page : opensource bg color" DefaultValue="#fffcfcfc" DestAttribName="theme_about_opensource_background_color" DestQualifiers="" UID="39-6-17" ValueRef="1-18-1" ValueType="BgColor" />
+        <Property Comment="About page : opensource text color" DefaultValue="#ff252525" DestAttribName="theme_about_opensource_text_color" DestQualifiers="" UID="39-6-18" ValueRef="1-3-1" ValueType="TextColor" />
+        <Property Comment="diaolg body background color" DefaultValue="#ffcccccc" DestAttribName="theme_popup_bg_color" DestQualifiers="" UID="39-7-1" ValueRef="1-18-1" ValueType="BgColor" />
+        <Property Comment="diaolg body background image" DestAttribName="theme_popup_bg_image" DestQualifiers="" UID="39-7-2" ValueRef="1-41-1-1" ValueType="BgImage" />
+        <Property Comment="diaolg body title text color" DefaultValue="#ff86898b" DestAttribName="theme_popup_title_text_color" DestQualifiers="" UID="39-7-3" ValueRef="1-9-3" ValueType="Color" />
+        <Property Comment="diaolg body text color" DefaultValue="#ff000000" DestAttribName="theme_popup_text_color" DestQualifiers="" UID="39-7-4" ValueRef="1-9-4" ValueType="Color" />
+        <Property Comment="diaolg button_text_color_functional" DefaultValue="#ff000000" DestAttribName="theme_button_text_color" DestQualifiers="" UID="39-7-5" ValueRef="1-9-15" ValueType="Color" />
+    </AppMetaData>
+</ThemeMetaData>

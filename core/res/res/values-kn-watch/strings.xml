@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="global_action_emergency">ತುರ್ತು SOS</string>
+    <string name="permgrouplab_sensors">ಸೆನ್ಸರ್‌ಗಳು</string>
+    <string name="reboot_to_update_prepare">ಅಪ್‌ಡೇಟ್ ಮಾಡಲು ಸಿದ್ಧಪಡಿಸಲಾಗುತ್ತಿದೆ</string>
+    <string name="reboot_to_update_title">Wear OS ಸಿಸ್ಟಂ ಅಪ್‌ಡೇಟ್</string>
+    <string name="select_input_method">ಇನ್‌ಪುಟ್ ಆಯ್ಕೆಮಾಡಿ</string>
+</resources>

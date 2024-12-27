@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape android:shape="oval"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <stroke android:width="@dimen/circle_cue_dash_width" android:color="@color/circle_cue_stroke_color" />
+    <solid android:color="@color/tap_duration_progress_gauge_color" />
+</shape>

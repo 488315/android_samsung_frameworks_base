@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="SDcardBlockUnmount_message">
+        <item quantity="other">A telefon instabil, mert eltávolították belőle egy olyan SD-kártyát, amelyre alkalmazások voltak telepítve. A telefon %d másodperc múlva újraindul, hogy visszaálljon a normál működése. A telefon újraindítása előtt mentsen minden nem mentett adatot.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">A telefon instabil, mert eltávolították belőle egy olyan SD-kártyát, amelyre alkalmazások voltak telepítve. A telefon %d másodperc múlva újraindul, hogy visszaálljon a normál működése. A telefon újraindítása előtt mentsen minden nem mentett adatot.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="SDcardBlockUnmount_title">
+        <item quantity="other">A telefon %d másodperc múlva újraindul</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">A telefon %d másodperc múlva újraindul</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_phone">
+        <item quantity="other">%d alkalmazás automatikusan bezáródott, mert túlmelegedett miattuk a telefon. A telefon lehűlése után ismét megnyithatja őket.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d alkalmazás automatikusan bezáródott, mert túlmelegedett miatta a telefon. Az eszköz lehűlése után ismét megnyithatja.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_tablet">
+        <item quantity="other">%d alkalmazás automatikusan bezáródott, mert túlmelegedett miattuk a táblagép. A táblagép lehűlése után ismét megnyithatja őket.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d alkalmazás automatikusan bezáródott, mert túlmelegedett miatta a táblagép. A táblagép lehűlése után ismét megnyithatja.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_title_v2">
+        <item quantity="other">%d alkalmazás bezáródott</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d alkalmazás bezáródott</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="dex_max_count_text">
+        <item quantity="other">Egyszerre legfeljebb %d alkalmazás jeleníthető meg a képernyőn. A legrégebbi alkalmazás kis méretűre állítva.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Egyszerre legfeljebb %d alkalmazás jeleníthető meg a képernyőn. A legrégebbi alkalmazás kis méretűre állítva.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="hot_key_guide_message">
+        <item quantity="other">Nyissa meg a hozzárendelni kívánt alkalmazást, majd tartsa nyomva az alkalmazásgombot %d másodpercig.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Nyissa meg a hozzárendelni kívánt alkalmazást, majd tartsa nyomva az alkalmazásgombot %d másodpercig.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_phone">
+        <item quantity="other">A(z) %1$s használata a telefon túlmelegedéséhez vezet. %2$d másodperc múlva automatikusan bezáródik.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">A(z) %1$s használata a telefon túlmelegedéséhez vezet. %2$d másodperc múlva automatikusan bezáródik.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_tablet">
+        <item quantity="other">A(z) %1$s használata a táblagép túlmelegedéséhez vezet. %2$d másodperc múlva automatikusan bezáródik.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">A(z) %1$s használata a táblagép túlmelegedéséhez vezet. %2$d másodperc múlva automatikusan bezáródik.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="maintenance_mode_backup_cloud_menu_sub_textview_message_default">
+        <item quantity="other">Korlátlan mennyiségű adatról készíthet biztonsági mentést a Samsung Cloudba, ahol akár %d napig tárolhatja őket, illetve vissza is állíthatja a mentett adatokat.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Korlátlan mennyiségű adatról készíthet biztonsági mentést a Samsung Cloudba, ahol akár %d napig tárolhatja őket, illetve vissza is állíthatja a mentett adatokat.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_phone">
+        <item quantity="other">A(z) %1$s használata a telefon túlmelegedéséhez vezet. Bezárhatja az alkalmazást most, vagy az %2$d másodperc múlva automatikusan bezáródik.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">A(z) %1$s használata a telefon túlmelegedéséhez vezet. Bezárhatja az alkalmazást most, vagy az %2$d másodperc múlva automatikusan bezáródik.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_tablet">
+        <item quantity="other">A(z) %1$s használata a táblagép túlmelegedéséhez vezet. Bezárhatja az alkalmazást most, vagy az %2$d másodperc múlva automatikusan bezáródik.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">A(z) %1$s használata a táblagép túlmelegedéséhez vezet. Bezárhatja az alkalmazást most, vagy az %2$d másodperc múlva automatikusan bezáródik.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="pinpuk_attempts">
+        <item quantity="other">Még %d próbálkozása van a SIM kártya zárolásáig.</item>
+        <item quantity="one">Még %d próbálkozása van a SIM kártya zárolásáig.</item>
+    </plurals>
+    <plurals name="sem_chooser_preview_items">
+        <item quantity="other">%d elem</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d elem</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_hours">
+        <item quantity="other">%d óra</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d óra</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_minutes">
+        <item quantity="other">%d perc</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d perc</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

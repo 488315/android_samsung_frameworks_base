@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="global_action_emergency">Hätäpuhelut</string>
+    <string name="permgrouplab_sensors">Anturit</string>
+    <string name="reboot_to_update_prepare">Valmistellaan päivitystä</string>
+    <string name="reboot_to_update_title">Wear OS ‑järjestelmäpäivitys</string>
+</resources>

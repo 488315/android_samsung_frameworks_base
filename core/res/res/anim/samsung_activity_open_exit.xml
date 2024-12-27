@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set android:shareInterpolator="false"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <translate android:interpolator="@interpolator/22_5_0_1" android:duration="450" android:fillBefore="true" android:fillAfter="true" android:fromXDelta="0.0dip" android:toXDelta="-120.0dip" android:fillEnabled="true" />
+    <extend android:interpolator="@interpolator/22_5_0_1" android:duration="450" android:startOffset="0" android:fromExtendLeft="0.0" android:fromExtendTop="0.0" android:fromExtendRight="120.0dip" android:fromExtendBottom="0.0" android:toExtendLeft="0.0" android:toExtendTop="0.0" android:toExtendRight="120.0dip" android:toExtendBottom="0.0" />
+</set>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="resolver_max_width">450.0dip</dimen>
+    <item type="dimen" name="sem_config_prefDialogWidth">@dimen/sem_dialog_width_with_large_screen</item>
+    <item type="dimen" name="sem_config_prefToastWidth">68.00001%</item>
+    <item type="dimen" name="sem_dialog_min_width_major">@dimen/sem_dialog_width_with_large_screen</item>
+</resources>

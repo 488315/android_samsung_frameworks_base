@@ -1,0 +1,96 @@
+package com.android.server;
+
+import android.os.SystemProperties;
+import android.util.Log;
+import com.android.internal.midi.MidiConstants;
+import com.samsung.android.graphics.spr.document.animator.SprAnimatorBase;
+import com.samsung.android.graphics.spr.document.attribute.SprAttributeBase;
+
+/* loaded from: classes5.dex */
+public final class SecureKeyConst {
+    public static final String AT_CMD_DRK_V1_WRITING_END = "FF";
+    public static final String AT_CMD_DRK_V2_VERSION = "01";
+    public static final String AT_CMD_DRK_V2_WRITING_END = "FFF";
+    public static final int AT_MAIN_INDEX = 0;
+    public static final int AT_MAIN_INDEX_READ_DATA = 1;
+    public static final int AT_MAIN_INDEX_TC_DATA = 9;
+    public static final int AT_MAIN_INDEX_VERIFY = 0;
+    public static final int AT_MAIN_INDEX_WRITE_DATA = 2;
+    public static final int AT_MAIN_READ_DATA = 10;
+    public static final int AT_MAIN_TC_DATA = 90;
+    public static final int AT_MAIN_VERIFY = 0;
+    public static final int AT_MAIN_WRITE_DATA = 20;
+    public static final int AT_MID_INDEX = 1;
+    public static final int AT_MINOR_INDEX = 2;
+    public static final String AT_RESPONSE_CONN_FAILED = "NG_FAIL(FAILED CONNECTION)";
+    public static final String AT_RESPONSE_EXCEPION_OCCURS = "NG_FAIL(EXCEPTION_OCCURS)";
+    public static final String AT_RESPONSE_FAILED = "NG_FAIL";
+    public static final String AT_RESPONSE_INSTANCE_ERROR = "NG_FAIL(INSTANCE ERROR)";
+    public static final String AT_RESPONSE_INVALID_PARAM = "NG_FAIL(INVALID_PARAM)";
+    public static final String AT_RESPONSE_MISSED_DATA = "NG_FAIL(DATA MISSED)";
+    public static final String AT_RESPONSE_NOT_SUPPORT_DRK = "OK(NOT SUPPORT DRK)";
+    public static final String AT_RESPONSE_NO_EM_TOKEN = "NG_FAIL(NO_TOKEN)";
+    public static final String AT_RESPONSE_OK = "OK";
+    public static final String AT_RESPONSE_PMK_OK = "OK(NOT SUPPORT PMK IN M OS)";
+    public static final String AT_RESPONSE_UNIMPLEMENTED = "NG_FAIL(UNIMPLEMENTED_CMD)";
+    public static final int CSR_BRANCH_ID_LENGTH = 3;
+    public static final int CSR_REQUEST_PHASE2 = 22;
+    public static final int CSR_TIMESTAMP_LENGTH = 14;
+    public static final int DRK_V1_SEQ_NO = 2;
+    public static final int DRK_V2_SEQ_NO = 3;
+    public static final int DRK_V2_VERSION = 2;
+    public static final int ERR_KEYMASTER_GAK_ROOT_FAIL = -11511;
+    public static final int ERR_KEYMASTER_JDM_FALSE_PROP = -11508;
+    public static final int ERR_KEYMASTER_JDM_NULL_PROP = -11509;
+    public static final int ERR_KEYMASTER_VERIFICATION_FAIL = -11510;
+    public static final int GOOGLE_ATTESTATION_KEY_VERIFY = 4;
+    public static final int GOOGLE_ATTESTATION_KEY_WRITE = 26;
+    public static final int KEY_DRK_V1 = 0;
+    public static final int KEY_DRK_V2 = 2;
+    public static final int KEY_GAK_ID_ATCMD = 6;
+    public static final int KEY_GAK_ID_BOOT = 8;
+    public static final int KEY_GOOGLE_ATTESTATION = 1;
+    public static final int KEY_RKP_DEVINFO = 5;
+    public static final int KEY_SAMSUNG_ATTESTATION = 3;
+    public static final int KEY_SGAK_ID_ATCMD = 7;
+    public static final int KEY_SGAK_ID_BOOT = 9;
+    public static final int KEY_STRONGBOX_ATTESTATION = 4;
+    public static final int MODE_MNFR_ALLOW_ATCMD = 28;
+    public static final int NOT_ERROR = 0;
+    public static final String PDP_ERROR = "PDP_ERROR";
+    public static final int REMOTE_KEY_PROVISIONING_DEVINFO_READ = 13;
+    public static final int SAMSUNG_ATTESTATION_CSR_REQUEST = 24;
+    public static final int SAMSUNG_ATTESTATION_KEY_VERIFY = 3;
+    public static final int SAMSUNG_ATTESTATION_KEY_WRITE = 25;
+    public static final int SAMSUNG_DEVICE_ROOT_KEY_UID_READ_PHASE1 = 10;
+    public static final int SAMSUNG_DEVICE_ROOT_KEY_VERIFY_PHASE1 = 0;
+    public static final int SAMSUNG_DEVICE_ROOT_KEY_VERIFY_PHASE2 = 2;
+    public static final int SAMSUNG_DEVICE_ROOT_KEY_VERSION_READ_PHASE2 = 12;
+    public static final int SAMSUNG_DEVICE_ROOT_KEY_WRITE_PHASE1 = 20;
+    public static final int SAMSUNG_DEVICE_ROOT_KEY_WRITE_PHASE2 = 23;
+    public static final int SAMSUNG_PAYMENT_KEY_UID_READ_PHASE1 = 11;
+    public static final int SAMSUNG_PAYMENT_KEY_VERIFY = 1;
+    public static final int SAMSUNG_PAYMENT_KEY_WRITE_PHASE1 = 21;
+    public static final int STRONGBOX_ATTESTATION_KEY_VERIFY = 5;
+    public static final int STRONGBOX_ATTESTATION_KEY_WRITE = 27;
+    public static final int TC_CHECK_DRK_VERSION = 91;
+    public static final int TC_GENERATESERVICEKEY = 95;
+    public static final int TC_GENERATESERVICEKEYWITHTLV = 96;
+    public static final int TC_GETDEVICEINFO = 97;
+    public static final int TC_GETDRKCERT = 94;
+    public static final int TC_GETDRKUID = 93;
+    public static final int TC_ISEXIST_DRK = 92;
+    public static final int TC_SERVICE_AVAILABLE = 90;
+    public static final byte[] GoogleRootPubKey = {SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT90, -126, 2, SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEIN, SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT90, 13, 6, 9, SprAnimatorBase.INTERPOLATOR_TYPE_SINEIN33, -122, 72, -122, -9, 13, 1, 1, 1, 5, 0, 3, -126, 2, 15, 0, SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT90, -126, 2, 10, 2, -126, 2, 1, 0, -81, -74, -57, -126, SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT33, -79, -89, 1, -20, SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT33, -76, SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT70, -117, -52, 84, 22, 99, -85, -17, -104, SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT80, 50, -57, Byte.MAX_VALUE, 117, SprAnimatorBase.INTERPOLATOR_TYPE_SINEOUT33, 3, 12, -105, 82, 75, 27, 95, -24, 9, -5, -57, SprAnimatorBase.INTERPOLATOR_TYPE_SINEIN33, -87, 69, SprAnimatorBase.INTERPOLATOR_TYPE_QUARTEASEIN, 116, 60, -67, -102, 111, 19, 53, 116, 74, -91, 94, 119, -10, -74, -84, 53, 53, -18, 23, -62, 94, 99, -107, 23, -35, -100, -110, -26, 55, 74, 83, -53, -2, 37, -113, -113, -5, -74, -3, 18, -109, 120, -94, SprAnimatorBase.INTERPOLATOR_TYPE_SINEIN33, 76, -87, -100, 69, SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT60, 71, -91, -97, 50, 1, -12, 65, -105, -54, SprAnimatorBase.INTERPOLATOR_TYPE_QUADEASEIN, -51, 126, 118, SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT80, -78, -11, SprAnimatorBase.INTERPOLATOR_TYPE_SINEOUT33, 81, -74, -2, -78, -1, -3, SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT33, 111, -28, -2, 91, -58, -67, -98, -61, 75, -2, 8, 35, -99, -86, -4, -21, -114, -75, -88, -19, SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT33, 58, -51, -100, 94, 58, 119, MidiConstants.STATUS_NOTE_ON, -31, -75, 20, 66, 121, SprAnimatorBase.INTERPOLATOR_TYPE_SINEOUT33, 89, -123, -104, 17, -83, -98, -78, -87, 107, -67, -41, -91, 124, -109, -87, SprAnimatorBase.INTERPOLATOR_TYPE_QUADEASEIN, 65, -4, -51, SprAnimatorBase.INTERPOLATOR_TYPE_SINEEASEINOUT, -42, Byte.MAX_VALUE, -42, -10, 113, -86, 11, -127, 82, SprAttributeBase.TYPE_ANIMATOR_SET, -83, 56, 79, -93, 121, 68, -122, 70, 4, -35, -77, -40, -60, -7, 32, -95, -101, 22, 86, -62, MidiConstants.STATUS_MIDI_TIME_CODE, 74, -42, MidiConstants.STATUS_CHANNEL_PRESSURE, 60, 86, -20, 6, 8, -103, 4, SprAnimatorBase.INTERPOLATOR_TYPE_QUADEASEIN, SprAnimatorBase.INTERPOLATOR_TYPE_QUADEASEINOUT, -47, -91, -2, 109, 52, 64, -75, 86, -70, -47, MidiConstants.STATUS_CHANNEL_PRESSURE, -95, 82, 88, -100, 83, -27, 93, 55, 7, 98, -16, 18, SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT70, -17, -111, -122, 27, 27, 14, 108, 76, Byte.MIN_VALUE, -110, 116, -103, MidiConstants.STATUS_PROGRAM_CHANGE, -23, -66, MidiConstants.STATUS_PROGRAM_CHANGE, -72, 62, 59, -63, -7, 60, 114, MidiConstants.STATUS_PROGRAM_CHANGE, 73, SprAttributeBase.TYPE_DURATION, 75, -67, SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT80, 19, 69, -26, SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT50, 63, -114, 38, -37, -20, 6, -55, 71, 102, MidiConstants.STATUS_SONG_SELECT, -63, 40, 35, -99, 79, 67, 18, -6, -40, 18, 56, -121, MidiConstants.STATUS_PITCH_BEND, 107, -20, -11, 103, 88, 59, -8, 53, 90, -127, -2, -22, -70, -7, -102, -125, -56, -33, 62, SprAnimatorBase.INTERPOLATOR_TYPE_SINEIN33, 50, SprAnimatorBase.INTERPOLATOR_TYPE_SINEIN33, -4, 103, SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT33, MidiConstants.STATUS_MIDI_TIME_CODE, 32, -79, 53, 21, -117, 104, SprAnimatorBase.INTERPOLATOR_TYPE_QUARTEASEINOUT, -50, -81, SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT90, -101, 110, -18, 119, -7, -120, 51, MidiConstants.STATUS_CONTROL_CHANGE, 24, -38, -95, 14, 69, SprAnimatorBase.INTERPOLATOR_TYPE_QUARTEASEIN, 6, -93, 116, -43, 7, -127, MidiConstants.STATUS_SONG_SELECT, 89, 8, 41, 102, -69, 119, -117, -109, 8, -108, 38, -104, -25, 78, 11, -51, SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEINOUT, 98, -118, 1, -62, -52, 3, -27, SprAnimatorBase.INTERPOLATOR_TYPE_QUARTEASEIN, 11, 62, 91, 74, -63, -28, -33, -98, -81, -97, -10, -92, -110, -89, 124, 20, -125, -120, 40, -123, 1, 91, 66, SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT50, -26, 123, Byte.MIN_VALUE, -72, -116, -101, 72, -31, 59, SprAttributeBase.TYPE_DURATION, 122, -75, 69, -57, 35, -1, -116, 68, -8, MidiConstants.STATUS_SONG_POSITION, -45, 104, -71, -10, 82, 13, SprAnimatorBase.INTERPOLATOR_TYPE_SINEOUT33, 20, 94, -65, -98, -122, SprAnimatorBase.INTERPOLATOR_TYPE_SINEIN33, -41, SprAnimatorBase.INTERPOLATOR_TYPE_QUADEASEOUT, -10, -93, -65, -46, 69, 9, 89, -42, 83, 116, 13, -105, -95, SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT80, 54, -117, 19, -17, 102, -43, MidiConstants.STATUS_CHANNEL_PRESSURE, -91, 74, 110, SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT80, 93, -102, 111, -17, 68, 104, 50, -68, 103, -124, 71, 37, -122, SprAnimatorBase.INTERPOLATOR_TYPE_QUARTEASEIN, 9, 61, MidiConstants.STATUS_CHANNEL_PRESSURE, -26, MidiConstants.STATUS_SONG_SELECT, 64, 93, -88, -106, 67, -17, 15, 77, 105, -74, 66, 0, 81, -3, -71, SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT90, 73, 103, 62, 54, -107, 5, Byte.MIN_VALUE, -45, -51, -12, -5, MidiConstants.STATUS_CHANNEL_PRESSURE, -117, -59, -124, -125, -107, 38, 0, 99, 2, 3, 1, 0, 1};
+    public static final byte[] GoogleDevRootPubKey = {SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT90, -126, 2, SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEIN, SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT90, 13, 6, 9, SprAnimatorBase.INTERPOLATOR_TYPE_SINEIN33, -122, 72, -122, -9, 13, 1, 1, 1, 5, 0, 3, -126, 2, 15, 0, SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT90, -126, 2, 10, 2, -126, 2, 1, 0, -25, -55, SprAnimatorBase.INTERPOLATOR_TYPE_QUADEASEOUT, 53, -7, -104, 114, SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT33, 65, 100, 55, -109, -17, 22, -87, -90, -55, 66, 99, 103, -127, 24, SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT50, 58, -56, -110, 101, -101, 126, 118, -119, 50, -114, 2, MidiConstants.STATUS_MIDI_TIME_CODE, -117, -4, -49, -94, SprAnimatorBase.INTERPOLATOR_TYPE_QUADEASEOUT, -124, -103, SprAnimatorBase.INTERPOLATOR_TYPE_QUARTEASEINOUT, -19, 27, 40, 111, -120, -22, -69, SprAnimatorBase.INTERPOLATOR_TYPE_QUADEASEINOUT, 62, 52, -118, 22, -30, 26, -90, -119, -10, MidiConstants.STATUS_PITCH_BEND, 64, -12, 5, 70, -57, -56, -60, -107, 92, -36, -113, 79, 10, 64, -89, -126, -99, -27, -101, -74, -117, SprAttributeBase.TYPE_DURATION, -108, SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT33, 89, 18, -110, -6, SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEIN, 51, 91, -37, -125, -22, SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEINOUT, 81, 0, -83, -22, -109, -98, 104, 126, -121, -55, 102, -74, 92, -101, 120, -55, -111, -8, -122, -7, 81, -44, -123, -46, -57, 84, -19, -47, -40, -124, -55, 35, 101, 90, 22, 50, -102, 13, 84, 63, -27, SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEINOUT, 63, -75, 55, 17, 0, -52, SprAnimatorBase.INTERPOLATOR_TYPE_QUADEASEIN, 125, 118, 14, -69, 59, -65, -2, -8, -91, -122, 88, -77, -86, 54, 0, 27, -5, -28, 73, 80, 126, MidiConstants.STATUS_PITCH_BEND, -79, 104, -58, -33, -37, 91, 125, 92, 6, -125, -89, -27, 78, -7, -69, 73, -41, 99, -27, -94, -92, -66, 105, 40, 27, -90, -40, -55, -97, 80, 86, SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT90, Byte.MAX_VALUE, -3, 74, -38, 17, 9, -118, 27, -39, -100, -93, 122, Byte.MAX_VALUE, -69, -62, -107, -33, -123, SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT80, -1, -56, -45, 117, 81, -35, -53, -20, -43, -122, -9, -76, 16, 56, -41, -83, SprAnimatorBase.INTERPOLATOR_TYPE_QUARTEASEIN, SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEINOUT, -29, 50, 73, -57, -51, -104, 2, 60, -68, -12, MidiConstants.STATUS_PROGRAM_CHANGE, -3, 65, SprAttributeBase.TYPE_ANIMATOR_SET, -99, 3, -53, 116, 98, -87, SprAnimatorBase.INTERPOLATOR_TYPE_QUADEASEIN, 104, 18, 11, MidiConstants.STATUS_SONG_SELECT, 38, SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT33, -2, SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT80, -4, MidiConstants.STATUS_MIDI_TIME_CODE, -93, 74, SprAnimatorBase.INTERPOLATOR_TYPE_QUADEASEIN, -44, SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT33, MidiConstants.STATUS_MIDI_TIME_CODE, 71, -79, 113, 94, MidiConstants.STATUS_POLYPHONIC_AFTERTOUCH, 3, -72, SprAttributeBase.TYPE_ANIMATOR_SET, -69, SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEINOUT, 21, MidiConstants.STATUS_CHANNEL_PRESSURE, 123, -33, 86, -10, -120, 116, -97, 93, -18, MidiConstants.STATUS_PROGRAM_CHANGE, 92, -4, 98, 9, -127, MidiConstants.STATUS_CONTROL_CHANGE, 50, 98, -76, -10, -54, 68, 105, -124, -10, MidiConstants.STATUS_CONTROL_CHANGE, 120, SprAnimatorBase.INTERPOLATOR_TYPE_QUADEASEIN, 56, -41, SprAnimatorBase.INTERPOLATOR_TYPE_SINEIN33, 2, 110, -83, -67, 82, -84, -78, SprAnimatorBase.INTERPOLATOR_TYPE_QUADEASEINOUT, 108, -47, 90, -120, 72, SprAnimatorBase.INTERPOLATOR_TYPE_SINEIN33, -74, -126, -95, 114, -62, 64, 90, 62, 15, 13, 94, 83, 24, 98, 72, -42, 124, MidiConstants.STATUS_POLYPHONIC_AFTERTOUCH, 85, 38, -50, -87, -17, 87, -116, -39, -124, 95, 61, 40, 38, -72, -28, -2, -103, -5, 50, 17, 67, 25, -35, 10, -124, 84, -1, 118, 107, -70, 1, 124, MidiConstants.STATUS_POLYPHONIC_AFTERTOUCH, 57, -38, -16, -105, -35, 75, MidiConstants.STATUS_SONG_SELECT, -101, 21, SprAnimatorBase.INTERPOLATOR_TYPE_QUADEASEOUT, 122, 113, 77, -103, 57, -72, -1, 51, 32, SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT90, 126, SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEINOUT, -120, -56, 41, -16, 123, -71, SprAnimatorBase.INTERPOLATOR_TYPE_QUADEASEIN, -125, MidiConstants.STATUS_NOTE_ON, SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT70, -5, 124, 67, -24, 68, 74, 40, SprAttributeBase.TYPE_DURATION, -55, -3, 71, -37, 100, -74, -37, -77, -10, 74, MidiConstants.STATUS_CHANNEL_PRESSURE, -54, 110, 14, -61, 75, 113, 19, 113, 6, 37, 61, MidiConstants.STATUS_PITCH_BEND, -109, -16, 11, -109, MidiConstants.STATUS_NOTE_ON, 121, 51, -121, -81, 87, 73, 67, 84, 116, -36, -75, -3, SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT90, -101, -116, -10, -107, -1, 80, SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT50, -37, 69, 19, SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT50, SprAnimatorBase.INTERPOLATOR_TYPE_SINEIN33, 59, 76, 90, 88, 18, SprAttributeBase.TYPE_SHADOW, 7, -26, -118, -117, -23, -74, -9, 51, MidiConstants.STATUS_SONG_SELECT, -99, 126, -118, -118, -82, 32, 57, -92, 80, 102, 126, 86, 121, -89, -10, 55, -8, -115, -8, 87, 1, 5, 1, 2, 3, 1, 0, 1};
+    public static final boolean isJDMProductNotInHouse = false;
+    public static final boolean isJDM = "in_house".contains("jdm");
+    public static final String isDevDevice = SystemProperties.get("ro.boot.em.status");
+
+    public static boolean checkblockDrkWriting() {
+        boolean defaultValue = Integer.parseInt(SystemProperties.get("ro.product.first_api_level")) > 34;
+        boolean specificDevice = "a36xq gtact5pro gtact5prowifi".contains(SystemProperties.get("ro.product.device"));
+        Log.i("DEVROOT#ATCmd", "Default : " + defaultValue + "specificDevice : " + specificDevice);
+        return defaultValue && !specificDevice;
+    }
+}

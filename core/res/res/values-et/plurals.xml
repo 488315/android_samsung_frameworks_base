@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="pinpuk_attempts">
+        <item quantity="other">Teil on enne SIM-kaardi lukustumist jäänud veel %d katset.</item>
+        <item quantity="one">Teil on enne SIM-kaardi lukustumist jäänud veel %d katse.</item>
+    </plurals>
+</resources>

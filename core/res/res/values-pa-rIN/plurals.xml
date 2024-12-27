@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="SDcardBlockUnmount_message">
+        <item quantity="other">ਤੁਹਾਡਾ ਫ਼ੋਨ ਅਸਥਿਰ ਹੈ ਕਿਉਂਕਿ SD ਕਾਰਡ ਜਿਸ ਤੇ ਐਪਸ ਸਥਾਪਿਤ ਕੀਤੇ ਗਏ ਸਨ ਉਸ ਨੂੰ ਹਟਾ ਦਿੱਤਾ ਗਿਆ ਸੀ। ਸਧਾਰਨ ਸਥਿਤੀ ਤੇ ਵਾਪਸ ਆਉਣ ਲਈ ਤੁਹਾਡਾ ਫ਼ੋਨ %d ਸਕਿੰਟ ਵਿੱਚ ਦੁਬਾਰਾ ਸ਼ੁਰੂ ਕਰ ਦਿੱਤਾ ਜਾਵੇਗਾ। ਫ਼ੋਨ ਦੁਬਾਰਾ ਸ਼ੁਰੂ ਕਰਨ ਤੋਂ ਪਹਿਲਾਂ ਕੋਈ ਵੀ ਅਸੁਰੱਖਿਅਤ ਡੈਟਾ ਸੁਰੱਖਿਅਤ ਕਰੋ।</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">ਤੁਹਾਡਾ ਫ਼ੋਨ ਅਸਥਿਰ ਹੈ ਕਿਉਂਕਿ SD ਕਾਰਡ ਜਿਸ ਤੇ ਐਪਸ ਸਥਾਪਿਤ ਕੀਤੇ ਗਏ ਸਨ ਉਸ ਨੂੰ ਹਟਾ ਦਿੱਤਾ ਗਿਆ ਸੀ। ਸਧਾਰਨ ਸਥਿਤੀ ਤੇ ਵਾਪਸ ਆਉਣ ਲਈ ਤੁਹਾਡਾ ਫ਼ੋਨ %d ਸਕਿੰਟ ਵਿੱਚ ਦੁਬਾਰਾ ਸ਼ੁਰੂ ਕਰ ਦਿੱਤਾ ਜਾਵੇਗਾ। ਫ਼ੋਨ ਦੁਬਾਰਾ ਸ਼ੁਰੂ ਕਰਨ ਤੋਂ ਪਹਿਲਾਂ ਕੋਈ ਵੀ ਅਸੁਰੱਖਿਅਤ ਡੈਟਾ ਸੁਰੱਖਿਅਤ ਕਰੋ।</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="SDcardBlockUnmount_title">
+        <item quantity="other">ਤੁਹਾਡਾ ਫ਼ੋਨ %d ਸਕਿੰਟ ਵਿੱਚ ਦੁਬਾਰਾ ਸ਼ੁਰੂ ਹੋਵੇਗਾ</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">ਤੁਹਾਡਾ ਫ਼ੋਨ %d ਸਕਿੰਟ ਵਿੱਚ ਦੁਬਾਰਾ ਸ਼ੁਰੂ ਹੋਵੇਗਾ</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_phone">
+        <item quantity="other">%d ਐਪਾਂ ਨੂੰ ਸਵੈਚਲਿਤ ਬੰਦ ਕਰ ਦਿੱਤਾ ਗਿਆ ਹੈ ਕਿਉਂਕਿ ਉਨ੍ਹਾਂ ਦੇ ਕਾਰਨ ਤੁਹਾਡਾ ਫ਼ੋਨ ਬਹੁਤ ਗਰਮ ਹੋ ਰਿਹਾ ਸੀ। ਤੁਹਾਡੇ ਫ਼ੋਨ ਦੇ ਠੰਡਾ ਹੋਣ ਤੋਂ ਬਾਅਦ ਤੁਸੀਂ ਉਨ੍ਹਾਂ ਨੂੰ ਦੁਬਾਰਾ ਖੋਲ੍ਹ ਸਕਦੇ ਹੋ।</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d ਐਪ ਨੂੰ ਸਵੈਚਲਿਤ ਬੰਦ ਕਰ ਦਿੱਤਾ ਗਿਆ ਹੈ ਕਿਉਂਕਿ ਉਸ ਦੇ ਕਾਰਨ ਤੁਹਾਡਾ ਫ਼ੋਨ ਬਹੁਤ ਗਰਮ ਹੋ ਰਿਹਾ ਸੀ। ਤੁਹਾਡੇ ਫ਼ੋਨ ਦੇ ਠੰਡਾ ਹੋਣ ਤੋਂ ਬਾਅਦ ਤੁਸੀਂ ਉਸ ਨੂੰ ਦੁਬਾਰਾ ਖੋਲ੍ਹ ਸਕਦੇ ਹੋ।</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_tablet">
+        <item quantity="other">%d ਐਪਾਂ ਨੂੰ ਸਵੈਚਲਿਤ ਬੰਦ ਕਰ ਦਿੱਤਾ ਗਿਆ ਹੈ ਕਿਉਂਕਿ ਉਨ੍ਹਾਂ ਦੇ ਕਾਰਨ ਤੁਹਾਡਾ ਟੈਬਲੇਟ ਬਹੁਤ ਗਰਮ ਹੋ ਰਿਹਾ ਸੀ। ਤੁਹਾਡੇ ਟੈਬਲੇਟ ਦੇ ਠੰਡਾ ਹੋਣ ਤੋਂ ਬਾਅਦ ਤੁਸੀਂ ਉਨ੍ਹਾਂ ਨੂੰ ਦੁਬਾਰਾ ਖੋਲ੍ਹ ਸਕਦੇ ਹੋ।</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d ਐਪ ਨੂੰ ਸਵੈਚਲਿਤ ਬੰਦ ਕਰ ਦਿੱਤਾ ਗਿਆ ਹੈ ਕਿਉਂਕਿ ਉਸ ਦੇ ਕਾਰਨ ਤੁਹਾਡਾ ਟੈਬਲੇਟ ਬਹੁਤ ਗਰਮ ਹੋ ਰਿਹਾ ਸੀ। ਤੁਹਾਡੇ ਟੈਬਲੇਟ ਦੇ ਠੰਡਾ ਹੋਣ ਤੋਂ ਬਾਅਦ ਤੁਸੀਂ ਉਸ ਨੂੰ ਦੁਬਾਰਾ ਖੋਲ੍ਹ ਸਕਦੇ ਹੋ।</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_title_v2">
+        <item quantity="other">%d ਐਪਾਂ ਨੂੰ ਬੰਦ ਕੀਤਾ ਗਿਆ</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d ਐਪ ਨੂੰ ਬੰਦ ਕੀਤਾ ਗਿਆ</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="dex_max_count_text">
+        <item quantity="other">ਇੱਕ ਹੀ ਸਮੇਂ ਤੇ ਸਕ੍ਰੀਨ ਤੇ %d ਤੋਂ ਵੱਧ ਐਪਾਂ ਨੂੰ ਦਿਖਾਇਆ ਨਹੀਂ ਜਾ ਸਕਦਾ। ਸਭ ਤੋਂ ਪੁਰਾਣੀ ਐਪ ਨੂੰ ਛੋਟਾ ਕੀਤਾ ਗਿਆ।</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">ਇੱਕ ਹੀ ਸਮੇਂ ਤੇ ਸਕ੍ਰੀਨ ਤੇ %d ਤੋਂ ਵੱਧ ਐਪ ਨੂੰ ਦਿਖਾਇਆ ਨਹੀਂ ਜਾ ਸਕਦਾ। ਸਭ ਤੋਂ ਪੁਰਾਣੀ ਐਪ ਨੂੰ ਛੋਟਾ ਕੀਤਾ ਗਿਆ।</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="hot_key_guide_message">
+        <item quantity="other">ਉਹ ਐਪ ਖੋਲ੍ਹੋ ਜਿਸ ਨੂੰ ਤੁਸੀਂ ਨਿਰਧਾਰਿਤ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ, ਫਿਰ ਐਪ ਬਟਨ ਨੂੰ %d ਸਕਿੰਟਾਂ ਲਈ ਦਬਾ ਕੇ ਰੱਖੋ।</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">ਉਹ ਐਪ ਖੋਲ੍ਹੋ ਜਿਸ ਨੂੰ ਤੁਸੀਂ ਨਿਰਧਾਰਿਤ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ, ਫਿਰ ਐਪ ਬਟਨ ਨੂੰ %d ਸਕਿੰਟ ਲਈ ਦਬਾ ਕੇ ਰੱਖੋ।</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_phone">
+        <item quantity="other">%1$s ਤੁਹਾਡੇ ਫ਼ੋਨ ਨੂੰ ਜ਼ਿਆਦਾ ਗਰਮ ਕਰ ਰਿਹਾ ਹੈ। ਇਹ %2$d ਸਕਿੰਟਾਂ ਵਿੱਚ ਸਵੈਚਲਿਤ ਬੰਦ ਹੋ ਜਾਵੇਗਾ।</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s ਤੁਹਾਡੇ ਫ਼ੋਨ ਨੂੰ ਜ਼ਿਆਦਾ ਗਰਮ ਕਰ ਰਿਹਾ ਹੈ। ਇਹ %2$d ਸਕਿੰਟ ਵਿੱਚ ਸਵੈਚਲਿਤ ਬੰਦ ਹੋ ਜਾਵੇਗਾ।</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_tablet">
+        <item quantity="other">%1$s ਤੁਹਾਡੇ ਟੈਬਲੇਟ ਨੂੰ ਜ਼ਿਆਦਾ ਗਰਮ ਕਰ ਰਿਹਾ ਹੈ। ਇਹ %2$d ਸਕਿੰਟਾਂ ਵਿੱਚ ਸਵੈਚਲਿਤ ਬੰਦ ਹੋ ਜਾਵੇਗਾ।</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s ਤੁਹਾਡੇ ਟੈਬਲੇਟ ਨੂੰ ਜ਼ਿਆਦਾ ਗਰਮ ਕਰ ਰਿਹਾ ਹੈ। ਇਹ %2$d ਸਕਿੰਟ ਵਿੱਚ ਸਵੈਚਲਿਤ ਬੰਦ ਹੋ ਜਾਵੇਗਾ।</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="maintenance_mode_backup_cloud_menu_sub_textview_message_default">
+        <item quantity="other">%d ਦਿਨਾਂ ਲਈ ਅਸੀਮਿਤ ਡੈਟਾ ਦਾ Samsung Cloud ਤੇ ਬੈਕ ਅੱਪ ਲਓ ਜਾਂ ਤੁਹਾਡੇ ਬੈਕ ਅੱਪ ਲਏ ਡੈਟਾ ਨੂੰ ਰੀਸਟੋਰ ਕਰੋ।</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d ਦਿਨ ਲਈ ਅਸੀਮਿਤ ਡੈਟਾ ਦਾ Samsung Cloud ਤੇ ਬੈਕ ਅੱਪ ਲਓ ਜਾਂ ਤੁਹਾਡੇ ਬੈਕ ਅੱਪ ਲਏ ਡੈਟਾ ਨੂੰ ਰੀਸਟੋਰ ਕਰੋ।</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_phone">
+        <item quantity="other">%1$s ਦੇ ਕਾਰਨ ਤੁਹਾਡਾ ਫ਼ੋਨ ਬਹੁਤ ਗਰਮ ਹੋ ਰਿਹਾ ਹੈ। ਤੁਸੀਂ ਇਸ ਨੂੰ ਹੁਣੇ ਬੰਦ ਕਰ ਸਕਦੇ ਹੋ, ਜਾਂ %2$d ਸਕਿੰਟ ਬਾਅਦ ਉਸ ਨੂੰ ਸਵੈਚਲਿਤ ਬੰਦ ਕਰ ਦਿੱਤਾ ਜਾਵੇਗਾ।</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s ਦੇ ਕਾਰਨ ਤੁਹਾਡਾ ਫ਼ੋਨ ਬਹੁਤ ਗਰਮ ਹੋ ਰਿਹਾ ਹੈ। ਤੁਸੀਂ ਇਸ ਨੂੰ ਹੁਣੇ ਬੰਦ ਕਰ ਸਕਦੇ ਹੋ, ਜਾਂ %2$d ਸਕਿੰਟ ਬਾਅਦ ਉਸ ਨੂੰ ਸਵੈਚਲਿਤ ਬੰਦ ਕਰ ਦਿੱਤਾ ਜਾਵੇਗਾ।</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_tablet">
+        <item quantity="other">%1$s ਦੇ ਕਾਰਨ ਤੁਹਾਡਾ ਟੈਬਲੇਟ ਬਹੁਤ ਗਰਮ ਹੋ ਰਿਹਾ ਹੈ। ਤੁਸੀਂ ਇਸ ਨੂੰ ਹੁਣੇ ਬੰਦ ਕਰ ਸਕਦੇ ਹੋ, ਜਾਂ %2$d ਸਕਿੰਟ ਬਾਅਦ ਉਸ ਨੂੰ ਸਵੈਚਲਿਤ ਬੰਦ ਕਰ ਦਿੱਤਾ ਜਾਵੇਗਾ।</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s ਦੇ ਕਾਰਨ ਤੁਹਾਡਾ ਟੈਬਲੇਟ ਬਹੁਤ ਗਰਮ ਹੋ ਰਿਹਾ ਹੈ। ਤੁਸੀਂ ਇਸ ਨੂੰ ਹੁਣੇ ਬੰਦ ਕਰ ਸਕਦੇ ਹੋ, ਜਾਂ %2$d ਸਕਿੰਟ ਬਾਅਦ ਉਸ ਨੂੰ ਸਵੈਚਲਿਤ ਬੰਦ ਕਰ ਦਿੱਤਾ ਜਾਵੇਗਾ।</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sem_chooser_preview_items">
+        <item quantity="other">%d ਆਈਟਮਾਂ</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d ਆਈਟਮ</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_hours">
+        <item quantity="other">%d ਘੰਟੇ</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d ਘੰਟਾ</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_minutes">
+        <item quantity="other">%d ਮਿੰਟ</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d ਮਿੰਟ</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

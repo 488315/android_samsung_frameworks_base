@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ThemeMetaData FormatVersion="1.3" GuideVersion="1.4">
+    <AppMetaData Name="Phone_CN" TargetApi="28" TargetPackageName="com.samsung.android.dialer" VersionCode="1" VersionName="">
+        <Include RefName="SESL" />
+        <Property Comment="CMCC VVM Convert Icon tint color" DefaultValue="" DestAttribName="cn_vvm_convert_tint_color" DestQualifiers="" UID="102-6-1" ValueRef="1-C" ValueType="TintColor" />
+        <Property Comment="CMCC VVM Voice to text color" DefaultValue="#ff7c7c7c" DestAttribName="voice_to_text_color" DestQualifiers="" UID="102-6-2" ValueRef="24-B" ValueType="TextColor" />
+        <Property Comment="CMCC VVM button text color" DefaultValue="#fffafafa" DestAttribName="cn_vvm_button_text_color" DestQualifiers="" UID="102-9-2" ValueRef="1-53-5" ValueType="TextColor" />
+        <Property Comment="CMCC VVM button bg tint color" DefaultValue="#ff0074d4" DestAttribName="cn_vvm_button_bg_color" DestQualifiers="" UID="102-9-3" ValueRef="1-53-3" ValueType="TintColor" />
+    </AppMetaData>
+    <AppMetaData Name="OsmnUi" TargetApi="29" TargetPackageName="com.samsung.osmnuui" VersionCode="1" VersionName="1.0">
+        <Include RefName="SESL" />
+        <Property Comment="sign in title" DefaultValue="#ffdd2c00" DestAttribName="dialog_sign_in_title" DestQualifiers="" UID="102-7-1" ValueRef="24-A" ValueType="TextColor" />
+        <Property Comment="verification_code_button_BgColor" DefaultValue="" DestAttribName="get_verify_code_bg_button" DestQualifiers="" UID="102-7-2" ValueRef="1-7-1" ValueType="BgColor" />
+        <Property Comment="verification_code_button_TextColor" DefaultValue="" DestAttribName="get_verify_code_text_button" DestQualifiers="" UID="102-7-3" ValueRef="1-7-2" ValueType="TextColor" />
+        <Property Comment="dialog cancel button textcolor" DefaultValue="" DestAttribName="dialog_cancel_button" DestQualifiers="" UID="102-7-4" ValueRef="1-9-15" ValueType="TextColor" />
+        <Property Comment="dialog button divider" DefaultValue="" DestAttribName="dialog_button_divider" DestQualifiers="" UID="102-7-6" ValueRef="1-9-8" ValueType="TextColor" />
+        <Property Comment="Error message" DefaultValue="#ffdd2c00" DestAttribName="edit_text_error_color" DestQualifiers="" UID="102-7-7" ValueRef="1-23-8" ValueType="TextColor" />
+    </AppMetaData>
+</ThemeMetaData>

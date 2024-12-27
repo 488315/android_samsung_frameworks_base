@@ -1,0 +1,90 @@
+package com.samsung.android.hardware.context;
+
+import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.util.Log;
+
+/* loaded from: classes6.dex */
+public class SemContextDeviceActivityDetectorAttribute extends SemContextAttribute {
+    public static final Parcelable.Creator<SemContextDeviceActivityDetectorAttribute> CREATOR = new Parcelable.Creator<SemContextDeviceActivityDetectorAttribute>() { // from class: com.samsung.android.hardware.context.SemContextDeviceActivityDetectorAttribute.1
+        /* JADX WARN: Can't rename method to resolve collision */
+        @Override // android.os.Parcelable.Creator
+        public SemContextDeviceActivityDetectorAttribute createFromParcel(Parcel in) {
+            return new SemContextDeviceActivityDetectorAttribute(in);
+        }
+
+        /* JADX WARN: Can't rename method to resolve collision */
+        @Override // android.os.Parcelable.Creator
+        public SemContextDeviceActivityDetectorAttribute[] newArray(int size) {
+            return new SemContextDeviceActivityDetectorAttribute[size];
+        }
+    };
+    private static final String TAG = "SemContextDeviceActivityDetectorAttribute";
+    private int mActivity;
+    private int mDuration;
+    private boolean mNeedsRequestToUpdate;
+    private int mPosture;
+
+    SemContextDeviceActivityDetectorAttribute() {
+        this.mActivity = 1;
+        this.mDuration = 10;
+        this.mPosture = 0;
+        this.mNeedsRequestToUpdate = false;
+        setAttribute();
+    }
+
+    SemContextDeviceActivityDetectorAttribute(Parcel src) {
+        super(src);
+        this.mActivity = 1;
+        this.mDuration = 10;
+        this.mPosture = 0;
+        this.mNeedsRequestToUpdate = false;
+    }
+
+    public SemContextDeviceActivityDetectorAttribute(int activity, int duration, boolean needsRequestToUpdate) {
+        this.mActivity = 1;
+        this.mDuration = 10;
+        this.mPosture = 0;
+        this.mNeedsRequestToUpdate = false;
+        this.mPosture = (65280 & activity) >> 8;
+        this.mDuration = duration;
+        this.mActivity = activity & 255;
+        this.mNeedsRequestToUpdate = needsRequestToUpdate;
+        Log.d(TAG, "SemContextDeviceActivityDetectorAttribute activity, posture : " + this.mActivity + " , " + this.mPosture);
+        setAttribute();
+    }
+
+    @Override // com.samsung.android.hardware.context.SemContextAttribute
+    public boolean checkAttribute() {
+        if (this.mActivity < 1 || this.mActivity > 2) {
+            Log.e(TAG, "SemContextDeviceActivityDetector activity is wrong.");
+            return false;
+        }
+        if ((this.mActivity == 1 && !this.mNeedsRequestToUpdate) || (this.mActivity == 2 && this.mDuration > 0)) {
+            Log.e(TAG, "This option is NOT supported, activity : " + this.mActivity + ", duration : " + this.mDuration + ", request : " + this.mNeedsRequestToUpdate);
+            return false;
+        }
+        Log.d(TAG, "SemContextDeviceActivityDetector checkAttribute : " + this.mActivity);
+        return this.mDuration >= 0;
+    }
+
+    private void setAttribute() {
+        Bundle attribute = new Bundle();
+        if (this.mActivity == 2 && !this.mNeedsRequestToUpdate) {
+            attribute.putInt("trigger_type", 3);
+            attribute.putInt("duration", 0);
+        } else if (this.mActivity == 2 && this.mNeedsRequestToUpdate) {
+            attribute.putInt("trigger_type", 2);
+            attribute.putInt("duration", 0);
+        } else if (this.mActivity == 1 && this.mNeedsRequestToUpdate) {
+            attribute.putInt("trigger_type", 1);
+            attribute.putInt("duration", this.mDuration);
+        } else {
+            Log.e(TAG, "The attribute is wrong.");
+            return;
+        }
+        attribute.putInt("posture", this.mPosture);
+        super.setAttribute(54, attribute);
+    }
+}

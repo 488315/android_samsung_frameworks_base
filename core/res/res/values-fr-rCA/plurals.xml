@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="SDcardBlockUnmount_message">
+        <item quantity="other">Votre téléphone est instable, car une carte SD contenant des applications a été retirée. Votre téléphone redémarrera dans %d secondes pour revenir à un fonctionnement normal. Sauvegardez les données non enregistrées avant que le téléphone ne redémarre.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Votre téléphone est instable, car une carte SD contenant des applications a été retirée. Votre téléphone redémarrera dans %d seconde pour revenir à un fonctionnement normal. Sauvegardez les données non enregistrées avant que le téléphone ne redémarre.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="SDcardBlockUnmount_title">
+        <item quantity="other">Votre tél. redémarrera dans %d secondes</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Votre tél. redémarrera dans %d seconde</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_phone">
+        <item quantity="other">%d applications ont été fermées automatiquement, car elles entrainaient une surchauffe de votre téléphone. Vous pourrez les ouvrir à nouveau une fois que votre téléphone aura refroidi.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">"%d application a été fermée automatiquement, car elle entrainait une surchauffe de votre téléphone. Vous pourrez l'ouvrir à nouveau une fois que votre téléphone aura refroidi."</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_tablet">
+        <item quantity="other">%d applications ont été fermées automatiquement, car elles entrainaient une surchauffe de votre tablette. Vous pourrez les ouvrir à nouveau une fois que votre tablette aura refroidi.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">"%d application a été fermée automatiquement, car elle entrainait une surchauffe de votre tablette. Vous pourrez l'ouvrir à nouveau une fois que votre tablette aura refroidi."</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_title_v2">
+        <item quantity="other">%d applications fermées</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d application fermée</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="dex_max_count_text">
+        <item quantity="other">"Impossible d'afficher plus de %d applications sur l'écran simultanément. L'application la plus ancienne a été réduite."</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">"Impossible d'afficher plus de %d application sur l'écran simultanément. L'application la plus ancienne a été réduite."</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="hot_key_guide_message">
+        <item quantity="other">"Ouvrez l'application que vous voulez attribuer, puis pressez la touche d'application pendant %d secondes."</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">"Ouvrez l'application que vous voulez attribuer, puis pressez la touche d'application pendant %d seconde."</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_phone">
+        <item quantity="other">"L'application %1$s entraine la surchauffe de votre téléphone. Elle se fermera automatiquement dans %2$d secondes."</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">"L'application %1$s entraine la surchauffe de votre téléphone. Elle se fermera automatiquement dans %2$d seconde."</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_tablet">
+        <item quantity="other">"L'application %1$s entraine la surchauffe de votre tablette. Elle se fermera automatiquement dans %2$d secondes."</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">"L'application %1$s entraine la surchauffe de votre tablette. Elle se fermera automatiquement dans %2$d seconde."</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="maintenance_mode_backup_cloud_menu_sub_textview_message_default">
+        <item quantity="other">"Sauvegardez des données illimitées dans Samsung Cloud pendant une période allant jusqu'à %d jours ou restaurez les données que vous avez sauvegardées."</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Sauvegardez des données illimitées dans Samsung Cloud pendant %d jour ou restaurez les données que vous avez sauvegardées.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_phone">
+        <item quantity="other">"L'application %1$s entraine la surchauffe de votre téléphone. Vous pouvez la fermer maintenant, sinon elle se fermera automatiquement dans %2$d secondes."</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">"L'application %1$s entraine la surchauffe de votre téléphone. Vous pouvez la fermer maintenant, sinon elle se fermera automatiquement dans %2$d seconde."</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_tablet">
+        <item quantity="other">"L'application %1$s entraine la surchauffe de votre tablette. Vous pouvez la fermer maintenant, sinon elle se fermera automatiquement dans %2$d secondes."</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">"L'application %1$s entraine la surchauffe de votre tablette. Vous pouvez la fermer maintenant, sinon elle se fermera automatiquement dans %2$d seconde."</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="pinpuk_attempts">
+        <item quantity="other">Il vous reste %d tentatives avant que votre carte SIM soit verrouillée.</item>
+        <item quantity="one">Il vous reste %d tentative avant que votre carte SIM soit verrouillée.</item>
+    </plurals>
+    <plurals name="sem_chooser_preview_items">
+        <item quantity="other">%d éléments</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d élément</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_hours">
+        <item quantity="other">%d heures</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d heure</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_minutes">
+        <item quantity="other">%d minutes</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d minute</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

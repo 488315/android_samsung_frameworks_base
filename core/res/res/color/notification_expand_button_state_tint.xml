@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:androidprv="http://schemas.android.com/apk/prv/res/android">
+    <item android:state_pressed="true" android:color="?^attr-private/materialColorOnPrimaryFixed" android:alpha="0.15" />
+    <item android:color="?^attr-private/materialColorOnPrimaryFixed" android:alpha="0.11" android:state_hovered="true" />
+    <item android:color="@color/transparent" />
+</selector>

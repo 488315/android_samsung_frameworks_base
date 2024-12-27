@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="base_error_dialog_bottom_padding">78.0dip</dimen>
+    <dimen name="base_error_dialog_padding">11.0dip</dimen>
+    <dimen name="base_error_dialog_top_padding">36.0dip</dimen>
+</resources>

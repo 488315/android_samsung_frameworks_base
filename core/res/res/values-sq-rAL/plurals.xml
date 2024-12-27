@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="SDcardBlockUnmount_message">
+        <item quantity="other">Telefoni yt nuk është stabël, sepse prej tij është hequr një kartë SD ku ishin instaluar app-e. Telefoni yt do të riniset për %d sekonda, që të kthehet në gjendjen normale. Ruaj çdo të dhënë të paruajtur, para se të riniset telefoni.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Telefoni yt nuk është stabël, sepse prej tij është hequr një kartë SD ku ishin instaluar app-e. Telefoni yt do të riniset për %d sekondë, që të kthehet në gjendjen normale. Ruaj çdo të dhënë të paruajtur, para se të riniset telefoni.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="SDcardBlockUnmount_title">
+        <item quantity="other">Telefoni do të riniset për %d sekonda</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Telefoni do të riniset për %d sekondë</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_phone">
+        <item quantity="other">%d app-e u mbyllën automatikisht, sepse po e bënin telefonin të mbinxehej. Mund t’i hapësh sërish më vonë, pasi të ftohet telefoni.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d app u mbyll automatikisht, sepse po e bënte telefonin të mbinxehej. Mund ta hapësh sërish më vonë, pasi të ftohet telefoni.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_tablet">
+        <item quantity="other">%d app-e u mbyllën automatikisht, sepse po e bënin tabletën të mbinxehej. Mund t’i hapësh sërish më vonë, pasi të ftohet tableta.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d app u mbyll automatikisht, sepse po e bënte tabletën të mbinxehej. Mund ta hapësh sërish më vonë, pasi të ftohet tableta.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_title_v2">
+        <item quantity="other">%d app-e u mbyllën</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d app u mbyll</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="dex_max_count_text">
+        <item quantity="other">S’mund të tregohen më shumë se %d app-e në ekran njëkohësisht. App-i më i vjetër u minimizua.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">S’mund të tregohet më shumë se %d app në ekran njëkohësisht. App-i më i vjetër u minimizua.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="hot_key_guide_message">
+        <item quantity="other">Hap app-in që dëshiron të bashkëlidhësh, pastaj shtyp dhe mbaj tastin e app-eve %d sekonda.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Hap app-in që dëshiron të bashkëlidhësh, pastaj shtyp dhe mbaj tastin e app-eve %d sekondë.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_phone">
+        <item quantity="other">%1$s po e bën telefonin të mbinxehet. Do të mbyllet automatikisht pas %2$d sekondash.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s po e bën telefonin të mbinxehet. Do të mbyllet automatikisht pas %2$d sekonde.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_tablet">
+        <item quantity="other">%1$s po e bën tabletën të mbinxehet. Do të mbyllet automatikisht pas %2$d sekondash.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s po e bën tabletën të mbinxehet. Do të mbyllet automatikisht pas %2$d sekonde.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="maintenance_mode_backup_cloud_menu_sub_textview_message_default">
+        <item quantity="other">Rezervo të dhëna pa cak në Samsung Cloud për deri %d ditë ose restauro të dhënat që ke rezervuar.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Rezervo të dhëna pa cak në Samsung Cloud për deri %d ditë ose restauro të dhënat që ke rezervuar.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_phone">
+        <item quantity="other">%1$s po e bën telefonin të mbinxehet. Mund ta mbyllësh tani, ose do të mbyllet automatikisht pas %2$d sekondash.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s po e bën telefonin të mbinxehet. Mund ta mbyllësh tani, ose do të mbyllet automatikisht pas %2$d sekonde.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_tablet">
+        <item quantity="other">%1$s po e bën tabletën të mbinxehet. Mund ta mbyllësh tani, ose do të mbyllet automatikisht pas %2$d sekondash.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s po e bën tabletën të mbinxehet. Mund ta mbyllësh tani, ose do të mbyllet automatikisht pas %2$d sekonde.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sem_chooser_preview_items">
+        <item quantity="other">%d gjëra</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d gjë</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_hours">
+        <item quantity="other">%d orë</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d orë</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_minutes">
+        <item quantity="other">%d minuta</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d minutë</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="global_action_emergency">හදිසි SOS උදවු</string>
+    <string name="permgrouplab_sensors">සංවේදක</string>
+    <string name="reboot_to_update_prepare">යාවත්කාලීන කිරීමට සූදානම් කරමින්</string>
+    <string name="reboot_to_update_title">Wear OS පද්ධති යාවත්කාලීනය</string>
+    <string name="select_input_method">ආදානය තෝරා ගන්න</string>
+</resources>

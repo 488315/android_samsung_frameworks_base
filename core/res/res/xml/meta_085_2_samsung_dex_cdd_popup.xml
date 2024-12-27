@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ThemeMetaData FormatVersion="1.3" GuideVersion="1.7">
+    <AppMetaData Name="Samsung DeX CDD popup" TargetApi="28" TargetPackageName="com.sec.android.app.dexonpc" VersionCode="1">
+        <Include RefName="SESL" />
+    </AppMetaData>
+</ThemeMetaData>

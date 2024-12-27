@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="global_action_emergency">Екстрені виклики</string>
+    <string name="permgrouplab_sensors">Датчики</string>
+    <string name="reboot_to_update_prepare">Підготовка до оновлення</string>
+    <string name="reboot_to_update_title">Оновлення системи Wear OS</string>
+    <string name="select_input_method">Виберіть метод введення</string>
+</resources>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="global_action_emergency">‏ایمرجنسی SOS</string>
+    <string name="permgrouplab_sensors">سینسرز</string>
+    <string name="reboot_to_update_prepare">اپ ڈیٹ کرنے کی تیاری ہو رہی ہے</string>
+    <string name="reboot_to_update_title">‏Wear OS سسٹم اپ ڈیٹ</string>
+    <string name="select_input_method">ان پٹ منتخب کریں</string>
+</resources>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <corners android:radius="@dimen/activity_embedding_divider_handle_radius_pressed" />
+    <size android:height="@dimen/activity_embedding_divider_handle_height_pressed" android:width="@dimen/activity_embedding_divider_handle_width_pressed" />
+    <solid android:color="@color/activity_embedding_divider_color_pressed" />
+</shape>

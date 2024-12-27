@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="SDcardBlockUnmount_message">
+        <item quantity="other">আপনার ফোন অস্থিতিশীল কারণ একটি SD কার্ডে অ্যাপ ইনস্টল করা ছিল যেটি সরিয়ে ফেলা হয়েছে৷ স্বাভাবিক অবস্থায় ফিরে যেতে %d সেকেন্ড পর আপনার ফোন পুনরায় চালু হবে। ফোন পুনরায় চালু হওয়ার আগে অসংরক্ষিত যেকোনো ডাটা সংরক্ষণ করুন৷</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">আপনার ফোন অস্থিতিশীল কারণ একটি SD কার্ডে অ্যাপ ইনস্টল করা ছিল যেটি সরিয়ে ফেলা হয়েছে৷ স্বাভাবিক অবস্থায় ফিরে যেতে %d সেকেন্ড পর আপনার ফোন পুনরায় চালু হবে। ফোন পুনরায় চালু হওয়ার আগে অসংরক্ষিত যেকোনো ডাটা সংরক্ষণ করুন৷</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="SDcardBlockUnmount_title">
+        <item quantity="other">%d সেকেন্ড পর আপনার ফোন পুনরায় চালু হবে</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d সেকেন্ড পর আপনার ফোন পুনরায় চালু হবে</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_phone">
+        <item quantity="other">%dটি অ্যাপ আপনার ফোনকে খুব বেশি গরম করে তোলার কারণে সেগুলো স্বয়ংক্রিয়ভাবে বন্ধ হয়ে গেছে৷ আপনার ফোন ঠাণ্ডা হওয়ার পরে আপনি সেগুলো আবার চালু করতে পারবেন৷</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%dটি আপনার ফোনকে খুব বেশি গরম করে তোলার কারণে এটি স্বয়ংক্রিয়ভাবে বন্ধ হয়ে গেছে৷ আপনার ফোন ঠাণ্ডা হওয়ার পর আপনি এটি আবার চালু করতে পারবেন৷</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_tablet">
+        <item quantity="other">%dটি অ্যাপের কারণে আপনার ট্যাবলেট খুব বেশি গরম হওয়ার ফলে এগুলো স্বয়ংক্রিয়ভাবে বন্ধ হয়ে গেছে৷ আপনার ট্যাবলেট ঠাণ্ডা হওয়ার পর আপনি এগুলো আবার চালু করতে পারবেন৷</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%dটি অ্যাপের কারণে আপনার ট্যাবলেট খুব বেশি গরম হওয়ার ফলে এটি স্বয়ংক্রিয়ভাবে বন্ধ হয়ে গেছে৷ আপনার ট্যাবলেট ঠাণ্ডা হওয়ার পর আপনি এটি আবার চালু করতে পারবেন৷</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_title_v2">
+        <item quantity="other">%dটি অ্যাপ বন্ধ হয়েছে</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%dটি অ্যাপ বন্ধ হয়েছে</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="dex_max_count_text">
+        <item quantity="other">স্ক্রিনে একবারে %dটির বেশি অ্যাপ দেখানো যাবে না৷ সবচেয়ে পুরাতন অ্যাপ মিনিমাইজ হয়েছে৷</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">স্ক্রিনে একবারে %dটির বেশি অ্যাপ দেখানো যাবে না৷ সবচেয়ে পুরাতন অ্যাপ মিনিমাইজ হয়েছে৷</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="hot_key_guide_message">
+        <item quantity="other">আপনি যে অ্যাপ বরাদ্দ করতে চান সেটি খুলুন, তারপর অ্যাপ কী চেপে %d সেকেন্ড ধরে রাখুন।</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">আপনি যে অ্যাপ বরাদ্দ করতে চান সেটি খুলুন, তারপর অ্যাপ কী চেপে %d সেকেন্ড ধরে রাখুন।</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_phone">
+        <item quantity="other">%1$s-এর কারণে আপনার ফোন বেশি গরম হচ্ছে৷ %2$d সেকেন্ড পর এটি স্বয়ংক্রিয় বন্ধ হবে৷</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s-এর কারণে আপনার ফোন বেশি গরম হচ্ছে৷ %2$d সেকেন্ড পর এটি স্বয়ংক্রিয় বন্ধ হবে৷</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_tablet">
+        <item quantity="other">%1$s-এর কারণে আপনার ট্যাবলেট বেশি গরম হচ্ছে৷ %2$d সেকেন্ড পর এটি স্বয়ংক্রিয় বন্ধ হবে৷</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s-এর কারণে আপনার ট্যাবলেট বেশি গরম হচ্ছে৷ %2$d সেকেন্ড পর এটি স্বয়ংক্রিয় বন্ধ হবে৷</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="maintenance_mode_backup_cloud_menu_sub_textview_message_default">
+        <item quantity="other">Samsung Cloud-এ সর্বোচ্চ %d দিনের জন্য আনলিমিটেড ডাটা ব্যাকআপ করুন অথবা আপনার ব্যাকআপ করা ডাটা পুনর্বহাল করুন৷</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Samsung Cloud-এ সর্বোচ্চ %d দিনের জন্য আনলিমিটেড ডাটা ব্যাকআপ করুন অথবা আপনার ব্যাকআপ করা ডাটা পুনর্বহাল করুন৷</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_phone">
+        <item quantity="other">%1$s-এর কারণে আপনার ফোন বেশি গরম হচ্ছে৷ আপনি এখন এটি বন্ধ করতে পারেন, অথবা %2$d সেকেন্ড পর এটি স্বয়ংক্রিয়ভাবে বন্ধ হয়ে যাবে৷</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s-এর কারণে আপনার ফোন বেশি গরম হচ্ছে৷ আপনি এখন এটি বন্ধ করতে পারেন, অথবা %2$d সেকেন্ড পর এটি স্বয়ংক্রিয়ভাবে বন্ধ হয়ে যাবে৷</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_tablet">
+        <item quantity="other">%1$s-এর কারণে আপনার ট্যাবলেট বেশি গরম হচ্ছে৷ আপনি এখন এটি বন্ধ করতে পারেন, অথবা %2$d সেকেন্ড পর এটি স্বয়ংক্রিয়ভাবে বন্ধ হয়ে যাবে৷</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s-এর কারণে আপনার ট্যাবলেট বেশি গরম হচ্ছে৷ আপনি এখন এটি বন্ধ করতে পারেন, অথবা %2$d সেকেন্ড পর এটি স্বয়ংক্রিয়ভাবে বন্ধ হয়ে যাবে৷</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sem_chooser_preview_items">
+        <item quantity="other">%dটি আইটেম</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%dটি আইটেম</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_hours">
+        <item quantity="other">%d ঘণ্টা</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d ঘণ্টা</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_minutes">
+        <item quantity="other">%d মিনিট</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d মিনিট</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

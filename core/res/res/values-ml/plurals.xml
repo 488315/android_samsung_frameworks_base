@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="pinpuk_attempts">
+        <item quantity="other">SIM ലോക്കാകുന്നതിന് മുമ്പായി നിങ്ങൾക്ക് %d ശ്രമങ്ങൾ കൂടി ശേഷിക്കുന്നു.</item>
+        <item quantity="one">SIM ലോക്കാകുന്നതിന് മുമ്പായി നിങ്ങൾക്ക് %d ശ്രമം കൂടി ശേഷിക്കുന്നു.</item>
+    </plurals>
+</resources>

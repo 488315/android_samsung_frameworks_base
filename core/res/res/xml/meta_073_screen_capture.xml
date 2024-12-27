@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ThemeMetaData FormatVersion="1.3" GuideVersion="1.4">
+    <AppMetaData Name="Samsung capture" TargetApi="28" TargetPackageName="com.samsung.android.app.smartcapture" VersionCode="1" VersionName="1.0">
+        <Include RefName="SESL" />
+        <Property Comment="Switch Highlight text on" DefaultValue="#ff0074d4" DestAttribName="settings_switch_bar_text_on" UID="73-2-3" ValueRef="24-E" ValueType="TextColor" />
+        <Property Comment="Settings profile size seek bar text" DefaultValue="#ff000000" DestAttribName="settings_seek_bar_text_color" UID="73-3-1" ValueRef="24-A" ValueType="TextColor" />
+        <Property Comment="Settings profile size seek bar background" DefaultValue="#ff979797" DestAttribName="settings_seek_bar_progress_color" UID="73-3-2" ValueRef="24-B" ValueType="BgColor" />
+        <Property Comment="Settings profile size seek bar thumb" DefaultValue="#ff0381fe" DestAttribName="settings_seek_bar_thumb_color" UID="73-3-3" ValueRef="1-A" ValueType="BgColor" />
+        <Property Comment="Settings profile size seek bar thumb disabled" DefaultValue="#ff9c9c9c" DestAttribName="settings_seek_bar_color" UID="73-3-4" ValueRef="24-B" ValueType="BgColor" />
+        <Property Comment="Master ON background color" DefaultValue="#ffaad2fa" DestAttribName="sec_widget_switch_bar_background_color_checked" UID="73-5-1" ValueRef="1-40-1" ValueType="BgColor" />
+        <Property Comment="Master OFF background color" DefaultValue="#fffafafa" DestAttribName="sec_widget_switch_bar_background_color_unchecked" UID="73-5-2" ValueRef="1-40-2" ValueType="BgColor" />
+        <Property Comment="Master ON text color" DefaultValue="#ff0072de" DestAttribName="sec_widget_switch_bar_on_text_color" UID="73-5-3" ValueRef="1-40-3" ValueType="TextColor" />
+        <Property Comment="Master OFF text color" DefaultValue="#ff252525" DestAttribName="sec_widget_switch_bar_off_text_color" UID="73-5-4" ValueRef="1-40-4" ValueType="TextColor" />
+        <Property Comment="Settings Description Main text" DefaultValue="#ff505050" DestAttribName="settings_description_body_title_color" UID="73-6-1" ValueRef="24-A" ValueType="TextColor" />
+        <Property Comment="Settings Description Sub text" DefaultValue="#ff8f8f8f" DestAttribName="settings_description_body_text_color" UID="73-6-2" ValueRef="24-A" ValueType="TextColor" />
+        <Property Comment="Screen Recorder Sound Suggestion body text" DefaultValue="#ff505050" DestAttribName="screen_recorder_sound_setting_suggestion_body_color" UID="73-8-1" ValueRef="1-9-3" ValueType="TextColor" />
+        <Property Comment="Screen Recorder Sound Suggestion sub title text" DefaultValue="#ff252525" DestAttribName="screen_recorder_sound_setting_suggestion_title_color" UID="73-8-2" ValueRef="24-A" ValueType="TextColor" />
+        <Property Comment="Screen Recorder Sound Suggestion radio text" DefaultValue="#ff252525" DestAttribName="screen_recorder_sound_setting_suggestion_radio_text_color" UID="73-8-3" ValueRef="24-A" ValueType="TextColor" />
+        <Property Comment="Screen Recorder quick panel subheader" DefaultValue="#ff979797" DestAttribName="screen_recorder_settings_sub_header" UID="73-9-1" ValueRef="1-19-4" ValueType="BgColor" />
+    </AppMetaData>
+</ThemeMetaData>

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="SDcardBlockUnmount_message">
+        <item quantity="other">‏SD کارڈ پر جو ایپلیکیشنز تنصیب تھے ان کے ہٹ جانے کی وجہ سے آپ کا فون غیر مستحکم ہوگیا ہے۔ عام حالت میں واپس آنے کے لیے آپ کا فون %d سیکنڈز میں دوبارہ اسٹارٹ ہوگا۔ فون دوبارہ اسٹارٹ ہونے سے پہلے کسی بھی غیر محفوظ ڈیٹا کو محفوظ کرلیں۔</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">‏SD کارڈ پر جو ایپلیکیشنز تنصیب تھے ان کے ہٹ جانے کی وجہ سے آپ کا فون غیر مستحکم ہوگیا ہے۔ عام حالت میں واپس آنے کے لیے آپ کا فون %d سیکنڈ میں دوبارہ اسٹارٹ ہوگا۔ فون دوبارہ اسٹارٹ ہونے سے پہلے کسی بھی غیر محفوظ ڈیٹا کو محفوظ کرلیں۔</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="SDcardBlockUnmount_title">
+        <item quantity="other">آپ کا فون %d سیکنڈز میں دوبارہ اسٹارٹ ہوگا</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">آپ کا فون %d سیکنڈ میں دوبارہ اسٹارٹ ہوگا</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_phone">
+        <item quantity="other">%d ایپلیکیشنز خودکار طور پر بند ہوگئے کیوں کہ وہ آپ کے فون کو گرم کرنے کا سبب بن رہے تھے۔ آپ کا فون ٹھنڈا ہونے کے بعد آپ انہیں بعد میں دوبارہ چالو کرسکتے ہیں۔</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d ایپلیکیشن خودکار طور پر بند ہوگیا کیوں کہ یہ آپ کے فون کو گرم کرنے کا سبب بن رہا تھا۔ آپ کا فون ٹھنڈا ہونے کے بعد آپ اسے بعد میں دوبارہ چالو کرسکتے ہیں۔</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_tablet">
+        <item quantity="other">%d ایپلیکیشنز خودکار طور پر بند ہوگئیں کیوں کہ وہ آپ کے فون کو گرم کرنے کا سبب بن رہی تھیں۔ آپ کا ٹیبلیٹ ٹھنڈا ہونے کے بعد آپ انہیں بعد میں دوبارہ چالو کرسکتے ہیں۔</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d ایپلیکیشن خودکار طور پر بند ہوگئی کیوں کہ اس کی وجہ سے آپ کا ٹیبلیٹ گرم ہورہا تھا۔ آپ کا ٹیبلیٹ ٹھنڈا ہونے کے بعد آپ انہیں بعد میں دوبارہ چالو کرسکتے ہیں۔</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_title_v2">
+        <item quantity="other">%d ایپلیکیشنز بند ہوگئے</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d ایپلیکیشن بند ہوگئی</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="dex_max_count_text">
+        <item quantity="other">اسکرین پر بیک وقت %d سے زیادہ ایپلیکیشنز نہیں دکھا سکتے۔ قدیم ترین ایپلیکیشن منیمائز کی گئی۔</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">اسکرین پر بیک وقت %d سے زیادہ ایپلیکیشن نہیں دکھا سکتے۔ قدیم ترین ایپلیکیشن منیمائز کی گئی۔</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="hot_key_guide_message">
+        <item quantity="other">وہ ایپ کھولیں جسے آپ اسائن کرنا چاہتے ہیں، پھر ایپ کی کلید دبائیں اور %d سیکنڈ تک پکڑے رہیں۔</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">وہ ایپ کھولیں جسے آپ اسائن کرنا چاہتے ہیں، پھر ایپ کی کلید دبائیں اور %d سیکنڈ تک پکڑے رہیں۔</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_phone">
+        <item quantity="other">%1$s کی وجہ سے آپ کا فون زیادہ گرم ہو رہا ہے۔ یہ %2$d سیکنڈ میں خودکار طور پر بند ہو جائے گا۔</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s کی وجہ سے آپ کا فون زیادہ گرم ہو رہا ہے۔ یہ %2$d سیکنڈ میں خودکار طور پر بند ہو جائے گا۔</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_tablet">
+        <item quantity="other">%1$s کی وجہ سے آپ کا ٹیبلیٹ زیادہ گرم ہو رہا ہے۔ یہ %2$d سیکنڈ میں خودکار طور پر بند ہو جائے گا۔</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s کی وجہ سے آپ کا ٹیبلیٹ زیادہ گرم ہو رہا ہے۔ یہ %2$d سیکنڈ میں خودکار طور پر بند ہو جائے گا۔</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="maintenance_mode_backup_cloud_menu_sub_textview_message_default">
+        <item quantity="other">%d دن تک Samsung Cloud پر لا محدود ڈیٹا کا بیک اپ لیں یا اپنا بیک اپ لیا گیا ڈیٹا بحال کریں۔</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d دن تک Samsung Cloud پر لا محدود ڈیٹا کا بیک اپ لیں یا اپنا بیک اپ لیا گیا ڈیٹا بحال کریں۔</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_phone">
+        <item quantity="other">%1$s آپ کے فون کو گرم کرنے کا سبب بن رہا ہے۔ آپ اسے ابھی بند کرسکتے ہیں، یا یہ %2$d سیکنڈز میں خودکار طور پر بند ہوجائے گا۔</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s آپ کے فون کو گرم کرنے کا سبب بن رہا ہے۔ آپ اسے ابھی بند کرسکتے ہیں، یا یہ %2$d سیکنڈ میں خودکار طور پر بند ہوجائے گا۔</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_tablet">
+        <item quantity="other">%1$s آپ کے ٹیبلیٹ کو گرم کرنے کا سبب بن رہا ہے۔ آپ اسے ابھی بند کرسکتے ہیں، یا یہ %2$d سیکنڈز میں خودکار طور پر بند ہوجائے گا۔</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s آپ کے ٹیبلیٹ کو گرم کرنے کا سبب بن رہا ہے۔ آپ اسے ابھی بند کرسکتے ہیں، یا یہ %2$d سیکنڈ میں خودکار طور پر بند ہوجائے گا۔</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sem_chooser_preview_items">
+        <item quantity="other">%d اشیاء</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d شئے</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_hours">
+        <item quantity="other">%d گھنٹے</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d گھنٹہ</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_minutes">
+        <item quantity="other">%d منٹس</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d منٹ</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

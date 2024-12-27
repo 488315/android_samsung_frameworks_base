@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ThemeMetaData FormatVersion="1.3" GuideVersion="2.3">
+    <AppMetaData Name="Samsung Pass Keyboad PlugIn" TargetApi="28" TargetPackageName="com.samsung.android.samsungpassautofill" VersionCode="1" VersionName="1.0">
+        <Include RefName="SESL" />
+        <Property Comment="Primary color" DefaultValue="#ff2153ff" DestAttribName="theme_93_A_primary_color" DestQualifiers="" UID="93-A" ValueRef="1-A" ValueType="Color" />
+        <Property Comment="Common component color" DefaultValue="#cc8f8f8f" DestAttribName="theme_93_C_common_component_color" DestQualifiers="" UID="93-C" ValueRef="1-C" ValueType="Color" />
+        <Property Comment="Color control activated color" DefaultValue="#ff2153ff" DestAttribName="theme_93_D_color_control_activated_color" DestQualifiers="" UID="93-D" ValueRef="1-D" ValueType="Color" />
+        <Property Comment="Plugin BG color" DefaultValue="#fff9f9f9" DestAttribName="theme_93_1_1_plugin_bg_color" UID="93-1-1" ValueRef="75-1-1" ValueType="BgColor" />
+        <Property Comment="Title text color" DefaultValue="#ff010101" DestAttribName="theme_93_1_2_title_text_color" UID="93-1-2" ValueRef="75-14-2" ValueType="Color" />
+        <Property Comment="Sub text color" DefaultValue="#ff252525" DestAttribName="theme_93_1_3_sub_text_color" UID="93-1-3" ValueRef="75-14-2" ValueType="Color" />
+        <Property Comment="Contained button text color" DefaultValue="#ff252525" DestAttribName="theme_93_1_4_contained_button_text_color" UID="93-1-4" ValueRef="75-14-5" ValueType="Color" />
+        <Property Comment="Contained button bg color" DefaultValue="#0f000000" DestAttribName="theme_93_1_5_contained_button_bg_color" UID="93-1-5" ValueRef="75-14-6" ValueType="Color" />
+        <Property Comment="Icon BG color" DefaultValue="#2bfafafa" DestAttribName="theme_93_2_1_icon_bg_color" UID="93-2-1" ValueRef="1-7-1-D" ValueType="Color" />
+        <Property Comment="Icon color" DefaultValue="#ff0074d4" DestAttribName="theme_93_2_2_icon_color" UID="93-2-2" ValueRef="1-A" ValueType="Color" />
+        <Property Comment="Text icon color" DefaultValue="#ff0074d4" DestAttribName="theme_93_2_3_text_icon_color" UID="93-2-3" ValueRef="1-A" ValueType="Color" />
+        <Property Comment="Title text color" DefaultValue="#ff010101" DestAttribName="theme_93_2_4_title_text_color" UID="93-2-4" ValueRef="1-3-1" ValueType="Color" />
+        <Property Comment="Divider color" DefaultValue="#ffe6e6e6" DestAttribName="theme_93_2_5_divider_color" UID="93-2-5" ValueRef="1-2" ValueType="Color" />
+        <Property Comment="Button BG color" DefaultValue="#fffafafa" DestAttribName="theme_93_2_6_button_bg_color" UID="93-2-6" ValueRef="1-9-1" ValueType="Color" />
+        <Property Comment="Button text color" DefaultValue="#ff252525" DestAttribName="theme_93_2_7_button_text_color" UID="93-2-7" ValueRef="1-9-6" ValueType="Color" />
+        <Property Comment="Add icon tint Color" DefaultValue="#ff00a53c" DestAttribName="theme_93_2_8_add_icon_tint_color" UID="93-2-8" ValueRef="1-17-1" ValueType="Color" />
+        <Property Comment="Add icon image" DestAttribName="theme_93_2_9_add_icon_image" DestQualifiers="xxxhdpi" UID="93-2-9" ValueRef="1-17-2" ValueType="Image" />
+        <Property Comment="Category normal text color" DefaultValue="#ff404040" DestAttribName="theme_93_3_1_category_normal_text_color" UID="93-3-1" ValueRef="75-12-2" ValueType="Color" />
+        <Property Comment="Category select text color" DefaultValue="#ff007bff" DestAttribName="theme_93_3_2_category_text_color" UID="93-3-2" ValueRef="75-12-3" ValueType="Color" />
+        <Property Comment="close icon" DefaultValue="#ff252525" DestAttribName="theme_93_4_1_close_icon" UID="93-4-1" ValueRef="1-1-3" ValueType="Color" />
+        <Property Comment="Check box title" DefaultValue="#ff252525" DestAttribName="theme_93_4_2_check_box_title_color" UID="93-4-2" ValueRef="1-3-1" ValueType="Color" />
+        <Property Comment="Button text color" DefaultValue="#ff505050" DestAttribName="theme_93_4_3_button_text_color" UID="93-4-3" ValueRef="1-9-15" ValueType="Color" />
+    </AppMetaData>
+</ThemeMetaData>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector android:height="64.0dip" android:width="64.0dip" android:viewportWidth="64.0" android:viewportHeight="64.0"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <path android:pathData="M 42 42 L 58 42 L 58 58 L 42 58 L 42 42 Z" />
+    <group android:scaleX="0.66" android:scaleY="0.66" android:translateX="42.0" android:translateY="42.0">
+        <path android:fillColor="#ff1a73e8" android:pathData="@string/config_work_badge_path_24" />
+    </group>
+    <path android:pathData="M 0 0 H 64 V 64 H 0 V 0 Z" />
+</vector>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="permgrouplab_sensors">Мэдрэгч</string>
+    <string name="reboot_to_update_prepare">Шинэчлэхэд бэлтгэж байна</string>
+    <string name="reboot_to_update_title">Wear OS-н систем шинэчлэлт</string>
+    <string name="select_input_method">Оролт сонгох</string>
+</resources>

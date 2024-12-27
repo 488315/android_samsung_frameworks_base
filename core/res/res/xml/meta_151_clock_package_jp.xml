@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ThemeMetaData FormatVersion="1.3" GuideVersion="1.4">
+    <AppMetaData Name="Clock_JP" TargetApi="19" TargetPackageName="com.sec.android.app.clockpackage" VersionCode="1" VersionName="">
+        <Property Comment="Reset text color" DefaultValue="#ff999bff" DestAttribName="timer_reset_button_textcolor" UID="151-1-1" ValueRef="14-2-22" ValueType="TextColor" />
+    </AppMetaData>
+</ThemeMetaData>

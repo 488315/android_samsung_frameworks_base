@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="global_action_emergency">Ārkārtas zvans</string>
+    <string name="permgrouplab_sensors">Sensori</string>
+    <string name="reboot_to_update_title">Wear OS sistēmas atjauninājums</string>
+    <string name="select_input_method">Izvēlieties ievades metodi</string>
+</resources>

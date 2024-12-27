@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="config_pdp_reject_dialog_title" />
+    <string name="config_pdp_reject_multi_conn_to_same_pdn_not_allowed">දී ඇති APN එකක් සඳහා බහුවිධ PDN සම්බන්ධතා ඉඩ නොදේ -55-</string>
+    <string name="config_pdp_reject_service_not_subscribed">සේවාවකට ග්‍රාහක වී නැත -33-</string>
+    <string name="config_pdp_reject_user_authentication_failed">සත්‍යාපනය අසාර්ථකයි -29-</string>
+</resources>

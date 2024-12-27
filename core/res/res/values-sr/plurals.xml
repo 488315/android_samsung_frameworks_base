@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="SDcardBlockUnmount_message">
+        <item quantity="other">Telefon je nestabilan jer je SD kartica na kojoj su bile instalirane aplikacije uklonjena. Telefon će se restartovati za %d sekundi kako bi se vratio u normalno stanje. Sačuvajte nesačuvane podatke pre nego što se telefon restartuje.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Telefon je nestabilan jer je SD kartica na kojoj su bile instalirane aplikacije uklonjena. Telefon će se restartovati za %d sekundu kako bi se vratio u normalno stanje. Sačuvajte nesačuvane podatke pre nego što se telefon restartuje.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Telefon je nestabilan jer je SD kartica na kojoj su bile instalirane aplikacije uklonjena. Telefon će se restartovati za %d sekunde kako bi se vratio u normalno stanje. Sačuvajte nesačuvane podatke pre nego što se telefon restartuje.</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="SDcardBlockUnmount_title">
+        <item quantity="other">Telefon će se restartovati za %d sekundi</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Telefon će se restartovati za %d sekundu</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Telefon će se restartovati za %d sekunde</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_phone">
+        <item quantity="other">Апликације (%d) су аутоматски затворене зато што су узроковале прегревање телефона. Можете поново да их отворите када се телефон охлади.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Апликација (%d) је аутоматски затворена зато што је узроковала прегревање телефона. Можете поново да је отворите када се телефон охлади.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Апликације (%d) су аутоматски затворене зато што су узроковале прегревање телефона. Можете поново да их отворите када се телефон охлади.</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_tablet">
+        <item quantity="other">Апликације (%d) су аутоматски затворене зато што су узроковале прегревање таблета. Можете поново да их отворите када се таблет охлади.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Апликација (%d) је аутоматски затворена зато што је узроковала прегревање таблета. Можете поново да је отворите када се таблет охлади.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Апликације (%d) су аутоматски затворене зато што су узроковале прегревање таблета. Можете поново да их отворите када се таблет охлади.</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_title_v2">
+        <item quantity="other">%d апликација је затворено</item>
+        <item quantity="zero">N/А</item>
+        <item quantity="one">%d апликација је затворена</item>
+        <item quantity="two">N/А</item>
+        <item quantity="few">%d апликације су затворене</item>
+        <item quantity="many">N/А</item>
+    </plurals>
+    <plurals name="dex_max_count_text">
+        <item quantity="other">Истовремено можете да приказујете највише %d апликација на екрану. Најстарија апликација је умањена.</item>
+        <item quantity="zero">N/А</item>
+        <item quantity="one">Истовремено можете да приказујете највише %d апликацију на екрану. Најстарија апликација је умањена.</item>
+        <item quantity="two">N/А</item>
+        <item quantity="few">Истовремено можете да приказујете највише %d апликације на екрану. Најстарија апликација је умањена.</item>
+        <item quantity="many">N/А</item>
+    </plurals>
+    <plurals name="hot_key_guide_message">
+        <item quantity="other">Отворите апликацију коју желите да доделите, а затим притисните и задржите тастер апликације на %d секунди.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Отворите апликацију коју желите да доделите, а затим притисните и задржите тастер апликације на %d секунду.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Отворите апликацију коју желите да доделите, а затим притисните и задржите тастер апликације на %d секунде.</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_phone">
+        <item quantity="other">Телефон се прегрева због апликације %1$s. Она ће се аутоматски затворити за %2$d секунди.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Телефон се прегрева због апликације %1$s. Она ће се аутоматски затворити за %2$d секунду.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Телефон се прегрева због апликације %1$s. Она ће се аутоматски затворити за %2$d секунде.</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_tablet">
+        <item quantity="other">Таблет се прегрева због апликације %1$s. Она ће се аутоматски затворити за %2$d секунди.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Таблет се прегрева због апликације %1$s. Она ће се аутоматски затворити за %2$d секунду.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Таблет се прегрева због апликације %1$s. Она ће се аутоматски затворити за %2$d секунде.</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="maintenance_mode_backup_cloud_menu_sub_textview_message_default">
+        <item quantity="other">Бекапујте неограничену количину података на Samsung Cloud и чувајте их до %d дана или вратите податке које сте бекаповали.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Бекапујте неограничену количину података на Samsung Cloud и чувајте их до %d дан или вратите податке које сте бекаповали.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Бекапујте неограничену количину података на Samsung Cloud и чувајте их до %d дана или вратите податке које сте бекаповали.</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_phone">
+        <item quantity="other">Апликација %1$s изазива прегревање телефона. Можете сада да је затворите или ће се она аутоматски затворити за %2$d секунди.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Апликација %1$s изазива прегревање телефона. Можете сада да је затворите или ће се она аутоматски затворити за %2$d секунду.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Апликација %1$s изазива прегревање телефона. Можете сада да је затворите или ће се она аутоматски затворити за %2$d секунде.</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_tablet">
+        <item quantity="other">Апликација %1$s изазива прегревање таблета. Можете сада да је затворите или ће се она аутоматски затворити за %2$d секунди.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Апликација %1$s изазива прегревање таблета. Можете сада да је затворите или ће се она аутоматски затворити за %2$d секунду.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Апликација %1$s изазива прегревање таблета. Можете сада да је затворите или ће се она аутоматски затворити за %2$d секунде.</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="pinpuk_attempts">
+        <item quantity="other">Имате још %d покушаја пре него што се SIM картица закључа.</item>
+        <item quantity="one">Имате још %d покушај пре него што се SIM картица закључа.</item>
+    </plurals>
+    <plurals name="sem_chooser_preview_items">
+        <item quantity="other">%d ставки</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d ставка</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">%d ставке</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_hours">
+        <item quantity="other">%d сати</item>
+        <item quantity="zero">N/А</item>
+        <item quantity="one">%d сат</item>
+        <item quantity="two">N/А</item>
+        <item quantity="few">%d сата</item>
+        <item quantity="many">N/А</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_minutes">
+        <item quantity="other">%d минута</item>
+        <item quantity="zero">N/А</item>
+        <item quantity="one">%d минут</item>
+        <item quantity="two">N/А</item>
+        <item quantity="few">%d минута</item>
+        <item quantity="many">N/А</item>
+    </plurals>
+</resources>

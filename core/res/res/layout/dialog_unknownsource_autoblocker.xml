@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:paddingLeft="@dimen/autoblocker_title_padding" android:paddingRight="@dimen/autoblocker_title_padding" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView android:layout_gravity="center" android:layout_width="@dimen/autoblocker_title_icon_size" android:layout_height="@dimen/autoblocker_title_icon_size" android:layout_marginTop="@dimen/autoblocker_title_padding" android:layout_marginBottom="@dimen/autoblocker_title_margin_bottom" android:src="@drawable/auto_blocker" />
+    <TextView android:textSize="@dimen/autoblocker_title_text_size" android:textColor="@color/unknownsource_text_color_primary" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="@dimen/autoblocker_title_margin_bottom" android:text="@string/unknown_install_blocked_esm_title" android:textFontWeight="600" />
+</LinearLayout>

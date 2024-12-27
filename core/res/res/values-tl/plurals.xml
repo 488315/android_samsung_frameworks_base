@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="SDcardBlockUnmount_message">
+        <item quantity="other">Hindi matatag ang telepono mo dahil inalis ang SD card na may mga app na naka-install dito. Magre-restart ang telepono mo sa loob ng %d segundo para bumalik sa normal. I-save ang anumang hindi naka-save na data bago mag-restart ang telepono.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Hindi matatag ang telepono mo dahil inalis ang SD card na may mga app na naka-install dito. Magre-restart ang telepono mo sa loob ng %d segundo para bumalik sa normal. I-save ang anumang hindi naka-save na data bago mag-restart ang telepono.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="SDcardBlockUnmount_title">
+        <item quantity="other">Magre-restart ang telepono mo sa loob ng %d segundo</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Magre-restart ang telepono mo sa loob ng %d segundo</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_phone">
+        <item quantity="other">Awtomatikong isinara ang %d app dahil nagdudulot ang mga ito sa pag-overheat ng telepono mo. Mabubuksan mo muli ang mga ito mamaya matapos lumamig ang telepono mo.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Awtomatikong isinara ang %d app dahil nagdudulot ito ng pag-overheat sa telepono mo. Mabubuksan mo ito muli mamaya matapos lumamig ang telepono mo.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_tablet">
+        <item quantity="other">Awtomatikong isinara ang %d app dahil nagdudulot ang mga ito sa pag-overheat ng tablet mo. Mabubuksan mo muli ang mga ito mamaya matapos lumamig ang tablet mo.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Awtomatikong isinara ang %d app dahil nagdudulot ito sa pag-overheat ng tablet mo. Mabubuksan mo muli ito mamaya matapos lumamig ang tablet mo.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_title_v2">
+        <item quantity="other">Isinara ang %d app</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Isinara ang %d app</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="dex_max_count_text">
+        <item quantity="other">Hindi maipapakita ang higit sa %d app sa screen nang sabay-sabay. Naka-minimize ang pinakalumang app.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Hindi maipapakita ang higit sa %d app sa screen nang sabay-sabay. Naka-minimize ang pinakalumang app.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="hot_key_guide_message">
+        <item quantity="other">Buksan ang app na gusto mong italaga, tapos i-press at i-hold ang app key sa loob ng %d segundo.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Buksan ang app na gusto mong italaga, tapos i-press at i-hold ang app key sa loob ng %d segundo.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_phone">
+        <item quantity="other">Nagdudulot ng pag-overheat ang %1$s sa telepono mo. Awtomatiko itong isasara sa loob ng %2$d segundo.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Nagdudulot ng pag-overheat ang %1$s sa telepono mo. Awtomatiko itong isasara sa loob ng %2$d segundo.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_tablet">
+        <item quantity="other">Nagdudulot ng pag-overheat ang %1$s sa tablet mo. Awtomatiko itong isasara sa loob ng %2$d segundo.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Nagdudulot ng pag-overheat ang %1$s sa tablet mo. Awtomatiko itong isasara sa loob ng %2$d segundo.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="maintenance_mode_backup_cloud_menu_sub_textview_message_default">
+        <item quantity="other">Mag-back up ng unlimited na data sa Samsung Cloud nang hanggang %d araw o mag-restore ng data na nai-back up mo.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Mag-back up ng unlimited na data sa Samsung Cloud nang hanggang %d araw o mag-restore ng data na nai-back up mo.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_phone">
+        <item quantity="other">Nagdudulot ng pag-overheat ang %1$s sa telepono mo. Maisasara mo ito ngayon o awtomatiko itong isasara sa loob ng %2$d segundo.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Nagdudulot ng pag-overheat ang %1$s sa telepono mo. Maisasara mo ito ngayon o awtomatiko itong isasara sa loob ng %2$d segundo.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_tablet">
+        <item quantity="other">Nagdudulot ng pag-overheat ang %1$s sa tablet mo. Maisasara mo ito ngayon o awtomatiko itong isasara sa loob ng %2$d segundo.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Nagdudulot ng pag-overheat ang %1$s sa tablet mo. Maisasara mo ito ngayon o awtomatiko itong isasara sa loob ng %2$d segundo.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="pinpuk_attempts">
+        <item quantity="other">Mayroon kang %d na natitirang pagsubok bago ma-lock ang SIM.</item>
+        <item quantity="one">Mayroon kang %d natitirang pagsubok bago ma-lock ang SIM.</item>
+    </plurals>
+    <plurals name="sem_chooser_preview_items">
+        <item quantity="other">%d item</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d item</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_hours">
+        <item quantity="other">%d oras</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d oras</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_minutes">
+        <item quantity="other">%d minuto</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d minuto</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

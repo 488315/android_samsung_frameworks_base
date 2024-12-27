@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="center" android:orientation="horizontal" android:id="@id/dialog_item" android:layout_width="172.0dip" android:layout_height="52.0dip" android:layout_marginTop="68.0dip" android:weightSum="100.0" android:layout_marginStart="10.0dip"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView android:background="@color/transparent" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="5.21" />
+    <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:id="@id/title" android:background="@drawable/input_method_item_background_selector" android:duplicateParentState="true" android:layout_width="0.0dip" android:layout_height="52.0dip" android:layout_weight="89.58" android:paddingStart="6.0dip" android:paddingEnd="6.0dip">
+        <LinearLayout android:gravity="center_vertical" android:orientation="vertical" android:id="@id/text_layout" android:duplicateParentState="true" android:layout_width="124.0dip" android:layout_height="fill_parent">
+            <TextView android:textSize="15.0sp" android:textColor="#ffffffff" android:gravity="center_vertical" android:id="@id/text1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:maxLines="1" android:layout_weight="1.0" android:fontFamily="google-sans-text-medium" android:layout_marginStart="8.0dip" android:layout_marginEnd="8.0dip" android:letterSpacing="0.01" />
+            <TextView android:textSize="13.0sp" android:textColor="#ffcac5bc" android:gravity="center_vertical" android:id="@id/text2" android:layout_width="wrap_content" android:layout_height="wrap_content" android:maxLines="1" android:layout_weight="1.0" android:fontFamily="google-sans-text-medium" android:layout_marginStart="8.0dip" android:layout_marginEnd="8.0dip" android:letterSpacing="0.01" />
+        </LinearLayout>
+        <RadioButton android:gravity="center" android:id="@id/radio" android:focusable="false" android:clickable="false" android:duplicateParentState="true" android:layout_width="wrap_content" android:layout_height="wrap_content" android:scaleX="1.0" android:scaleY="1.0" android:buttonTint="#ffe6ff7b" />
+    </LinearLayout>
+    <TextView android:background="@color/transparent" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="5.21" />
+</LinearLayout>

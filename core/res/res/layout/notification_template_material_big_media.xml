@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.internal.widget.MediaNotificationView android:id="@id/status_bar_latest_event_content" android:tag="bigMediaNarrow" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <include android:layout_width="fill_parent" android:layout_height="@dimen/media_notification_header_height" layout="@layout/notification_template_header" />
+    <LinearLayout android:orientation="vertical" android:id="@id/notification_media_content" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <LinearLayout android:orientation="vertical" android:id="@id/notification_main_column" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/notification_content_margin_top" android:layout_marginStart="@dimen/notification_content_margin_start" android:layout_marginEnd="@dimen/notification_content_margin_end">
+            <include layout="@layout/notification_template_part_line1" />
+            <include layout="@layout/notification_template_text" />
+        </LinearLayout>
+        <FrameLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:minHeight="@dimen/notification_content_margin" android:layout_marginStart="38.0dip">
+            <LinearLayout android:gravity="top" android:orientation="horizontal" android:id="@id/media_actions" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="@dimen/media_notification_actions_padding_bottom" android:layoutDirection="ltr">
+                <include android:id="@id/action0" layout="@layout/notification_material_media_action" />
+                <include android:id="@id/action1" layout="@layout/notification_material_media_action" />
+                <include android:id="@id/action2" layout="@layout/notification_material_media_action" />
+                <include android:id="@id/action3" layout="@layout/notification_material_media_action" />
+                <include android:id="@id/action4" layout="@layout/notification_material_media_action" />
+            </LinearLayout>
+        </FrameLayout>
+    </LinearLayout>
+    <include layout="@layout/notification_template_right_icon" />
+</com.android.internal.widget.MediaNotificationView>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ThemeMetaData FormatVersion="1.3" GuideVersion="1.8">
+    <AppMetaData Name="Bixby Touch" TargetApi="28" TargetPackageName="com.samsung.android.bixbytouch" VersionCode="1" VersionName="1.0">
+        <Include RefName="SESL" />
+        <Property Comment="Master ON background color" DefaultValue="#e64297ff" DestAttribName="theme_control_master_switch_on_background_color" DestQualifiers="" UID="154-2-1" ValueRef="1-40-1" ValueType="BgColor" />
+        <Property Comment="Master Off background color" DefaultValue="#fffafafa" DestAttribName="theme_control_master_switch_off_background_color" DestQualifiers="" UID="154-2-2" ValueRef="1-40-2" ValueType="BgColor" />
+        <Property Comment="Master On text color" DefaultValue="#fffafafa" DestAttribName="theme_control_master_switch_on_text_color" DestQualifiers="" UID="154-2-3" ValueRef="1-40-3" ValueType="TextColor" />
+        <Property Comment="Master Off text color" DefaultValue="#ff252525" DestAttribName="theme_control_master_switch_off_text_color" DestQualifiers="" UID="154-2-4" ValueRef="1-40-4" ValueType="TextColor" />
+        <Property Comment="Description text color" DefaultValue="#ff8f8f8f" DestAttribName="theme_control_description_text_color" DestQualifiers="" UID="154-4-2" ValueRef="1-1-4" ValueType="TextColor" />
+        <Property Comment="Description text color" DefaultValue="#ff252525" DestAttribName="theme_control_apps_using_bixby_touch_description_text_color" DestQualifiers="" UID="154-7-2" ValueRef="1-1-4" ValueType="TextColor" />
+        <Property Comment="Main text color" DefaultValue="#ff252525" DestAttribName="theme_control_main_text_color" DestQualifiers="" UID="154-7-3" ValueRef="1-3-1" ValueType="TextColor" />
+        <Property Comment="Divider color" DefaultValue="#ffe6e6e6" DestAttribName="theme_control_divider_color" DestQualifiers="" UID="154-7-4" ValueRef="1-2" ValueType="Color" />
+        <Property Comment="Info icon tint color" DefaultValue="#ff454545" DestAttribName="theme_control_bixby_touch_more_options_button_color" DestQualifiers="" UID="154-9-3" ValueRef="1-11-1" ValueType="Color" />
+        <Property Comment="About page Version info text color" DefaultValue="#ff252525" DestAttribName="theme_control_about_bixby_touch_app_name_text_color" DestQualifiers="" UID="154-9-4" ValueRef="1-1-3" ValueType="TextColor" />
+        <Property Comment="About page sub text" DefaultValue="#ff979797" DestAttribName="theme_control_about_bixby_touch_app_version_text_color" DestQualifiers="" UID="154-9-5" ValueRef="1-1-4" ValueType="TextColor" />
+        <Property Comment="About page Button bg color" DefaultValue="#ffebebeb" DestAttribName="theme_control_raised_button_background_color" DestQualifiers="" UID="154-9-6" ValueRef="1-7-1" ValueType="Color" />
+        <Property Comment="About page Button text color" DefaultValue="#ff252525" DestAttribName="theme_control_about_bixby_touch_open_source_button_text_color" DestQualifiers="" UID="154-9-7" ValueRef="1-7-2" ValueType="TextColor" />
+        <Property Comment="Description text color" DefaultValue="#ff252525" DestAttribName="theme_control_privacy_policy_content_text_color" DestQualifiers="" UID="154-10-6" ValueRef="1-3-1" ValueType="TextColor" />
+        <Property Comment="Hyper link text color" DefaultValue="#ff3b3b3b" DestAttribName="theme_control_privacy_policy_url_text_color" DestQualifiers="" UID="154-10-8" ValueRef="1-3-4" ValueType="TextColor" />
+        <Property Comment="Description text color" DefaultValue="#ff000000" DestAttribName="theme_control_open_source_licenses_text_color" DestQualifiers="" UID="154-11-6" ValueRef="1-3-1" ValueType="TextColor" />
+    </AppMetaData>
+</ThemeMetaData>

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="SDcardBlockUnmount_message">
+        <item quantity="other">הטלפון אינו יציב כיוון שהוסר כרטיס SD שהיו מותקנים בו יישומים. הטלפון יופעל מחדש בתוך %d שניות כדי לחזור למצב רגיל. לפני הפעלה מחדש של הטלפון, שמור נתונים שלא נשמרו.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">הטלפון אינו יציב כיוון שהוסר כרטיס SD שמותקנים בו יישומים. הטלפון יופעל מחדש בתוך %d שניות כדי לחזור למצב רגיל. לפני הפעלה מחדש של הטלפון, שמור נתונים שלא נשמרו.</item>
+        <item quantity="two">הטלפון אינו יציב כיוון שהוסר כרטיס SD שהיו מותקנים בו יישומים. הטלפון יופעל מחדש בתוך %d שניות כדי לחזור למצב רגיל. לפני הפעלה מחדש של הטלפון, שמור נתונים שלא נשמרו.</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">הטלפון אינו יציב כיוון שהוסר כרטיס SD שהיו מותקנים בו יישומים. הטלפון יופעל מחדש בתוך %d שניות כדי לחזור למצב רגיל. לפני הפעלה מחדש של הטלפון, שמור נתונים שלא נשמרו.</item>
+    </plurals>
+    <plurals name="SDcardBlockUnmount_title">
+        <item quantity="other">הטלפון יופעל מחדש בעוד %d שניות</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">טלפון זה יופעל מחדש בעוד %d שניות</item>
+        <item quantity="two">הטלפון יופעל מחדש בעוד %d שניות</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">הטלפון יופעל מחדש בעוד %d שניות</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_phone">
+        <item quantity="other">%d יישומים נסגרו באופן אוטומטי בגלל התחממות יתר בטלפון. תוכל לפתוח אותם מחדש לאחר שהטלפון יתקרר.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d יישום נסגר באופן אוטומטי בגלל התחממות יתר בטלפון. תוכל לפתוח אותו מחדש לאחר שהטלפון יתקרר.</item>
+        <item quantity="two">%d יישומים נסגרו באופן אוטומטי בגלל התחממות יתר בטלפון. תוכל לפתוח אותם מחדש לאחר שהטלפון יתקרר.</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">%d יישומים נסגרו באופן אוטומטי בגלל התחממות יתר בטלפון. תוכל לפתוח אותם מחדש לאחר שהטלפון יתקרר.</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_tablet">
+        <item quantity="other">%d יישומים נסגרו באופן אוטומטי בגלל התחממות יתר בטאבלט. תוכל לפתוח אותם מחדש לאחר שהטאבלט יתקרר.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d יישום נסגר באופן אוטומטי בגלל התחממות יתר בטאבלט. תוכל לפתוח אותו מחדש לאחר שהטאבלט יתקרר.</item>
+        <item quantity="two">%d יישומים נסגרו באופן אוטומטי בגלל התחממות יתר בטאבלט. תוכל לפתוח אותם מחדש לאחר שהטאבלט יתקרר.</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">%d יישומים נסגרו באופן אוטומטי בגלל התחממות יתר בטאבלט. תוכל לפתוח אותם מחדש לאחר שהטאבלט יתקרר.</item>
+    </plurals>
+    <plurals name="app_kills_title_v2">
+        <item quantity="other">%d יישומים נסגרו</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d יישום נסגר</item>
+        <item quantity="two">%d יישומים נסגרו</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">%d יישומים נסגרו</item>
+    </plurals>
+    <plurals name="dex_max_count_text">
+        <item quantity="other">ניתן להראות במסך לכל היותר %d יישומים בפעם. היישום הישן ביותר כווץ.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">ניתן להראות במסך לכל היותר %d יישום בפעם. היישום הישן ביותר כווץ.</item>
+        <item quantity="two">ניתן להראות במסך לכל היותר %d יישומים בפעם. היישום הישן ביותר כווץ.</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">ניתן להראות במסך לכל היותר %d יישומים בפעם. היישום הישן ביותר כווץ.</item>
+    </plurals>
+    <plurals name="hot_key_guide_message">
+        <item quantity="other">פתח את היישום שברצונך להקצות ולאחר מכן החזק את מפתח היישום למשך %d שניות.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">פתח את היישום שברצונך להקצות ולאחר מכן החזק את מפתח היישום למשך שנייה %d.</item>
+        <item quantity="two">פתח את היישום שברצונך להקצות ולאחר מכן החזק את מפתח היישום למשך %d שניות.</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">פתח את היישום שברצונך להקצות ולאחר מכן החזק את מפתח היישום למשך %d שניות.</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_phone">
+        <item quantity="other">%1$s גורם להתחממות יתר בטלפון שלך. הוא ייסגר באופן אוטומטי בעוד %2$d שניות.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s גורם להתחממות יתר בטלפון שלך. הוא ייסגר באופן אוטומטי בעוד שנייה %2$d.</item>
+        <item quantity="two">%1$s גורם להתחממות יתר בטלפון שלך. הוא ייסגר באופן אוטומטי בעוד %2$d שניות.</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">%1$s גורם להתחממות יתר בטלפון שלך. הוא ייסגר באופן אוטומטי בעוד %2$d שניות.</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_tablet">
+        <item quantity="other">%1$s גורם להתחממות יתר בטאבלט שלך. הוא ייסגר באופן אוטומטי בעוד %2$d שניות.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s גורם להתחממות יתר בטאבלט שלך. הוא ייסגר באופן אוטומטי בעוד שנייה %2$d.</item>
+        <item quantity="two">%1$s גורם להתחממות יתר בטאבלט שלך. הוא ייסגר באופן אוטומטי בעוד %2$d שניות.</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">%1$s גורם להתחממות יתר בטאבלט שלך. הוא ייסגר באופן אוטומטי בעוד %2$d שניות.</item>
+    </plurals>
+    <plurals name="maintenance_mode_backup_cloud_menu_sub_textview_message_default">
+        <item quantity="other">גבה כמות בלתי מוגבלת של נתונים ב-Samsung Cloud לפרק זמן של עד %d ימים או שחזר נתונים שגיבית.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">גבה כמות בלתי מוגבלת של נתונים ב-Samsung Cloud לפרק זמן של עד יום %d או שחזר נתונים שגיבית.</item>
+        <item quantity="two">גבה כמות בלתי מוגבלת של נתונים ב-Samsung Cloud לפרק זמן של עד %d ימים או שחזר נתונים שגיבית.</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">גבה כמות בלתי מוגבלת של נתונים ב-Samsung Cloud לפרק זמן של עד %d ימים או שחזר נתונים שגיבית.</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_phone">
+        <item quantity="other">%1$s גורם להתחממות יתר בטלפון. תוכל לסגור אותו עכשיו או שהסגירה תתבצע באופן אוטומטי בעוד %2$d שניות.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s גורם להתחממות יתר בטלפון. תוכל לסגור אותו עכשיו או שהסגירה תתבצע באופן אוטומטי בעוד %2$d שנייה.</item>
+        <item quantity="two">%1$s גורם להתחממות יתר בטלפון. תוכל לסגור אותו עכשיו או שהסגירה תתבצע באופן אוטומטי בעוד %2$d שניות.</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">%1$s גורם להתחממות יתר בטלפון. תוכל לסגור אותו עכשיו או שהסגירה תתבצע באופן אוטומטי בעוד %2$d שניות.</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_tablet">
+        <item quantity="other">%1$s גורם להתחממות יתר בטאבלט. תוכל לסגור אותו עכשיו או שהסגירה תתבצע באופן אוטומטי בעוד %2$d שניות.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s גורם להתחממות יתר בטאבלט. תוכל לסגור אותו עכשיו או שהסגירה תתבצע באופן אוטומטי בעוד %2$d שנייה.</item>
+        <item quantity="two">%1$s גורם להתחממות יתר בטאבלט. תוכל לסגור אותו עכשיו או שהסגירה תתבצע באופן אוטומטי בעוד %2$d שניות.</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">%1$s גורם להתחממות יתר בטאבלט. תוכל לסגור אותו עכשיו או שהסגירה תתבצע באופן אוטומטי בעוד %2$d שניות.</item>
+    </plurals>
+    <plurals name="pinpuk_attempts">
+        <item quantity="other">‏נותרו לך %d ניסיונות לפני שכרטיס ה-SIM‏ יינעל.</item>
+        <item quantity="one">‏נותרו לך %d ניסיונות לפני שכרטיס ה-SIM‏ יינעל.</item>
+    </plurals>
+    <plurals name="sem_chooser_preview_items">
+        <item quantity="other">%d פריטים</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d פריט</item>
+        <item quantity="two">%d פריטים</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">%d פריטים</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_hours">
+        <item quantity="other">%d שעות</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">שעה %d</item>
+        <item quantity="two">%d שעות</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">%d שעות</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_minutes">
+        <item quantity="other">%d דקות</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d דקה</item>
+        <item quantity="two">%d דקות</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">%d דקות</item>
+    </plurals>
+</resources>

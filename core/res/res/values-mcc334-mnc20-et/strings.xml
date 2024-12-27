@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="config_pdp_reject_dialog_title" />
+    <string name="config_pdp_reject_multi_conn_to_same_pdn_not_allowed">Antud APN-i puhul pole mitu PDN-ühendust lubatud -55-</string>
+    <string name="config_pdp_reject_service_not_subscribed">TEENUST POLE TELLITUD -33-</string>
+    <string name="config_pdp_reject_user_authentication_failed">AUTENTIMINE EBAÕNNESTUS -29-</string>
+</resources>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="global_action_emergency">Итна помош</string>
+    <string name="permgrouplab_sensors">Сензори</string>
+    <string name="reboot_to_update_prepare">Се подготвува за ажурирање</string>
+    <string name="reboot_to_update_title">Системско ажурирање на Wear OS</string>
+    <string name="select_input_method">Изберете метод за внесување</string>
+</resources>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ThemeMetaData FormatVersion="1.3" GuideVersion="1.4">
+    <AppMetaData Name="Messages" TargetApi="21" TargetPackageName="com.samsung.android.messaging" UID="Messages" VersionCode="1" VersionName="">
+        <Include RefName="SESL" />
+        <Property Comment="Mms Viewer - Subject Text Color" DefaultValue="#ff3b3b3b" DestAttribName="theme_mms_viewer_subject_text_color" DestQualifiers="" UID="156-1-1" ValueRef="13-54-3" ValueType="TextColor" />
+        <Property Comment="Mms Viewer : Save Button Bg Color" DefaultValue="#0f000000" DestAttribName="theme_mms_viewer_save_button_bg_color" DestQualifiers="" UID="156-1-2" ValueRef="13-53-1" ValueType="BgColor" />
+        <Property Comment="Mms Viewer : Save Button Text Color" DefaultValue="#ff252525" DestAttribName="theme_mms_viewer_save_button_text_color" DestQualifiers="" UID="156-1-3" ValueRef="13-53-2" ValueType="TextColor" />
+        <Property Comment="Mms Viewer : Contents Text Color" DefaultValue="#ff505050" DestAttribName="theme_mms_viewer_contents_text_color" DestQualifiers="" UID="156-1-4" ValueRef="13-54-4" ValueType="TextColor" />
+        <Property Comment="Mms Viewer : hyperlink text color" DefaultValue="#ff3b3b3b" DestAttribName="theme_mms_viewer_link_text_color" DestQualifiers="" UID="156-1-5" ValueRef="13-54-5" ValueType="TextColor" />
+        <Property Comment="Mms Viewer : File Name Text Color" DefaultValue="#ff3b3b3b" DestAttribName="theme_mms_viewer_file_name_text_color" UID="156-1-6" ValueRef="13-54-3" ValueType="TextColor" />
+        <Property Comment="Mms Viewer : File Name Icon Color" DefaultValue="#ff0093c8" DestAttribName="theme_mms_viewer_file_name_icon_color" UID="156-1-7" ValueRef="1-A" ValueType="TintColor" />
+        <Property Comment="Mms Viewer : File Name Button Text Color" DefaultValue="#ff0093c8" DestAttribName="theme_mms_viewer_file_name_button_text_color" UID="156-1-8" ValueRef="1-A" ValueType="TextColor" />
+    </AppMetaData>
+</ThemeMetaData>

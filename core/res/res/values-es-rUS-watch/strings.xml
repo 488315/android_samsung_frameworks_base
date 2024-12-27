@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="global_action_emergency">Emergencia SOS</string>
+    <string name="permgrouplab_sensors">Sensores</string>
+    <string name="reboot_to_update_prepare">Preparando la actualización</string>
+    <string name="reboot_to_update_title">Actualización del sistema de Wear OS</string>
+    <string name="select_input_method">Elige una entrada</string>
+</resources>

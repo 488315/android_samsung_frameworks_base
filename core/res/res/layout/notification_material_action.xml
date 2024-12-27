@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Button android:textSize="14.0sp" android:textColor="@color/notification_primary_text_color_current" android:ellipsize="end" android:gravity="center" android:id="@id/action0" android:background="@drawable/notification_material_action_background" android:layout_width="fill_parent" android:layout_height="@dimen/notification_action_list_height" android:singleLine="true" android:includeFontPadding="false" android:layout_weight="1.0" android:textAllCaps="false" android:fontFamily="sec" android:textFontWeight="600" style="@style/Widget.Material.Light.Button.Borderless.Small"
+  xmlns:android="http://schemas.android.com/apk/res/android" />

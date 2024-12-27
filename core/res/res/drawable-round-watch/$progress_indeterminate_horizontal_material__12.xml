@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector android:height="24.0dip" android:width="64.0dip" android:viewportWidth="64.0" android:viewportHeight="24.0"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:aapt="http://schemas.android.com/aapt">
+    <group android:scaleX="0.01" android:scaleY="0.01" android:translateX="32.0" android:translateY="12.0">
+        <path android:fillColor="?colorControlNormal" android:pathData="@string/indeterminate_progress_background" android:fillAlpha="0.2" android:fillType="nonZero" />
+        <path android:fillColor="?^attr-private/colorProgressBackgroundNormal" android:pathData="@string/indeterminate_progress_13" android:fillAlpha="@dimen/indeterminate_progress_alpha_13" android:fillType="nonZero" />
+    </group>
+</vector>

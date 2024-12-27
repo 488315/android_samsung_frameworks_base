@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="global_action_emergency">የነፍስ አድን ድንገተኛ ጥሪ</string>
+    <string name="permgrouplab_sensors">አነፍናፊዎች</string>
+    <string name="reboot_to_update_prepare">ለማዘመን በመዘጋጀት ላይ</string>
+    <string name="reboot_to_update_title">የWear OS ስርዓት ዝማኔ</string>
+    <string name="select_input_method">ግብዓትን ይምረጡ</string>
+</resources>

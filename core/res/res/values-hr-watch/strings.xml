@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="global_action_emergency">SOS poziv</string>
+    <string name="permgrouplab_sensors">Senzori</string>
+    <string name="reboot_to_update_prepare">Priprema za ažuriranje</string>
+    <string name="reboot_to_update_title">Ažuriranje sustava Wear OS</string>
+    <string name="select_input_method">Odaberite unos</string>
+</resources>

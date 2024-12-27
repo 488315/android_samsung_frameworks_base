@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<NotificationHeaderView android:theme="@style/Theme.DeviceDefault.Notification" android:orientation="horizontal" android:id="@id/notification_header" android:paddingBottom="@dimen/notification_group_header_height_expanded_padding_bottom" android:clipChildren="false" android:layout_width="fill_parent" android:layout_height="@dimen/notification_group_header_height_expanded" android:layout_marginTop="@dimen/notification_headerless_margin_twoline" android:layout_marginBottom="@dimen/notification_header_margin_bottom"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <FrameLayout android:id="@id/alternate_expand_target" android:focusable="false" android:layout_width="@dimen/notification_content_margin_start" android:layout_height="wrap_content" android:importantForAccessibility="no" android:layout_alignParentStart="true" />
+    <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:clipChildren="false" android:layout_width="wrap_content" android:layout_height="fill_parent" android:layout_marginStart="@dimen/notification_icon_circle_start" android:layout_toStartOf="@id/expand_button">
+        <NotificationTopLineView android:theme="@style/Theme.DeviceDefault.Notification" android:gravity="center_vertical" android:id="@id/notification_top_line" android:clipChildren="false" android:layout_width="wrap_content" android:layout_height="fill_parent" android:layout_alignParentStart="true"
+          xmlns:android="http://schemas.android.com/apk/res/android">
+            <include layout="@layout/notification_top_line_views" />
+        </NotificationTopLineView>
+    </LinearLayout>
+    <LinearLayout android:paddingBottom="@dimen/notification_group_header_height_expanded_padding_bottom" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_centerVertical="true" android:layout_marginStart="@dimen/notification_expand_button_margin_start" android:layout_marginEnd="@dimen/notification_expand_button_margin_end" android:layout_alignParentEnd="true">
+        <include android:layout_width="wrap_content" android:layout_height="wrap_content" layout="@layout/notification_expand_button" />
+    </LinearLayout>
+</NotificationHeaderView>

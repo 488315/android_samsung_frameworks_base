@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ThemeMetaData FormatVersion="1.3" GuideVersion="2.8">
+    <AppMetaData AppendTo="Settings" Name="Wi-Fi" TargetApi="19" TargetPackageName="com.android.settings" VersionCode="1" VersionName="">
+        <Include RefName="SESL" />
+        <Property Comment="title text" DefaultValue="#ff252525" DestAttribName="wifi_p2p_preference_title_color,wifi_preference_title_color" DestQualifiers="" UID="40-1-1" ValueRef="24-A" ValueType="Color" />
+        <Property Comment="Description text" DefaultValue="#ff979797" DestAttribName="wifi_p2p_preference_summary_color,wifi_preference_summary_color" DestQualifiers="" UID="40-1-2" ValueRef="24-B" ValueType="TintColor" />
+        <Property Comment="Wi-Fi hidden AP list empty view text" DefaultValue="#ff0094b0" DestAttribName="wifi_hidden_ap_list_empty_text" DestQualifiers="" UID="40-1-4" ValueRef="1-1-3" ValueType="TintColor" />
+        <Property Comment="Wi-Fi AP list divider" DefaultValue="#ffcecece" DestAttribName="wifi_list_divider_color" DestQualifiers="" UID="40-1-5" ValueRef="1-2" ValueType="TintColor" />
+        <Property Comment="Text: Web link text color" DefaultValue="#ff3b3b3b" DestAttribName="sec_widget_description_link_text_color" UID="40-1-6" ValueRef="1-3-4" ValueType="Color" />
+        <Property Comment="Add icon color" DefaultValue="#ff00b149" DestAttribName="sec_wifi_add_icon_color" DestQualifiers="" UID="40-1-9" ValueRef="1-17-1" ValueType="Color" />
+        <Property Comment="Add icon image" DefaultValue="" DestAttribName="sec_wifi_list_icon_create_mtrl" DestQualifiers="xxxhdpi" ImageSize="32X32" UID="40-1-10" ValueRef="1-17-2" ValueType="Image" />
+        <Property Comment="Subheader text color" DefaultValue="#ff909090" DestAttribName="sec_wifi_subtitle_text_color" DestQualifiers="" UID="40-1-11" ValueRef="24-B" ValueType="Color" />
+        <Property Comment="Connected AP text color" DefaultValue="#ff0074d4" DestAttribName="sec_highlight_text_color" DestQualifiers="" UID="40-1-12" ValueRef="24-E" ValueType="Color" />
+        <Property Comment="Wi-Fi signal icon tint color" DefaultValue="#ff4297ff" DestAttribName="sec_wifi_icon_blue_color" DestQualifiers="" UID="40-1-13" ValueRef="24-E" ValueType="TintColor" />
+        <Property Comment="Wi-Fi tips icon tint color" DefaultValue="#ff808080" DestAttribName="sec_wifi_tips_icon_color" DestQualifiers="" UID="40-1-14" ValueRef="24-A" ValueType="TintColor" />
+        <Property Comment="QR code icon color on action bar" DefaultValue="#ff252525" DestAttribName="sec_wifi_action_menu_text" DestQualifiers="" UID="40-2-1" ValueRef="1-1-3" ValueType="TintColor" />
+        <Property Comment="Master switch progress circle" DefaultValue="#fffafafa" DestAttribName="sec_loading_progress_color2" DestQualifiers="" UID="40-2-2" ValueRef="1-55-1" ValueType="TintColor" />
+        <Property Comment="Wi-Fi always allow scanning dialog text" DefaultValue="#ff000000" DestAttribName="wifi_dialog_body_text" DestQualifiers="" UID="40-3-3" ValueRef="24-B" ValueType="TintColor" />
+        <Property Comment="Wi-Fi AP dialog label text color" DefaultValue="#ff545454" DestAttribName="wifi_ap_dialog_label_text_color,sec_wifi_ap_activity_label_text_color" DestQualifiers="" UID="40-3-4" ValueRef="24-E" ValueType="Color" />
+        <Property Comment="Wi-Fi AP Tethering icon tint color" DefaultValue="#ff9e9e9e" DestAttribName="wifi_ap_tethering_icon_tint_color" DestQualifiers="" UID="40-3-7" ValueRef="24-A" ValueType="TintColor" />
+        <Property Comment="Wi-Fi AP connecting highlight color" DefaultValue="#ff0074d4" DestAttribName="wifi_ap_connecting" DestQualifiers="" UID="40-3-8" ValueRef="24-E" ValueType="TintColor" />
+        <Property Comment="Wifi connect activity : Show password icon" DefaultValue="#ff808080" DestAttribName="sec_wifi_show_password_icon_color,sec_wifi_arrow_icon_color" DestQualifiers="" UID="40-5-1" ValueRef="24-D" ValueType="TintColor" />
+        <Property Comment="Wifi Manage Network activity : Modify icon" DefaultValue="#ff979797" DestAttribName="sec_wifi_manage_network_modify_icon_color" DestQualifiers="" UID="40-5-2" ValueRef="24-D" ValueType="TintColor" />
+        <Property Comment="Wi-Fi error text color" DefaultValue="#ffb00020" DestAttribName="sec_wifi_dialog_error_color" DestQualifiers="" UID="40-6-1" ValueRef="1-23-8" ValueType="Color" />
+        <Property Comment="Wi-Fi QR code SSID text color" DefaultValue="#ff252525" DestAttribName="wifi_ap_qrcode_page_ssid_color" DestQualifiers="" UID="40-7-1" ValueRef="1-3-1" ValueType="Color" />
+        <Property Comment="Wi-Fi QR code description text color" DefaultValue="#ff505050" DestAttribName="wifi_ap_qrcode_page_summary_color" DestQualifiers="" UID="40-7-2" ValueRef="1-3-2" ValueType="Color" />
+        <Property Comment="Wi-Fi Detail card title text" DefaultValue="#ff909090" DestAttribName="sec_wifi_detail_title_color" DestQualifiers="" UID="40-8-1" ValueRef="1-3-2" ValueType="Color" />
+        <Property Comment="Wi-Fi Detail card sub text" DefaultValue="#ff252525" DestAttribName="sec_wifi_detail_value_color" DestQualifiers="" UID="40-8-2" ValueRef="1-3-1" ValueType="Color" />
+        <Property Comment="Wi-Fi Card icon color" DefaultValue="#ff9c9c9c" DestAttribName="sec_wifi_detail_icon_tint_color" DestQualifiers="" UID="40-9-1" ValueRef="24-A" ValueType="Color" />
+        <Property Comment="Wi-Fi Detail expandable icon tint color" DefaultValue="#ff9c9c9c" DestAttribName="sec_wifi_detail_arrow_tint_color" DestQualifiers="" UID="40-9-2" ValueRef="24-A" ValueType="Color" />
+    </AppMetaData>
+</ThemeMetaData>

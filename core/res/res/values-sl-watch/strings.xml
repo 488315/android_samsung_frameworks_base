@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="global_action_emergency">Nujni primer</string>
+    <string name="permgrouplab_sensors">Tipala</string>
+    <string name="reboot_to_update_prepare">Pripravljanje na posodobitev</string>
+    <string name="reboot_to_update_title">Posodobitev sistema Wear OS</string>
+    <string name="select_input_method">Izbira vhodne naprave</string>
+</resources>

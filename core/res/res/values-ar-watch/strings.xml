@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="global_action_emergency">اتصالات الطوارئ</string>
+    <string name="permgrouplab_sensors">أجهزة الاستشعار</string>
+    <string name="reboot_to_update_prepare">جارٍ التحضير لإجراء التحديث</string>
+    <string name="reboot_to_update_title">‏تحديث نظام التشغيل Wear OS</string>
+</resources>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="global_action_emergency">आपत्‌कालीन सेवामा फोन गर्ने सुविधा</string>
+    <string name="permgrouplab_sensors">सेन्सरहरू</string>
+    <string name="reboot_to_update_prepare">अपडेट गर्ने तयारी गरिँदै छ</string>
+    <string name="reboot_to_update_title">Wear OS को सिस्टम अपडेट</string>
+    <string name="select_input_method">इनपुट छनौट गर्नुहोस्</string>
+</resources>

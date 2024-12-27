@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="SDcardBlockUnmount_message">
+        <item quantity="other">Your phone is unstable because an SD card that had apps installed on it was removed. Your phone will restart in %d seconds to return to normal. Save any unsaved data before the phone restarts.</item>
+        <item quantity="zero">Your phone is unstable because an SD card that had apps installed on it was removed. Your phone will restart in %d seconds to return to normal. Save any unsaved data before the phone restarts.</item>
+        <item quantity="one">Your phone is unstable because an SD card that had apps installed on it was removed. Your phone will restart in %d second to return to normal. Save any unsaved data before the phone restarts.</item>
+        <item quantity="two">Your phone is unstable because an SD card that had apps installed on it was removed. Your phone will restart in %d seconds to return to normal. Save any unsaved data before the phone restarts.</item>
+        <item quantity="few">Your phone is unstable because an SD card that had apps installed on it was removed. Your phone will restart in %d seconds to return to normal. Save any unsaved data before the phone restarts.</item>
+        <item quantity="many">Your phone is unstable because an SD card that had apps installed on it was removed. Your phone will restart in %d seconds to return to normal. Save any unsaved data before the phone restarts.</item>
+    </plurals>
+    <plurals name="SDcardBlockUnmount_title">
+        <item quantity="other">Your phone will restart in %d seconds</item>
+        <item quantity="zero">Your phone will restart in %d seconds</item>
+        <item quantity="one">Your phone will restart in %d second</item>
+        <item quantity="two">Your phone will restart in %d seconds</item>
+        <item quantity="few">Your phone will restart in %d seconds</item>
+        <item quantity="many">Your phone will restart in %d seconds</item>
+    </plurals>
+    <plurals name="pinpuk_attempts">
+        <item quantity="other">You have %d remaining attempts before SIM is locked.</item>
+        <item quantity="one">You have %d remaining attempt before SIM is locked.</item>
+    </plurals>
+</resources>

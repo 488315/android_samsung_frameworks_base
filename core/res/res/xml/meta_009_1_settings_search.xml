@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ThemeMetaData FormatVersion="1.3" GuideVersion="1.4">
+    <AppMetaData Name="Settings Search" TargetApi="19" TargetPackageName="com.android.settings.intelligence" VersionCode="1" VersionName="">
+        <Include RefName="SESL" />
+        <Property Comment="Search result focused text color" DefaultValue="#ff4297ff" DestAttribName="sec_search_contrast_text" UID="9_1-1-1" ValueRef="24-E" ValueType="TextColor" />
+        <Property Comment="Search No results text color" DefaultValue="#ff4d4d4d" DestAttribName="sec_no_result_found_color" UID="9_1-1-2" ValueRef="1-53-1" ValueType="TextColor" />
+        <Property Comment="Search correction text color" DefaultValue="#ff252525" DestAttribName="sec_search_result_header_text_color" UID="9_1-1-3" ValueRef="1-1-3" ValueType="TextColor" />
+        <Property Comment="Search correction focused text color" DefaultValue="#ff0072de" DestAttribName="sec_search_correction_text_color" UID="9_1-1-4" ValueRef="1-59-9" ValueType="TextColor" />
+        <Property Comment="Clear search history button text color" DefaultValue="#ff010101" DestAttribName="sec_clear_search_history" UID="9_1-1-5" ValueRef="24-E" ValueType="TextColor" />
+        <Property Comment="Navigation Background color" DefaultValue="#fff2f2f2" DestAttribName="sec_round_and_bgcolor" DestQualifiers="" POption="FixedOpacity" UID="9_1-2-1" ValueRef="1-69-1" ValueType="BgColor" />
+        <Property Comment="Navigation Icon color (Light/Dark)" DefaultValue="true" DestAttribName="use_light_status_navi_bar" DestQualifiers="" UID="9_1-2-2" ValueRef="1-51-1" ValueType="Bool" />
+        <Property Comment="Subheader Text Color" DefaultValue="#ff909090" DestAttribName="sec_search_result_sub_header_text_color" UID="9_1-5-2" ValueRef="1-1-4" ValueType="TextColor" />
+        <Property Comment="Group header Text Color" DefaultValue="#ff909090" DestAttribName="sec_group_header_title_text_color" UID="9_1-5-3" ValueRef="1-3-2" ValueType="TextColor" />
+        <Property Comment="More Button Background color" DefaultValue="#0d252525" DestAttribName="sec_more_button_background_color" UID="9_1-5-4-D" ValueRef="1-7-1" ValueType="TintColor" />
+        <Property Comment="More Button Icon color" DefaultValue="#ff505050" DestAttribName="sec_more_button_tint_color" UID="9_1-5-5-D" ValueRef="1-7-2" ValueType="TintColor" />
+        <Property Comment="Search bg color" DefaultValue="#fffcfcfc" DestAttribName="sec_search_background_color" UID="9_1-5-21" ValueRef="1-18-1" ValueType="BgColor" />
+        <Property Comment="Recent search remove icon color" DefaultValue="#ff4d4d4d" DestAttribName="sec_delete_saved_query" UID="9_1-5-22-D" ValueRef="1-7-2" ValueType="TintColor" />
+        <Property Comment="Recent search tag icon color" DefaultValue="#ff4d4d4d" DestAttribName="sec_search_recommended_query_chip_tag_icon_text_color" UID="9_1-5-23-D" ValueRef="1-7-2" ValueType="TintColor" />
+        <Property Comment="Recent search text color" DefaultValue="#ff4d4d4d" DestAttribName="sec_search_recommended_query_chip_text_color" UID="9_1-5-24-D" ValueRef="1-7-2" ValueType="TextColor" />
+        <Property Comment="Recent search chip bg color" DefaultValue="#0d252525" DestAttribName="sec_search_recommended_query_chip_background_color" UID="9_1-5-25-D" ValueRef="1-7-1" ValueType="BgColor" />
+        <Property Comment="Suggestion tag icon color" DefaultValue="#ff0072de" DestAttribName="sec_search_recommended_tag_chip_icon_color" UID="9_1-5-26" ValueRef="1-40-3" ValueType="TintColor" />
+        <Property Comment="Suggestion text color" DefaultValue="#ff0072de" DestAttribName="sec_search_recommended_tag_chip_text_color" UID="9_1-5-27" ValueRef="1-40-3" ValueType="TextColor" />
+        <Property Comment="Suggestion chip bg color" DefaultValue="#fffcfcfc" DestAttribName="sec_search_recommended_tag_chip_background_color" UID="9_1-5-28" ValueRef="1-40-1" ValueType="BgColor" />
+        <Property Comment="Suggestion chip bg border color" DefaultValue="#800072de" DestAttribName="sec_search_recommended_tag_chip_border_color" UID="9_1-5-29" ValueRef="1-40-3" ValueType="BgColor" />
+        <Property Comment="Suggestion more button BG color" DefaultValue="#fffcfcfc" DestAttribName="sec_tag_more_button_bg_color" UID="9_1-5-30" ValueRef="1-40-1" ValueType="BgColor" />
+        <Property Comment="Suggestion more button BG border color" DefaultValue="#990072de" DestAttribName="sec_tag_more_button_border_color" UID="9_1-5-31" ValueRef="1-40-3" ValueType="BgColor" />
+        <Property Comment="Suggestion more button icon color" DefaultValue="#ff0072de" DestAttribName="sec_tag_more_button_tint_color" UID="9_1-5-32" ValueRef="1-40-3" ValueType="TintColor" />
+        <Property Comment="Radio button off text color" DefaultValue="#ff858585" DestAttribName="sec_search_result_radio_button_off_color" UID="9_1-6-1" ValueRef="1-3-2" ValueType="TextColor" />
+        <Property Comment="Radio button on text color" DefaultValue="#ff0072de" DestAttribName="sec_search_result_radio_button_on_color" UID="9_1-6-2" ValueRef="24-E" ValueType="TextColor" />
+    </AppMetaData>
+</ThemeMetaData>

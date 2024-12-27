@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:layout_width="@dimen/sem_chooser_share_status_view_size" android:layout_height="@dimen/sem_chooser_share_status_view_size"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView android:id="@id/sem_chooser_sent_failed" android:layout_width="fill_parent" android:layout_height="fill_parent" android:src="@drawable/sem_chooser_share_status_sent_failed_background" />
+    <ProgressBar android:id="@id/sem_chooser_preparing" android:layout_width="fill_parent" android:layout_height="fill_parent" android:progressDrawable="@drawable/sem_chooser_circular_determinate_progressbar_preparing" style="?progressBarStyleHorizontal" />
+    <ProgressBar android:id="@id/sem_chooser_connecting" android:layout_width="fill_parent" android:layout_height="fill_parent" android:progressDrawable="@drawable/sem_chooser_circular_determinate_progressbar_connecting" style="?progressBarStyleHorizontal" />
+    <ProgressBar android:id="@id/sem_chooser_sending_progress" android:background="@drawable/sem_chooser_circular_determinate_progressbar_background" android:layout_width="fill_parent" android:layout_height="fill_parent" android:progressDrawable="@drawable/sem_chooser_circular_determinate_progressbar_sent" style="?progressBarStyleHorizontal" />
+    <ImageView android:layout_gravity="center" android:id="@id/sem_chooser_sent" android:layout_width="@dimen/sem_chooser_share_status_sent_icon_width" android:layout_height="@dimen/sem_chooser_share_status_sent_icon_height" android:src="@drawable/sem_chooser_ic_completed" />
+    <ImageView android:layout_gravity="center" android:id="@id/sem_chooser_failed" android:layout_width="@dimen/sem_chooser_share_status_failed_icon_width" android:layout_height="@dimen/sem_chooser_share_status_failed_icon_height" android:src="@drawable/sem_chooser_ic_failed" />
+</FrameLayout>

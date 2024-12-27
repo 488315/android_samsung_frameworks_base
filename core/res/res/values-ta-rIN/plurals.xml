@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="SDcardBlockUnmount_message">
+        <item quantity="other">பயன்பாடுகள் நிறுவப்பட்ட SD அட்டை அகற்றப்பட்டுள்ளதால் உங்கள் ஃபோன் நிலையற்றதாக உள்ளது. இயல்புநிலைக்கு திரும்ப உங்கள் ஃபோன் %d வினாடிகளில் மீண்டும் துவங்கப்படும். ஃபோன் மீண்டும் துவங்கப்படுவதற்கு முன்னர், சேமிக்கப்படாத தரவை சேமிக்கவும்.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">பயன்பாடுகள் நிறுவப்பட்ட SD அட்டை அகற்றப்பட்டுள்ளதால் உங்கள் ஃபோன் நிலையற்றதாக உள்ளது. இயல்புநிலைக்கு திரும்ப உங்கள் ஃபோன் %d வினாடியில் மீண்டும் துவங்கப்படும். ஃபோன் மீண்டும் துவங்கப்படுவதற்கு முன்னர், சேமிக்கப்படாத தரவை சேமிக்கவும்.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="SDcardBlockUnmount_title">
+        <item quantity="other">ஃபோன் %d வினாடிகளில் மீண்டும் துவங்கும்</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">ஃபோன் %d வினாடியில் மீண்டும் துவங்கும்</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_phone">
+        <item quantity="other">%d பயன்பாடுகள் உங்கள் ஃபோனை அதிக சூடாக செய்ததால், தானாகவே மூடப்பட்டன. உங்கள் ஃபோன் குளிர்வடைந்ததும் நீங்கள் அவற்றை பின்னர் திறக்கலாம்.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d பயன்பாடு உங்கள் ஃபோனை அதிக சூடாக செய்ததால், தானாகவே மூடப்பட்டது. உங்கள் ஃபோன் குளிர்வடைந்ததும் நீங்கள் அதனை பின்னர் திறக்கலாம்.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_tablet">
+        <item quantity="other">%d பயன்பாடுகள், உங்கள் டேப்லெட்டை அதிக சூடாக செய்ததால், அவை தானாகவே மூடப்பட்டன. உங்கள் டேப்லெட் குளிர்வடைந்ததும் நீங்கள் அவற்றை பின்னர் திறக்கலாம்.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d பயன்பாடு, உங்கள் டேப்லெட்டை அதிக சூடாக செய்ததால், அது தானாகவே மூடப்பட்டது. உங்கள் டேப்லெட் குளிர்வடைந்ததும் நீங்கள் அதனை பின்னர் திறக்கலாம்.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_title_v2">
+        <item quantity="other">%d பயன்பாடுகள் மூடப்பட்டுள்ளன</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d பயன்பாடு மூடப்பட்டுள்ளது</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="dex_max_count_text">
+        <item quantity="other">ஒரே நேரத்தில், %d பயன்பாடுகளுக்கும் அதிகமாக திரையில் காட்ட இயலாது. மிகப் பழமையான பயன்பாடு சிறிதாக்கப்பட்டுள்ளது.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">ஒரே நேரத்தில், %d பயன்பாட்டிற்கும் அதிகமாக திரையில் காட்ட இயலாது. மிகப் பழமையான பயன்பாடு சிறிதாக்கப்பட்டுள்ளது.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="hot_key_guide_message">
+        <item quantity="other">நீங்கள் நியமிக்க விரும்பும் பயன்பாட்டைத் திறந்து, பயன்பாட்டு விசையை %d வினாடிகளுக்கு அழுத்திப் பிடிக்கவும்.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">நீங்கள் நியமிக்க விரும்பும் பயன்பாட்டைத் திறந்து, பயன்பாட்டு விசையை %d வினாடிக்கு அழுத்திப் பிடிக்கவும்.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_phone">
+        <item quantity="other">%1$s ஆனது உங்கள் ஃபோனை அதிக சூடாகச் செய்கிறது. %2$d வினாடிகளில் அது தானாகவே மூடப்படும்.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s ஆனது உங்கள் ஃபோனை அதிக சூடாகச் செய்கிறது. %2$d வினாடியில் அது தானாகவே மூடப்படும்.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_tablet">
+        <item quantity="other">%1$s ஆனது உங்கள் டேப்லெட்டை அதிக சூடாகச் செய்கிறது. %2$d வினாடிகளில் அது தானாகவே மூடப்படும்.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s ஆனது உங்கள் டேப்லெட்டை அதிக சூடாகச் செய்கிறது. %2$d வினாடியில் அது தானாகவே மூடப்படும்.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="maintenance_mode_backup_cloud_menu_sub_textview_message_default">
+        <item quantity="other">%d நாட்கள் வரை Samsung Cloud-இல் வரம்பில்லாத தரவை பின்சேமிக்கலாம் அல்லது நீங்கள் பின்சேமித்த தரவை மீள்சேமிக்கலாம்.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d நாள் வரை Samsung Cloud-இல் வரம்பில்லாத தரவை பின்சேமிக்கலாம் அல்லது நீங்கள் பின்சேமித்த தரவை மீள்சேமிக்கலாம்.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_phone">
+        <item quantity="other">%1$s, உங்கள் ஃபோனை அதிக சூடாகச் செய்கிறது. நீங்கள் இப்போது இதனை மூடலாம் அல்லது %2$d வினாடிகளில் அது தானாகவே மூடப்படும்.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s, உங்கள் ஃபோனை அதிக சூடாகச் செய்கிறது. நீங்கள் இப்போது இதனை மூடலாம் அல்லது %2$d வினாடியில் அது தானாகவே மூடப்படும்.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_tablet">
+        <item quantity="other">%1$s, உங்கள் டேப்லெட்டை அதிக சூடாகச் செய்கிறது. நீங்கள் இப்போது இதனை மூடலாம் அல்லது %2$d வினாடிகளில் அது தானாகவே மூடப்படும்.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s, உங்கள் டேப்லெட்டை அதிக சூடாகச் செய்கிறது. நீங்கள் இப்போது இதனை மூடலாம் அல்லது %2$d வினாடியில் அது தானாகவே மூடப்படும்.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sem_chooser_preview_items">
+        <item quantity="other">%d உருப்படிகள்</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d உருப்படி</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_hours">
+        <item quantity="other">%d மணிநேரங்கள்</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d மணிநேரம்</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_minutes">
+        <item quantity="other">%d நிமிடங்கள்</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d நிமிடம்</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>
